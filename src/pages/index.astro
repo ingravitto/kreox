@@ -2,20 +2,23 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Steps from '../components/Steps.astro';
-import CompareTripode from '../components/CompareTripode.astro';
+import Marquee from '../components/Marquee.astro';
+import WeightBars from '../components/WeightBars.astro';
 import NoticiaCard from '../components/NoticiaCard.astro';
 import CtaTarifa from '../components/CtaTarifa.astro';
 import { NIVELACION, AZULEJOS, PRODUCTOS, M2_POR_NIVELADOR } from '../data/site';
 import { TILE_PRODUCTS } from '../data/azulejos';
 import { getNoticias } from '../data/noticias';
 
-import imgBanner from '../assets/img/niveladores-piko-universal-kreox.jpg';
+import imgHero from '../assets/img/hero-productos-kreox.jpg';
 import imgPiko from '../assets/img/piko-nivelador-suelo-radiante-kreox.png';
 import imgUni from '../assets/img/nivelador-universal-recrecido-kreox.png';
-import imgLaser from '../assets/img/piko-laser-receptor-suelo-radiante.jpg';
+import imgSuelo from '../assets/img/suelo-radiante-piko-color.jpg';
+import imgDetalle from '../assets/img/piko-suelo-radiante-detalle.jpg';
 import imgArandela from '../assets/img/arandela-niveladora-recambio.png';
 import imgBase from '../assets/img/base-niveladora-universal-recambio.png';
 import imgAnilla from '../assets/img/anilla-metalica-niveladora-universal.png';
+import imgLineas from '../assets/img/lineas-azulejos.jpg';
 import imgFabrica from '../assets/img/fabrica-kreox-ibi.jpg';
 import imgSello from '../assets/img/sello-producto-patentado.png';
 
@@ -32,146 +35,191 @@ const steps = [
 <Base
   title="KREOX · Niveladores para mortero autonivelante y azulejos"
   description="Fabricante español de niveladores para mortero autonivelante (PIKO y Universal) y sistemas de colocación de azulejos. Material reciclado. Pide tarifa 2026."
+  overlay
 >
-  <section class="hero">
-    <div class="container split">
-      <div class="copy">
-        <span class="eyebrow">Fabricado en España · Producto patentado</span>
-        <h1>Sistemas de nivelación para mortero autonivelante, fabricados en España</h1>
-        <p class="lead">PIKO y el Nivelador Universal sustituyen al trípode de acero: <strong>hasta 50 veces más ligeros, sin óxido y reutilizables</strong>. Para suelo radiante y recrecidos.</p>
-        <div class="btn-row">
-          <a class="btn btn--lime" href={PRODUCTOS.piko.url}>Ver PIKO</a>
-          <a class="btn btn--ghost" href={PRODUCTOS.universal.url}>Ver Nivelador Universal</a>
-        </div>
-        <dl class="kpis">
-          <div><dt>{PRODUCTOS.piko.pesoG} g</dt><dd>pesa un PIKO</dd></div>
-          <div><dt>≈ 1 kg</dt><dd>pesa un trípode</dd></div>
-          <div><dt>0</dt><dd>óxido</dd></div>
-        </dl>
+  <!-- HERO -->
+  <section class="hero section--dark">
+    <Image src={imgHero} alt="Productos KREOX: niveladores PIKO y Universal junto a Kalzos y Kuñas sobre fondo negro" widths={[960, 1600, 1920]} sizes="100vw" class="hero-bg" loading="eager" fetchpriority="high" />
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="container hero-in on-dark">
+      <span class="eyebrow">Innovation for construction</span>
+      <h1>Sistemas de nivelación para mortero autonivelante, <span class="sand">fabricados en España</span></h1>
+      <p class="lead">PIKO y el Nivelador Universal sustituyen al trípode de acero: <strong>hasta 50 veces más ligeros, sin óxido y reutilizables</strong>. Para suelo radiante y recrecidos.</p>
+      <div class="btn-row">
+        <a class="btn btn--sand" href={PRODUCTOS.piko.url}>Descubre PIKO <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+        <a class="btn btn--ghost" href={PRODUCTOS.universal.url}>Nivelador Universal</a>
       </div>
-      <Image src={imgBanner} alt="Niveladores PIKO y Universal de KREOX para mortero autonivelante" widths={[600, 1000]} sizes="(min-width: 900px) 540px, 92vw" class="hero-img" loading="eager" fetchpriority="high" />
+      <dl class="stats">
+        <div><dt><em>{PRODUCTOS.piko.pesoG}</em> g</dt><dd>Pesa un PIKO</dd></div>
+        <div><dt>≈ 1 kg</dt><dd>Pesa un trípode</dd></div>
+        <div><dt><em>0</em></dt><dd>Óxido</dd></div>
+        <div><dt>{PRODUCTOS.piko.caja}</dt><dd>PIKO por caja</dd></div>
+      </dl>
     </div>
+    <a class="scroll" href="#niveladores" aria-label="Ir a los niveladores"><span></span></a>
   </section>
 
+  <Marquee items={['Producto patentado', 'Fabricado en España', 'Material reciclado', 'Sin óxido', 'Reutilizable', 'Compatible con láser', 'Tercera generación']} />
+
+  <!-- PRODUCTOS -->
   <section class="section" id="niveladores">
     <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Nivelación con mortero autonivelante</span>
-        <h2>Elige tu nivelador</h2>
-        <p>Dos niveladores, un mismo método: marcar la cota con láser y verter hasta la anilla.</p>
-      </div>
-      <div class="grid grid-2">
-        <a class="pcard" href={PRODUCTOS.piko.url}>
-          <div class="pimg"><Image src={imgPiko} alt="PIKO de KREOX, nivelador para suelo radiante" widths={[360, 522]} sizes="(min-width: 900px) 260px, 45vw" /></div>
-          <div class="ptext">
-            <span class="badge">Suelo radiante</span>
-            <h3>PIKO</h3>
-            <p>Se clava en la placa de aislamiento del suelo radiante. Unos {PRODUCTOS.piko.pesoG} g. Caja de {PRODUCTOS.piko.caja} uds.</p>
-            <span class="more">Ver PIKO →</span>
-          </div>
-        </a>
-        <a class="pcard" href={PRODUCTOS.universal.url}>
-          <div class="pimg"><Image src={imgUni} alt="Nivelador Universal de KREOX para recrecidos" widths={[360, 522]} sizes="(min-width: 900px) 260px, 45vw" /></div>
-          <div class="ptext">
-            <span class="badge">Recrecidos</span>
-            <h3>Nivelador Universal</h3>
-            <p>Base plana y reforzada para cualquier superficie. Unos {PRODUCTOS.universal.pesoG} g. Caja de {PRODUCTOS.universal.caja} uds.</p>
-            <span class="more">Ver Nivelador Universal →</span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--soft">
-    <div class="container">
-      <div class="section-head">
-        <h2>Trípode de acero frente a niveladores KREOX</h2>
-        <p>El argumento en una tabla. Calculado para 100 m² con un nivelador cada {M2_POR_NIVELADOR} m².</p>
-      </div>
-      <CompareTripode />
-      <div class="btn-row">
-        <a class="btn btn--dark" href={`${NIVELACION}calculadora/`}>Calcula los niveladores de tu obra</a>
-        <a class="btn btn--ghost" href={`${NIVELACION}piko-vs-tripode/`}>Comparativa completa</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="split">
-        <div>
-          <h2>Cómo funciona, en 4 pasos</h2>
-          <p class="lead">Sin trípodes que asentar ni óxido que limpiar. Compatible con láser habitual y con láser con receptor.</p>
+      <div class="head-row">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Nivelación con mortero autonivelante</span>
+          <h2>Dos niveladores. Un mismo método.</h2>
         </div>
-        <Image src={imgLaser} alt="Instalador ajustando un PIKO con láser con receptor sobre suelo radiante" widths={[316]} sizes="(min-width: 900px) 480px, 92vw" class="photo" />
+        <p class="muted side" data-reveal>Marca la cota con láser, ajusta la anilla y vierte. Elige según el soporte de tu obra.</p>
       </div>
-      <div class="steps-wrap"><Steps steps={steps} /></div>
+      <div class="bento">
+        <a class="prod p1" href={PRODUCTOS.piko.url} data-reveal>
+          <div class="pimg"><Image src={imgPiko} alt="PIKO de KREOX, nivelador para suelo radiante" widths={[420, 640]} sizes="(min-width: 960px) 360px, 80vw" /></div>
+          <div class="ptext">
+            <span class="chip chip--sand">Suelo radiante</span>
+            <h3>PIKO</h3>
+            <p>Se clava en la placa de aislamiento. Sustituye al trípode con solo {PRODUCTOS.piko.pesoG} g.</p>
+            <ul class="specs-inline"><li>{PRODUCTOS.piko.medidas.altoMm} mm</li><li>{PRODUCTOS.piko.pesoG} g</li><li>Caja {PRODUCTOS.piko.caja}</li></ul>
+            <span class="arrow-link">Ver PIKO</span>
+          </div>
+        </a>
+        <a class="prod p2" href={PRODUCTOS.universal.url} data-reveal style="--d:.1s">
+          <div class="pimg"><Image src={imgUni} alt="Nivelador Universal de KREOX para recrecidos" widths={[420, 640]} sizes="(min-width: 960px) 360px, 80vw" /></div>
+          <div class="ptext">
+            <span class="chip chip--sand">Recrecidos</span>
+            <h3>Nivelador Universal</h3>
+            <p>Base plana y reforzada para apoyarlo sobre cualquier superficie.</p>
+            <ul class="specs-inline"><li>Base Ø{PRODUCTOS.universal.medidas.baseMm} mm</li><li>{PRODUCTOS.universal.pesoG} g</li><li>Caja {PRODUCTOS.universal.caja}</li></ul>
+            <span class="arrow-link">Ver Universal</span>
+          </div>
+        </a>
+        <a class="mini m1" href={`${NIVELACION}calculadora/`} data-reveal>
+          <span class="eyebrow">Herramienta</span>
+          <h3>¿Cuántos niveladores necesito?</h3>
+          <span class="big">m² → uds</span>
+          <span class="arrow-link">Calcular</span>
+        </a>
+        <a class="mini m2" href={`${NIVELACION}recambios/`} data-reveal style="--d:.1s">
+          <span class="eyebrow">Recambios</span>
+          <h3>Cambia solo la pieza gastada</h3>
+          <div class="parts">
+            <Image src={imgArandela} alt="Arandela niveladora" widths={[160]} sizes="64px" />
+            <Image src={imgBase} alt="Base niveladora universal" widths={[160]} sizes="64px" />
+            <Image src={imgAnilla} alt="Anilla metálica niveladora universal" widths={[160]} sizes="64px" />
+          </div>
+          <span class="arrow-link">Ver recambios</span>
+        </a>
+        <a class="mini m3" href={`${NIVELACION}piko-vs-tripode/`} data-reveal style="--d:.2s">
+          <span class="eyebrow">Comparativa</span>
+          <h3>PIKO frente al trípode de acero</h3>
+          <span class="big">1 kg → 20 g</span>
+          <span class="arrow-link">Comparar</span>
+        </a>
+      </div>
     </div>
   </section>
 
-  <section class="section section--dark">
+  <!-- PESO -->
+  <section class="section section--paper">
     <div class="container split">
-      <div>
+      <div data-reveal>
+        <span class="eyebrow">Adiós al trípode de acero</span>
+        <h2>Menos peso, cero óxido, más obra.</h2>
+        <p class="lead">Los trípodes metálicos pesan cerca de 1 kg, se corroen con el pH alcalino del mortero y hay que asentar sus tres patas. Los niveladores KREOX se colocan en segundos, se limpian con agua y llevan una anilla visual para comprobar el nivel.</p>
+        <div class="btn-row">
+          <a class="btn btn--dark" href={`${NIVELACION}piko-vs-tripode/`}>Ver comparativa completa</a>
+        </div>
+      </div>
+      <WeightBars />
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA -->
+  <section class="how section section--dark grain">
+    <Image src={imgSuelo} alt="Niveladores PIKO azules clavados en un suelo radiante antes del vertido de mortero" widths={[960, 1920]} sizes="100vw" class="how-bg" />
+    <div class="how-shade" aria-hidden="true"></div>
+    <div class="container rel">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Cómo funciona</span>
+        <h2>Nivelado perfecto en 4 pasos</h2>
+        <p>Sin trípodes que asentar ni óxido que limpiar. Compatible con láser habitual y con láser con receptor.</p>
+      </div>
+      <Steps steps={steps} dark />
+    </div>
+  </section>
+
+  <!-- NOVEDADES -->
+  <section class="section">
+    <div class="container split">
+      <div class="nov-media" data-reveal>
+        <Image src={imgDetalle} alt="PIKO clavado en placa de suelo radiante con su anilla a la altura del vertido" widths={[600, 1100]} sizes="(min-width: 960px) 560px, 92vw" class="nov-img" />
+        <Image src={imgSello} alt="Producto patentado" widths={[200, 400]} sizes="140px" class="nov-sello" />
+      </div>
+      <div data-reveal>
         <span class="eyebrow">Novedades 2026</span>
-        <h2>Anilla con fibra, nuevo color y base reforzada</h2>
+        <h2>Anilla con fibra, nuevo color y base reforzada.</h2>
         <ul class="checks">
           <li>Anilla con aditivo de fibra: más vida útil y regulación más firme.</li>
           <li>Nuevo color de alta visibilidad en obra.</li>
           <li>Base del Nivelador Universal más dura y segura al retirarla.</li>
           <li>Todo probado en obra real antes de lanzarlo.</li>
         </ul>
-        <div class="btn-row"><a class="btn btn--lime" href={`${NIVELACION}recambios/`}>Ver recambios</a></div>
-      </div>
-      <div class="parts">
-        <Image src={imgArandela} alt="Arandela niveladora con aditivo de fibra" widths={[240, 480]} sizes="150px" />
-        <Image src={imgBase} alt="Base niveladora universal reforzada" widths={[240, 480]} sizes="150px" />
-        <Image src={imgAnilla} alt="Anilla metálica niveladora universal" widths={[240, 480]} sizes="150px" />
-        <Image src={imgSello} alt="Producto patentado" widths={[240, 480]} sizes="150px" class="sello" />
+        <div class="btn-row"><a class="btn btn--dark" href="/noticias/sistemas-de-nivelacion-para-mortero-autonivelante/">Leer la novedad</a></div>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">También fabricamos</span>
-        <h2>Sistema de nivelación para colocación de azulejos</h2>
-        <p>Kalzo compatible con todas las kuñas del mercado, rotura limpia sin sobrantes y Kuñas para losas de 3 a 15 mm.</p>
+  <!-- AZULEJOS -->
+  <section class="tiles section section--paper">
+    <Image src={imgLineas} alt="" widths={[960]} sizes="60vw" class="lineart" />
+    <div class="container rel">
+      <div class="head-row">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Soluciones para</span>
+          <h2>La colocación de azulejos</h2>
+        </div>
+        <a class="btn btn--ghost side" href={AZULEJOS} data-reveal>Ver todas las soluciones</a>
       </div>
       <div class="grid grid-4">
-        {TILE_PRODUCTS.map((p) => (
-          <a class="tile" href={`${AZULEJOS}${p.slug}/`}>
-            <Image src={p.img} alt={p.alt} widths={[300, 600]} sizes="(min-width: 900px) 260px, 45vw" />
-            <span>{p.name}</span>
+        {TILE_PRODUCTS.map((p, i) => (
+          <a class="tile" href={`${AZULEJOS}${p.slug}/`} data-reveal style={`--d:${i * 0.08}s`}>
+            <div class="tile-img"><Image src={p.img} alt={p.alt} widths={[300, 600]} sizes="(min-width: 960px) 280px, 45vw" /></div>
+            <h3>{p.name}</h3>
+            <span class="arrow-link">Ver</span>
           </a>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section section--soft">
+  <!-- EMPRESA -->
+  <section class="section section--graphite grain">
     <div class="container split">
-      <Image src={imgFabrica} alt="Fabricación de productos KREOX en Ibi, Alicante" widths={[500, 1013]} sizes="(min-width: 900px) 480px, 92vw" class="photo" />
-      <div>
+      <div data-reveal>
         <span class="eyebrow">Tercera generación</span>
-        <h2>Fabricantes nacionales, desde Ibi (Alicante)</h2>
-        <p>KREOX nace de la búsqueda constante de la perfección en nuestros productos, con la experiencia de tres generaciones de una familia fabricante.</p>
-        <ul class="checks">
-          <li>Diseñado y fabricado en España</li>
-          <li>Material reciclado</li>
-          <li>Precio competitivo y agilidad de pedidos</li>
-        </ul>
-        <div class="btn-row"><a class="btn btn--dark" href="/empresa/">Conócenos</a></div>
+        <h2>Búsqueda constante de la perfección.</h2>
+        <p class="lead">Kreox nace de la experiencia transmitida durante años por las tres generaciones de nuestra familia. Somos fabricantes nacionales, en Ibi (Alicante).</p>
+        <dl class="stats">
+          <div><dt>3ª</dt><dd>Generación</dd></div>
+          <div><dt>100<em class="sand">%</em></dt><dd>Hecho en España</dd></div>
+          <div><dt>♻</dt><dd>Material reciclado</dd></div>
+        </dl>
+        <div class="btn-row"><a class="btn btn--sand" href="/empresa/">Conócenos</a></div>
       </div>
+      <div data-reveal><Image src={imgFabrica} alt="Fabricación y envasado de productos KREOX en Ibi, Alicante" widths={[600, 1013]} sizes="(min-width: 960px) 560px, 92vw" class="fab" /></div>
     </div>
   </section>
 
+  <!-- NOTICIAS -->
   <section class="section">
     <div class="container">
-      <div class="section-head"><h2>Últimas noticias</h2></div>
+      <div class="head-row">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Noticias</span>
+          <h2>Lo último de KREOX</h2>
+        </div>
+        <a class="btn btn--ghost side" href="/noticias/" data-reveal>Todas las noticias</a>
+      </div>
       <div class="grid grid-3">{destacadas.map((n) => <NoticiaCard n={n} />)}</div>
-      <p><a href="/noticias/">Ver todas las noticias →</a></p>
     </div>
   </section>
 
@@ -179,31 +227,73 @@ const steps = [
 </Base>
 
 <style>
-  .hero { background: var(--ink); color: #d9d6d0; padding-block: clamp(40px, 6vw, 88px); }
-  .hero h1 { color: var(--white); }
-  .hero .eyebrow { color: var(--lime); }
-  .hero .btn--ghost { color: var(--white); }
-  .hero-img { border-radius: 22px; width: 100%; }
-  .kpis { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 28px; margin: 32px 0 0; }
-  .kpis dt { font-size: 1.7rem; font-weight: 700; color: var(--lime); line-height: 1; }
-  .kpis dd { margin: 6px 0 0; font-size: 0.85rem; color: #bdb9b2; }
+  .rel { position: relative; }
+  /* Hero */
+  .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; padding: calc(var(--header-h) + 60px) 0 clamp(56px, 8vw, 96px); }
+  .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 80% center; animation: heroZoom 18s var(--ease) both; }
+  .hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(18,18,17,.96) 0%, rgba(18,18,17,.82) 38%, rgba(18,18,17,.15) 75%), linear-gradient(0deg, rgba(18,18,17,.9) 0%, rgba(18,18,17,0) 45%); }
+  .hero-in { position: relative; z-index: 1; }
+  @media (max-width: 959px) { .hero-shade { background: linear-gradient(0deg, rgba(18,18,17,.95) 0%, rgba(18,18,17,.78) 55%, rgba(18,18,17,.55) 100%); } }
+  .hero h1 { max-width: 15ch; font-size: clamp(2.6rem, 6.4vw, 5.6rem); }
+  .hero .lead { max-width: 560px; color: var(--on-dark); }
+  .hero .stats { max-width: 720px; margin-top: clamp(36px, 5vw, 64px); }
+  .hero .eyebrow, .hero h1, .hero .lead, .hero .btn-row, .hero .stats { animation: rise 1s var(--ease) both; }
+  .hero h1 { animation-delay: .1s; } .hero .lead { animation-delay: .2s; } .hero .btn-row { animation-delay: .3s; } .hero .stats { animation-delay: .45s; }
+  .scroll { position: absolute; right: var(--gutter); bottom: 40px; width: 26px; height: 44px; border: 1px solid rgba(255,255,255,.4); border-radius: 99px; display: none; }
+  .scroll span { position: absolute; left: 50%; top: 9px; width: 3px; height: 8px; border-radius: 3px; background: var(--sand); translate: -50% 0; animation: wheel 1.8s ease-in-out infinite; }
+  @media (min-width: 960px) { .scroll { display: block; } }
+  @keyframes heroZoom { from { transform: scale(1.1); } to { transform: scale(1); } }
+  @keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+  @keyframes wheel { 0% { opacity: 0; transform: translateY(0); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(12px); } }
 
-  .pcard { display: grid; grid-template-columns: 1fr; gap: 0; border-radius: var(--radius); overflow: hidden; text-decoration: none; color: inherit; background: var(--white); border: 1px solid var(--line); transition: transform .15s ease, box-shadow .15s ease; }
-  .pcard:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
-  @media (min-width: 560px) { .pcard { grid-template-columns: 0.9fr 1.1fr; } }
-  .pimg { background: #0b0b0b; display: grid; place-items: center; }
-  .pimg :global(img) { width: 100%; max-height: 300px; object-fit: contain; }
-  @media (min-width: 560px) { .pimg :global(img) { max-height: none; } }
-  .ptext { padding: 24px; align-self: center; }
-  .ptext h3 { font-size: 1.6rem; margin: 12px 0 8px; }
-  .more { font-weight: 600; color: var(--blue); }
+  .head-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 0 40px; margin-bottom: clamp(36px, 5vw, 64px); }
+  .head-row .section-head { margin-bottom: 0; }
+  .side { max-width: 340px; margin: 16px 0 0; }
 
-  .photo { border-radius: var(--radius); width: 100%; object-fit: cover; }
-  .steps-wrap { margin-top: 32px; }
+  /* Bento de productos */
+  .bento { display: grid; gap: 18px; grid-template-columns: 1fr; }
+  @media (min-width: 760px) { .bento { grid-template-columns: repeat(6, 1fr); } .p1, .p2 { grid-column: span 3; } .mini { grid-column: span 2; } }
+  .prod { position: relative; display: grid; background: #000; color: var(--on-dark); border-radius: var(--radius-xl); overflow: hidden; text-decoration: none; isolation: isolate; transition: transform .45s var(--ease); }
+  .prod:hover { transform: translateY(-6px); }
+  .prod::before { content: ''; position: absolute; inset: auto -20% -40% -20%; height: 70%; background: radial-gradient(ellipse at center, rgba(200,225,29,.18), transparent 65%); z-index: -1; transition: opacity .45s; opacity: .6; }
+  .prod:hover::before { opacity: 1; }
+  .pimg { overflow: hidden; }
+  .pimg :global(img) { width: 100%; max-height: 420px; object-fit: contain; transition: transform .8s var(--ease); }
+  .prod:hover .pimg :global(img) { transform: scale(1.04); }
+  .ptext { padding: 4px clamp(24px, 3vw, 36px) clamp(26px, 3vw, 36px); }
+  .ptext h3 { color: var(--white); font-size: clamp(1.8rem, 3vw, 2.5rem); margin: 18px 0 10px; letter-spacing: -0.03em; }
+  .ptext p { color: var(--on-dark-soft); }
+  .specs-inline { list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-wrap: wrap; gap: 0; }
+  .specs-inline li { font-size: 0.8rem; letter-spacing: .08em; color: var(--white); padding: 0 14px; border-left: 1px solid var(--line-dark); }
+  .specs-inline li:first-child { padding-left: 0; border: 0; }
+  .prod .arrow-link { color: var(--sand); }
+  .mini { display: flex; flex-direction: column; gap: 6px; padding: clamp(22px, 2.6vw, 30px); border-radius: var(--radius-xl); background: var(--paper); text-decoration: none; transition: transform .45s var(--ease), background .3s; min-height: 240px; }
+  .mini:hover { transform: translateY(-6px); background: var(--sand-soft); }
+  .mini .eyebrow { margin-bottom: .4em; }
+  .mini h3 { margin: 0; }
+  .mini .big { font-size: clamp(1.6rem, 2.6vw, 2.2rem); font-weight: 600; letter-spacing: -0.03em; color: var(--sand-strong); margin: auto 0 10px; }
+  .mini .arrow-link { margin-top: auto; }
+  .parts { display: flex; gap: 10px; margin: auto 0 10px; }
+  .parts :global(img) { width: 64px; height: 64px; object-fit: contain; }
 
-  .parts { display: grid; grid-template-columns: repeat(2, minmax(0, 150px)); justify-content: center; gap: 20px; }
-  .parts :global(img) { width: 150px; height: 140px; object-fit: contain; }
+  /* Cómo funciona */
+  .how { overflow: hidden; }
+  .how-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .35; }
+  .how-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,18,17,.9), rgba(18,18,17,.7) 50%, rgba(18,18,17,.95)); }
 
-  .tile { text-decoration: none; color: var(--ink); font-weight: 600; }
-  .tile :global(img) { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); margin-bottom: 10px; }
+  /* Novedades */
+  .nov-media { position: relative; }
+  .nov-img { border-radius: var(--radius-xl); width: 100%; }
+  .nov-sello { position: absolute; right: -10px; bottom: -30px; width: 130px; filter: drop-shadow(0 10px 20px rgba(0,0,0,.5)); background: var(--ink); border-radius: 50%; padding: 6px; }
+
+  /* Azulejos */
+  .tiles { overflow: hidden; }
+  .lineart { position: absolute; right: -8%; top: 4%; width: min(60vw, 820px); opacity: .5; mix-blend-mode: multiply; pointer-events: none; }
+  .tile { display: block; text-decoration: none; }
+  .tile-img { border-radius: var(--radius); overflow: hidden; margin-bottom: 16px; }
+  .tile-img :global(img) { width: 100%; aspect-ratio: 1; object-fit: cover; transition: transform .8s var(--ease); }
+  .tile:hover .tile-img :global(img) { transform: scale(1.06); }
+  .tile h3 { margin-bottom: 6px; }
+
+  .fab { border-radius: var(--radius-xl); width: 100%; }
 </style>

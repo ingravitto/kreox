@@ -1,0 +1,43 @@
+---
+// Visualización del peso a mover para nivelar 100 m² (dato calculado con los pesos que publica KREOX).
+import { PRODUCTOS, M2_POR_NIVELADOR } from '../data/site';
+const n = Math.ceil(100 / M2_POR_NIVELADOR);
+const rows = [
+  { label: 'Trípodes de acero', kg: (n * PRODUCTOS.tripode.pesoG) / 1000, tone: 'bad' },
+  { label: 'Nivelador Universal', kg: (n * PRODUCTOS.universal.pesoG) / 1000, tone: 'mid' },
+  { label: 'PIKO', kg: (n * PRODUCTOS.piko.pesoG) / 1000, tone: 'good' },
+];
+const max = rows[0].kg;
+const fmt = (v: number) => v.toLocaleString('es-ES', { maximumFractionDigits: 1 });
+---
+<figure class="wb" data-reveal>
+  <figcaption>
+    <span class="eyebrow">Peso a mover en obra</span>
+    <strong>Para nivelar 100 m² ({n} puntos de nivel)</strong>
+  </figcaption>
+  <ul>
+    {rows.map((r) => (
+      <li class={r.tone}>
+        <div class="lbl"><span>{r.label}</span><b>{fmt(r.kg)} kg</b></div>
+        <div class="bar"><span style={`--w:${Math.max(2, (r.kg / max) * 100)}%`}></span></div>
+      </li>
+    ))}
+  </ul>
+  <p class="muted">Cálculo orientativo: 1 nivelador cada {M2_POR_NIVELADOR} m²; trípode ≈ 1 kg, Universal ≈ {PRODUCTOS.universal.pesoG} g, PIKO ≈ {PRODUCTOS.piko.pesoG} g.</p>
+</figure>
+<style>
+  .wb { margin: 0; padding: clamp(24px, 3vw, 40px); border-radius: var(--radius-xl); background: var(--ink); color: var(--on-dark); }
+  figcaption strong { display: block; color: var(--white); font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 600; margin-bottom: 28px; letter-spacing: -0.01em; }
+  ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
+  .lbl { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; font-size: 0.92rem; }
+  .lbl b { font-size: clamp(1.3rem, 2.4vw, 1.9rem); font-weight: 600; color: var(--white); letter-spacing: -0.02em; }
+  .bar { height: 12px; border-radius: 99px; background: rgba(255,255,255,.07); overflow: hidden; }
+  .bar span { display: block; height: 100%; width: 0; border-radius: 99px; transition: width 1.6s var(--ease) .2s; }
+  :global(.is-in) .bar span, :global(.no-js) .bar span { width: var(--w); }
+  .bad .bar span { background: linear-gradient(90deg, #6e3a2f, #a3392b); }
+  .mid .bar span { background: var(--sand); }
+  .good .bar span { background: var(--lime); }
+  .good b { color: var(--lime); }
+  .muted { margin: 24px 0 0; font-size: 0.8rem; }
+  @media (prefers-reduced-motion: reduce) { .bar span { width: var(--w); } }
+</style>

@@ -2,22 +2,29 @@
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { CATEGORIAS, fecha, noticiaUrl } from '../data/noticias';
+import fallback from '../assets/img/fondo-piedra-productos-kreox.jpg';
 interface Props { n: CollectionEntry<'noticias'> }
 const { n } = Astro.props;
+const img = n.data.image ?? fallback;
 ---
-<article class="card nc">
-  {n.data.image && <Image src={n.data.image} alt={n.data.imageAlt ?? ''} widths={[400, 700]} sizes="(min-width: 900px) 360px, 92vw" />}
-  <div class="meta"><span class="badge badge--outline">{CATEGORIAS[n.data.category]}</span> <time datetime={n.data.date.toISOString()}>{fecha(n.data.date)}</time></div>
+<article class="nc" data-reveal>
+  <div class="ph"><Image src={img} alt={n.data.image ? (n.data.imageAlt ?? '') : ''} widths={[400, 720]} sizes="(min-width: 960px) 380px, 92vw" /></div>
+  <div class="meta"><span>{CATEGORIAS[n.data.category]}</span><time datetime={n.data.date.toISOString()}>{fecha(n.data.date)}</time></div>
   <h3><a href={noticiaUrl(n)}>{n.data.title}</a></h3>
-  <p class="muted">{n.data.description}</p>
+  <p>{n.data.description}</p>
+  <span class="arrow-link" aria-hidden="true">Leer</span>
 </article>
 <style>
   .nc { position: relative; display: flex; flex-direction: column; }
-  .nc :global(img) { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 10px; margin-bottom: 14px; background: #0b0b0b; }
-  .meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 0.82rem; color: var(--ink-3); margin-bottom: 10px; }
-  h3 { font-size: 1.08rem; }
+  .ph { border-radius: var(--radius); overflow: hidden; margin-bottom: 20px; background: var(--ink); }
+  .ph :global(img) { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; transition: transform .8s var(--ease), opacity .4s; }
+  .nc:hover .ph :global(img) { transform: scale(1.05); }
+  .meta { display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 12px; }
+  .meta span { color: var(--sand-strong); font-weight: 600; }
+  h3 { font-size: 1.15rem; line-height: 1.35; }
   h3 a { color: var(--ink); text-decoration: none; }
   h3 a::after { content: ''; position: absolute; inset: 0; }
-  h3 a:hover { text-decoration: underline; }
-  p { margin: 0; }
+  .nc:hover h3 a { color: var(--sand-strong); }
+  p { color: var(--text-soft); font-size: 0.93rem; margin-bottom: 16px; }
+  .arrow-link { margin-top: auto; }
 </style>

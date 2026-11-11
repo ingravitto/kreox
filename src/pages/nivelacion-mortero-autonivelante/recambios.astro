@@ -1,4 +1,6 @@
 ---
+import PageHero from '../../components/PageHero.astro';
+import imgHeroBg from '../../assets/img/hero-productos-kreox.jpg';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import CtaTarifa from '../../components/CtaTarifa.astro';
@@ -19,30 +21,35 @@ const schema = items.map((it) =>
 );
 ---
 <Base
+  overlay
   title="Recambios para niveladores de mortero autonivelante | KREOX"
   description="Arandela niveladora, base y anilla metálica de recambio para los niveladores PIKO y Universal de KREOX. Cambia solo la pieza gastada y alarga la vida del sistema."
   breadcrumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }, { name: 'Recambios', url }]}
   schema={schema}
 >
-  <section class="section">
+  <PageHero
+    compact
+    eyebrow="Recambios y accesorios"
+    title="Recambios para niveladores"
+    accent="PIKO y Universal"
+    lead="Cuando una pieza se desgasta, <strong>cambias solo esa pieza</strong>: alargas la vida del sistema y bajas el coste por obra frente a comprar trípodes nuevos."
+    bg={imgHeroBg}
+    crumbs={[{ name: 'Nivelación', url: NIVELACION }, { name: 'Recambios', url }]}
+  />
+  <section class="section section--tight">
     <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Recambios y accesorios</span>
-        <h1>Recambios para niveladores PIKO y Universal</h1>
-        <p class="lead">Los niveladores KREOX están hechos para durar muchas obras. Cuando una pieza se desgasta, <strong>cambias solo esa pieza</strong>: alargas la vida del sistema y bajas el coste por obra frente a comprar trípodes nuevos.</p>
-      </div>
       <div class="table-wrap">
         <table>
           <thead><tr><th scope="col">Recambio</th><th scope="col">Para</th><th scope="col">Presentación</th></tr></thead>
           <tbody>
-            {items.map((it) => <tr><th scope="row"><a href={`#${it.id}`}>{it.name}</a></th><td>{it.para}</td><td>Caja de {it.caja} uds</td></tr>)}
+            {items.map((it) => <tr><th scope="row"><a class="link" href={`#${it.id}`}>{it.name}</a></th><td>{it.para}</td><td>Caja de {it.caja} uds</td></tr>)}
           </tbody>
         </table>
       </div>
     </div>
   </section>
 
-  <section class="section section--soft">
+  <section class="section section--paper">
     <div class="container grid">
       {items.map((it) => (
         <article class="card item" id={it.id}>

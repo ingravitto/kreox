@@ -1,4 +1,6 @@
 ---
+import PageHero from '../../components/PageHero.astro';
+import imgHeroBg from '../../assets/img/fondo-piedra-productos-kreox.jpg';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import Steps from '../../components/Steps.astro';
@@ -34,33 +36,35 @@ const schema = [
   faqSchema(TILE_FAQ),
 ];
 ---
-<Base title={p.title} description={p.description} ogType="product" image={p.img.src} breadcrumbs={[{ name: 'Colocación de azulejos', url: AZULEJOS }, { name: p.name, url }]} schema={schema}>
-  <section class="section">
-    <div class="container split">
-      <div>
-        <span class="eyebrow">Colocación de azulejos</span>
-        <h1>{p.name}</h1>
-        <p class="lead">{p.intro}</p>
-        <p>{p.body}</p>
-        <div class="table-wrap">
-          <table>
-            <tbody>
-              <tr><th scope="row">Presentación</th><td>{p.presentacion.join(' · ')}</td></tr>
-              {p.extra?.map((e) => <tr><th scope="row">{e.label}</th><td>{e.value}</td></tr>)}
-              <tr><th scope="row">Origen</th><td>Diseñado y fabricado en España con material reciclado</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="btn-row">
-          <a class="btn btn--dark" href="/contacto/?interes=azulejos">Pedir tarifa 2026</a>
-          <a class="btn btn--ghost" href={SITE.tileCalculator}>Calculadora de piezas</a>
-        </div>
-      </div>
-      <Image src={p.img} alt={p.alt} widths={[480, 800]} sizes="(min-width: 900px) 520px, 92vw" class="pimg" loading="eager" />
+<Base overlay title={p.title} description={p.description} ogType="product" image={p.img.src} breadcrumbs={[{ name: 'Colocación de azulejos', url: AZULEJOS }, { name: p.name, url }]} schema={schema}>
+  <PageHero
+    eyebrow="Colocación de azulejos"
+    title={p.name}
+    lead={p.intro}
+    bg={imgHeroBg}
+    product={p.img}
+    productAlt={p.alt}
+    crumbs={[{ name: 'Azulejos', url: AZULEJOS }, { name: p.name, url }]}
+  >
+    <div class="btn-row">
+      <a class="btn btn--sand" href="/contacto/?interes=azulejos">Pedir tarifa 2026</a>
+      <a class="btn btn--ghost" href={SITE.tileCalculator}>Calculadora de piezas</a>
+    </div>
+  </PageHero>
+  <section class="section section--paper">
+    <div class="container split split--top">
+      <div><span class="eyebrow">Ficha</span><h2>{p.name}</h2><p class="lead">{p.body}</p></div>
+      <table class="specs">
+        <tbody>
+          <tr><th scope="row">Presentación</th><td>{p.presentacion.join(' · ')}</td></tr>
+          {p.extra?.map((e) => <tr><th scope="row">{e.label}</th><td>{e.value}</td></tr>)}
+          <tr><th scope="row">Origen</th><td>Diseñado y fabricado en España con material reciclado</td></tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
-  <section class="section section--soft">
+  <section class="section section--paper">
     <div class="container">
       <div class="section-head"><h2>Modo de uso</h2></div>
       <Steps steps={p.steps} />

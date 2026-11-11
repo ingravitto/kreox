@@ -1,0 +1,55 @@
+---
+// Hero oscuro a sangre para páginas interiores (estilo kreox.es: foto de obra/producto en negro + texto arena).
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+interface Props {
+  eyebrow?: string;
+  title: string;
+  accent?: string; // parte del título que va en arena
+  lead?: string;
+  crumbs?: { name: string; url: string }[];
+  bg?: ImageMetadata;
+  bgAlt?: string;
+  product?: ImageMetadata;
+  productAlt?: string;
+  compact?: boolean;
+}
+const { eyebrow, title, accent, lead, crumbs, bg, bgAlt = '', product, productAlt = '', compact = false } = Astro.props;
+---
+<section class:list={['phero section--dark grain', { compact, 'has-product': !!product }]}>
+  {bg && <Image src={bg} alt={bgAlt} widths={[960, 1600, 1920]} sizes="100vw" class="bg" loading="eager" fetchpriority="high" />}
+  <div class="shade" aria-hidden="true"></div>
+  <div class="container inner">
+    <div class="copy on-dark">
+      {crumbs && <Breadcrumbs items={[{ name: 'Inicio', url: '/' }, ...crumbs]} dark />}
+      {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+      <h1>{title}{accent && <> <span class="sand">{accent}</span></>}</h1>
+      {lead && <p class="lead" set:html={lead} />}
+      <slot />
+    </div>
+    {product && (
+      <div class="media">
+        <div class="glow" aria-hidden="true"></div>
+        <Image src={product} alt={productAlt} widths={[420, 640]} sizes="(min-width: 960px) 460px, 80vw" loading="eager" />
+      </div>
+    )}
+  </div>
+</section>
+<style>
+  .phero { position: relative; overflow: hidden; padding-top: calc(var(--header-h) + clamp(40px, 6vw, 88px)); padding-bottom: clamp(64px, 9vw, 130px); min-height: min(88vh, 860px); display: flex; align-items: center; }
+  .phero.compact { min-height: 0; }
+  .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55; animation: kenburns 24s var(--ease) both; }
+  .shade { position: absolute; inset: 0; background: radial-gradient(ellipse at 75% 50%, rgba(18,18,17,.1), rgba(18,18,17,.85) 70%), linear-gradient(90deg, rgba(18,18,17,.95) 0%, rgba(18,18,17,.55) 55%, rgba(18,18,17,.25) 100%); }
+  .inner { position: relative; z-index: 1; display: grid; gap: 40px; align-items: center; }
+  @media (min-width: 960px) { .has-product .inner { grid-template-columns: 1.15fr 0.85fr; } }
+  .copy { max-width: 760px; }
+  h1 { color: var(--white); }
+  .compact h1 { font-size: clamp(2rem, 4.4vw, 3.6rem); }
+  .lead { color: var(--on-dark); max-width: 640px; }
+  .media { position: relative; display: grid; place-items: center; }
+  .media :global(img) { position: relative; width: min(100%, 440px); border-radius: var(--radius-xl); border: 1px solid var(--line-dark); box-shadow: 0 40px 80px -30px rgba(0,0,0,.8); animation: float 7s ease-in-out infinite; }
+  .glow { position: absolute; width: 70%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(200,225,29,.22), rgba(31,111,209,.12) 45%, transparent 70%); filter: blur(30px); }
+  @keyframes kenburns { from { transform: scale(1.08); } to { transform: scale(1); } }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+</style>

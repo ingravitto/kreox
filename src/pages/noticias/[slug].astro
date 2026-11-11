@@ -1,4 +1,6 @@
 ---
+import PageHero from '../../components/PageHero.astro';
+import imgHeroBg from '../../assets/img/fondo-piedra-productos-kreox.jpg';
 import { Image } from 'astro:assets';
 import { render, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
@@ -39,17 +41,16 @@ const article = {
 };
 const schema = [article, ...(n.data.faq.length ? [faqSchema(n.data.faq)] : [])];
 ---
-<Base title={n.data.seoTitle ?? `${n.data.title} | KREOX`} description={n.data.description} ogType="article" image={n.data.image?.src} breadcrumbs={[{ name: 'Noticias', url: '/noticias/' }, { name: n.data.title, url }]} schema={schema}>
+<Base overlay title={n.data.seoTitle ?? `${n.data.title} | KREOX`} description={n.data.description} ogType="article" image={n.data.image?.src} breadcrumbs={[{ name: 'Noticias', url: '/noticias/' }, { name: n.data.title, url }]} schema={schema}>
+  <PageHero compact eyebrow={CATEGORIAS[n.data.category]} title={n.data.title} lead={n.data.description} bg={imgHeroBg} crumbs={[{ name: 'Noticias', url: '/noticias/' }, { name: n.data.title, url }]} />
   <article class="section">
     <div class="container">
       <header class="prose head">
         <div class="meta">
-          <span class="badge badge--outline">{CATEGORIAS[n.data.category]}</span>
+          <span class="chip">{CATEGORIAS[n.data.category]}</span>
           <time datetime={n.data.date.toISOString()}>{fecha(n.data.date)}</time>
           {n.data.updated && <span>· Actualizado el <time datetime={n.data.updated.toISOString()}>{fecha(n.data.updated)}</time></span>}
         </div>
-        <h1>{n.data.title}</h1>
-        <p class="lead">{n.data.description}</p>
       </header>
       {n.data.image && <Image src={n.data.image} alt={n.data.imageAlt ?? ''} widths={[700, 1100]} sizes="(min-width: 900px) 760px, 92vw" class="cover" loading="eager" />}
       <div class="prose body"><Content /></div>
@@ -63,7 +64,7 @@ const schema = [article, ...(n.data.faq.length ? [faqSchema(n.data.faq)] : [])];
   </article>
   {n.data.faq.length > 0 && <Faq faqs={n.data.faq} />}
   {related.length > 0 && (
-    <section class="section section--soft">
+    <section class="section section--paper">
       <div class="container">
         <h2>Más noticias de {CATEGORIAS[n.data.category].toLowerCase()}</h2>
         <div class="grid grid-3">{related.map((r) => <NoticiaCard n={r} />)}</div>
@@ -74,7 +75,7 @@ const schema = [article, ...(n.data.faq.length ? [faqSchema(n.data.faq)] : [])];
 </Base>
 <style>
   .head { margin-bottom: 28px; }
-  .meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 0.85rem; color: var(--ink-3); margin-bottom: 14px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 0.85rem; color: var(--text-soft); margin-bottom: 14px; }
   h1 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); }
   .cover { max-width: 760px; width: 100%; border-radius: var(--radius); margin-bottom: 32px; background: #0b0b0b; }
   .prods { margin-top: 36px; }

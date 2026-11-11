@@ -1,16 +1,11 @@
 ---
-import { Image } from 'astro:assets';
-import Base from '../../layouts/Base.astro';
-import Steps from '../../components/Steps.astro';
-import CompareTripode from '../../components/CompareTripode.astro';
-import Calculadora from '../../components/Calculadora.astro';
-import Faq from '../../components/Faq.astro';
-import CtaTarifa from '../../components/CtaTarifa.astro';
+import ProductPage from '../../components/ProductPage.astro';
 import { NIVELACION, PRODUCTOS, M2_POR_NIVELADOR } from '../../data/site';
 import { FAQ_PIKO } from '../../data/faqs';
 import { productSchema, faqSchema } from '../../data/schema';
 
-import imgHero from '../../assets/img/piko-nivelador-suelo-radiante-kreox.png';
+import imgProducto from '../../assets/img/piko-nivelador-suelo-radiante-kreox.png';
+import imgBg from '../../assets/img/suelo-radiante-piko-bn.jpg';
 import imgPlano from '../../assets/img/piko-medidas-plano.png';
 import imgComo from '../../assets/img/piko-como-funciona-suelo-radiante.png';
 import imgLaser from '../../assets/img/piko-laser-receptor-suelo-radiante.jpg';
@@ -19,19 +14,21 @@ import imgLimpieza from '../../assets/img/piko-limpieza-reutilizable.jpg';
 import imgTriPesado from '../../assets/img/tripodes-acero-pesados.jpg';
 import imgTriOxido from '../../assets/img/tripodes-acero-oxidados.jpg';
 import imgArandela from '../../assets/img/arandela-niveladora-recambio.png';
-import imgSello from '../../assets/img/sello-producto-patentado.png';
+import imgBase from '../../assets/img/base-niveladora-universal-recambio.png';
+import imgAnilla from '../../assets/img/anilla-metalica-niveladora-universal.png';
+import imgUni from '../../assets/img/nivelador-universal-recrecido-kreox.png';
 
 const P = PRODUCTOS.piko;
 const url = `${NIVELACION}piko/`;
+const M = P.medidas;
 
 const schema = [
   productSchema({
     id: url,
     name: P.nombreCompleto,
     alternateName: ['PIKO KREOX', 'Nivelador Aislamiento 1 PiKo'],
-    description:
-      'Nivelador para mortero autonivelante que se clava en la placa de aislamiento del suelo radiante y marca la altura de acabado con una anilla regulable por láser. Sustituye al trípode de acero: unos 20 g por unidad, no se oxida y es reutilizable.',
-    images: [imgHero.src, imgPlano.src],
+    description: 'Nivelador para mortero autonivelante que se clava en la placa de aislamiento del suelo radiante y marca la altura de acabado con una anilla regulable por láser. Sustituye al trípode de acero: unos 20 g por unidad, no se oxida y es reutilizable.',
+    images: [imgProducto.src, imgPlano.src],
     weightG: P.pesoG,
     related: `${NIVELACION}nivelador-universal/`,
     props: [
@@ -39,7 +36,7 @@ const schema = [
       ['Fijación', P.fijacion],
       ['Presentación', `Caja de ${P.caja} unidades`],
       ['Densidad recomendada', `1 nivelador cada ${M2_POR_NIVELADOR} m² aprox.`],
-      ['Medidas (mm)', `Fuste ${P.medidas.altoMm} + punta ${P.medidas.puntaMm}; base Ø${P.medidas.baseMm}; arandela Ø${P.medidas.arandelaMm}`],
+      ['Medidas (mm)', `Fuste ${M.altoMm} + punta ${M.puntaMm}; base Ø${M.baseMm}; arandela Ø${M.arandelaMm}`],
       ['Compatibilidad láser', 'Láser habitual y láser con receptor'],
       ['Reutilizable', 'Sí'],
       ['Patente', 'Producto patentado'],
@@ -47,179 +44,68 @@ const schema = [
   }),
   faqSchema(FAQ_PIKO),
 ];
-
-const steps = [
-  { title: 'Clava el PIKO', text: `Clávalo en la placa de aislamiento del suelo radiante: su punta entra sin herramientas. Coloca aproximadamente uno cada ${M2_POR_NIVELADOR} m².` },
-  { title: 'Marca la cota con láser', text: 'Marca la altura de acabado con un láser nivelador, habitual o con receptor.' },
-  { title: 'Ajusta la anilla', text: 'Desliza la anilla del PIKO hasta la línea marcada por el láser.' },
-  { title: 'Vierte y retira', text: 'Vierte el mortero autonivelante hasta la altura de la anilla. Después retira el PIKO y límpialo para la próxima obra.' },
-];
 ---
-<Base
-  title="PIKO · Nivelador de mortero autonivelante para suelo radiante | KREOX"
-  description="PIKO de KREOX sustituye al trípode de acero en suelo radiante: 20 g, sin óxido, reutilizable y compatible con láser. Producto patentado, fabricado en España."
-  ogType="product"
-  image={imgHero.src}
-  breadcrumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }, { name: 'PIKO', url }]}
-  schema={schema}
->
-  <section class="section hero">
-    <div class="container split">
-      <div>
-        <span class="eyebrow">Nivelador para suelo radiante</span>
-        <h1>PIKO, el nivelador para mortero autonivelante en suelo radiante</h1>
-        <p class="lead">
-          El <strong>PIKO de KREOX</strong> se clava en la placa de aislamiento del suelo radiante y marca la altura exacta a la que
-          debe llegar el mortero autonivelante. Sustituye al trípode de acero: pesa unos <strong>{P.pesoG} gramos frente a cerca de
-          1 kg</strong>, <strong>no se oxida</strong> con el pH alcalino del mortero y es <strong>reutilizable</strong>. Se regula con láser
-          habitual o con receptor y se fabrica en España.
-        </p>
-        <div class="badges">
-          <span class="badge">Producto patentado</span>
-          <span class="badge badge--outline">Caja de {P.caja} uds</span>
-          <span class="badge badge--outline">Fabricado en España</span>
-        </div>
-        <div class="btn-row">
-          <a class="btn btn--dark" href="/contacto/?interes=nivelacion">Pedir tarifa 2026</a>
-          <a class="btn btn--ghost" href="#calculadora">¿Cuántos PIKO necesito?</a>
-        </div>
-      </div>
-      <div class="hero-img">
-        <Image src={imgHero} alt="PIKO de KREOX, nivelador azul con anilla verde lima para mortero autonivelante en suelo radiante" widths={[400, 522]} sizes="(min-width: 900px) 460px, 90vw" loading="eager" fetchpriority="high" />
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--soft" id="datos">
-    <div class="container split top">
-      <div>
-        <h2>Datos técnicos del PIKO</h2>
-        <div class="table-wrap">
-          <table>
-            <tbody>
-              <tr><th scope="row">Uso</th><td>Nivelación de mortero autonivelante sobre placa de aislamiento de suelo radiante</td></tr>
-              <tr><th scope="row">Fijación</th><td>Punta que se clava en el aislamiento</td></tr>
-              <tr><th scope="row">Peso</th><td>≈ {P.pesoG} g por unidad</td></tr>
-              <tr><th scope="row">Medidas</th><td>Fuste {P.medidas.altoMm} mm + punta {P.medidas.puntaMm} mm · base Ø{P.medidas.baseMm} mm · fuste {P.medidas.fusteMm} mm · arandela Ø{P.medidas.arandelaMm} mm</td></tr>
-              <tr><th scope="row">Presentación</th><td>Caja de {P.caja} unidades</td></tr>
-              <tr><th scope="row">Colocación</th><td>1 nivelador cada {M2_POR_NIVELADOR} m² aprox.</td></tr>
-              <tr><th scope="row">Regulación</th><td>Anilla deslizante; versión 2026 con aditivo de fibra</td></tr>
-              <tr><th scope="row">Láser</th><td>Compatible con láser habitual y con láser con receptor</td></tr>
-              <tr><th scope="row">Reutilizable</th><td>Sí, se retira y se limpia tras el vertido</td></tr>
-              <tr><th scope="row">Recambio</th><td><a href={`${NIVELACION}recambios/`}>Arandela niveladora</a> (caja de 150)</td></tr>
-              <tr><th scope="row">Origen</th><td>Diseñado y fabricado en España (Ibi, Alicante) · producto patentado</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <figure class="plano">
-        <Image src={imgPlano} alt="Plano con medidas del PIKO: fuste de 152 mm, punta de 24 mm, base de 50 mm y arandela de 48 mm" widths={[480, 800, 1232]} sizes="(min-width: 900px) 540px, 92vw" />
-        <figcaption class="muted">Medidas en milímetros según el plano del fabricante.</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section class="section" id="como-se-usa">
-    <div class="container">
-      <div class="section-head">
-        <h2>Cómo se usa el PIKO, en 4 pasos</h2>
-        <p>La misma secuencia en cualquier instalación de suelo radiante: clavar, marcar, ajustar y verter.</p>
-      </div>
-      <Steps steps={steps} />
-      <div class="grid grid-2 media">
-        <Image src={imgComo} alt="Esquema del PIKO clavado en la placa de aislamiento con la anilla a la altura del mortero autonivelante" widths={[600, 1000, 1477]} sizes="(min-width: 900px) 580px, 92vw" />
-        <Image src={imgLaser} alt="Instalador ajustando un PIKO sobre placa de tetones de suelo radiante con láser y receptor" widths={[316]} sizes="(min-width: 900px) 580px, 92vw" class="photo" />
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--soft" id="comparativa">
-    <div class="container">
-      <div class="section-head">
-        <h2>PIKO frente al trípode de acero</h2>
-        <p>Por qué cada vez más aplicadores de suelo radiante dejan el trípode metálico.</p>
-      </div>
-      <CompareTripode only="piko" />
-      <div class="grid grid-4 photos">
-        <figure><Image src={imgTriPesado} alt="Operario cargando decenas de trípodes de acero pesados" widths={[316]} /><figcaption class="bad">Trípodes: pesados y voluminosos</figcaption></figure>
-        <figure><Image src={imgTriOxido} alt="Trípodes de acero oxidados por el contacto con el mortero" widths={[316]} /><figcaption class="bad">Trípodes: se oxidan</figcaption></figure>
-        <figure><Image src={imgCaja} alt="Caja con 100 niveladores PIKO de KREOX" widths={[316]} /><figcaption class="good">PIKO: 100 uds en una caja</figcaption></figure>
-        <figure><Image src={imgLimpieza} alt="Limpieza de niveladores PIKO en un cubo de agua para reutilizarlos" widths={[316]} /><figcaption class="good">PIKO: se limpia con agua</figcaption></figure>
-      </div>
-      <p><a href={`${NIVELACION}piko-vs-tripode/`}>Ver la comparativa completa PIKO vs. trípode →</a></p>
-    </div>
-  </section>
-
-  <section class="section section--dark">
-    <div class="container split">
-      <div>
-        <span class="eyebrow">Mejora continua · 2026</span>
-        <h2>Nueva anilla con aditivo de fibra</h2>
-        <ul class="checks">
-          <li>Más resistencia al uso continuo y menos desgaste en contacto con el mortero.</li>
-          <li>Regulación más firme y precisa.</li>
-          <li>Nuevo color de alta visibilidad, que se distingue mejor en obra.</li>
-          <li>Probada en condiciones reales de obra antes de su lanzamiento.</li>
-        </ul>
-      </div>
-      <div class="dark-imgs">
-        <Image src={imgArandela} alt="Arandela niveladora verde lima con aditivo de fibra para PIKO" widths={[360, 732]} sizes="260px" />
-        <Image src={imgSello} alt="Sello de producto patentado KREOX" widths={[200, 400]} sizes="180px" class="sello" />
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="piko-o-universal">
-    <div class="container">
-      <div class="section-head"><h2>¿PIKO o Nivelador Universal?</h2></div>
-      <div class="grid grid-2">
-        <div class="card">
-          <h3>PIKO, si hay aislamiento</h3>
-          <p>Para suelo radiante sobre placa de aislamiento, donde el nivelador se puede <strong>clavar</strong>.</p>
-          <span class="badge">Estás en esta página</span>
-        </div>
-        <div class="card">
-          <h3>Nivelador Universal, si la superficie es dura</h3>
-          <p>Para recrecidos sobre forjado, solera o pavimento existente: se <strong>apoya</strong> sobre su base plana.</p>
-          <a href={`${NIVELACION}nivelador-universal/`}>Ver Nivelador Universal →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--soft" id="calculadora">
-    <div class="container">
-      <div class="section-head">
-        <h2>¿Cuántos PIKO necesitas?</h2>
-        <p>Introduce los metros cuadrados de tu obra y te damos niveladores, cajas y el peso que te ahorras frente al trípode.</p>
-      </div>
-      <Calculadora compact defaultProduct="piko" />
-    </div>
-  </section>
-
-  <Faq faqs={FAQ_PIKO} title="Preguntas frecuentes sobre el PIKO" />
-  <CtaTarifa title="¿Vas a nivelar un suelo radiante?" text="Pide la tarifa 2026 y te asesoramos sobre cuántos PIKO necesitas para tu obra." />
-</Base>
-
-<style>
-  .hero { padding-top: clamp(28px, 4vw, 48px); }
-  .hero-img { background: #0b0b0b; border-radius: 22px; overflow: hidden; display: grid; place-items: center; }
-  .hero-img :global(img) { width: 100%; max-width: 460px; }
-  .badges { display: flex; flex-wrap: wrap; gap: 8px; }
-  .top { align-items: start; }
-  .plano { margin: 0; background: #d9d9d9; border-radius: var(--radius); padding: 12px; }
-  .plano :global(img) { border-radius: 10px; }
-  .plano figcaption { padding: 8px 4px 0; }
-  .media { margin-top: 28px; align-items: center; }
-  .media :global(img) { border-radius: var(--radius); width: 100%; }
-  .media :global(.photo) { object-fit: cover; aspect-ratio: 316 / 190; }
-  .photos { margin-top: 24px; }
-  .photos figure { margin: 0; }
-  .photos :global(img) { width: 100%; aspect-ratio: 316 / 190; object-fit: cover; border-radius: 10px; }
-  .photos figcaption { font-size: 0.88rem; font-weight: 600; margin-top: 8px; }
-  .bad { color: #9b2c1f; }
-  .good { color: #2f6b0f; }
-  .dark-imgs { display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; }
-  .dark-imgs :global(img) { width: 260px; }
-  .dark-imgs :global(.sello) { width: 160px; opacity: 0.9; }
-</style>
+<ProductPage
+  kind="piko"
+  name="PIKO"
+  seo={{
+    title: 'PIKO · Nivelador de mortero autonivelante para suelo radiante | KREOX',
+    description: 'PIKO de KREOX sustituye al trípode de acero en suelo radiante: 20 g, sin óxido, reutilizable y compatible con láser. Producto patentado, fabricado en España.',
+    schema,
+    image: imgProducto.src,
+  }}
+  hero={{
+    eyebrow: 'Nivelador para suelo radiante',
+    title: 'PIKO, el nivelador para mortero autonivelante en',
+    accent: 'suelo radiante',
+    lead: `El <strong>PIKO de KREOX</strong> se clava en la placa de aislamiento y marca la altura exacta del mortero autonivelante. Sustituye al trípode de acero: <strong>${P.pesoG} gramos frente a cerca de 1 kg</strong>, <strong>sin óxido</strong> y <strong>reutilizable</strong>. Compatible con láser habitual o con receptor.`,
+    bg: imgBg,
+    bgAlt: 'Suelo radiante con niveladores PIKO clavados antes del vertido',
+    product: imgProducto,
+    productAlt: 'PIKO de KREOX, nivelador azul con anilla verde lima para mortero autonivelante',
+  }}
+  kpis={[
+    { v: String(P.pesoG), u: 'g', l: 'Peso por unidad' },
+    { v: String(M.altoMm + M.puntaMm), u: 'mm', l: 'Altura total' },
+    { v: String(P.caja), u: 'uds', l: 'Por caja' },
+    { v: String(M2_POR_NIVELADOR), u: 'm²', l: 'Por nivelador (aprox.)' },
+  ]}
+  plano={{ img: imgPlano, alt: `Plano con medidas del PIKO: fuste de ${M.altoMm} mm, punta de ${M.puntaMm} mm, base de ${M.baseMm} mm y arandela de ${M.arandelaMm} mm` }}
+  specs={[
+    ['Uso', 'Mortero autonivelante sobre placa de aislamiento de suelo radiante'],
+    ['Fijación', 'Punta que se clava en el aislamiento'],
+    ['Peso', `≈ ${P.pesoG} g`],
+    ['Medidas', `Fuste ${M.altoMm} mm + punta ${M.puntaMm} mm · base Ø${M.baseMm} mm · fuste ${M.fusteMm} mm · arandela Ø${M.arandelaMm} mm`],
+    ['Presentación', `Caja de ${P.caja} unidades`],
+    ['Colocación', `1 nivelador cada ${M2_POR_NIVELADOR} m² aprox.`],
+    ['Regulación', 'Anilla deslizante; versión 2026 con aditivo de fibra'],
+    ['Láser', 'Habitual y con receptor'],
+    ['Recambio', `<a href="${NIVELACION}recambios/">Arandela niveladora</a> (caja de 150)`],
+    ['Origen', 'Diseñado y fabricado en Ibi (Alicante) · patentado'],
+  ]}
+  steps={[
+    { title: 'Clava el PIKO', text: `En la placa de aislamiento del suelo radiante, sin herramientas. Aproximadamente uno cada ${M2_POR_NIVELADOR} m².` },
+    { title: 'Marca la cota', text: 'Con un láser nivelador, habitual o con receptor.' },
+    { title: 'Ajusta la anilla', text: 'Deslízala hasta la línea marcada por el láser.' },
+    { title: 'Vierte y retira', text: 'Mortero hasta la anilla. Después retira el PIKO y límpialo para la próxima obra.' },
+  ]}
+  stepsMedia={[
+    { img: imgComo, alt: 'Esquema del PIKO clavado en la placa de aislamiento con la anilla a la altura del mortero autonivelante' },
+    { img: imgLaser, alt: 'Instalador ajustando un PIKO sobre placa de tetones con láser y receptor' },
+  ]}
+  gallery={[
+    { img: imgTriPesado, alt: 'Operario cargando decenas de trípodes de acero', caption: 'Trípodes: pesados', good: false },
+    { img: imgTriOxido, alt: 'Trípodes de acero oxidados por el mortero', caption: 'Trípodes: se oxidan', good: false },
+    { img: imgCaja, alt: 'Caja con 100 niveladores PIKO', caption: 'PIKO: 100 uds por caja', good: true },
+    { img: imgLimpieza, alt: 'PIKO limpiándose en un cubo de agua para reutilizarlo', caption: 'PIKO: se limpia con agua', good: true },
+  ]}
+  parts={[
+    { img: imgArandela, alt: 'Arandela niveladora con aditivo de fibra', name: 'Arandela niveladora', caja: 'Recambio del PIKO · caja de 150' },
+    { img: imgBase, alt: 'Base niveladora universal', name: 'Base niveladora universal', caja: 'Para el Universal · caja de 40' },
+    { img: imgAnilla, alt: 'Anilla metálica niveladora universal', name: 'Anilla metálica', caja: 'Para el Universal · caja de 40' },
+  ]}
+  other={{ name: '¿Superficie dura, sin aislamiento?', text: 'Usa el Nivelador Universal, con base plana para recrecidos →', href: `${NIVELACION}nivelador-universal/`, img: imgUni, alt: 'Nivelador Universal' }}
+  faqs={FAQ_PIKO}
+  faqTitle="Preguntas frecuentes sobre el PIKO"
+  cta={{ title: '¿Vas a nivelar un suelo radiante?', text: 'Pide la tarifa 2026 y te asesoramos sobre cuántos PIKO necesitas para tu obra.' }}
+/>

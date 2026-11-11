@@ -1,13 +1,14 @@
 ---
 import Base from './Base.astro';
+import PageHero from '../components/PageHero.astro';
+import imgHeroBg from '../assets/img/fondo-piedra-productos-kreox.jpg';
 interface Props { title: string; description: string; url: string; updated: string }
 const { title, description, url, updated } = Astro.props;
 ---
-<Base title={`${title} | KREOX`} description={description} breadcrumbs={[{ name: title, url }]}>
+<Base overlay title={`${title} | KREOX`} description={description} breadcrumbs={[{ name: title, url }]}>
+  <PageHero compact eyebrow="Información legal" title={title} lead={`Última actualización: ${updated}`} bg={imgHeroBg} crumbs={[{ name: title, url }]} />
   <section class="section">
     <div class="container prose">
-      <h1>{title}</h1>
-      <p class="muted">Última actualización: {updated}</p>
       <slot />
     </div>
   </section>

@@ -1,0 +1,21 @@
+---
+import { Image } from 'astro:assets';
+import aimplas from '../assets/img/socio-aimplas.png';
+import aiju from '../assets/img/socio-aiju.png';
+import ibiae from '../assets/img/socio-ibiae.png';
+---
+<div class="partners">
+  <span class="label">Estamos asociados</span>
+  <ul>
+    <li><Image src={aimplas} alt="AIMPLAS, Plastics Technology Centre" widths={[260, 520]} sizes="170px" /></li>
+    <li><Image src={aiju} alt="AIJU, Instituto Tecnológico de producto infantil y ocio" widths={[260, 520]} sizes="170px" /></li>
+    <li><Image src={ibiae} alt="IBIAE, Asociación de Empresarios Foia de Castalla" widths={[260, 520]} sizes="150px" /></li>
+  </ul>
+</div>
+<style>
+  .partners { display: flex; flex-wrap: wrap; align-items: center; gap: 24px 48px; margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--line-dark); }
+  .label { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--on-dark-soft); }
+  ul { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 28px 48px; margin: 0; padding: 0; }
+  li :global(img) { height: 34px; width: auto; opacity: 0.6; transition: opacity .2s; }
+  li :global(img):hover { opacity: 1; }
+</style>

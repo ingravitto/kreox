@@ -1,4 +1,6 @@
 ---
+import PageHero from '../../components/PageHero.astro';
+import imgHeroBg from '../../assets/img/suelo-radiante-piko-bn.jpg';
 import Base from '../../layouts/Base.astro';
 import Calculadora from '../../components/Calculadora.astro';
 import Faq from '../../components/Faq.astro';
@@ -19,23 +21,26 @@ const faqs = [
 ];
 ---
 <Base
+  overlay
   title="Calculadora de niveladores para mortero autonivelante | KREOX"
   description="Calcula cuántos niveladores PIKO o Universal necesitas para tu obra de mortero autonivelante: unidades, cajas y peso frente al trípode de acero."
   breadcrumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }, { name: 'Calculadora', url }]}
   schema={[faqSchema(faqs)]}
 >
-  <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Herramienta</span>
-        <h1>Calculadora de niveladores para mortero autonivelante</h1>
-        <p class="lead">Introduce los metros cuadrados que vas a verter y te decimos cuántos niveladores y cajas necesitas, y cuánto peso te ahorras frente al trípode de acero.</p>
-      </div>
-      <Calculadora />
-    </div>
+  <PageHero
+    compact
+    eyebrow="Herramienta"
+    title="Calculadora de niveladores para"
+    accent="mortero autonivelante"
+    lead="Introduce los metros cuadrados que vas a verter y te decimos cuántos niveladores y cajas necesitas, y cuánto peso te ahorras frente al trípode de acero."
+    bg={imgHeroBg}
+    crumbs={[{ name: 'Nivelación', url: NIVELACION }, { name: 'Calculadora', url }]}
+  />
+  <section class="section section--tight calc-wrap">
+    <div class="container container--narrow"><Calculadora /></div>
   </section>
 
-  <section class="section section--soft">
+  <section class="section section--paper">
     <div class="container">
       <div class="section-head">
         <h2>Tabla rápida de cantidades</h2>

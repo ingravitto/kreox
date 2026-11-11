@@ -16,9 +16,11 @@ interface Props {
   schema?: Record<string, unknown>[];
   breadcrumbs?: Crumb[];
   noindex?: boolean;
+  /** La página empieza con un hero oscuro a sangre: la cabecera va transparente encima y las migas se pintan dentro del hero. */
+  overlay?: boolean;
 }
 
-const { title, description, image = '/img/og-kreox-niveladores.jpg', ogType = 'website', schema = [], breadcrumbs, noindex = false } = Astro.props;
+const { title, description, image = '/img/og-kreox-niveladores.jpg', ogType = 'website', schema = [], breadcrumbs, noindex = false, overlay = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
 const ogImage = new URL(image, SITE.url).href;
 // En el entorno de pruebas (staging) se publica con PUBLIC_NOINDEX=1 para que Google no lo indexe.
@@ -28,7 +30,7 @@ const crumbs = breadcrumbs ? [{ name: 'Inicio', url: '/' }, ...breadcrumbs] : un
 const graph = [organizationSchema(), websiteSchema(), ...(crumbs ? [breadcrumbSchema(crumbs)] : []), ...schema];
 ---
 <!doctype html>
-<html lang="es">
+<html lang="es" class="no-js">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -36,9 +38,10 @@ const graph = [organizationSchema(), websiteSchema(), ...(crumbs ? [breadcrumbSc
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta name="robots" content={robots} />
-    <meta name="theme-color" content="#1c1c1b" />
+    <meta name="theme-color" content="#121211" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="alternate" type="application/rss+xml" title="Noticias KREOX" href="/noticias/rss.xml" />
+    <script is:inline>document.documentElement.classList.replace('no-js', 'js');</script>
 
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="KREOX" />
@@ -52,13 +55,29 @@ const graph = [organizationSchema(), websiteSchema(), ...(crumbs ? [breadcrumbSc
     <JsonLd data={{ '@context': 'https://schema.org', '@graph': graph }} />
     <slot name="head" />
   </head>
-  <body>
+  <body class:list={[{ 'has-overlay': overlay }]}>
     <a class="skip" href="#contenido">Saltar al contenido</a>
-    <Header />
+    <Header overlay={overlay} />
     <main id="contenido">
-      {crumbs && <Breadcrumbs items={crumbs} />}
+      {crumbs && !overlay && <Breadcrumbs items={crumbs} />}
       <slot />
     </main>
     <Footer />
+    <script>
+      // Entrada suave de bloques al hacer scroll (respeta prefers-reduced-motion vía CSS).
+      const els = document.querySelectorAll('[data-reveal]');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add('is-in'));
+      }
+    </script>
   </body>
 </html>
+<style is:global>
+  main { padding-top: var(--header-h); }
+  .has-overlay main { padding-top: 0; }
+</style>

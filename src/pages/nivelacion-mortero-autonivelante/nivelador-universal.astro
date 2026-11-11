@@ -1,34 +1,29 @@
 ---
-import { Image } from 'astro:assets';
-import Base from '../../layouts/Base.astro';
-import Steps from '../../components/Steps.astro';
-import CompareTripode from '../../components/CompareTripode.astro';
-import Calculadora from '../../components/Calculadora.astro';
-import Faq from '../../components/Faq.astro';
-import CtaTarifa from '../../components/CtaTarifa.astro';
+import ProductPage from '../../components/ProductPage.astro';
 import { NIVELACION, PRODUCTOS, M2_POR_NIVELADOR } from '../../data/site';
 import { FAQ_UNIVERSAL } from '../../data/faqs';
 import { productSchema, faqSchema } from '../../data/schema';
 
-import imgHero from '../../assets/img/nivelador-universal-recrecido-kreox.png';
+import imgProducto from '../../assets/img/nivelador-universal-recrecido-kreox.png';
+import imgBg from '../../assets/img/hero-productos-kreox.jpg';
 import imgPlano from '../../assets/img/nivelador-universal-medidas-plano.png';
 import imgComo from '../../assets/img/nivelador-universal-como-funciona.png';
-import imgCaja from '../../assets/img/caja-nivelador-universal.jpg';
+import imgArandela from '../../assets/img/arandela-niveladora-recambio.png';
 import imgBase from '../../assets/img/base-niveladora-universal-recambio.png';
 import imgAnilla from '../../assets/img/anilla-metalica-niveladora-universal.png';
-import imgArandela from '../../assets/img/arandela-niveladora-recambio.png';
+import imgPiko from '../../assets/img/piko-nivelador-suelo-radiante-kreox.png';
 
 const P = PRODUCTOS.universal;
 const url = `${NIVELACION}nivelador-universal/`;
+const M = P.medidas;
 
 const schema = [
   productSchema({
     id: url,
     name: P.nombreCompleto,
     alternateName: ['Nivelador Universal KREOX'],
-    description:
-      'Nivelador con base plana y reforzada para marcar la altura de acabado del mortero autonivelante en recrecidos sobre cualquier superficie. Regulable por láser, reutilizable, sin óxido y con recambios por piezas. Unos 250 g por unidad.',
-    images: [imgHero.src, imgPlano.src],
+    description: 'Nivelador con base plana y reforzada para marcar la altura de acabado del mortero autonivelante en recrecidos sobre cualquier superficie. Regulable por láser, reutilizable, sin óxido y con recambios por piezas. Unos 250 g por unidad.',
+    images: [imgProducto.src, imgPlano.src],
     weightG: P.pesoG,
     related: `${NIVELACION}piko/`,
     props: [
@@ -36,7 +31,7 @@ const schema = [
       ['Apoyo', P.fijacion],
       ['Presentación', `Caja de ${P.caja} unidades`],
       ['Densidad recomendada', `1 nivelador cada ${M2_POR_NIVELADOR} m² aprox.`],
-      ['Medidas (mm)', `Fuste ${P.medidas.altoMm}; base ${P.medidas.baseAltoMm} de alto y Ø${P.medidas.baseMm}; arandela Ø${P.medidas.arandelaMm}`],
+      ['Medidas (mm)', `Fuste ${M.altoMm}; base ${M.baseAltoMm} de alto y Ø${M.baseMm}; arandela Ø${M.arandelaMm}`],
       ['Compatibilidad láser', 'Láser habitual y láser con receptor'],
       ['Recambios', 'Base niveladora universal, anilla metálica niveladora universal, arandela niveladora'],
       ['Patente', 'Producto patentado'],
@@ -44,172 +39,60 @@ const schema = [
   }),
   faqSchema(FAQ_UNIVERSAL),
 ];
-
-const steps = [
-  { title: 'Apoya el nivelador', text: `Colócalo sobre la superficie que vas a recrecer: la base plana lo mantiene estable. Aproximadamente uno cada ${M2_POR_NIVELADOR} m².` },
-  { title: 'Marca la cota con láser', text: 'Marca la altura de acabado con un láser nivelador, habitual o con receptor.' },
-  { title: 'Ajusta la anilla', text: 'Desliza la anilla hasta la línea marcada por el láser.' },
-  { title: 'Vierte y retira', text: 'Vierte el mortero autonivelante hasta la anilla, retira el nivelador y límpialo para la siguiente obra.' },
-];
 ---
-<Base
-  title="Nivelador Universal para recrecido con autonivelante | KREOX"
-  description="Nivelador Universal KREOX: base plana y reforzada para recrecidos con mortero autonivelante sobre cualquier superficie. Reutilizable, con recambios. Fabricado en España."
-  ogType="product"
-  image={imgHero.src}
-  breadcrumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }, { name: 'Nivelador Universal', url }]}
-  schema={schema}
->
-  <section class="section hero">
-    <div class="container split">
-      <div>
-        <span class="eyebrow">Nivelador para recrecidos</span>
-        <h1>Nivelador Universal para recrecidos con mortero autonivelante</h1>
-        <p class="lead">
-          El <strong>Nivelador Universal de KREOX</strong> marca la altura de acabado del mortero autonivelante en recrecidos y
-          nivelaciones sobre <strong>cualquier superficie</strong>: forjado, solera o pavimento existente. Se apoya sobre su
-          <strong>base plana y reforzada</strong>, se regula con láser y se retira para reutilizarlo. Pesa unos
-          <strong>{P.pesoG} g</strong>, frente a cerca de 1 kg de un trípode de acero, y no se oxida. Sus piezas se venden como recambio.
-        </p>
-        <div class="badges">
-          <span class="badge">Producto patentado</span>
-          <span class="badge badge--outline">Caja de {P.caja} uds</span>
-          <span class="badge badge--outline">Fabricado en España</span>
-        </div>
-        <div class="btn-row">
-          <a class="btn btn--dark" href="/contacto/?interes=nivelacion">Pedir tarifa 2026</a>
-          <a class="btn btn--ghost" href="#video">Ver la instalación en vídeo</a>
-        </div>
-      </div>
-      <div class="hero-img">
-        <Image src={imgHero} alt="Nivelador Universal de KREOX con base verde lima y fuste azul para recrecidos con mortero autonivelante" widths={[400, 522]} sizes="(min-width: 900px) 460px, 90vw" loading="eager" fetchpriority="high" />
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--soft" id="datos">
-    <div class="container split top">
-      <div>
-        <h2>Datos técnicos del Nivelador Universal</h2>
-        <div class="table-wrap">
-          <table>
-            <tbody>
-              <tr><th scope="row">Uso</th><td>Recrecidos y nivelación de pavimentos con mortero autonivelante</td></tr>
-              <tr><th scope="row">Apoyo</th><td>Base plana y estable (reforzada en 2026), sin clavar</td></tr>
-              <tr><th scope="row">Peso</th><td>≈ {P.pesoG} g por unidad</td></tr>
-              <tr><th scope="row">Medidas</th><td>Fuste {P.medidas.altoMm} mm · base {P.medidas.baseAltoMm} mm de alto y Ø{P.medidas.baseMm} mm · fuste {P.medidas.fusteMm} mm · arandela Ø{P.medidas.arandelaMm} mm</td></tr>
-              <tr><th scope="row">Presentación</th><td>Caja de {P.caja} unidades</td></tr>
-              <tr><th scope="row">Colocación</th><td>1 nivelador cada {M2_POR_NIVELADOR} m² aprox.</td></tr>
-              <tr><th scope="row">Regulación</th><td>Anilla deslizante; versión 2026 con aditivo de fibra</td></tr>
-              <tr><th scope="row">Láser</th><td>Compatible con láser habitual y con láser con receptor</td></tr>
-              <tr><th scope="row">Recambios</th><td><a href={`${NIVELACION}recambios/`}>Base niveladora universal, anilla metálica y arandela</a></td></tr>
-              <tr><th scope="row">Origen</th><td>Diseñado y fabricado en España (Ibi, Alicante) · producto patentado</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <figure class="plano">
-        <Image src={imgPlano} alt="Plano con medidas del Nivelador Universal: fuste de 142 mm, base de 15 mm de alto y 87 mm de diámetro, arandela de 48 mm" widths={[480, 800, 1232]} sizes="(min-width: 900px) 540px, 92vw" />
-        <figcaption class="muted">Medidas en milímetros según el plano del fabricante.</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section class="section" id="como-se-usa">
-    <div class="container">
-      <div class="section-head"><h2>Cómo se usa, en 4 pasos</h2></div>
-      <Steps steps={steps} />
-      <div class="split video-row" id="video">
-        <div>
-          <h3>Instalación real en obra</h3>
-          <p>En el vídeo se ve el proceso completo: marcado de la altura con láser con receptor, comprobación con láser habitual y ajuste de la anilla hasta la línea marcada.</p>
-          <Image src={imgComo} alt="Esquema del Nivelador Universal apoyado sobre el soporte con la anilla a la altura del recrecido" widths={[600, 1000, 1477]} sizes="(min-width: 900px) 560px, 92vw" class="esquema" />
-        </div>
-        <video controls preload="none" playsinline poster="/videos/nivelador-universal-instalacion-poster.jpg" width="404" height="720">
-          <source src="/videos/nivelador-universal-instalacion.mp4" type="video/mp4" />
-          Tu navegador no puede reproducir el vídeo. <a href="/videos/nivelador-universal-instalacion.mp4">Descárgalo aquí</a>.
-        </video>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--soft" id="comparativa">
-    <div class="container">
-      <div class="section-head"><h2>Nivelador Universal frente al trípode de acero</h2></div>
-      <CompareTripode only="universal" />
-    </div>
-  </section>
-
-  <section class="section section--dark">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Mejora continua · 2026</span>
-        <h2>Base reforzada y recambios por piezas</h2>
-        <p>La base es ahora más dura y resistente: se comporta mejor durante el fraguado y se retira con más seguridad. Y si una pieza se desgasta, cambias solo esa pieza.</p>
-      </div>
-      <div class="grid grid-3">
-        <a class="card part" href={`${NIVELACION}recambios/`}>
-          <Image src={imgBase} alt="Base niveladora universal de recambio en verde lima" widths={[300, 600]} sizes="240px" />
-          <h3>Base niveladora universal</h3><p>Caja de 40 uds</p>
-        </a>
-        <a class="card part" href={`${NIVELACION}recambios/`}>
-          <Image src={imgAnilla} alt="Anilla metálica niveladora universal de recambio" widths={[300, 600]} sizes="240px" />
-          <h3>Anilla metálica niveladora universal</h3><p>Caja de 40 uds</p>
-        </a>
-        <a class="card part" href={`${NIVELACION}recambios/`}>
-          <Image src={imgArandela} alt="Arandela niveladora de recambio con aditivo de fibra" widths={[300, 600]} sizes="240px" />
-          <h3>Arandela niveladora</h3><p>Caja de 150 uds</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="universal-o-piko">
-    <div class="container">
-      <div class="section-head"><h2>¿Universal o PIKO?</h2></div>
-      <div class="grid grid-2">
-        <div class="card">
-          <h3>Universal, si la superficie es dura</h3>
-          <p>Forjado, solera o pavimento existente: el nivelador se <strong>apoya</strong> sobre su base plana.</p>
-          <span class="badge">Estás en esta página</span>
-        </div>
-        <div class="card">
-          <h3>PIKO, si hay placa de aislamiento</h3>
-          <p>En suelo radiante, el PIKO se <strong>clava</strong> en el aislamiento y pesa solo unos 20 g.</p>
-          <a href={`${NIVELACION}piko/`}>Ver PIKO →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--soft" id="calculadora">
-    <div class="container">
-      <div class="section-head"><h2>¿Cuántos niveladores necesitas?</h2></div>
-      <Calculadora compact defaultProduct="universal" />
-      <figure class="caja"><Image src={imgCaja} alt="Caja de Niveladores Universales KREOX lista para obra" widths={[316]} /></figure>
-    </div>
-  </section>
-
-  <Faq faqs={FAQ_UNIVERSAL} title="Preguntas frecuentes sobre el Nivelador Universal" />
-  <CtaTarifa title="¿Tienes un recrecido en marcha?" text="Pide la tarifa 2026 de Niveladores Universales y recambios." />
-</Base>
-
-<style>
-  .hero { padding-top: clamp(28px, 4vw, 48px); }
-  .hero-img { background: #0b0b0b; border-radius: 22px; overflow: hidden; display: grid; place-items: center; }
-  .hero-img :global(img) { width: 100%; max-width: 460px; }
-  .badges { display: flex; flex-wrap: wrap; gap: 8px; }
-  .top { align-items: start; }
-  .plano { margin: 0; background: #d9d9d9; border-radius: var(--radius); padding: 12px; }
-  .plano :global(img) { border-radius: 10px; }
-  .plano figcaption { padding: 8px 4px 0; }
-  .video-row { margin-top: 40px; }
-  .video-row video { width: 100%; max-width: 340px; justify-self: center; border-radius: var(--radius); background: #000; aspect-ratio: 404 / 720; }
-  .esquema { border-radius: var(--radius); margin-top: 12px; }
-  .part { text-decoration: none; color: inherit; text-align: center; }
-  .part :global(img) { width: 180px; height: 160px; object-fit: contain; margin: 0 auto 12px; }
-  .part h3 { font-size: 1.02rem; margin-bottom: 0.2em; }
-  .part p { margin: 0; color: #bdb9b2; font-size: 0.9rem; }
-  .caja { margin: 24px 0 0; max-width: 316px; }
-  .caja :global(img) { border-radius: 10px; }
-</style>
+<ProductPage
+  kind="universal"
+  name="Nivelador Universal"
+  seo={{
+    title: 'Nivelador Universal para recrecido con autonivelante | KREOX',
+    description: 'Nivelador Universal KREOX: base plana y reforzada para recrecidos con mortero autonivelante sobre cualquier superficie. Reutilizable, con recambios. Fabricado en España.',
+    schema,
+    image: imgProducto.src,
+  }}
+  hero={{
+    eyebrow: 'Nivelador para recrecidos',
+    title: 'Nivelador Universal para recrecidos con',
+    accent: 'mortero autonivelante',
+    lead: `Marca la altura de acabado sobre <strong>cualquier superficie</strong>: forjado, solera o pavimento existente. Se apoya sobre su <strong>base plana y reforzada</strong>, se regula con láser y se reutiliza. Unos <strong>${P.pesoG} g</strong> frente a cerca de 1 kg de un trípode, y sin óxido.`,
+    bg: imgBg,
+    bgAlt: 'Niveladores KREOX sobre fondo negro',
+    product: imgProducto,
+    productAlt: 'Nivelador Universal de KREOX con base verde lima y fuste azul',
+  }}
+  kpis={[
+    { v: String(P.pesoG), u: 'g', l: 'Peso por unidad' },
+    { v: String(M.baseMm), u: 'mm', l: 'Diámetro de base' },
+    { v: String(P.caja), u: 'uds', l: 'Por caja' },
+    { v: '3', u: 'piezas', l: 'Con recambio' },
+  ]}
+  plano={{ img: imgPlano, alt: `Plano con medidas del Nivelador Universal: fuste de ${M.altoMm} mm, base de ${M.baseAltoMm} mm de alto y ${M.baseMm} mm de diámetro, arandela de ${M.arandelaMm} mm` }}
+  specs={[
+    ['Uso', 'Recrecidos y nivelación de pavimentos con mortero autonivelante'],
+    ['Apoyo', 'Base plana y estable (reforzada en 2026)'],
+    ['Peso', `≈ ${P.pesoG} g`],
+    ['Medidas', `Fuste ${M.altoMm} mm · base ${M.baseAltoMm} mm de alto y Ø${M.baseMm} mm · fuste ${M.fusteMm} mm · arandela Ø${M.arandelaMm} mm`],
+    ['Presentación', `Caja de ${P.caja} unidades`],
+    ['Colocación', `1 nivelador cada ${M2_POR_NIVELADOR} m² aprox.`],
+    ['Regulación', 'Anilla deslizante; versión 2026 con aditivo de fibra'],
+    ['Láser', 'Habitual y con receptor'],
+    ['Recambios', `<a href="${NIVELACION}recambios/">Base, anilla metálica y arandela</a>`],
+    ['Origen', 'Diseñado y fabricado en Ibi (Alicante) · patentado'],
+  ]}
+  steps={[
+    { title: 'Apoya el nivelador', text: `Sobre la superficie a recrecer: la base plana lo mantiene estable. Aproximadamente uno cada ${M2_POR_NIVELADOR} m².` },
+    { title: 'Marca la cota', text: 'Con un láser nivelador, habitual o con receptor.' },
+    { title: 'Ajusta la anilla', text: 'Deslízala hasta la línea marcada por el láser.' },
+    { title: 'Vierte y retira', text: 'Mortero hasta la anilla; retira el nivelador y límpialo para la siguiente obra.' },
+  ]}
+  stepsMedia={[{ img: imgComo, alt: 'Esquema del Nivelador Universal apoyado sobre el soporte con la anilla a la altura del recrecido' }]}
+  video={{ src: '/videos/nivelador-universal-instalacion.mp4', poster: '/videos/nivelador-universal-instalacion-poster.jpg', text: 'Instalación real: marcado con láser con receptor y ajuste de la anilla.' }}
+  parts={[
+    { img: imgBase, alt: 'Base niveladora universal de recambio', name: 'Base niveladora universal', caja: 'Reforzada 2026 · caja de 40' },
+    { img: imgAnilla, alt: 'Anilla metálica niveladora universal de recambio', name: 'Anilla metálica', caja: 'Caja de 40' },
+    { img: imgArandela, alt: 'Arandela niveladora con aditivo de fibra', name: 'Arandela niveladora', caja: 'Caja de 150' },
+  ]}
+  other={{ name: '¿Suelo radiante con placa de aislamiento?', text: 'Usa el PIKO, que se clava y pesa solo 20 g →', href: `${NIVELACION}piko/`, img: imgPiko, alt: 'PIKO' }}
+  faqs={FAQ_UNIVERSAL}
+  faqTitle="Preguntas frecuentes sobre el Nivelador Universal"
+  cta={{ title: '¿Tienes un recrecido en marcha?', text: 'Pide la tarifa 2026 de Niveladores Universales y recambios.' }}
+/>

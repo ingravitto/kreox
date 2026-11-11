@@ -1,4 +1,6 @@
 ---
+import PageHero from '../../components/PageHero.astro';
+import imgHeroBg from '../../assets/img/fondo-piedra-productos-kreox.jpg';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import CtaTarifa from '../../components/CtaTarifa.astro';
@@ -18,29 +20,36 @@ const schema = [
 ];
 ---
 <Base
+  overlay
   title="Lámina de polietileno bajo solera | KREOX"
   description="Lámina de polietileno KREOX para soleras, cimientos y aceras: evita la humedad por capilaridad, resiste al moho y protege el hormigón de grasas y aceites."
   breadcrumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }, { name: 'Lámina bajo solera', url }]}
   schema={schema}
 >
+  <PageHero
+    eyebrow="Accesorio de pavimentación"
+    title="Lámina de polietileno"
+    accent="bajo solera"
+    lead="Impermeabiliza soleras de hormigón, cimientos y aceras. Se instala <strong>sobre la grava de drenaje y bajo el mallazo</strong>, y deja una base resistente y protegida frente a la humedad."
+    bg={imgHeroBg}
+    product={img}
+    productAlt="Rollos de lámina de polietileno bajo solera KREOX en negro y transparente"
+    crumbs={[{ name: 'Nivelación', url: NIVELACION }, { name: 'Lámina bajo solera', url }]}
+  >
+    <div class="btn-row"><a class="btn btn--sand" href="/contacto/?interes=nivelacion">Pedir tarifa 2026</a></div>
+  </PageHero>
   <section class="section">
-    <div class="container split">
-      <div>
-        <span class="eyebrow">Accesorio de pavimentación</span>
-        <h1>Lámina de polietileno bajo solera</h1>
-        <p class="lead">La lámina de polietileno de KREOX impermeabiliza soleras de hormigón, cimientos y aceras. Se instala <strong>sobre la grava de drenaje y bajo el mallazo</strong>, y deja una base resistente y protegida frente a la humedad.</p>
-        <ul class="checks">
-          <li>Evita la humedad por capilaridad y las filtraciones de lluvia</li>
-          <li>Resiste al moho</li>
-          <li>Protege el hormigón de grasas y aceites</li>
-          <li>Aumenta la durabilidad de otros elementos de construcción</li>
-        </ul>
-        <div class="btn-row"><a class="btn btn--dark" href="/contacto/?interes=nivelacion">Pedir tarifa 2026</a></div>
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">Ventajas</span><h2>Una base protegida frente a la humedad</h2></div>
+      <div class="grid grid-4">
+        <div class="card"><h3>Sin humedad</h3><p class="muted mt-0">Evita la humedad por capilaridad y las filtraciones de lluvia.</p></div>
+        <div class="card"><h3>Resiste al moho</h3><p class="muted mt-0">Protección duradera bajo la solera.</p></div>
+        <div class="card"><h3>Protege el hormigón</h3><p class="muted mt-0">Frente a grasas y aceites.</p></div>
+        <div class="card"><h3>Más durabilidad</h3><p class="muted mt-0">Aumenta la vida de otros elementos de construcción.</p></div>
       </div>
-      <Image src={img} alt="Rollos de lámina de polietileno bajo solera KREOX en negro y transparente" widths={[480, 946]} sizes="(min-width: 900px) 480px, 92vw" class="pimg" loading="eager" />
     </div>
   </section>
-  <section class="section section--soft">
+  <section class="section section--paper">
     <div class="container">
       <div class="section-head"><h2>Completa tu sistema de pavimentación</h2></div>
       <div class="grid grid-2">

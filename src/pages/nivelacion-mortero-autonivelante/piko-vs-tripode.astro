@@ -1,4 +1,7 @@
 ---
+import PageHero from '../../components/PageHero.astro';
+import imgHeroBg from '../../assets/img/suelo-radiante-piko-bn.jpg';
+import WeightBars from '../../components/WeightBars.astro';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import CompareTripode from '../../components/CompareTripode.astro';
@@ -22,27 +25,29 @@ const faqs = [
 ];
 ---
 <Base
+  overlay
   title="PIKO vs trípode de acero para mortero autonivelante | KREOX"
   description="Comparativa entre el trípode de acero y el nivelador PIKO de KREOX: peso, óxido, limpieza, colocación y coste para nivelar mortero autonivelante."
   breadcrumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }, { name: 'PIKO vs trípode', url }]}
   schema={[faqSchema(faqs)]}
 >
+  <PageHero
+    eyebrow="Comparativa"
+    title="PIKO frente al trípode de acero para"
+    accent="mortero autonivelante"
+    lead={`Para nivelar 100 m² se necesitan unos ${n} puntos de nivel. Con trípodes de acero son <strong>unos ${(n * PRODUCTOS.tripode.pesoG) / 1000} kg</strong> que cargar, limpiar y vigilar que no se oxiden. Con PIKO, <strong>unos ${(n * PRODUCTOS.piko.pesoG) / 1000} kg</strong> en una caja.`}
+    bg={imgHeroBg}
+    crumbs={[{ name: 'Nivelación', url: NIVELACION }, { name: 'PIKO vs trípode', url }]}
+  />
   <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Comparativa</span>
-        <h1>PIKO frente al trípode de acero para mortero autonivelante</h1>
-        <p class="lead">
-          Para nivelar 100 m² de mortero autonivelante se necesitan unos {n} puntos de nivel. Con trípodes de acero eso son
-          <strong>unos {(n * PRODUCTOS.tripode.pesoG) / 1000} kg</strong> que cargar, limpiar y vigilar que no se oxiden. Con PIKO son
-          <strong>unos {(n * PRODUCTOS.piko.pesoG) / 1000} kg</strong> en una caja.
-        </p>
-      </div>
-      <CompareTripode />
+    <div class="container split">
+      <WeightBars />
+      <div data-reveal><span class="eyebrow">Tabla comparativa</span><h2>Punto por punto</h2><p class="lead">Peso, óxido, limpieza, colocación, transporte, recambios y precio.</p></div>
     </div>
+    <div class="container" style="margin-top:48px"><CompareTripode /></div>
   </section>
 
-  <section class="section section--soft">
+  <section class="section section--paper">
     <div class="container grid grid-2">
       <div>
         <h2>El problema del trípode de acero</h2>

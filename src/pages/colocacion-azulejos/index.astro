@@ -1,4 +1,6 @@
 ---
+import PageHero from '../../components/PageHero.astro';
+import imgHeroBg from '../../assets/img/fondo-piedra-productos-kreox.jpg';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import Faq from '../../components/Faq.astro';
@@ -9,32 +11,30 @@ import { faqSchema } from '../../data/schema';
 import imgSistema from '../../assets/img/sistema-nivelacion-azulejos-kreox.png';
 ---
 <Base
+  overlay
   title="Sistema de nivelación para colocación de azulejos | KREOX"
   description="Kalzo Separador, Kuña Niveladora, Kuña Antimanchas y Alikates KREOX: sistema de nivelación de baldosas fabricado en España con material reciclado."
   breadcrumbs={[{ name: 'Colocación de azulejos', url: AZULEJOS }]}
   schema={[faqSchema(TILE_FAQ)]}
 >
-  <section class="section">
-    <div class="container split">
-      <div>
-        <span class="eyebrow">Nueva formulación · mayor calidad</span>
-        <h1>Sistema de nivelación para la colocación de azulejos</h1>
-        <p class="lead">Kalzos, Kuñas y Alikates diseñados y fabricados en España para colocar baldosas cerámicas de forma ágil, eficiente y precisa, con material reciclado y un agarre superior.</p>
-        <ul class="checks">
-          <li>Kalzo compatible con todas las kuñas del mercado</li>
-          <li>Rotura limpia por el punto previsto, sin sobrantes</li>
-          <li>Kuñas para losas de 3 a 15 mm sin suplementos</li>
-        </ul>
-        <div class="btn-row">
-          <a class="btn btn--dark" href="/contacto/?interes=azulejos">Pedir tarifa 2026</a>
-          <a class="btn btn--ghost" href={SITE.tileCalculator}>Calculadora de piezas</a>
-        </div>
-      </div>
-      <Image src={imgSistema} alt="Kalzo y Kuña KREOX: material 100 % reciclado, mejor agarre y rotura limpia" widths={[600, 1159]} sizes="(min-width: 900px) 540px, 92vw" class="hero-img" loading="eager" />
+  <PageHero
+    eyebrow="Soluciones para"
+    title="La colocación de"
+    accent="azulejos"
+    lead="Kalzos, Kuñas y Alikates diseñados y fabricados en España para colocar baldosas cerámicas de forma ágil, eficiente y precisa, con material reciclado y un agarre superior."
+    bg={imgHeroBg}
+    product={imgSistema}
+    productAlt="Kalzo y Kuña KREOX: material 100 % reciclado, mejor agarre y rotura limpia"
+    crumbs={[{ name: 'Colocación de azulejos', url: AZULEJOS }]}
+  >
+    <div class="chips" style="margin-top:24px"><span class="chip chip--sand">Compatible con todas las kuñas</span><span class="chip">Rotura limpia</span><span class="chip">Losas de 3 a 15 mm</span></div>
+    <div class="btn-row">
+      <a class="btn btn--sand" href="/contacto/?interes=azulejos">Pedir tarifa 2026</a>
+      <a class="btn btn--ghost" href={SITE.tileCalculator}>Calculadora de piezas</a>
     </div>
-  </section>
+  </PageHero>
 
-  <section class="section section--soft">
+  <section class="section section--paper">
     <div class="container">
       <div class="section-head"><h2>Productos</h2></div>
       <div class="grid grid-4">

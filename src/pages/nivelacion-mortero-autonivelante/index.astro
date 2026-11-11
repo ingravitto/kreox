@@ -1,4 +1,6 @@
 ---
+import PageHero from '../../components/PageHero.astro';
+import imgHeroBg from '../../assets/img/suelo-radiante-piko-color.jpg';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import Steps from '../../components/Steps.astro';
@@ -33,31 +35,28 @@ const steps = [
 ];
 ---
 <Base
+  overlay
   title="Sistemas de nivelación para mortero autonivelante | KREOX"
   description="Niveladores PIKO y Universal para mortero autonivelante: sustituyen al trípode de acero en suelo radiante y recrecidos. Ligeros, sin óxido y fabricados en España."
   breadcrumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }]}
   schema={[faqSchema(faqs)]}
 >
-  <section class="section hero">
-    <div class="container split">
-      <div>
-        <span class="eyebrow">Pavimentación con mortero autonivelante</span>
-        <h1>Sistemas de nivelación para mortero autonivelante</h1>
-        <p class="lead">
-          KREOX diseña y fabrica en España dos niveladores que sustituyen al trípode de acero: <strong>PIKO</strong>, que se clava en la
-          placa de aislamiento del <strong>suelo radiante</strong>, y el <strong>Nivelador Universal</strong>, que se apoya sobre cualquier
-          superficie para <strong>recrecidos</strong>. Los dos se regulan con láser, no se oxidan, se reutilizan y tienen recambios por piezas.
-        </p>
-        <div class="btn-row">
-          <a class="btn btn--dark" href="#elige">Elige tu nivelador</a>
-          <a class="btn btn--ghost" href={`${NIVELACION}calculadora/`}>Calcular cantidades</a>
-        </div>
-      </div>
-      <Image src={imgBanner} alt="Niveladores KREOX PIKO y Universal en azul y verde lima sobre fondo negro" widths={[600, 1000]} sizes="(min-width: 900px) 540px, 92vw" class="banner" loading="eager" />
+  <PageHero
+    eyebrow="Pavimentación con mortero autonivelante"
+    title="Sistemas de nivelación para"
+    accent="mortero autonivelante"
+    lead="KREOX diseña y fabrica en España dos niveladores que sustituyen al trípode de acero: <strong>PIKO</strong>, que se clava en la placa de aislamiento del <strong>suelo radiante</strong>, y el <strong>Nivelador Universal</strong>, que se apoya sobre cualquier superficie para <strong>recrecidos</strong>. Los dos se regulan con láser, no se oxidan, se reutilizan y tienen recambios."
+    bg={imgHeroBg}
+    bgAlt="Suelo radiante con niveladores PIKO azules antes del vertido"
+    crumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }]}
+  >
+    <div class="btn-row">
+      <a class="btn btn--sand" href="#elige">Elige tu nivelador</a>
+      <a class="btn btn--ghost" href={`${NIVELACION}calculadora/`}>Calcular cantidades</a>
     </div>
-  </section>
+  </PageHero>
 
-  <section class="section section--soft" id="elige">
+  <section class="section section--paper" id="elige">
     <div class="container">
       <div class="section-head"><h2>Elige tu nivelador</h2></div>
       <div class="grid grid-2">
@@ -102,7 +101,7 @@ const steps = [
     </div>
   </section>
 
-  <section class="section section--soft">
+  <section class="section section--paper">
     <div class="container">
       <div class="section-head"><h2>Cómo se nivela un mortero autonivelante con KREOX</h2></div>
       <Steps steps={steps} />

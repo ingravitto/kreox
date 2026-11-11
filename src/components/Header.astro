@@ -2,10 +2,12 @@
 import { Image } from 'astro:assets';
 import logo from '../assets/img/kreox-logo-blanco.png';
 import { NAV, SITE } from '../data/site';
+interface Props { overlay?: boolean }
+const { overlay = false } = Astro.props;
 const path = Astro.url.pathname;
 const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 ---
-<header class="site-header">
+<header class:list={['site-header', { overlay }]} data-header>
   <div class="container bar">
     <a href="/" class="logo" aria-label="KREOX, ir a la portada">
       <Image src={logo} alt="KREOX" width={150} loading="eager" />
@@ -17,7 +19,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
           <li class={'children' in item ? 'has-sub' : ''}>
             <a href={item.href} class:list={[{ active: isActive(item.href), hl: 'highlight' in item }]}>
               {item.label}
-              {'children' in item && <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" /></svg>}
+              {'children' in item && <svg width="9" height="9" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4" /></svg>}
             </a>
             {'children' in item && (
               <div class="sub">
@@ -39,12 +41,15 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
     </nav>
 
     <div class="actions">
-      <a class="phone" href={SITE.phoneHref}>{SITE.phone}</a>
-      <a class="btn btn--lime cta" href="/contacto/">Pide tarifa 2026</a>
+      <a class="phone" href={SITE.phoneHref} aria-label={`Llamar al ${SITE.phone}`}>
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1z" fill="currentColor"/></svg>
+        <span>{SITE.phone}</span>
+      </a>
+      <a class="btn btn--sand cta" href="/contacto/">Tarifa 2026</a>
     </div>
 
     <details class="mobile">
-      <summary aria-label="Abrir menú"><span></span><span></span><span></span></summary>
+      <summary aria-label="Abrir menú"><span></span><span></span></summary>
       <nav aria-label="Principal móvil">
         {NAV.map((item) => (
           <div class="m-group">
@@ -54,53 +59,65 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
             )}
           </div>
         ))}
-        <a class="btn btn--lime" href="/contacto/">Pide tarifa 2026</a>
+        <a class="btn btn--sand" href="/contacto/">Pide tarifa 2026</a>
         <a class="m-phone" href={SITE.phoneHref}>{SITE.phone}</a>
       </nav>
     </details>
   </div>
 </header>
 
+<script>
+  const h = document.querySelector<HTMLElement>('[data-header]');
+  if (h) {
+    const on = () => h.classList.toggle('is-scrolled', window.scrollY > 24);
+    on();
+    window.addEventListener('scroll', on, { passive: true });
+  }
+</script>
+
 <style>
-  .site-header { background: var(--ink); color: var(--white); position: sticky; top: 0; z-index: 50; border-bottom: 1px solid #2c2c2a; }
-  .bar { display: flex; align-items: center; gap: 24px; min-height: 72px; }
+  .site-header { position: fixed; inset: 0 0 auto; z-index: 50; color: var(--white); background: rgba(18, 18, 17, 0.92); backdrop-filter: saturate(140%) blur(14px); -webkit-backdrop-filter: saturate(140%) blur(14px); border-bottom: 1px solid var(--line-dark); transition: background .35s var(--ease), border-color .35s var(--ease); }
+  .site-header.overlay:not(.is-scrolled) { background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,0)); border-color: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .bar { display: flex; align-items: center; gap: 28px; height: var(--header-h); }
   .logo { flex: none; display: block; }
-  .logo :global(img) { width: 132px; height: auto; }
+  .logo :global(img) { width: 112px; height: auto; }
 
-  .desktop { display: none; margin-left: auto; }
-  .menu { list-style: none; display: flex; gap: 4px; margin: 0; padding: 0; }
+  .desktop { display: none; margin-inline: auto; }
+  .menu { list-style: none; display: flex; gap: 2px; margin: 0; padding: 0; }
   .menu > li { position: relative; }
-  .menu > li > a { display: inline-flex; align-items: center; gap: 6px; color: #e7e4de; text-decoration: none; font-weight: 500; font-size: 0.93rem; padding: 10px 12px; border-radius: 8px; }
-  .menu > li > a:hover, .menu > li > a.active { color: var(--white); background: #2a2a28; }
-  .menu > li > a.hl { color: var(--lime); }
-  .sub { position: absolute; top: 100%; left: 0; padding-top: 8px; display: none; }
-  .has-sub:hover .sub, .has-sub:focus-within .sub { display: block; }
-  .sub ul { list-style: none; margin: 0; padding: 10px; background: var(--white); border-radius: var(--radius); box-shadow: 0 18px 40px rgba(0,0,0,.25); min-width: 320px; }
-  .sub a { display: block; padding: 10px 12px; border-radius: 8px; text-decoration: none; color: var(--ink); }
-  .sub a:hover { background: var(--sand-soft); }
-  .sub strong { display: block; font-weight: 600; font-size: 0.95rem; }
-  .sub span { display: block; font-size: 0.8rem; color: var(--ink-3); }
+  .menu > li > a { display: inline-flex; align-items: center; gap: 7px; color: rgba(255,255,255,.82); text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 10px 14px; border-radius: 999px; transition: color .2s, background .2s; }
+  .menu > li > a:hover, .menu > li > a.active { color: var(--white); background: rgba(255,255,255,.07); }
+  .menu > li > a.hl { color: var(--sand); }
+  .sub { position: absolute; top: 100%; left: 50%; translate: -50% 0; padding-top: 12px; opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .25s var(--ease), transform .25s var(--ease), visibility .25s; }
+  .has-sub:hover .sub, .has-sub:focus-within .sub { opacity: 1; visibility: visible; transform: none; }
+  .sub ul { list-style: none; margin: 0; padding: 10px; background: var(--ink-2); border: 1px solid var(--line-dark); border-radius: var(--radius); box-shadow: 0 30px 60px rgba(0,0,0,.45); min-width: 340px; }
+  .sub a { display: block; padding: 12px 14px; border-radius: 12px; text-decoration: none; color: var(--white); transition: background .2s; }
+  .sub a:hover { background: rgba(255,255,255,.06); }
+  .sub strong { display: block; font-weight: 500; font-size: 0.92rem; }
+  .sub span { display: block; font-size: 0.76rem; color: var(--sand); margin-top: 2px; }
 
-  .actions { display: none; align-items: center; gap: 16px; }
-  .phone { color: #e7e4de; text-decoration: none; font-size: 0.9rem; white-space: nowrap; }
-  .cta { padding: 0.7em 1.15em; font-size: 0.9rem; }
+  .actions { display: none; align-items: center; gap: 18px; }
+  .phone { display: inline-flex; align-items: center; gap: 8px; color: rgba(255,255,255,.82); text-decoration: none; font-size: 0.86rem; white-space: nowrap; }
+  .phone:hover { color: var(--sand); }
+  .cta { padding: 0.95em 1.4em; }
 
   .mobile { margin-left: auto; }
-  .mobile summary { list-style: none; cursor: pointer; width: 44px; height: 44px; display: grid; place-content: center; gap: 5px; border-radius: 8px; }
+  .mobile summary { list-style: none; cursor: pointer; width: 46px; height: 46px; display: grid; place-content: center; gap: 7px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); }
   .mobile summary::-webkit-details-marker { display: none; }
-  .mobile summary span { display: block; width: 22px; height: 2px; background: var(--white); }
-  .mobile[open] summary { background: #2a2a28; }
-  .mobile nav { position: absolute; left: 0; right: 0; top: 72px; background: var(--ink); padding: 8px var(--gutter) 24px; max-height: calc(100vh - 72px); overflow-y: auto; border-top: 1px solid #2c2c2a; }
-  .m-group { border-bottom: 1px solid #2c2c2a; padding: 12px 0; }
-  .m-top { color: var(--white); font-weight: 600; text-decoration: none; display: block; padding: 4px 0; }
-  .m-group ul { list-style: none; padding: 0 0 0 12px; margin: 4px 0 0; }
-  .m-group li a { color: #cfcbc4; text-decoration: none; display: block; padding: 6px 0; font-size: 0.95rem; }
-  .mobile nav .btn { margin-top: 18px; width: 100%; }
-  .m-phone { display: block; text-align: center; color: #cfcbc4; margin-top: 12px; }
+  .mobile summary span { display: block; width: 18px; height: 1.5px; background: var(--white); transition: transform .25s var(--ease); }
+  .mobile[open] summary span:first-child { transform: translateY(4.25px) rotate(45deg); }
+  .mobile[open] summary span:last-child { transform: translateY(-4.25px) rotate(-45deg); }
+  .mobile nav { position: fixed; left: 0; right: 0; top: var(--header-h); bottom: 0; background: var(--ink); padding: 8px var(--gutter) 32px; overflow-y: auto; border-top: 1px solid var(--line-dark); }
+  .m-group { border-bottom: 1px solid var(--line-dark); padding: 16px 0; }
+  .m-top { color: var(--white); font-weight: 500; font-size: 1.15rem; text-decoration: none; display: block; padding: 4px 0; }
+  .m-group ul { list-style: none; padding: 0; margin: 6px 0 0; }
+  .m-group li a { color: var(--on-dark-soft); text-decoration: none; display: block; padding: 7px 0; }
+  .mobile nav .btn { margin-top: 24px; width: 100%; }
+  .m-phone { display: block; text-align: center; color: var(--on-dark); margin-top: 16px; }
 
-  @media (min-width: 1080px) {
+  @media (min-width: 1120px) {
     .desktop, .actions { display: flex; }
     .mobile { display: none; }
   }
-  @media (min-width: 1080px) and (max-width: 1240px) { .phone { display: none; } }
+  @media (min-width: 1120px) and (max-width: 1260px) { .phone span { display: none; } }
 </style>
