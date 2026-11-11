@@ -1,0 +1,92 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Steps from '../../components/Steps.astro';
+import Faq from '../../components/Faq.astro';
+import CtaTarifa from '../../components/CtaTarifa.astro';
+import { AZULEJOS, SITE } from '../../data/site';
+import { TILE_PRODUCTS, TILE_FAQ, type TileProduct } from '../../data/azulejos';
+import { faqSchema, ORG_ID } from '../../data/schema';
+
+export function getStaticPaths() {
+  return TILE_PRODUCTS.map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+const { p } = Astro.props as { p: TileProduct };
+const url = `${AZULEJOS}${p.slug}/`;
+const others = TILE_PRODUCTS.filter((o) => o.slug !== p.slug);
+const schema = [
+  {
+    '@type': 'Product',
+    '@id': `${SITE.url}${url}#product`,
+    url: `${SITE.url}${url}`,
+    name: p.name,
+    description: `${p.intro} ${p.body}`,
+    brand: { '@type': 'Brand', name: 'KREOX' },
+    manufacturer: { '@id': ORG_ID },
+    category: 'Sistemas de nivelación de baldosas',
+    image: [new URL(p.img.src, SITE.url).href],
+    countryOfOrigin: 'ES',
+    additionalProperty: [
+      ...p.presentacion.map((v) => ({ '@type': 'PropertyValue', name: 'Presentación', value: v })),
+      ...(p.extra ?? []).map((e) => ({ '@type': 'PropertyValue', name: e.label, value: e.value })),
+    ],
+  },
+  faqSchema(TILE_FAQ),
+];
+---
+<Base title={p.title} description={p.description} ogType="product" image={p.img.src} breadcrumbs={[{ name: 'Colocación de azulejos', url: AZULEJOS }, { name: p.name, url }]} schema={schema}>
+  <section class="section">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">Colocación de azulejos</span>
+        <h1>{p.name}</h1>
+        <p class="lead">{p.intro}</p>
+        <p>{p.body}</p>
+        <div class="table-wrap">
+          <table>
+            <tbody>
+              <tr><th scope="row">Presentación</th><td>{p.presentacion.join(' · ')}</td></tr>
+              {p.extra?.map((e) => <tr><th scope="row">{e.label}</th><td>{e.value}</td></tr>)}
+              <tr><th scope="row">Origen</th><td>Diseñado y fabricado en España con material reciclado</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn--dark" href="/contacto/?interes=azulejos">Pedir tarifa 2026</a>
+          <a class="btn btn--ghost" href={SITE.tileCalculator}>Calculadora de piezas</a>
+        </div>
+      </div>
+      <Image src={p.img} alt={p.alt} widths={[480, 800]} sizes="(min-width: 900px) 520px, 92vw" class="pimg" loading="eager" />
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head"><h2>Modo de uso</h2></div>
+      <Steps steps={p.steps} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><h2>Productos relacionados</h2></div>
+      <div class="grid grid-3">
+        {others.map((o) => (
+          <a class="card rel" href={`${AZULEJOS}${o.slug}/`}>
+            <Image src={o.img} alt={o.alt} widths={[240, 480]} sizes="120px" />
+            <div><h3>{o.name}</h3><span class="muted">Ver producto →</span></div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={TILE_FAQ} />
+  <CtaTarifa interes="azulejos" text="Te enviamos la tarifa de Kalzos, Kuñas y Alikates." />
+</Base>
+<style>
+  .pimg { border-radius: 22px; width: 100%; aspect-ratio: 1; object-fit: cover; }
+  .rel { display: flex; gap: 16px; align-items: center; text-decoration: none; color: inherit; }
+  .rel :global(img) { width: 96px; height: 96px; object-fit: cover; border-radius: 10px; flex: none; }
+  .rel h3 { margin: 0 0 4px; font-size: 1.05rem; }
+</style>

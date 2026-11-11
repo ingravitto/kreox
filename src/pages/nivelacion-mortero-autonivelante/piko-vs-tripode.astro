@@ -1,0 +1,92 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import CompareTripode from '../../components/CompareTripode.astro';
+import Faq from '../../components/Faq.astro';
+import CtaTarifa from '../../components/CtaTarifa.astro';
+import { NIVELACION, PRODUCTOS, M2_POR_NIVELADOR } from '../../data/site';
+import { faqSchema } from '../../data/schema';
+import imgTriPesado from '../../assets/img/tripodes-acero-pesados.jpg';
+import imgTriOxido from '../../assets/img/tripodes-acero-oxidados.jpg';
+import imgTriMortero from '../../assets/img/tripode-acero-en-mortero.jpg';
+import imgCaja from '../../assets/img/caja-100-piko.jpg';
+import imgLimpieza from '../../assets/img/piko-limpieza-reutilizable.jpg';
+import imgLaser from '../../assets/img/piko-laser-receptor-suelo-radiante.jpg';
+
+const url = `${NIVELACION}piko-vs-tripode/`;
+const n = Math.ceil(100 / M2_POR_NIVELADOR);
+const faqs = [
+  { q: '¿Por qué se oxidan los trípodes de nivelación?', a: 'Porque son de acero y el mortero tiene un pH alcalino. El contacto repetido con el mortero los corroe, los hace menos duraderos y dificulta su limpieza.' },
+  { q: '¿Cuánto peso ahorro con PIKO frente a trípodes?', a: `Con un nivelador cada ${M2_POR_NIVELADOR} m², 100 m² necesitan unos ${n} niveladores: unos ${(n * PRODUCTOS.tripode.pesoG) / 1000} kg en trípodes de acero frente a unos ${(n * PRODUCTOS.piko.pesoG) / 1000} kg en PIKO.` },
+  { q: '¿El PIKO es igual de preciso que un trípode?', a: 'Sí. La altura se marca igualmente con láser (habitual o con receptor) y la anilla del PIKO se ajusta a esa línea. Además, la anilla sirve de referencia visual durante el vertido.' },
+];
+---
+<Base
+  title="PIKO vs trípode de acero para mortero autonivelante | KREOX"
+  description="Comparativa entre el trípode de acero y el nivelador PIKO de KREOX: peso, óxido, limpieza, colocación y coste para nivelar mortero autonivelante."
+  breadcrumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }, { name: 'PIKO vs trípode', url }]}
+  schema={[faqSchema(faqs)]}
+>
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Comparativa</span>
+        <h1>PIKO frente al trípode de acero para mortero autonivelante</h1>
+        <p class="lead">
+          Para nivelar 100 m² de mortero autonivelante se necesitan unos {n} puntos de nivel. Con trípodes de acero eso son
+          <strong>unos {(n * PRODUCTOS.tripode.pesoG) / 1000} kg</strong> que cargar, limpiar y vigilar que no se oxiden. Con PIKO son
+          <strong>unos {(n * PRODUCTOS.piko.pesoG) / 1000} kg</strong> en una caja.
+        </p>
+      </div>
+      <CompareTripode />
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container grid grid-2">
+      <div>
+        <h2>El problema del trípode de acero</h2>
+        <ul class="list">
+          <li><strong>Pesado y voluminoso:</strong> cerca de 1 kg por trípode.</li>
+          <li><strong>Óxido y difícil limpieza:</strong> el pH alcalino del mortero corroe el acero.</li>
+          <li><strong>Colocación lenta:</strong> cada pata debe quedar en la posición correcta.</li>
+          <li><strong>Más caro por unidad.</strong></li>
+        </ul>
+        <div class="grid grid-3 pics">
+          <Image src={imgTriPesado} alt="Trípodes de acero pesados cargados por un operario" widths={[316]} />
+          <Image src={imgTriOxido} alt="Trípodes de acero oxidados" widths={[316]} />
+          <Image src={imgTriMortero} alt="Trípode de acero sumergido en mortero autonivelante" widths={[316]} />
+        </div>
+      </div>
+      <div>
+        <h2>La alternativa: PIKO</h2>
+        <ul class="list">
+          <li><strong>Ligero y pequeño:</strong> unos {PRODUCTOS.piko.pesoG} g; {PRODUCTOS.piko.caja} unidades en una caja.</li>
+          <li><strong>Reutilizable y fácil de limpiar:</strong> no se oxida.</li>
+          <li><strong>Colocación rápida:</strong> se clava en el aislamiento y su anilla visual facilita verificar el nivel.</li>
+          <li><strong>Más económico por unidad.</strong></li>
+        </ul>
+        <div class="grid grid-3 pics">
+          <Image src={imgCaja} alt="Caja de 100 PIKO" widths={[316]} />
+          <Image src={imgLimpieza} alt="PIKO limpiándose con agua" widths={[316]} />
+          <Image src={imgLaser} alt="PIKO ajustado con láser con receptor sobre suelo radiante" widths={[316]} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="lead">¿Trabajas sobre superficie dura, sin aislamiento? El <a href={`${NIVELACION}nivelador-universal/`}>Nivelador Universal</a> ofrece las mismas ventajas con base plana para recrecidos.</p>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} />
+  <CtaTarifa />
+</Base>
+<style>
+  .list { padding-left: 1.2em; }
+  .list li { margin-bottom: 0.5em; }
+  .pics { gap: 10px; margin-top: 16px; grid-template-columns: repeat(3, 1fr); }
+  .pics :global(img) { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 10px; }
+</style>

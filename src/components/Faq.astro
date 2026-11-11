@@ -1,0 +1,29 @@
+---
+// Preguntas frecuentes visibles. El mismo array se pasa a faqSchema() en la página,
+// así lo que lee Google y las IA coincide siempre con lo que ve el usuario.
+interface Props { faqs: { q: string; a: string }[]; title?: string; id?: string }
+const { faqs, title = 'Preguntas frecuentes', id = 'preguntas-frecuentes' } = Astro.props;
+---
+<section class="section" id={id}>
+  <div class="container">
+    <div class="section-head"><h2>{title}</h2></div>
+    <div class="faq">
+      {faqs.map((f, i) => (
+        <details open={i === 0}>
+          <summary><h3>{f.q}</h3></summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+<style>
+  .faq { max-width: 880px; display: grid; gap: 12px; }
+  details { border: 1px solid var(--line); border-radius: var(--radius); padding: 4px 22px; background: var(--white); }
+  summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 14px 0; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; font-size: 1.5rem; font-weight: 400; color: var(--ink-3); flex: none; }
+  details[open] summary::after { content: '–'; }
+  summary h3 { margin: 0; font-size: 1.05rem; }
+  details p { margin: 0 0 18px; color: var(--ink-3); }
+</style>

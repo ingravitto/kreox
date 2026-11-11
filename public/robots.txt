@@ -1,0 +1,7 @@
+# kreox.es — se permite el rastreo a buscadores y asistentes de IA.
+User-agent: *
+Allow: /
+Disallow: /contacto.php
+Disallow: /gracias/
+
+Sitemap: https://kreox.es/sitemap.xml

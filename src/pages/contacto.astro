@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../data/site';
+---
+<Base
+  title="Contacto y tarifa 2026 | KREOX"
+  description="Pide la tarifa 2026 de KREOX o contacta con nuestro departamento comercial: +34 965 552 170, comercial@kreox.es. Ibi (Alicante)."
+  breadcrumbs={[{ name: 'Contacto', url: '/contacto/' }]}
+>
+  <section class="section">
+    <div class="container split top">
+      <div>
+        <span class="eyebrow">Departamento comercial</span>
+        <h1>Pide la tarifa 2026 o resuelve tus dudas</h1>
+        <p class="lead">Rellena el formulario y te respondemos con la tarifa y el asesoramiento que necesites para tu obra.</p>
+        <ul class="contact">
+          <li><strong>Teléfono</strong><a href={SITE.phoneHref}>{SITE.phone}</a></li>
+          <li><strong>Departamento comercial</strong><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+          <li><strong>Departamento de exportación</strong><a href={`mailto:${SITE.emailExport}`}>{SITE.emailExport}</a></li>
+          <li><strong>Dirección</strong>{SITE.address.street} · {SITE.address.postalCode} {SITE.address.city} ({SITE.address.region})</li>
+        </ul>
+      </div>
+      <form class="card form" method="post" action="/contacto.php">
+        <p class="err" hidden data-err>No hemos podido enviar el formulario. Revisa los campos o escríbenos a {SITE.email}.</p>
+        <label>Nombre<input name="nombre" autocomplete="name" required maxlength="120" /></label>
+        <label>Empresa<input name="empresa" autocomplete="organization" maxlength="120" /></label>
+        <label>Localidad<input name="localidad" autocomplete="address-level2" maxlength="120" /></label>
+        <label>Correo electrónico*<input type="email" name="email" autocomplete="email" required maxlength="160" /></label>
+        <label>Teléfono<input type="tel" name="telefono" autocomplete="tel" maxlength="40" /></label>
+        <label>¿Qué te interesa?
+          <select name="interes">
+            <option value="nivelacion">Nivelación con mortero autonivelante (PIKO / Universal)</option>
+            <option value="azulejos">Colocación de azulejos (Kalzo / Kuñas / Alikates)</option>
+            <option value="ambos">Ambos</option>
+            <option value="exportacion">Exportación / distribución</option>
+          </select>
+        </label>
+        <label>Mensaje<textarea name="mensaje" rows="5" maxlength="3000"></textarea></label>
+        <div class="hp" aria-hidden="true"><label>Web<input name="web" tabindex="-1" autocomplete="off" /></label></div>
+        <input type="hidden" name="ts" value="" />
+        <label class="check"><input type="checkbox" name="privacidad" value="1" required /> <span>He leído y acepto la <a href="/politica-privacidad/">política de privacidad</a>.</span></label>
+        <button class="btn btn--dark" type="submit">Enviar y pedir tarifa</button>
+      </form>
+    </div>
+  </section>
+</Base>
+<script>
+  const form = document.querySelector<HTMLFormElement>('form.form')!;
+  const q = new URLSearchParams(location.search);
+  const interes = q.get('interes');
+  if (interes) (form.elements.namedItem('interes') as HTMLSelectElement).value = interes;
+  if (q.get('error')) form.querySelector<HTMLElement>('[data-err]')!.hidden = false;
+  (form.elements.namedItem('ts') as HTMLInputElement).value = String(Math.floor(Date.now() / 1000));
+</script>
+<style>
+  .top { align-items: start; }
+  .contact { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 16px; }
+  .contact strong { display: block; font-size: 0.85rem; color: var(--ink-3); font-weight: 500; }
+  .form { display: grid; gap: 14px; }
+  .form label { display: grid; gap: 6px; font-weight: 600; font-size: 0.9rem; color: var(--ink); }
+  .form input:not([type='checkbox']), .form select, .form textarea { font: inherit; font-weight: 400; padding: 12px 14px; border: 1px solid #cfc8bd; border-radius: var(--radius-sm); width: 100%; background: var(--white); }
+  .form .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; }
+  .form .check input { width: 18px; height: 18px; margin-top: 4px; accent-color: var(--ink); }
+  .hp { position: absolute; left: -5000px; }
+  .err { background: #fbeeee; color: #9b2c1f; padding: 12px; border-radius: var(--radius-sm); margin: 0; }
+</style>

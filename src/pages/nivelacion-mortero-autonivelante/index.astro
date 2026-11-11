@@ -1,0 +1,167 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Steps from '../../components/Steps.astro';
+import CompareTripode from '../../components/CompareTripode.astro';
+import Faq from '../../components/Faq.astro';
+import CtaTarifa from '../../components/CtaTarifa.astro';
+import { NIVELACION, PRODUCTOS, M2_POR_NIVELADOR } from '../../data/site';
+import { faqSchema } from '../../data/schema';
+
+import imgBanner from '../../assets/img/niveladores-piko-universal-kreox.jpg';
+import imgPiko from '../../assets/img/piko-nivelador-suelo-radiante-kreox.png';
+import imgUni from '../../assets/img/nivelador-universal-recrecido-kreox.png';
+import imgArandela from '../../assets/img/arandela-niveladora-recambio.png';
+import imgBase from '../../assets/img/base-niveladora-universal-recambio.png';
+import imgAnilla from '../../assets/img/anilla-metalica-niveladora-universal.png';
+import imgLamina from '../../assets/img/lamina-polietileno-bajo-solera.png';
+
+const faqs = [
+  { q: '¿Qué es un sistema de nivelación para mortero autonivelante?', a: 'Es un conjunto de niveladores que se colocan sobre el soporte antes del vertido y marcan, con una anilla regulable por láser, la altura de acabado del mortero autonivelante. Sirve para controlar el espesor y conseguir una superficie uniforme.' },
+  { q: '¿Qué diferencia hay entre PIKO y el Nivelador Universal?', a: 'El PIKO tiene punta y se clava en la placa de aislamiento del suelo radiante. El Nivelador Universal tiene base plana y se apoya sobre superficies duras, por lo que está pensado para recrecidos.' },
+  { q: '¿Cuántos niveladores necesito por m²?', a: `Se recomienda aproximadamente un nivelador cada ${M2_POR_NIVELADOR} m². Para 100 m², unos ${Math.ceil(100 / M2_POR_NIVELADOR)} niveladores.` },
+  { q: '¿Por qué no usar trípodes de acero?', a: 'Pesan cerca de 1 kg cada uno, se oxidan con el pH alcalino del mortero, se limpian mal y requieren asentar bien sus tres patas. Los niveladores KREOX pesan entre 20 y 250 g, no se oxidan y se colocan en segundos.' },
+  { q: '¿Son reutilizables?', a: 'Sí. Se retiran tras el vertido, se limpian y se vuelven a usar. Las piezas que se desgastan (arandela, base y anilla metálica) se venden como recambio.' },
+  { q: '¿Dónde se fabrican?', a: 'En España, en Ibi (Alicante). KREOX es una empresa familiar de tercera generación y sus niveladores son productos patentados.' },
+];
+
+const steps = [
+  { title: 'Coloca los niveladores', text: `Uno cada ${M2_POR_NIVELADOR} m² aprox.: clavado (PIKO) o apoyado (Universal).` },
+  { title: 'Marca la cota', text: 'Con láser habitual o con receptor.' },
+  { title: 'Ajusta las anillas', text: 'Cada anilla a la línea del láser.' },
+  { title: 'Vierte y retira', text: 'Mortero hasta la anilla; después, retira y limpia los niveladores.' },
+];
+---
+<Base
+  title="Sistemas de nivelación para mortero autonivelante | KREOX"
+  description="Niveladores PIKO y Universal para mortero autonivelante: sustituyen al trípode de acero en suelo radiante y recrecidos. Ligeros, sin óxido y fabricados en España."
+  breadcrumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }]}
+  schema={[faqSchema(faqs)]}
+>
+  <section class="section hero">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">Pavimentación con mortero autonivelante</span>
+        <h1>Sistemas de nivelación para mortero autonivelante</h1>
+        <p class="lead">
+          KREOX diseña y fabrica en España dos niveladores que sustituyen al trípode de acero: <strong>PIKO</strong>, que se clava en la
+          placa de aislamiento del <strong>suelo radiante</strong>, y el <strong>Nivelador Universal</strong>, que se apoya sobre cualquier
+          superficie para <strong>recrecidos</strong>. Los dos se regulan con láser, no se oxidan, se reutilizan y tienen recambios por piezas.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn--dark" href="#elige">Elige tu nivelador</a>
+          <a class="btn btn--ghost" href={`${NIVELACION}calculadora/`}>Calcular cantidades</a>
+        </div>
+      </div>
+      <Image src={imgBanner} alt="Niveladores KREOX PIKO y Universal en azul y verde lima sobre fondo negro" widths={[600, 1000]} sizes="(min-width: 900px) 540px, 92vw" class="banner" loading="eager" />
+    </div>
+  </section>
+
+  <section class="section section--soft" id="elige">
+    <div class="container">
+      <div class="section-head"><h2>Elige tu nivelador</h2></div>
+      <div class="grid grid-2">
+        <a class="card prod" href={PRODUCTOS.piko.url}>
+          <div class="pimg"><Image src={imgPiko} alt="PIKO de KREOX para suelo radiante" widths={[300, 522]} sizes="240px" /></div>
+          <div>
+            <h3>PIKO · Suelo radiante</h3>
+            <ul class="checks">
+              <li>Se clava en la placa de aislamiento</li>
+              <li>≈ {PRODUCTOS.piko.pesoG} g por unidad</li>
+              <li>Caja de {PRODUCTOS.piko.caja} uds</li>
+              <li>Recambio: arandela</li>
+            </ul>
+            <span class="more">Ver PIKO →</span>
+          </div>
+        </a>
+        <a class="card prod" href={PRODUCTOS.universal.url}>
+          <div class="pimg"><Image src={imgUni} alt="Nivelador Universal de KREOX para recrecidos" widths={[300, 522]} sizes="240px" /></div>
+          <div>
+            <h3>Nivelador Universal · Recrecidos</h3>
+            <ul class="checks">
+              <li>Base plana: se apoya en cualquier superficie</li>
+              <li>≈ {PRODUCTOS.universal.pesoG} g por unidad</li>
+              <li>Caja de {PRODUCTOS.universal.caja} uds</li>
+              <li>Recambios: base, anilla y arandela</li>
+            </ul>
+            <span class="more">Ver Nivelador Universal →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Por qué dejar el trípode de acero</h2>
+        <p>Los trípodes metálicos pesan, se oxidan con el pH alcalino del mortero y se colocan peor. Los niveladores KREOX llevan además una anilla visual que facilita comprobar el nivel.</p>
+      </div>
+      <CompareTripode />
+      <p><a href={`${NIVELACION}piko-vs-tripode/`}>Comparativa completa →</a></p>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head"><h2>Cómo se nivela un mortero autonivelante con KREOX</h2></div>
+      <Steps steps={steps} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Recambios y accesorios</h2>
+        <p>Cambia solo la pieza gastada, no el nivelador entero.</p>
+      </div>
+      <div class="grid grid-4">
+        <a class="card mini" href={`${NIVELACION}recambios/`}><Image src={imgArandela} alt="Arandela niveladora" widths={[240]} sizes="160px" /><h3>Arandela niveladora</h3><p class="muted">Caja de 150</p></a>
+        <a class="card mini" href={`${NIVELACION}recambios/`}><Image src={imgBase} alt="Base niveladora universal" widths={[240]} sizes="160px" /><h3>Base niveladora universal</h3><p class="muted">Caja de 40</p></a>
+        <a class="card mini" href={`${NIVELACION}recambios/`}><Image src={imgAnilla} alt="Anilla metálica niveladora universal" widths={[240]} sizes="160px" /><h3>Anilla metálica</h3><p class="muted">Caja de 40</p></a>
+        <a class="card mini" href={`${NIVELACION}lamina-bajo-solera/`}><Image src={imgLamina} alt="Lámina de polietileno bajo solera" widths={[240]} sizes="160px" /><h3>Lámina bajo solera</h3><p class="muted">Polietileno</p></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">Dónde se usan</span>
+        <h2>De la vivienda a la nave industrial</h2>
+        <ul class="checks">
+          <li>Instalaciones de suelo radiante</li>
+          <li>Recrecidos de pavimento</li>
+          <li>Nivelación antes de revestir</li>
+          <li>Pavimentos técnicos e industriales</li>
+          <li>Rehabilitación y obra nueva</li>
+        </ul>
+      </div>
+      <div>
+        <span class="eyebrow">Mejora continua · 2026</span>
+        <h2>Probado en obra real</h2>
+        <p>Anilla con aditivo de fibra, nuevo color de alta visibilidad y base reforzada del Nivelador Universal. Todas las mejoras se probaron en obra antes de su lanzamiento.</p>
+        <a href="/noticias/sistemas-de-nivelacion-para-mortero-autonivelante/">Leer la noticia →</a>
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} />
+  <CtaTarifa />
+</Base>
+
+<style>
+  .hero { padding-top: clamp(28px, 4vw, 48px); }
+  .banner { border-radius: 22px; width: 100%; }
+  .prod { display: grid; grid-template-columns: 1fr; gap: 20px; text-decoration: none; color: inherit; transition: transform .15s ease; }
+  .prod:hover { transform: translateY(-3px); }
+  @media (min-width: 560px) { .prod { grid-template-columns: 180px 1fr; align-items: center; } }
+  .pimg { background: #0b0b0b; border-radius: 12px; overflow: hidden; }
+  .pimg :global(img) { width: 100%; }
+  .prod h3 { margin-bottom: 0.7em; }
+  .more { display: inline-block; margin-top: 16px; font-weight: 600; color: var(--blue); }
+  .mini { text-decoration: none; color: inherit; text-align: center; }
+  .mini :global(img) { width: 130px; height: 120px; object-fit: contain; margin: 0 auto 10px; }
+  .mini h3 { font-size: 1rem; margin-bottom: 0.2em; }
+  .mini p { margin: 0; }
+</style>

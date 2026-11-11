@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import { NIVELACION, AZULEJOS } from '../data/site';
+---
+<Base title="Página no encontrada | KREOX" description="La página que buscas no existe o ha cambiado de dirección. Consulta las secciones principales de KREOX." noindex>
+  <section class="section">
+    <div class="container prose">
+      <h1>Página no encontrada</h1>
+      <p class="lead">Puede que la página haya cambiado de dirección con la nueva web. Estas son las secciones principales:</p>
+      <ul>
+        <li><a href={NIVELACION}>Sistemas de nivelación para mortero autonivelante</a></li>
+        <li><a href={`${NIVELACION}piko/`}>PIKO · nivelador para suelo radiante</a></li>
+        <li><a href={`${NIVELACION}nivelador-universal/`}>Nivelador Universal</a></li>
+        <li><a href={AZULEJOS}>Colocación de azulejos</a></li>
+        <li><a href="/contacto/">Contacto y tarifa</a></li>
+      </ul>
+    </div>
+  </section>
+</Base>

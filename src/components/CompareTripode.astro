@@ -1,0 +1,80 @@
+---
+// Comparativa trípode de acero vs. niveladores KREOX con los datos que publica KREOX.
+import { PRODUCTOS, M2_POR_NIVELADOR } from '../data/site';
+interface Props { only?: 'piko' | 'universal' }
+const { only } = Astro.props;
+const n100 = Math.ceil(100 / M2_POR_NIVELADOR);
+const kg = (g: number) => ((g * n100) / 1000).toLocaleString('es-ES', { maximumFractionDigits: 1 });
+const showPiko = only !== 'universal';
+const showUni = only !== 'piko';
+---
+<div class="table-wrap">
+  <table>
+    <caption class="visually-hidden">Comparativa entre el trípode de acero y los niveladores KREOX</caption>
+    <thead>
+      <tr>
+        <th scope="col">Característica</th>
+        <th scope="col">Trípode de acero</th>
+        {showPiko && <th scope="col">PIKO</th>}
+        {showUni && <th scope="col">Nivelador Universal</th>}
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Peso por unidad</th>
+        <td class="td-bad">≈ 1 kg</td>
+        {showPiko && <td class="td-good">≈ {PRODUCTOS.piko.pesoG} g</td>}
+        {showUni && <td class="td-good">≈ {PRODUCTOS.universal.pesoG} g</td>}
+      </tr>
+      <tr>
+        <th scope="row">Peso para 100 m² ({n100} uds)*</th>
+        <td class="td-bad">≈ {kg(PRODUCTOS.tripode.pesoG)} kg</td>
+        {showPiko && <td class="td-good">≈ {kg(PRODUCTOS.piko.pesoG)} kg</td>}
+        {showUni && <td class="td-good">≈ {kg(PRODUCTOS.universal.pesoG)} kg</td>}
+      </tr>
+      <tr>
+        <th scope="row">Óxido</th>
+        <td class="td-bad">Se corroe con el pH alcalino del mortero</td>
+        {showPiko && <td class="td-good">No se oxida</td>}
+        {showUni && <td class="td-good">No se oxida</td>}
+      </tr>
+      <tr>
+        <th scope="row">Limpieza</th>
+        <td class="td-bad">Difícil</td>
+        {showPiko && <td class="td-good">Rápida, con agua</td>}
+        {showUni && <td class="td-good">Rápida</td>}
+      </tr>
+      <tr>
+        <th scope="row">Colocación</th>
+        <td class="td-bad">Hay que asentar bien las tres patas</td>
+        {showPiko && <td class="td-good">Se clava en el aislamiento</td>}
+        {showUni && <td class="td-good">Se apoya sobre su base plana</td>}
+      </tr>
+      <tr>
+        <th scope="row">Referencia de nivel</th>
+        <td class="td-bad">Sin referencia visual</td>
+        {showPiko && <td class="td-good">Anilla visual regulable por láser</td>}
+        {showUni && <td class="td-good">Anilla visual regulable por láser</td>}
+      </tr>
+      <tr>
+        <th scope="row">Transporte</th>
+        <td class="td-bad">Voluminoso</td>
+        {showPiko && <td class="td-good">{PRODUCTOS.piko.caja} uds por caja</td>}
+        {showUni && <td class="td-good">{PRODUCTOS.universal.caja} uds por caja</td>}
+      </tr>
+      <tr>
+        <th scope="row">Recambios por piezas</th>
+        <td class="td-bad">No</td>
+        {showPiko && <td class="td-good">Sí (arandela)</td>}
+        {showUni && <td class="td-good">Sí (base, anilla y arandela)</td>}
+      </tr>
+      <tr>
+        <th scope="row">Precio por unidad</th>
+        <td class="td-bad">Más caro</td>
+        {showPiko && <td class="td-good">Más económico</td>}
+        {showUni && <td class="td-good">Más económico</td>}
+      </tr>
+    </tbody>
+  </table>
+</div>
+<p class="muted">* Cálculo orientativo con la densidad recomendada de un nivelador cada {M2_POR_NIVELADOR} m² y los pesos aproximados por unidad.</p>

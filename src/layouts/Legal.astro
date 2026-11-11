@@ -1,0 +1,14 @@
+---
+import Base from './Base.astro';
+interface Props { title: string; description: string; url: string; updated: string }
+const { title, description, url, updated } = Astro.props;
+---
+<Base title={`${title} | KREOX`} description={description} breadcrumbs={[{ name: title, url }]}>
+  <section class="section">
+    <div class="container prose">
+      <h1>{title}</h1>
+      <p class="muted">Última actualización: {updated}</p>
+      <slot />
+    </div>
+  </section>
+</Base>

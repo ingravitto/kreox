@@ -1,0 +1,107 @@
+# kreox.es · web estática (Astro) en hosting cPanel/Apache
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+AddDefaultCharset UTF-8
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# HTTPS y dominio sin www (solo afecta a kreox.es; el subdominio de pruebas no se toca)
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+RewriteCond %{HTTP_HOST} ^www\.kreox\.es$ [NC]
+RewriteRule ^ https://kreox.es%{REQUEST_URI} [R=301,L]
+
+# ---------------------------------------------------------------
+# Redirecciones 301 desde la web WordPress anterior
+# ---------------------------------------------------------------
+
+# Nivelación con mortero autonivelante
+RewriteRule ^soluciones-para-sistemas-de-pavimentacion-mediante-mortero-autonivelante/?$ /nivelacion-mortero-autonivelante/ [R=301,L]
+RewriteRule ^soluciones-para-sistemas-de-pavimentacion-mediante-mortero-autonivelante/nivelador-aislamiento-1-piko/?$ /nivelacion-mortero-autonivelante/piko/ [R=301,L]
+RewriteRule ^soluciones-para-sistemas-de-pavimentacion-mediante-mortero-autonivelante/nivelador-recrecido-universal/?$ /nivelacion-mortero-autonivelante/nivelador-universal/ [R=301,L]
+RewriteRule ^soluciones-para-sistemas-de-pavimentacion-mediante-mortero-autonivelante/recambios-y-accesorios/?$ /nivelacion-mortero-autonivelante/recambios/ [R=301,L]
+RewriteRule ^soluciones-para-sistemas-de-pavimentacion-mediante-mortero-autonivelante/lamina-bajo-solera/?$ /nivelacion-mortero-autonivelante/lamina-bajo-solera/ [R=301,L]
+
+# Colocación de azulejos
+RewriteRule ^soluciones-para-la-colocacion-de-azulejos/?$ /colocacion-azulejos/ [R=301,L]
+RewriteRule ^soluciones-para-la-colocacion-de-azulejos/(alikates|kalzo-separador|kuna-antimanchas|kuna-niveladora)/?$ /colocacion-azulejos/$1/ [R=301,L]
+RewriteRule ^calculador-de-piezas/?$ https://calculadora.kreox.es/ [R=301,L]
+
+# Noticias (antes en la raíz del dominio)
+RewriteRule ^blog/?$ /noticias/ [R=301,L]
+RewriteRule ^sistemas-de-nivelacion-para-mortero-autonivelante/?$ /noticias/sistemas-de-nivelacion-para-mortero-autonivelante/ [R=301,L]
+RewriteRule ^kreox-presenta-sus-novedades-para-2025-avances-innovadores-en-sistemas-de-pavimentacion-con-mortero-autonivelante/?$ /noticias/kreox-presenta-sus-novedades-para-2025/ [R=301,L]
+RewriteRule ^la-mejor-rotura-del-mercado-te-lo-demostramos/?$ /noticias/la-mejor-rotura-del-mercado/ [R=301,L]
+RewriteRule ^mejoramos-nuestro-packaging/?$ /noticias/mejoramos-nuestro-packaging/ [R=301,L]
+RewriteRule ^kreox-se-une-a-alejandro-climent-en-su-emocionante-retorno-al-campeonato-de-espana-de-trial-2024/?$ /noticias/kreox-patrocina-a-alejandro-climent-trial-2024/ [R=301,L]
+RewriteRule ^mejora-continua-de-nuestro-producto/?$ /noticias/mejora-continua-kuna-aleta-2024/ [R=301,L]
+RewriteRule ^sabias-que-nuestro-kalzo-funciona-con-todas-las-kunas-del-mercado/?$ /noticias/kalzo-funciona-con-todas-las-kunas/ [R=301,L]
+RewriteRule ^la-parte-mas-humana-de-la-marca-kreox/?$ /noticias/la-parte-mas-humana-de-kreox/ [R=301,L]
+RewriteRule ^hoy-montamos-con-kalzo-y-kuna-antimanchas/?$ /noticias/hoy-montamos-con-kalzo-y-kuna-antimanchas/ [R=301,L]
+RewriteRule ^category/ /noticias/ [R=301,L]
+RewriteRule ^feed/?$ /noticias/rss.xml [R=301,L]
+
+# Legales y otras
+RewriteRule ^privacy-policy/?$ /politica-privacidad/ [R=301,L]
+RewriteRule ^politicas-de-cookies/?$ /politica-cookies/ [R=301,L]
+RewriteRule ^registro-users/?$ /contacto/ [R=301,L]
+
+# Sitemaps de Yoast
+RewriteRule ^(sitemap_index|post-sitemap|page-sitemap|category-sitemap|wp-sitemap)\.xml$ /sitemap.xml [R=301,L]
+
+# Versión en inglés: redirección TEMPORAL (302) a la versión en español hasta publicar /en/
+RewriteRule ^en/?$ / [R=302,L]
+RewriteRule ^en/home/?$ / [R=302,L]
+RewriteRule ^en/solutions-for-flooring-systems-using-self-leveling-mortar/?$ /nivelacion-mortero-autonivelante/ [R=302,L]
+RewriteRule ^en/solutions-for-flooring-systems-using-self-leveling-mortar/leveler-insulation-1-tip/?$ /nivelacion-mortero-autonivelante/piko/ [R=302,L]
+RewriteRule ^en/solutions-for-flooring-systems-using-self-leveling-mortar/universal-raised-leveler/?$ /nivelacion-mortero-autonivelante/nivelador-universal/ [R=302,L]
+RewriteRule ^en/solutions-for-tile-installation/?$ /colocacion-azulejos/ [R=302,L]
+RewriteRule ^en/solutions-for-tile-installation/alikates-tile-pliers/?$ /colocacion-azulejos/alikates/ [R=302,L]
+RewriteRule ^en/solutions-for-tile-installation/kalzo-spacer-clip/?$ /colocacion-azulejos/kalzo-separador/ [R=302,L]
+RewriteRule ^en/solutions-for-tile-installation/stain-resistant-kuna-leveling-wedge/?$ /colocacion-azulejos/kuna-antimanchas/ [R=302,L]
+RewriteRule ^en/solutions-for-tile-installation/kuna-leveling-wedge/?$ /colocacion-azulejos/kuna-niveladora/ [R=302,L]
+RewriteRule ^en/company/?$ /empresa/ [R=302,L]
+RewriteRule ^en/contact/?$ /contacto/ [R=302,L]
+RewriteRule ^en/news/?$ /noticias/ [R=302,L]
+RewriteRule ^en/piece-calculator/?$ https://calculadora.kreox.es/ [R=302,L]
+RewriteRule ^en/ / [R=302,L]
+
+# Restos de WordPress
+RewriteRule ^wp-(admin|login\.php|content|includes|json) / [R=301,L]
+RewriteRule ^xmlrpc\.php$ - [F,L]
+</IfModule>
+
+# Cabeceras de seguridad
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header always set Strict-Transport-Security "max-age=31536000"
+</IfModule>
+
+# Caché: los archivos de /_astro/ llevan hash en el nombre y no cambian nunca
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 hour"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType video/mp4 "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.(webp|woff2|css|js)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml application/xml application/rss+xml application/javascript image/svg+xml
+</IfModule>

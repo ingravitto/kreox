@@ -1,0 +1,57 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import CtaTarifa from '../components/CtaTarifa.astro';
+import { NIVELACION, AZULEJOS, SITE } from '../data/site';
+import imgFabrica from '../assets/img/fabrica-kreox-ibi.jpg';
+import imgSello from '../assets/img/sello-producto-patentado.png';
+import imgMade from '../assets/img/fabricado-en-espana.png';
+---
+<Base
+  title="KREOX · Fabricante español de sistemas de nivelación"
+  description="KREOX, fabricante familiar de tercera generación en Ibi (Alicante). Diseñamos y fabricamos en España niveladores para mortero autonivelante y azulejos."
+  breadcrumbs={[{ name: 'Empresa', url: '/empresa/' }]}
+>
+  <section class="section">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">Tercera generación</span>
+        <h1>Fabricantes de sistemas de nivelación desde Ibi (Alicante)</h1>
+        <p class="lead">KREOX nace de nuestra búsqueda constante de la perfección en la mejora de nuestros productos. Esa exigencia es el resultado de la experiencia transmitida durante años por <strong>tres generaciones de nuestra familia</strong>.</p>
+        <p>Somos <strong>fabricantes nacionales</strong>: diseñamos y fabricamos en España los niveladores <a href={`${NIVELACION}piko/`}>PIKO</a> y <a href={`${NIVELACION}nivelador-universal/`}>Universal</a> para mortero autonivelante, y el <a href={AZULEJOS}>sistema de nivelación para azulejos</a> Kalzo, Kuña y Alikates. KREOX es una marca de {SITE.legalName}</p>
+      </div>
+      <Image src={imgFabrica} alt="Proceso de fabricación y envasado de productos KREOX" widths={[500, 1013]} sizes="(min-width: 900px) 480px, 92vw" class="photo" loading="eager" />
+    </div>
+  </section>
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head"><h2>Lo que supone ser fabricante</h2></div>
+      <div class="grid grid-4">
+        <div class="card"><h3>Precio competitivo</h3><p class="muted mt-0">Precio de fabricante nacional.</p></div>
+        <div class="card"><h3>Calidad garantizada</h3><p class="muted mt-0">Las mejoras se prueban en obra real antes de lanzarlas.</p></div>
+        <div class="card"><h3>Agilidad de pedidos</h3><p class="muted mt-0">Fabricación nacional, sin esperas de importación.</p></div>
+        <div class="card"><h3>Made in Spain</h3><p class="muted mt-0">Diseño y fabricación en España con material reciclado.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container split">
+      <div>
+        <h2>Innovación y patentes</h2>
+        <p>Nuestros niveladores para mortero autonivelante son <strong>productos patentados</strong>, y cada año incorporamos mejoras que nacen de la experiencia de los profesionales en obra: en 2026, la anilla con aditivo de fibra, el nuevo color de alta visibilidad y la base reforzada del Nivelador Universal.</p>
+        <p>Nuestros productos ofrecen además un agarre superior y se fabrican con material reciclado.</p>
+      </div>
+      <div class="badges">
+        <Image src={imgSello} alt="Sello de producto patentado" widths={[200, 400]} sizes="180px" class="sello" />
+        <Image src={imgMade} alt="Fabricado en España" widths={[131]} sizes="120px" />
+      </div>
+    </div>
+  </section>
+  <CtaTarifa />
+</Base>
+<style>
+  .photo { border-radius: var(--radius); width: 100%; }
+  .badges { display: flex; gap: 32px; align-items: center; justify-content: center; background: var(--ink); border-radius: var(--radius); padding: 32px; }
+  .badges :global(img) { width: 120px; }
+  .badges :global(.sello) { width: 180px; }
+</style>

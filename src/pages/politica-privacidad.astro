@@ -1,0 +1,26 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { SITE } from '../data/site';
+---
+<Legal title="Política de privacidad" description="Cómo trata KREOX los datos personales que nos envías a través del formulario de contacto." url="/politica-privacidad/" updated="noviembre de 2026">
+  <h2>Responsable del tratamiento</h2>
+  <ul>
+    <li><strong>Responsable:</strong> {SITE.legalName} (marca KREOX)</li>
+    <li><strong>CIF:</strong> {SITE.cif}</li>
+    <li><strong>Dirección:</strong> {SITE.address.street}, {SITE.address.postalCode} {SITE.address.city} ({SITE.address.region}), España</li>
+    <li><strong>Teléfono:</strong> {SITE.phone}</li>
+    <li><strong>Email:</strong> <a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+  </ul>
+  <h2>Qué datos tratamos y para qué</h2>
+  <p>A través del formulario de contacto recogemos nombre, empresa, localidad, email, teléfono y el mensaje que nos envías. Los usamos <strong>únicamente para responder a tu consulta y enviarte la tarifa o la información comercial que solicitas</strong>.</p>
+  <h2>Base legal</h2>
+  <p>El consentimiento que das al marcar la casilla de aceptación (art. 6.1.a del RGPD) y, en su caso, la aplicación de medidas precontractuales a petición tuya (art. 6.1.b del RGPD).</p>
+  <h2>Conservación</h2>
+  <p>Conservamos los datos mientras sea necesario para atender tu solicitud y, después, durante los plazos legales aplicables.</p>
+  <h2>Destinatarios</h2>
+  <p>No cedemos tus datos a terceros salvo obligación legal. El proveedor de alojamiento web y correo trata los datos por cuenta nuestra como encargado del tratamiento.</p>
+  <h2>Tus derechos</h2>
+  <p>Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a <a href={`mailto:${SITE.email}`}>{SITE.email}</a> o a la dirección postal indicada. También puedes reclamar ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es">www.aepd.es</a>).</p>
+  <h2>Normativa</h2>
+  <p>Reglamento (UE) 2016/679 (RGPD), Ley Orgánica 3/2018 (LOPDGDD) y Ley 34/2002 (LSSI-CE).</p>
+</Legal>

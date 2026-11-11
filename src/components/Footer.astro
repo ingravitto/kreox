@@ -1,0 +1,73 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/img/kreox-logo-blanco.png';
+import madeSpain from '../assets/img/fabricado-en-espana.png';
+import { SITE, NIVELACION, AZULEJOS } from '../data/site';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container cols">
+    <div class="brand">
+      <Image src={logo} alt="KREOX" width={140} />
+      <p>Fabricantes de sistemas de nivelación para mortero autonivelante y para la colocación de azulejos. Empresa familiar de tercera generación en Ibi (Alicante).</p>
+      <div class="made"><Image src={madeSpain} alt="" width={44} /> <span>Diseñado y fabricado en España</span></div>
+    </div>
+    <nav aria-label="Nivelación autonivelante">
+      <h2>Nivelación autonivelante</h2>
+      <ul>
+        <li><a href={`${NIVELACION}piko/`}>PIKO · suelo radiante</a></li>
+        <li><a href={`${NIVELACION}nivelador-universal/`}>Nivelador Universal</a></li>
+        <li><a href={`${NIVELACION}recambios/`}>Recambios</a></li>
+        <li><a href={`${NIVELACION}lamina-bajo-solera/`}>Lámina bajo solera</a></li>
+        <li><a href={`${NIVELACION}calculadora/`}>Calculadora de niveladores</a></li>
+        <li><a href={`${NIVELACION}piko-vs-tripode/`}>PIKO frente al trípode</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Colocación de azulejos">
+      <h2>Colocación de azulejos</h2>
+      <ul>
+        <li><a href={`${AZULEJOS}kalzo-separador/`}>Kalzo Separador</a></li>
+        <li><a href={`${AZULEJOS}kuna-niveladora/`}>Kuña Niveladora</a></li>
+        <li><a href={`${AZULEJOS}kuna-antimanchas/`}>Kuña Antimanchas</a></li>
+        <li><a href={`${AZULEJOS}alikates/`}>Alikates</a></li>
+        <li><a href={SITE.tileCalculator}>Calculadora de piezas</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h2>Contacto</h2>
+      <address>
+        {SITE.address.street}<br />{SITE.address.postalCode} {SITE.address.city} ({SITE.address.region})<br />
+        <a href={SITE.phoneHref}>{SITE.phone}</a><br />
+        <a href={`mailto:${SITE.email}`}>{SITE.email}</a><br />
+        Exportación: <a href={`mailto:${SITE.emailExport}`}>{SITE.emailExport}</a>
+      </address>
+      <ul class="social">
+        <li><a href={SITE.social.youtube} rel="me">YouTube</a></li>
+        <li><a href={SITE.social.linkedin} rel="me">LinkedIn</a></li>
+        <li><a href={SITE.social.instagram} rel="me">Instagram</a></li>
+        <li><a href={SITE.social.tiktok} rel="me">TikTok</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container legal">
+    <span>© {year} KREOX · {SITE.legalName}</span>
+    <a href="/aviso-legal/">Aviso legal</a>
+    <a href="/politica-privacidad/">Privacidad</a>
+    <a href="/politica-cookies/">Cookies</a>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: var(--ink); color: #b9b5ae; font-size: 0.93rem; padding-top: 64px; }
+  .cols { display: grid; gap: 36px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+  .brand p { margin-top: 16px; }
+  .made { display: flex; align-items: center; gap: 10px; color: var(--white); font-weight: 500; }
+  h2 { color: var(--white); font-size: 0.95rem; letter-spacing: 0.04em; margin-bottom: 14px; }
+  ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  a { color: #e3dfd8; text-decoration: none; }
+  a:hover { color: var(--lime); }
+  address { font-style: normal; line-height: 1.9; }
+  .social { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; }
+  .legal { display: flex; flex-wrap: wrap; gap: 18px; border-top: 1px solid #2f2f2d; margin-top: 48px; padding-top: 20px; padding-bottom: 28px; font-size: 0.85rem; }
+  .legal span { margin-right: auto; }
+</style>

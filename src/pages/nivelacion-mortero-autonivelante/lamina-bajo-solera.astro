@@ -1,0 +1,57 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import CtaTarifa from '../../components/CtaTarifa.astro';
+import { NIVELACION } from '../../data/site';
+import { productSchema } from '../../data/schema';
+import img from '../../assets/img/lamina-polietileno-bajo-solera.png';
+
+const url = `${NIVELACION}lamina-bajo-solera/`;
+const schema = [
+  productSchema({
+    id: url,
+    name: 'Lámina de polietileno bajo solera',
+    description: 'Lámina de polietileno para impermeabilizar soleras de hormigón, cimientos y aceras. Se instala sobre la grava de drenaje y bajo el mallazo.',
+    images: [img.src],
+    props: [['Uso', 'Impermeabilización bajo solera, cimientos y aceras'], ['Material', 'Polietileno']],
+  }),
+];
+---
+<Base
+  title="Lámina de polietileno bajo solera | KREOX"
+  description="Lámina de polietileno KREOX para soleras, cimientos y aceras: evita la humedad por capilaridad, resiste al moho y protege el hormigón de grasas y aceites."
+  breadcrumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }, { name: 'Lámina bajo solera', url }]}
+  schema={schema}
+>
+  <section class="section">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">Accesorio de pavimentación</span>
+        <h1>Lámina de polietileno bajo solera</h1>
+        <p class="lead">La lámina de polietileno de KREOX impermeabiliza soleras de hormigón, cimientos y aceras. Se instala <strong>sobre la grava de drenaje y bajo el mallazo</strong>, y deja una base resistente y protegida frente a la humedad.</p>
+        <ul class="checks">
+          <li>Evita la humedad por capilaridad y las filtraciones de lluvia</li>
+          <li>Resiste al moho</li>
+          <li>Protege el hormigón de grasas y aceites</li>
+          <li>Aumenta la durabilidad de otros elementos de construcción</li>
+        </ul>
+        <div class="btn-row"><a class="btn btn--dark" href="/contacto/?interes=nivelacion">Pedir tarifa 2026</a></div>
+      </div>
+      <Image src={img} alt="Rollos de lámina de polietileno bajo solera KREOX en negro y transparente" widths={[480, 946]} sizes="(min-width: 900px) 480px, 92vw" class="pimg" loading="eager" />
+    </div>
+  </section>
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head"><h2>Completa tu sistema de pavimentación</h2></div>
+      <div class="grid grid-2">
+        <a class="card" href={`${NIVELACION}piko/`}><h3>PIKO →</h3><p class="muted mt-0">Nivelador de mortero autonivelante para suelo radiante.</p></a>
+        <a class="card" href={`${NIVELACION}nivelador-universal/`}><h3>Nivelador Universal →</h3><p class="muted mt-0">Nivelador para recrecidos sobre cualquier superficie.</p></a>
+      </div>
+    </div>
+  </section>
+  <CtaTarifa />
+</Base>
+<style>
+  .pimg { border-radius: 22px; background: var(--sand-soft); width: 100%; }
+  a.card { text-decoration: none; color: inherit; }
+</style>

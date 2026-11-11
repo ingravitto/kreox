@@ -1,0 +1,58 @@
+---
+import Base from '../../layouts/Base.astro';
+import Calculadora from '../../components/Calculadora.astro';
+import Faq from '../../components/Faq.astro';
+import CtaTarifa from '../../components/CtaTarifa.astro';
+import { NIVELACION, PRODUCTOS, M2_POR_NIVELADOR } from '../../data/site';
+import { faqSchema } from '../../data/schema';
+
+const url = `${NIVELACION}calculadora/`;
+const rows = [25, 50, 100, 200, 500, 1000].map((m2) => {
+  const uds = Math.ceil(m2 / M2_POR_NIVELADOR);
+  return { m2, uds, piko: Math.ceil(uds / PRODUCTOS.piko.caja), uni: Math.ceil(uds / PRODUCTOS.universal.caja) };
+});
+const faqs = [
+  { q: '¿Cuántos niveladores de mortero autonivelante se necesitan por m²?', a: `Como referencia, KREOX recomienda un nivelador cada ${M2_POR_NIVELADOR} m² aproximadamente. Para 100 m² son unos ${Math.ceil(100 / M2_POR_NIVELADOR)} niveladores.` },
+  { q: '¿Cuántos m² cubre una caja de PIKO?', a: `Una caja trae ${PRODUCTOS.piko.caja} PIKO, suficiente para unos ${PRODUCTOS.piko.caja * M2_POR_NIVELADOR} m² en un mismo vertido con la densidad recomendada.` },
+  { q: '¿Cuántos m² cubre una caja de Niveladores Universales?', a: `Una caja trae ${PRODUCTOS.universal.caja} niveladores, suficiente para unos ${PRODUCTOS.universal.caja * M2_POR_NIVELADOR} m² en un mismo vertido con la densidad recomendada.` },
+  { q: 'Si los niveladores son reutilizables, ¿necesito tantos?', a: 'Necesitas los suficientes para la superficie que vas a verter de una vez. Después se retiran, se limpian y se reutilizan en el siguiente vertido u obra.' },
+];
+---
+<Base
+  title="Calculadora de niveladores para mortero autonivelante | KREOX"
+  description="Calcula cuántos niveladores PIKO o Universal necesitas para tu obra de mortero autonivelante: unidades, cajas y peso frente al trípode de acero."
+  breadcrumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }, { name: 'Calculadora', url }]}
+  schema={[faqSchema(faqs)]}
+>
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Herramienta</span>
+        <h1>Calculadora de niveladores para mortero autonivelante</h1>
+        <p class="lead">Introduce los metros cuadrados que vas a verter y te decimos cuántos niveladores y cajas necesitas, y cuánto peso te ahorras frente al trípode de acero.</p>
+      </div>
+      <Calculadora />
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head">
+        <h2>Tabla rápida de cantidades</h2>
+        <p>Con un nivelador cada {M2_POR_NIVELADOR} m². PIKO en cajas de {PRODUCTOS.piko.caja} uds y Nivelador Universal en cajas de {PRODUCTOS.universal.caja} uds.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Superficie</th><th scope="col">Niveladores</th><th scope="col">Cajas de PIKO</th><th scope="col">Cajas de Universal</th></tr></thead>
+          <tbody>
+            {rows.map((r) => <tr><th scope="row">{r.m2.toLocaleString('es-ES')} m²</th><td>{r.uds.toLocaleString('es-ES')}</td><td>{r.piko}</td><td>{r.uni}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p class="muted">Cantidades orientativas. Confírmalas para tu obra con nuestro departamento comercial.</p>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} />
+  <CtaTarifa />
+</Base>

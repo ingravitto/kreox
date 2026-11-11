@@ -1,0 +1,82 @@
+---
+import { Image } from 'astro:assets';
+import { render, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Faq from '../../components/Faq.astro';
+import CtaTarifa from '../../components/CtaTarifa.astro';
+import NoticiaCard from '../../components/NoticiaCard.astro';
+import { getNoticias, CATEGORIAS, fecha, noticiaUrl } from '../../data/noticias';
+import { faqSchema, ORG_ID } from '../../data/schema';
+import { SITE, NIVELACION, AZULEJOS } from '../../data/site';
+
+export async function getStaticPaths() {
+  const all = await getNoticias();
+  return all.map((n) => ({ params: { slug: n.id }, props: { n, all } }));
+}
+const { n, all } = Astro.props as { n: CollectionEntry<'noticias'>; all: CollectionEntry<'noticias'>[] };
+const { Content } = await render(n);
+const url = noticiaUrl(n);
+const related = all.filter((o) => o.id !== n.id && o.data.category === n.data.category).slice(0, 3);
+const PRODUCT_LINKS: Record<string, { label: string; href: string }> = {
+  piko: { label: 'PIKO · nivelador para suelo radiante', href: `${NIVELACION}piko/` },
+  universal: { label: 'Nivelador Universal para recrecidos', href: `${NIVELACION}nivelador-universal/` },
+  recambios: { label: 'Recambios para niveladores', href: `${NIVELACION}recambios/` },
+  kalzo: { label: 'Kalzo Separador', href: `${AZULEJOS}kalzo-separador/` },
+  kunas: { label: 'Kuña Niveladora', href: `${AZULEJOS}kuna-niveladora/` },
+  alikates: { label: 'Alikates', href: `${AZULEJOS}alikates/` },
+};
+const article = {
+  '@type': 'NewsArticle',
+  headline: n.data.title,
+  description: n.data.description,
+  datePublished: n.data.date.toISOString(),
+  dateModified: (n.data.updated ?? n.data.date).toISOString(),
+  inLanguage: 'es',
+  mainEntityOfPage: `${SITE.url}${url}`,
+  author: { '@type': 'Organization', name: n.data.author === 'Equipo KREOX' ? 'KREOX' : n.data.author },
+  publisher: { '@id': ORG_ID },
+  ...(n.data.image ? { image: [new URL(n.data.image.src, SITE.url).href] } : {}),
+};
+const schema = [article, ...(n.data.faq.length ? [faqSchema(n.data.faq)] : [])];
+---
+<Base title={n.data.seoTitle ?? `${n.data.title} | KREOX`} description={n.data.description} ogType="article" image={n.data.image?.src} breadcrumbs={[{ name: 'Noticias', url: '/noticias/' }, { name: n.data.title, url }]} schema={schema}>
+  <article class="section">
+    <div class="container">
+      <header class="prose head">
+        <div class="meta">
+          <span class="badge badge--outline">{CATEGORIAS[n.data.category]}</span>
+          <time datetime={n.data.date.toISOString()}>{fecha(n.data.date)}</time>
+          {n.data.updated && <span>· Actualizado el <time datetime={n.data.updated.toISOString()}>{fecha(n.data.updated)}</time></span>}
+        </div>
+        <h1>{n.data.title}</h1>
+        <p class="lead">{n.data.description}</p>
+      </header>
+      {n.data.image && <Image src={n.data.image} alt={n.data.imageAlt ?? ''} widths={[700, 1100]} sizes="(min-width: 900px) 760px, 92vw" class="cover" loading="eager" />}
+      <div class="prose body"><Content /></div>
+      {n.data.products.length > 0 && (
+        <aside class="prose card prods">
+          <h2>Productos de esta noticia</h2>
+          <ul>{n.data.products.map((p) => <li><a href={PRODUCT_LINKS[p].href}>{PRODUCT_LINKS[p].label}</a></li>)}</ul>
+        </aside>
+      )}
+    </div>
+  </article>
+  {n.data.faq.length > 0 && <Faq faqs={n.data.faq} />}
+  {related.length > 0 && (
+    <section class="section section--soft">
+      <div class="container">
+        <h2>Más noticias de {CATEGORIAS[n.data.category].toLowerCase()}</h2>
+        <div class="grid grid-3">{related.map((r) => <NoticiaCard n={r} />)}</div>
+      </div>
+    </section>
+  )}
+  <CtaTarifa interes={n.data.category === 'azulejos' ? 'azulejos' : 'nivelacion'} />
+</Base>
+<style>
+  .head { margin-bottom: 28px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 0.85rem; color: var(--ink-3); margin-bottom: 14px; }
+  h1 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); }
+  .cover { max-width: 760px; width: 100%; border-radius: var(--radius); margin-bottom: 32px; background: #0b0b0b; }
+  .prods { margin-top: 36px; }
+  .prods h2 { margin-top: 0; font-size: 1.1rem; }
+</style>

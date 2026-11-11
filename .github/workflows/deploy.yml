@@ -1,0 +1,65 @@
+name: Construir y publicar
+
+# - En cada push a main: construye la web y pasa el control de calidad SEO (no publica nada).
+# - Publicar: pestaña Actions → "Construir y publicar" → Run workflow → elegir destino.
+#   "pruebas" publica en el subdominio de pruebas con noindex; "produccion" publica en kreox.es.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      destino:
+        description: 'Dónde publicar'
+        required: true
+        default: pruebas
+        type: choice
+        options: [pruebas, produccion]
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Construir
+        run: npm run build
+        env:
+          PUBLIC_NOINDEX: ${{ github.event.inputs.destino == 'produccion' && '0' || '1' }}
+      - name: Control de calidad SEO
+        run: npm run check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web
+          path: dist/
+          include-hidden-files: true
+          retention-days: 7
+
+  deploy:
+    if: github.event_name == 'workflow_dispatch'
+    needs: build
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.destino }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: web
+          path: dist/
+      - name: Publicar por FTPS en el hosting
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./dist/
+          server-dir: ${{ github.event.inputs.destino == 'produccion' && secrets.FTP_DIR_PRODUCCION || secrets.FTP_DIR_PRUEBAS }}

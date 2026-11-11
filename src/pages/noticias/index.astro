@@ -1,0 +1,39 @@
+---
+import Base from '../../layouts/Base.astro';
+import NoticiaCard from '../../components/NoticiaCard.astro';
+import { getNoticias, CATEGORIAS } from '../../data/noticias';
+const noticias = await getNoticias();
+const grupos = (Object.keys(CATEGORIAS) as (keyof typeof CATEGORIAS)[])
+  .map((k) => ({ k, label: CATEGORIAS[k], items: noticias.filter((n) => n.data.category === k) }))
+  .filter((g) => g.items.length);
+---
+<Base
+  title="Noticias de nivelación y pavimentación | KREOX"
+  description="Novedades de KREOX sobre sistemas de nivelación para mortero autonivelante, PIKO, Nivelador Universal y colocación de azulejos."
+  breadcrumbs={[{ name: 'Noticias', url: '/noticias/' }]}
+>
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h1>Noticias KREOX</h1>
+        <p class="lead">Novedades de producto, guías y actualidad de nuestros sistemas de nivelación.</p>
+        <nav class="cats" aria-label="Categorías">
+          {grupos.map((g) => <a class="badge badge--outline" href={`#${g.k}`}>{g.label} ({g.items.length})</a>)}
+          <a class="badge badge--outline" href="/noticias/rss.xml">RSS</a>
+        </nav>
+      </div>
+      {grupos.map((g) => (
+        <section class="grupo" id={g.k}>
+          <h2>{g.label}</h2>
+          <div class="grid grid-3">{g.items.map((n) => <NoticiaCard n={n} />)}</div>
+        </section>
+      ))}
+    </div>
+  </section>
+</Base>
+<style>
+  .cats { display: flex; flex-wrap: wrap; gap: 8px; }
+  .cats a { text-decoration: none; }
+  .grupo { margin-top: 48px; }
+  .grupo h2 { font-size: 1.4rem; }
+</style>
