@@ -2,7 +2,30 @@
 Options -Indexes
 DirectoryIndex index.html
 ErrorDocument 404 /404.html
-AddDefaultCharset UTF-8
+AddCharset UTF-8 .html .xml .txt .css .js
+
+# Tipos de archivo explícitos: el hosting no siempre detecta bien .webp/.woff2/.mp4
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType image/avif .avif
+  AddType image/svg+xml .svg
+  AddType font/woff2 .woff2
+  AddType font/woff .woff
+  AddType video/mp4 .mp4
+  AddType application/rss+xml .rss
+</IfModule>
+<FilesMatch "\.webp$">
+  ForceType image/webp
+</FilesMatch>
+<FilesMatch "\.woff2$">
+  ForceType font/woff2
+</FilesMatch>
+<FilesMatch "\.woff$">
+  ForceType font/woff
+</FilesMatch>
+<FilesMatch "\.mp4$">
+  ForceType video/mp4
+</FilesMatch>
 
 <IfModule mod_rewrite.c>
 RewriteEngine On
