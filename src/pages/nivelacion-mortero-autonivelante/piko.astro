@@ -5,7 +5,7 @@ import { FAQ_PIKO } from '../../data/faqs';
 import { productSchema, faqSchema } from '../../data/schema';
 
 import imgProducto from '../../assets/img/piko-nivelador-suelo-radiante-kreox.png';
-import imgBg from '../../assets/img/suelo-radiante-piko-bn.jpg';
+import imgBg from '../../assets/img/hf-piko-suelo-radiante-laser.jpg';
 import imgPlano from '../../assets/img/piko-medidas-plano.png';
 import imgComo from '../../assets/img/piko-como-funciona-suelo-radiante.png';
 import imgLaser from '../../assets/img/piko-laser-receptor-suelo-radiante.jpg';
@@ -60,7 +60,7 @@ const schema = [
     accent: 'suelo radiante',
     lead: `El <strong>PIKO de KREOX</strong> se clava en la placa de aislamiento y marca la altura exacta del mortero autonivelante. Sustituye al trípode de acero: <strong>${P.pesoG} gramos frente a cerca de 1 kg</strong>, <strong>sin óxido</strong> y <strong>reutilizable</strong>. Compatible con láser habitual o con receptor.`,
     bg: imgBg,
-    bgAlt: 'Suelo radiante con niveladores PIKO clavados antes del vertido',
+    bgAlt: 'Niveladores PIKO clavados en suelo radiante con la línea del láser a la altura de las anillas',
     product: imgProducto,
     productAlt: 'PIKO de KREOX, nivelador azul con anilla verde lima para mortero autonivelante',
   }}
@@ -105,6 +105,7 @@ const schema = [
     { img: imgAnilla, alt: 'Anilla metálica niveladora universal', name: 'Anilla metálica', caja: 'Para el Universal · caja de 40' },
   ]}
   other={{ name: '¿Superficie dura, sin aislamiento?', text: 'Usa el Nivelador Universal, con base plana para recrecidos →', href: `${NIVELACION}nivelador-universal/`, img: imgUni, alt: 'Nivelador Universal' }}
+  film={{ src: '/videos/piko-vertido-suelo-radiante.mp4', poster: imgBg, label: 'Vertido de mortero autonivelante sobre suelo radiante con niveladores PIKO', title: 'El mortero llega a la anilla', accent: 'y se queda plano.' }}
   faqs={FAQ_PIKO}
   faqTitle="Preguntas frecuentes sobre el PIKO"
   cta={{ title: '¿Vas a nivelar un suelo radiante?', text: 'Pide la tarifa 2026 y te asesoramos sobre cuántos PIKO necesitas para tu obra.' }}

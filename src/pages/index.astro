@@ -6,15 +6,17 @@ import Marquee from '../components/Marquee.astro';
 import WeightBars from '../components/WeightBars.astro';
 import NoticiaCard from '../components/NoticiaCard.astro';
 import CtaTarifa from '../components/CtaTarifa.astro';
+import AutoVideo from '../components/AutoVideo.astro';
 import { NIVELACION, AZULEJOS, PRODUCTOS, M2_POR_NIVELADOR } from '../data/site';
 import { TILE_PRODUCTS } from '../data/azulejos';
 import { getNoticias } from '../data/noticias';
 
-import imgHero from '../assets/img/hero-productos-kreox.jpg';
+import imgHero from '../assets/img/hf-hero-video-poster.jpg';
 import imgPiko from '../assets/img/piko-nivelador-suelo-radiante-kreox.png';
 import imgUni from '../assets/img/nivelador-universal-recrecido-kreox.png';
-import imgSuelo from '../assets/img/suelo-radiante-piko-color.jpg';
-import imgDetalle from '../assets/img/piko-suelo-radiante-detalle.jpg';
+import imgSuelo from '../assets/img/hf-piko-suelo-radiante-laser.jpg';
+import imgUniVertido from '../assets/img/hf-universal-recrecido-vertido.jpg';
+import imgDetalle from '../assets/img/hf-anilla-fibra-macro.jpg';
 import imgArandela from '../assets/img/arandela-niveladora-recambio.png';
 import imgBase from '../assets/img/base-niveladora-universal-recambio.png';
 import imgAnilla from '../assets/img/anilla-metalica-niveladora-universal.png';
@@ -39,7 +41,8 @@ const steps = [
 >
   <!-- HERO -->
   <section class="hero section--dark">
-    <Image src={imgHero} alt="Productos KREOX: niveladores PIKO y Universal junto a Kalzos y Kuñas sobre fondo negro" widths={[960, 1600, 1920]} sizes="100vw" class="hero-bg" loading="eager" fetchpriority="high" />
+    <Image src={imgHero} alt="Niveladores PIKO y Universal de KREOX sobre mortero autonivelante recién vertido" widths={[960, 1600, 1920]} sizes="100vw" class="hero-bg" loading="eager" fetchpriority="high" />
+    <div class="hero-video"><AutoVideo src="/videos/hero-niveladores-kreox.mp4" poster={imgHero} label="PIKO y Nivelador Universal sobre mortero autonivelante" eager /></div>
     <div class="hero-shade" aria-hidden="true"></div>
     <div class="container hero-in on-dark">
       <span class="eyebrow">Innovation for construction</span>
@@ -135,7 +138,7 @@ const steps = [
 
   <!-- CÓMO FUNCIONA -->
   <section class="how section section--dark grain">
-    <Image src={imgSuelo} alt="Niveladores PIKO azules clavados en un suelo radiante antes del vertido de mortero" widths={[960, 1920]} sizes="100vw" class="how-bg" />
+    <Image src={imgSuelo} alt="Niveladores PIKO clavados en un suelo radiante con la línea del láser a la altura de las anillas" widths={[960, 1920]} sizes="100vw" class="how-bg" />
     <div class="how-shade" aria-hidden="true"></div>
     <div class="container rel">
       <div class="section-head" data-reveal>
@@ -147,11 +150,34 @@ const steps = [
     </div>
   </section>
 
+  <!-- EN OBRA (vídeos) -->
+  <section class="section section--dark film">
+    <div class="container">
+      <div class="head-row">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">En obra</span>
+          <h2>El mortero sube. <span class="sand">La anilla manda.</span></h2>
+        </div>
+        <p class="muted side" data-reveal>El autonivelante fluye hasta la anilla de cada nivelador y queda plano. Sin trípodes, sin óxido.</p>
+      </div>
+      <div class="film-grid">
+        <a class="clip" href={PRODUCTOS.piko.url} data-reveal>
+          <AutoVideo src="/videos/piko-vertido-suelo-radiante.mp4" poster={imgSuelo} label="Vertido de mortero autonivelante sobre suelo radiante con niveladores PIKO" />
+          <span class="clip-cap"><span class="chip chip--sand">PIKO</span> Suelo radiante <span class="arrow-link">Ver</span></span>
+        </a>
+        <a class="clip" href={PRODUCTOS.universal.url} data-reveal style="--d:.1s">
+          <AutoVideo src="/videos/universal-vertido-recrecido.mp4" poster={imgUniVertido} label="Vertido de mortero autonivelante en un recrecido con Niveladores Universales" />
+          <span class="clip-cap"><span class="chip chip--sand">Universal</span> Recrecidos <span class="arrow-link">Ver</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- NOVEDADES -->
   <section class="section">
     <div class="container split">
       <div class="nov-media" data-reveal>
-        <Image src={imgDetalle} alt="PIKO clavado en placa de suelo radiante con su anilla a la altura del vertido" widths={[600, 1100]} sizes="(min-width: 960px) 560px, 92vw" class="nov-img" />
+        <Image src={imgDetalle} alt="Detalle de la anilla verde lima con aditivo de fibra sobre el fuste azul del PIKO" widths={[600, 1100]} sizes="(min-width: 960px) 560px, 92vw" class="nov-img" />
         <Image src={imgSello} alt="Producto patentado" widths={[200, 400]} sizes="140px" class="nov-sello" />
       </div>
       <div data-reveal>
@@ -230,10 +256,23 @@ const steps = [
   .rel { position: relative; }
   /* Hero */
   .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; padding: calc(var(--header-h) + 60px) 0 clamp(56px, 8vw, 96px); }
-  .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 80% center; animation: heroZoom 18s var(--ease) both; }
-  .hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(18,18,17,.96) 0%, rgba(18,18,17,.82) 38%, rgba(18,18,17,.15) 75%), linear-gradient(0deg, rgba(18,18,17,.9) 0%, rgba(18,18,17,0) 45%); }
+  .hero-bg, .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 75% center; }
+  .hero-video :global(video) { object-position: 70% center; background: transparent; }
+  @media (min-width: 960px) {
+    .hero { background: #050505; }
+    .hero-bg, .hero-video { inset: auto 0 auto auto; top: 50%; width: min(72%, 1180px); height: auto; aspect-ratio: 16 / 9; transform: translateY(-46%); -webkit-mask-image: radial-gradient(ellipse 62% 60% at 60% 56%, #000 48%, transparent 100%); mask-image: radial-gradient(ellipse 62% 60% at 60% 56%, #000 48%, transparent 100%); }
+    .hero-bg, .hero-video :global(video) { object-position: center; }
+    .hero-shade { background: linear-gradient(0deg, rgba(18,18,17,.85) 0%, rgba(18,18,17,0) 40%) !important; }
+  }
+  .hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(18,18,17,.92) 0%, rgba(18,18,17,.6) 38%, rgba(18,18,17,0) 62%), linear-gradient(0deg, rgba(18,18,17,.85) 0%, rgba(18,18,17,0) 40%); }
   .hero-in { position: relative; z-index: 1; }
-  @media (max-width: 959px) { .hero-shade { background: linear-gradient(0deg, rgba(18,18,17,.95) 0%, rgba(18,18,17,.78) 55%, rgba(18,18,17,.55) 100%); } }
+  @media (max-width: 959px) {
+    .hero { align-items: flex-start; padding-bottom: 46vh; background: #050505; }
+    .hero-bg, .hero-video { inset: auto 0 0 0; top: auto; height: 50vh; -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 32%); mask-image: linear-gradient(180deg, transparent 0%, #000 32%); }
+    .hero-bg, .hero-video :global(video) { object-position: 62% center; }
+    .scroll { display: none; }
+  }
+  @media (max-width: 959px) { .hero-shade { display: none; } }
   .hero h1 { max-width: 15ch; font-size: clamp(2.6rem, 6.4vw, 5.6rem); }
   .hero .lead { max-width: 560px; color: var(--on-dark); }
   .hero .stats { max-width: 720px; margin-top: clamp(36px, 5vw, 64px); }
@@ -278,7 +317,14 @@ const steps = [
 
   /* Cómo funciona */
   .how { overflow: hidden; }
-  .how-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .35; }
+  .how-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .45; }
+  .film-grid { display: grid; gap: 18px; }
+  @media (min-width: 860px) { .film-grid { grid-template-columns: 1fr 1fr; } }
+  .clip { position: relative; display: block; border-radius: var(--radius-xl); overflow: hidden; aspect-ratio: 16 / 10; text-decoration: none; border: 1px solid var(--line-dark); }
+  .clip :global(video) { transition: transform 1.2s var(--ease); }
+  .clip:hover :global(video) { transform: scale(1.04); }
+  .clip-cap { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px; padding: 60px 22px 20px; color: var(--white); font-weight: 500; background: linear-gradient(0deg, rgba(0,0,0,.75), transparent); }
+  .clip-cap .arrow-link { margin-left: auto; }
   .how-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,18,17,.9), rgba(18,18,17,.7) 50%, rgba(18,18,17,.95)); }
 
   /* Novedades */

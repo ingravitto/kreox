@@ -1,0 +1,231 @@
+---
+// "Cómo funciona" interactivo: corte técnico en SVG que se anima paso a paso.
+// Paso 1: se coloca el nivelador · 2: el láser marca la cota · 3: la anilla se ajusta · 4: se vierte el mortero y se retira.
+// Se controla con el scroll (escritorio), con los botones de paso o con "Ver animación". Sin librerías.
+interface Props {
+  kind: 'piko' | 'universal';
+  steps: { title: string; text: string }[];
+}
+const { kind, steps } = Astro.props;
+const isPiko = kind === 'piko';
+const ground = isPiko ? 300 : 306; // cota del soporte (aislamiento o forjado)
+const laserY = 214;
+const mortarH = ground - laserY;
+const uid = `cf-${kind}`;
+---
+<div class="cf" data-cf data-step="0" id={uid}>
+  <div class="stage" aria-hidden="true">
+    <div class="stage-in">
+      <svg viewBox="0 0 640 420" role="img">
+        <defs>
+          <linearGradient id={`${uid}-mortar`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#b9b7b1" />
+            <stop offset="0.08" stop-color="#9e9c96" />
+            <stop offset="1" stop-color="#7d7b76" />
+          </linearGradient>
+          <linearGradient id={`${uid}-slab`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#5a5955" />
+            <stop offset="1" stop-color="#3b3a37" />
+          </linearGradient>
+          <pattern id={`${uid}-hatch`} width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="10" stroke="rgba(255,255,255,.06)" stroke-width="2" />
+          </pattern>
+          <pattern id={`${uid}-dash`} width="24" height="3" patternUnits="userSpaceOnUse">
+            <rect width="10" height="3" fill="rgba(255,255,255,.55)"><animate attributeName="x" from="0" to="24" dur="0.9s" repeatCount="indefinite" /></rect>
+          </pattern>
+          <filter id={`${uid}-glow`} x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Soporte -->
+        <rect x="0" y={isPiko ? 340 : ground} width="640" height={isPiko ? 80 : 420 - ground} fill={`url(#${uid}-slab)`} />
+        <rect x="0" y={isPiko ? 340 : ground} width="640" height={isPiko ? 80 : 420 - ground} fill={`url(#${uid}-hatch)`} />
+        {isPiko && (
+          <g class="insul">
+            <rect x="0" y={ground} width="640" height="40" fill="#1d1d1c" />
+            {Array.from({ length: 16 }).map((_, i) => <rect x={i * 40 + 6} y={ground - 14} width="28" height="16" rx="3" fill="#2a2a28" />)}
+            {Array.from({ length: 8 }).map((_, i) => <circle cx={i * 80 + 40 + (i % 2 ? 0 : 0)} cy={ground - 6} r="7" fill="#b3322a" />)}
+            <text x="16" y={ground + 28} class="lbl dim">Placa de aislamiento · suelo radiante</text>
+          </g>
+        )}
+        {!isPiko && <text x="16" y={ground + 30} class="lbl dim">Forjado / solera existente</text>}
+
+        <!-- Mortero autonivelante -->
+        <g class="mortar">
+          <rect x="0" y={laserY} width="640" height={mortarH} fill={`url(#${uid}-mortar)`} />
+          <rect x="0" y={laserY} width="640" height="3" fill="#d9d7d1" />
+        </g>
+        <text x="16" y={laserY + 30} class="lbl mortar-lbl">Mortero autonivelante</text>
+
+        <!-- Láser -->
+        <g class="laser">
+          <g class="tripod">
+            <line x1="52" y1={laserY + 8} x2="30" y2={ground - 2} />
+            <line x1="52" y1={laserY + 8} x2="74" y2={ground - 2} />
+            <line x1="52" y1={laserY + 8} x2="52" y2={ground - 2} />
+            <rect x="36" y={laserY - 18} width="32" height="26" rx="5" />
+          </g>
+          <rect class="beam" x="70" y={laserY - 1.5} width="570" height="3" rx="1.5" fill="#ff3b2f" filter={`url(#${uid}-glow)`} />
+          <rect class="beam-dash" x="70" y={laserY - 1.5} width="570" height="3" fill={`url(#${uid}-dash)`} />
+          <text x="86" y={laserY - 12} class="lbl laser-lbl">Cota de acabado (láser)</text>
+        </g>
+
+        <!-- Nivelador -->
+        <g class="lev">
+          <g class="lev-body">
+            {isPiko ? (
+              <>
+                <rect x="312" y="96" width="16" height={ground - 96} rx="3" fill="#1f6fd1" />
+                <rect x="318" y="96" width="4" height={ground - 96} fill="#1756a8" />
+                <rect x="290" y={ground - 6} width="60" height="7" rx="3" fill="#1f6fd1" />
+                <path d={`M313 ${ground + 1} L327 ${ground + 1} L320 ${ground + 24} Z`} fill="#1756a8" />
+              </>
+            ) : (
+              <>
+                <rect x="312" y="100" width="16" height={ground - 112} rx="3" fill="#1f6fd1" />
+                <rect x="318" y="100" width="4" height={ground - 112} fill="#1756a8" />
+                <path d={`M282 ${ground} L292 ${ground - 16} L348 ${ground - 16} L358 ${ground} Z`} fill="#c8e11d" />
+                <rect x="296" y={ground - 18} width="48" height="4" rx="2" fill="#2a2a28" />
+              </>
+            )}
+            <g class="ring">
+              <rect x="294" y={laserY - 4} width="52" height="8" rx="3" fill="#c8e11d" />
+              <rect x="309" y={laserY - 9} width="22" height="6" rx="2" fill="#c8e11d" />
+            </g>
+          </g>
+        </g>
+
+        <!-- Indicadores -->
+        <g class="ok">
+          <rect x="430" y="120" width="180" height="44" rx="22" fill="#121211" stroke="#c7b29a" />
+          <text x="520" y="148" text-anchor="middle" class="lbl ok-lbl">✓ Superficie nivelada</text>
+        </g>
+        <g class="adjust">
+          <path d="M366 168 L366 204" stroke="#c7b29a" stroke-width="2" marker-end="" />
+          <path d="M360 196 L366 206 L372 196" fill="none" stroke="#c7b29a" stroke-width="2" />
+          <text x="380" y="190" class="lbl sand-lbl">Ajusta la anilla</text>
+        </g>
+      </svg>
+      <div class="hud">
+        <span class="hud-step"><b data-cf-num>1</b> / {steps.length}</span>
+        <span class="hud-title" data-cf-title>{steps[0].title}</span>
+      </div>
+    </div>
+  </div>
+
+  <ol class="list">
+    {steps.map((s, i) => (
+      <li data-cf-item={i + 1}>
+        <button type="button" data-cf-go={i + 1}>
+          <span class="n">{String(i + 1).padStart(2, '0')}</span>
+          <span class="t"><strong>{s.title}</strong><span>{s.text}</span></span>
+        </button>
+      </li>
+    ))}
+  </ol>
+  <button type="button" class="btn btn--dark play" data-cf-play>
+    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="currentColor"/></svg>
+    Ver animación completa
+  </button>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-cf]').forEach((root) => {
+    const items = [...root.querySelectorAll<HTMLElement>('[data-cf-item]')];
+    const num = root.querySelector<HTMLElement>('[data-cf-num]')!;
+    const title = root.querySelector<HTMLElement>('[data-cf-title]')!;
+    let timer: number | undefined;
+    const set = (n: number) => {
+      root.dataset.step = String(n);
+      items.forEach((it) => it.classList.toggle('on', Number(it.dataset.cfItem) === n));
+      num.textContent = String(Math.max(1, n));
+      const cur = items[Math.max(0, n - 1)];
+      title.textContent = cur?.querySelector('strong')?.textContent ?? '';
+    };
+    root.querySelectorAll<HTMLButtonElement>('[data-cf-go]').forEach((b) =>
+      b.addEventListener('click', () => { window.clearInterval(timer); set(Number(b.dataset.cfGo)); }),
+    );
+    root.querySelector('[data-cf-play]')?.addEventListener('click', () => {
+      window.clearInterval(timer);
+      let n = 1; set(n);
+      timer = window.setInterval(() => { n += 1; if (n > items.length) { window.clearInterval(timer); return; } set(n); }, 2600);
+    });
+    // En escritorio el paso sigue al scroll; en móvil arranca la animación al entrar en pantalla.
+    const desktop = window.matchMedia('(min-width: 960px)').matches;
+    if (desktop) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { window.clearInterval(timer); set(Number((e.target as HTMLElement).dataset.cfItem)); } });
+      }, { rootMargin: '-45% 0px -45% 0px' });
+      items.forEach((it) => io.observe(it));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) { io.disconnect(); (root.querySelector('[data-cf-play]') as HTMLButtonElement)?.click(); }
+      }, { threshold: 0.4 });
+      io.observe(root.querySelector('.stage')!);
+    }
+    set(1);
+  });
+</script>
+
+<style>
+  .cf { display: grid; gap: 28px; }
+  @media (min-width: 960px) { .cf { grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: start; } }
+  .stage { position: relative; }
+  @media (min-width: 960px) { .stage { position: sticky; top: calc(var(--header-h) + 28px); grid-row: span 2; } }
+  .stage-in { position: relative; border-radius: var(--radius-xl); overflow: hidden; background: radial-gradient(ellipse at 50% 0%, #2a2a28, #121211 70%); border: 1px solid var(--line-dark); }
+  svg { display: block; width: 100%; height: auto; }
+  .lbl { font: 600 11px/1 var(--font); letter-spacing: .14em; text-transform: uppercase; }
+  .dim { fill: rgba(255,255,255,.45); }
+  .mortar-lbl { fill: #2b2a27; opacity: 0; transition: opacity .6s .9s; }
+  .laser-lbl { fill: #ff6b5b; }
+  .sand-lbl { fill: #c7b29a; }
+  .ok-lbl { fill: #c7b29a; font-size: 12px; }
+  .tripod line { stroke: #8f8c85; stroke-width: 3; stroke-linecap: round; }
+  .tripod rect { fill: #e2a400; stroke: #121211; stroke-width: 2; }
+
+  /* Estado inicial */
+  .lev { transform: translateY(-190px); opacity: 0; transition: transform .9s var(--ease), opacity .5s; }
+  .ring { transform: translateY(-46px); transition: transform 1s var(--ease); }
+  .laser { opacity: 0; transition: opacity .6s; }
+  .laser .beam, .laser .beam-dash { transform-box: fill-box; transform-origin: left center; transform: scaleX(0); transition: transform 1.1s var(--ease) .2s; }
+  .mortar { transform-box: fill-box; transform-origin: bottom; transform: scaleY(0); transition: transform 1.6s var(--ease); }
+  .ok, .adjust { opacity: 0; transition: opacity .5s; }
+
+  /* Paso 1: colocar */
+  [data-step='1'] .lev, [data-step='2'] .lev, [data-step='3'] .lev, [data-step='4'] .lev { transform: none; opacity: 1; }
+  /* Paso 2: láser */
+  [data-step='2'] .laser, [data-step='3'] .laser, [data-step='4'] .laser { opacity: 1; }
+  [data-step='2'] .laser :is(.beam, .beam-dash), [data-step='3'] .laser :is(.beam, .beam-dash), [data-step='4'] .laser :is(.beam, .beam-dash) { transform: scaleX(1); }
+  /* Paso 3: anilla a la cota */
+  [data-step='3'] .ring, [data-step='4'] .ring { transform: none; }
+  [data-step='3'] .adjust { opacity: 1; }
+  /* Paso 4: verter y retirar */
+  [data-step='4'] .mortar { transform: scaleY(1); }
+  [data-step='4'] .mortar-lbl { opacity: 1; }
+  [data-step='4'] .lev { animation: lift 1s var(--ease) 2.1s forwards; }
+  [data-step='4'] .ok { opacity: 1; transition-delay: 2.6s; }
+  [data-step='4'] .laser { opacity: .35; transition-delay: 1.6s; }
+  @keyframes lift { to { transform: translateY(-220px); opacity: 0; } }
+
+  .hud { position: absolute; left: 16px; top: 16px; display: flex; align-items: center; gap: 12px; padding: 8px 14px 8px 8px; border-radius: 999px; background: rgba(18,18,17,.75); backdrop-filter: blur(6px); border: 1px solid var(--line-dark); color: var(--white); font-size: .82rem; }
+  .hud-step { display: inline-flex; align-items: center; justify-content: center; gap: 3px; white-space: nowrap; min-width: 58px; padding: 0 10px; height: 30px; border-radius: 999px; background: var(--sand); color: var(--ink); font-size: .75rem; letter-spacing: .08em; }
+  .hud-step b { font-weight: 700; }
+
+  .list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+  @media (min-width: 960px) { .list li { min-height: 34vh; display: flex; align-items: center; } .list li:last-child { min-height: 30vh; } }
+  .list button { all: unset; box-sizing: border-box; cursor: pointer; display: flex; gap: 20px; width: 100%; padding: 22px 0; border-top: 1px solid var(--line); opacity: .45; transition: opacity .35s; }
+  .list li.on button, .list button:hover { opacity: 1; }
+  .list button:focus-visible { outline: 2px solid var(--sand); outline-offset: 4px; }
+  .n { flex: none; width: 46px; height: 46px; border-radius: 50%; display: grid; place-content: center; border: 1px solid var(--line); font-weight: 600; font-size: .8rem; letter-spacing: .1em; color: var(--sand-strong); transition: background .35s, color .35s, border-color .35s; }
+  .list li.on .n { background: var(--ink); color: var(--sand); border-color: var(--ink); }
+  .t strong { display: block; font-size: clamp(1.15rem, 1.8vw, 1.45rem); font-weight: 600; color: var(--ink); letter-spacing: -0.01em; margin-bottom: 6px; }
+  .t span { color: var(--text-soft); font-size: .97rem; line-height: 1.6; }
+  .play { justify-self: start; }
+  .play svg { width: 12px; height: 12px; }
+  @media (min-width: 960px) { .play { grid-column: 2; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-step='4'] .lev { animation: none; }
+  }
+</style>

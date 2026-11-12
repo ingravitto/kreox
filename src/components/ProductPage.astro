@@ -1,18 +1,19 @@
 ---
 // Plantilla de ficha de nivelador (PIKO / Nivelador Universal), con el estilo de kreox.es:
 // hero oscuro con foto de obra, plano técnico con cotas sobre gris claro, pasos, comparativa, recambios y FAQ.
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import Base from '../layouts/Base.astro';
 import PageHero from './PageHero.astro';
 import Marquee from './Marquee.astro';
-import Steps from './Steps.astro';
+import ComoFunciona from './ComoFunciona.astro';
+import AutoVideo from './AutoVideo.astro';
 import CompareTripode from './CompareTripode.astro';
 import WeightBars from './WeightBars.astro';
 import Calculadora from './Calculadora.astro';
 import Faq from './Faq.astro';
 import CtaTarifa from './CtaTarifa.astro';
-import { NIVELACION } from '../data/site';
+import { NIVELACION, SITE } from '../data/site';
 
 interface Props {
   kind: 'piko' | 'universal';
@@ -24,6 +25,7 @@ interface Props {
   steps: { title: string; text: string }[];
   stepsMedia: { img: ImageMetadata; alt: string }[];
   video?: { src: string; poster: string; text: string };
+  film?: { src: string; poster: ImageMetadata; label: string; title: string; accent: string };
   gallery?: { img: ImageMetadata; alt: string; caption: string; good: boolean }[];
   parts: { img: ImageMetadata; alt: string; name: string; caja: string }[];
   other: { name: string; text: string; href: string; img: ImageMetadata; alt: string };
@@ -34,8 +36,23 @@ interface Props {
 }
 const p = Astro.props;
 const url = p.kind === 'piko' ? `${NIVELACION}piko/` : `${NIVELACION}nivelador-universal/`;
+const filmThumb = p.film ? await getImage({ src: p.film.poster, width: 1280, format: 'jpeg' }) : undefined;
+const schema = [
+  ...p.seo.schema,
+  ...(p.film && filmThumb
+    ? [{
+        '@type': 'VideoObject',
+        name: `${p.name}: vertido de mortero autonivelante`,
+        description: p.film.label,
+        thumbnailUrl: new URL(filmThumb.src, SITE.url).href,
+        contentUrl: new URL(p.film.src, SITE.url).href,
+        uploadDate: '2026-11-12',
+        publisher: { '@id': `${SITE.url}/#organization` },
+      }]
+    : []),
+];
 ---
-<Base title={p.seo.title} description={p.seo.description} ogType="product" image={p.seo.image} overlay breadcrumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }, { name: p.name, url }]} schema={p.seo.schema}>
+<Base title={p.seo.title} description={p.seo.description} ogType="product" image={p.seo.image} overlay breadcrumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }, { name: p.name, url }]} schema={schema}>
   <PageHero eyebrow={p.hero.eyebrow} title={p.hero.title} accent={p.hero.accent} lead={p.hero.lead} bg={p.hero.bg} bgAlt={p.hero.bgAlt} product={p.hero.product} productAlt={p.hero.productAlt} crumbs={[{ name: 'Nivelación', url: NIVELACION }, { name: p.name, url }]}>
     <div class="chips hero-chips"><span class="chip chip--sand">Producto patentado</span><span class="chip">Fabricado en España</span><span class="chip">Reutilizable</span></div>
     <div class="btn-row">
@@ -75,10 +92,11 @@ const url = p.kind === 'piko' ? `${NIVELACION}piko/` : `${NIVELACION}nivelador-u
   <section class="section" id="como-se-usa">
     <div class="container">
       <div class="section-head" data-reveal>
-        <span class="eyebrow">Modo de uso</span>
-        <h2>Clava o apoya, marca, ajusta y vierte.</h2>
+        <span class="eyebrow">Cómo funciona</span>
+        <h2>Así nivela {p.name}, <span class="sand">paso a paso.</span></h2>
+        <p>Pulsa cada paso o baja con el scroll y verás el proceso en un corte de la obra.</p>
       </div>
-      <Steps steps={p.steps} />
+      <ComoFunciona kind={p.kind} steps={p.steps} />
       <div class:list={['media-row', { 'with-video': !!p.video }]}>
         {p.stepsMedia.map((m) => <div class="m" data-reveal><Image src={m.img} alt={m.alt} widths={[600, 1000, 1477]} sizes="(min-width: 960px) 600px, 92vw" /></div>)}
         {p.video && (
@@ -93,6 +111,17 @@ const url = p.kind === 'piko' ? `${NIVELACION}piko/` : `${NIVELACION}nivelador-u
       </div>
     </div>
   </section>
+
+  {p.film && (
+    <section class="filmband">
+      <AutoVideo src={p.film.src} poster={p.film.poster} label={p.film.label} />
+      <div class="filmshade" aria-hidden="true"></div>
+      <div class="container filmcopy on-dark" data-reveal>
+        <span class="eyebrow">En obra</span>
+        <h2>{p.film.title} <span class="sand">{p.film.accent}</span></h2>
+      </div>
+    </section>
+  )}
 
   <Marquee dark items={['Sin óxido', 'Reutilizable', 'Láser habitual o con receptor', 'Anilla visual de nivel', 'Recambios por piezas', 'Producto patentado']} />
 
@@ -162,6 +191,11 @@ const url = p.kind === 'piko' ? `${NIVELACION}piko/` : `${NIVELACION}nivelador-u
 
 <style>
   .hero-chips { margin-top: 26px; }
+  .filmband { position: relative; min-height: min(80vh, 760px); display: flex; align-items: flex-end; overflow: hidden; background: #000; }
+  .filmband :global(video) { position: absolute; inset: 0; }
+  .filmshade { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(18,18,17,.92) 0%, rgba(18,18,17,.2) 50%, rgba(18,18,17,0) 100%); }
+  .filmcopy { position: relative; padding-block: clamp(48px, 7vw, 96px); }
+  .filmcopy h2 { color: var(--white); max-width: 16ch; }
   .kpis { background: var(--ink); border-top: 1px solid var(--line-dark); }
   .kpis dl { display: grid; grid-template-columns: repeat(2, 1fr); margin: 0; }
   @media (min-width: 760px) { .kpis dl { grid-template-columns: repeat(4, 1fr); } }
