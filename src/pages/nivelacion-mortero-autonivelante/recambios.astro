@@ -4,8 +4,9 @@ import imgHeroBg from '../../assets/img/hero-productos-kreox.jpg';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import CtaTarifa from '../../components/CtaTarifa.astro';
+import Faq from '../../components/Faq.astro';
 import { NIVELACION } from '../../data/site';
-import { productSchema } from '../../data/schema';
+import { productSchema, faqSchema } from '../../data/schema';
 import imgArandela from '../../assets/img/arandela-niveladora-recambio.png';
 import imgBase from '../../assets/img/base-niveladora-universal-recambio.png';
 import imgAnilla from '../../assets/img/anilla-metalica-niveladora-universal.png';
@@ -16,14 +17,23 @@ const items = [
   { id: 'base-niveladora-universal', name: 'Base niveladora universal', img: imgBase, para: 'Nivelador Universal', caja: 40, alt: 'Base niveladora universal verde lima de recambio', text: 'Base plana y reforzada que da estabilidad al Nivelador Universal sobre cualquier superficie. Más dura y resistente durante el fraguado.' },
   { id: 'anilla-metalica-niveladora-universal', name: 'Anilla metálica niveladora universal', img: imgAnilla, para: 'Nivelador Universal', caja: 40, alt: 'Anilla metálica niveladora universal de recambio', text: 'Pieza metálica de la base del Nivelador Universal, disponible como recambio para alargar la vida del sistema.' },
 ];
+// FAQ construidas solo con los datos de esta página (piezas, compatibilidad y cajas) y las reglas de tarifa.
+const [arandela, base, anilla] = items;
+const faqs = [
+  { q: '¿Qué recambios hay para los niveladores KREOX?', a: `Tres piezas: la ${arandela.name.toLowerCase()} (para ${arandela.para}), la ${base.name.toLowerCase()} y la ${anilla.name.toLowerCase()} (las dos para el ${base.para}).` },
+  { q: '¿Qué recambio lleva el PIKO?', a: `La ${arandela.name.toLowerCase()}, que es la pieza que marca la altura del mortero. La versión 2026 lleva aditivo de fibra y un color más visible en obra.` },
+  { q: '¿Por qué comprar recambios y no niveladores nuevos?', a: 'Porque los niveladores son reutilizables: se retiran tras el vertido, se limpian y se vuelven a usar. Si una pieza se desgasta, se cambia solo esa pieza.' },
+  { q: '¿Cómo se venden los recambios?', a: `En cajas: ${arandela.name.toLowerCase()}, ${arandela.caja} unidades; ${base.name.toLowerCase()}, ${base.caja} unidades; ${anilla.name.toLowerCase()}, ${anilla.caja} unidades.` },
+  { q: '¿Cómo consigo el precio de los recambios?', a: 'Escríbenos por WhatsApp y te enviamos la tarifa 2027 con los precios de niveladores y recambios.' },
+];
 const schema = items.map((it) =>
   productSchema({ id: `${url}#${it.id}`, name: it.name, description: `${it.text} Recambio para ${it.para}. Caja de ${it.caja} unidades.`, images: [it.img.src], props: [['Compatible con', it.para], ['Presentación', `Caja de ${it.caja} unidades`]] }),
-);
+).concat([faqSchema(faqs)]);
 ---
 <Base
   overlay
   title="Recambios para niveladores de mortero autonivelante | KREOX"
-  description="Arandela niveladora, base y anilla metálica de recambio para los niveladores PIKO y Universal de KREOX. Cambia solo la pieza gastada y alarga la vida del sistema."
+  description="Recambios para PIKO y Nivelador Universal: arandela niveladora, base y anilla metálica. Cambia solo la pieza gastada y alarga la vida del sistema."
   breadcrumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }, { name: 'Recambios', url }]}
   schema={schema}
 >
@@ -75,6 +85,7 @@ const schema = items.map((it) =>
     </div>
   </section>
 
+  <Faq faqs={faqs} title="Preguntas sobre recambios" />
   <CtaTarifa title="Pide recambios" text="Pide por WhatsApp la tarifa 2027 de recambios y te los enviamos con tu próximo pedido." />
 </Base>
 <style>

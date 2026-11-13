@@ -3,9 +3,14 @@
 // no arranca con "reducir movimiento" y tiene botón de pausa (WCAG 2.2.2).
 import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
+import { existsSync } from 'node:fs';
 interface Props { src: string; poster: ImageMetadata; label: string; class?: string; eager?: boolean }
 const { src, poster, label, class: cls } = Astro.props;
-const p = await getImage({ src: poster, width: 1920, format: 'webp', quality: 72 });
+const p = await getImage({ src: poster, width: Math.min(1600, poster.width), format: 'webp', quality: 68 });
+const pSm = await getImage({ src: poster, width: Math.min(720, poster.width), format: 'webp', quality: 62 });
+// Si existe public/videos/<nombre>-m.mp4 (854 px), el móvil descarga esa versión ligera.
+const srcMobile = src.replace(/\.mp4$/, '-m.mp4');
+const hasMobile = existsSync(new URL(`../../public${srcMobile}`, import.meta.url));
 ---
 <div class="avw" data-autovideo-wrap>
   <video
@@ -16,10 +21,12 @@ const p = await getImage({ src: poster, width: 1920, format: 'webp', quality: 72
     playsinline
     preload="none"
     data-poster={p.src}
+    data-poster-sm={pSm.src}
     aria-label={label}
     width={poster.width}
     height={poster.height}
   >
+    {hasMobile && <source src={srcMobile} type="video/mp4" media="(max-width: 767px)" />}
     <source src={src} type="video/mp4" />
   </video>
   <button type="button" class="av-toggle" data-av-toggle aria-label="Pausar vídeo" aria-pressed="false">
@@ -47,7 +54,7 @@ const p = await getImage({ src: poster, width: 1920, format: 'webp', quality: 72
     v.addEventListener('click', () => btn.click());
     // El póster se carga solo cuando el vídeo se acerca a la pantalla (no compite con la carga inicial).
     const near = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { if (v.dataset.poster) v.poster = v.dataset.poster; near.disconnect(); }
+      if (e.isIntersecting) { const sm = window.matchMedia('(max-width: 767px)').matches && v.dataset.posterSm; const ps = sm || v.dataset.poster; if (ps) v.poster = ps; near.disconnect(); }
     }, { rootMargin: '600px 0px' });
     near.observe(v);
     const io = new IntersectionObserver(([e]) => {

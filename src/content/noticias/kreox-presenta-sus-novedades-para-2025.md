@@ -1,7 +1,7 @@
 ---
 seoTitle: 'Novedades KREOX 2025: niveladores para autonivelante'
 title: 'KREOX presenta sus novedades para 2025: avances en pavimentación con mortero autonivelante'
-description: 'KREOX lanza en 2025 el PIKO y el Nivelador Universal, niveladores para pavimentación con mortero autonivelante más ágiles y precisos que los sistemas tradicionales.'
+description: 'KREOX lanza en 2025 el PIKO y el Nivelador Universal: niveladores para mortero autonivelante más ágiles y precisos que los sistemas tradicionales.'
 date: 2025-01-09
 category: nivelacion
 products: [piko, universal]

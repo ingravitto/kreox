@@ -9,6 +9,8 @@ import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 import InViewVideos from '../components/InViewVideos.astro';
 import f400 from '@fontsource/poppins/files/poppins-latin-400-normal.woff2?url';
 import f600 from '@fontsource/poppins/files/poppins-latin-600-normal.woff2?url';
+import f300 from '@fontsource/poppins/files/poppins-latin-300-normal.woff2?url';
+import f500 from '@fontsource/poppins/files/poppins-latin-500-normal.woff2?url';
 import { SITE } from '../data/site';
 import { organizationSchema, websiteSchema, breadcrumbSchema } from '../data/schema';
 
@@ -46,6 +48,8 @@ const graph = [organizationSchema(), websiteSchema(), ...(crumbs ? [breadcrumbSc
     <meta name="theme-color" content="#121211" />
     <link rel="preload" href={f600} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={f400} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={f300} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={f500} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="alternate" type="application/rss+xml" title="Noticias KREOX" href="/noticias/rss.xml" />
     <script is:inline>document.documentElement.classList.replace('no-js', 'js');</script>

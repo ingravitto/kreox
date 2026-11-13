@@ -30,7 +30,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     slug: 'kalzo-separador',
     name: 'Kalzo Separador',
     title: 'Kalzo Separador para nivelación de baldosas | KREOX',
-    description: 'Kalzo Separador KREOX: rotura limpia por el punto previsto, compatible con todas las kuñas del mercado. Juntas de 0,5 a 3 mm. Fabricado en España con material reciclado.',
+    description: 'Kalzo Separador KREOX: rotura limpia por el punto previsto y compatible con todas las kuñas del mercado. Juntas de 0,5 a 3 mm. Material reciclado.',
     img: kalzo,
     alt: 'Kalzos separadores KREOX de varios colores según grosor de junta',
     intro: 'Diseñado y fabricado para facilitar y garantizar la colocación de baldosas cerámicas, de pequeño o gran formato, de forma ágil y eficiente.',

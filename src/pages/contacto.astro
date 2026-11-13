@@ -4,12 +4,24 @@ import imgHeroBg from '../assets/img/fondo-piedra-productos-kreox.jpg';
 import Base from '../layouts/Base.astro';
 import { SITE, waTarifa } from '../data/site';
 import WaIcon from '../components/WaIcon.astro';
+import Faq from '../components/Faq.astro';
+import { faqSchema } from '../data/schema';
+
+// Preguntas de contacto: solo datos de site.ts y las reglas de tarifa (por WhatsApp).
+const faqs = [
+  { q: '¿Cómo consigo la tarifa 2027 de KREOX?', a: `Escríbenos por WhatsApp al ${SITE.whatsappDisplay} y te enviamos la tarifa 2027. La tarifa se pide solo por WhatsApp.` },
+  { q: '¿Puedo pedir solo la tarifa de niveladores para mortero autonivelante?', a: 'Sí. Indícanos en el mensaje si te interesan los niveladores PIKO y Universal, los recambios o el sistema de colocación de azulejos y te asesoramos sobre lo que necesitas para tu obra.' },
+  { q: '¿A quién escribo para distribución o exportación?', a: `Para distribución y exportación escribe a ${SITE.emailExport}. Para el resto de consultas comerciales, a ${SITE.email}.` },
+  { q: '¿Dónde está KREOX?', a: `En ${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.city} (${SITE.address.region}), donde diseñamos y fabricamos nuestros productos.` },
+  { q: '¿Para qué sirve el formulario de contacto?', a: 'Para consultas técnicas y cualquier otra pregunta que no sea la tarifa. Te responde nuestro departamento comercial.' },
+];
 ---
 <Base
   overlay
   title="Contacto y tarifa 2027 por WhatsApp | KREOX"
   description="Pide la tarifa 2027 de KREOX por WhatsApp (+34 611 87 50 47) o escribe a nuestro departamento comercial: comercial@kreox.es."
   breadcrumbs={[{ name: 'Contacto', url: '/contacto/' }]}
+  schema={[faqSchema(faqs)]}
 >
   <PageHero
     compact
@@ -98,6 +110,7 @@ import WaIcon from '../components/WaIcon.astro';
       </form>
     </div>
   </section>
+  <Faq faqs={faqs} title="Preguntas sobre contacto y tarifa" />
 </Base>
 <script>
   const form = document.querySelector<HTMLFormElement>('[data-form]')!;

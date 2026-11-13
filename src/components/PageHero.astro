@@ -18,7 +18,7 @@ interface Props {
 const { eyebrow, title, accent, lead, crumbs, bg, bgAlt = '', product, productAlt = '', compact = false } = Astro.props;
 ---
 <section class:list={['phero section--dark grain', { compact, 'has-product': !!product }]}>
-  {bg && <Image src={bg} alt={bgAlt} widths={[960, 1600, 1920]} sizes="100vw" class="bg" loading="eager" fetchpriority="high" />}
+  {bg && <Image src={bg} alt={bgAlt} widths={[640, 960, 1600, 1920]} sizes="100vw" quality={58} class="bg" loading="eager" fetchpriority="high" />}
   <div class="shade" aria-hidden="true"></div>
   <div class="container inner">
     <div class="copy on-dark">

@@ -14,6 +14,8 @@ import Calculadora from './Calculadora.astro';
 import Faq from './Faq.astro';
 import CtaTarifa from './CtaTarifa.astro';
 import { NIVELACION, SITE, waTarifa } from '../data/site';
+import NoticiaCard from './NoticiaCard.astro';
+import { getNoticias } from '../data/noticias';
 
 interface Props {
   kind: 'piko' | 'universal';
@@ -35,6 +37,8 @@ interface Props {
   name: string;
 }
 const p = Astro.props;
+// Guías y noticias que mencionan este producto (enlazado interno hacia el contenido editorial)
+const guias = (await getNoticias()).filter((n) => n.data.products.includes(p.kind)).slice(0, 3);
 const url = p.kind === 'piko' ? `${NIVELACION}piko/` : `${NIVELACION}nivelador-universal/`;
 const filmThumb = p.film ? await getImage({ src: p.film.poster, width: 1280, format: 'jpeg' }) : undefined;
 const howTo = {
@@ -218,6 +222,14 @@ const schema = [
   </section>
 
   <Faq faqs={p.faqs} title={p.faqTitle} />
+  {guias.length > 0 && (
+    <section class="section section--paper">
+      <div class="container">
+        <div class="section-head"><span class="eyebrow">Guías y noticias</span><h2>Aprende a sacarle partido al {p.name}</h2></div>
+        <div class="grid grid-3">{guias.map((g) => <NoticiaCard n={g} />)}</div>
+      </div>
+    </section>
+  )}
   <CtaTarifa title={p.cta.title} text={p.cta.text} />
 </Base>
 

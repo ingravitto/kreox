@@ -123,6 +123,10 @@ RewriteRule ^xmlrpc\.php$ - [F,L]
   <FilesMatch "\.(webp|woff2|css|js)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
+  # Vídeos, pósteres e imágenes sin hash: 30 días (el nombre cambia si se reemplaza el archivo)
+  <FilesMatch "\.(mp4|jpg|jpeg|png|svg|ico)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
 </IfModule>
 
 <IfModule mod_deflate.c>

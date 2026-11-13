@@ -8,6 +8,10 @@ import { NIVELACION, AZULEJOS, SITE } from '../data/site';
 import imgFabrica from '../assets/img/hero-productos-kreox.jpg';
 import SelloPatentado from '../components/SelloPatentado.astro';
 import EneIcon from '../components/EneIcon.astro';
+import NoticiaCard from '../components/NoticiaCard.astro';
+import { getNoticias } from '../data/noticias';
+
+const noticias = (await getNoticias()).filter((n) => n.data.category === 'empresa' || n.data.category === 'comunidad').slice(0, 3);
 ---
 <Base
   overlay
@@ -59,10 +63,41 @@ import EneIcon from '../components/EneIcon.astro';
       </div>
     </div>
   </section>
+  <section class="section section--paper">
+    <div class="container split split--top">
+      <div>
+        <span class="eyebrow">Dónde estamos</span>
+        <h2>Fabricamos en Ibi, en la Foia de Castalla (Alicante)</h2>
+        <p>Desde nuestras instalaciones en Ibi diseñamos, fabricamos y enviamos los niveladores para mortero autonivelante y el sistema de colocación de azulejos KREOX. Atendemos a profesionales y distribuidores, y tenemos un contacto específico para distribución y exportación.</p>
+        <p class="muted">KREOX forma parte de AIMPLAS, AIJU e IBIAE, la Asociación de Empresarios de la Foia de Castalla.</p>
+      </div>
+      <address class="card place">
+        <strong>{SITE.legalName}</strong>
+        <span>{SITE.address.street}</span>
+        <span>{SITE.address.postalCode} {SITE.address.city} ({SITE.address.region})</span>
+        <a href={SITE.whatsapp} target="_blank" rel="noopener">WhatsApp {SITE.whatsappDisplay}<span class="visually-hidden"> (se abre en una nueva ventana)</span></a>
+        <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        <a href={`mailto:${SITE.emailExport}`}>Exportación: {SITE.emailExport}</a>
+        <a class="arrow-link" href="/contacto/">Ir a contacto</a>
+      </address>
+    </div>
+  </section>
+  {noticias.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="section-head"><span class="eyebrow">Noticias</span><h2>La vida en KREOX</h2></div>
+        <div class="grid grid-3">{noticias.map((n) => <NoticiaCard n={n} />)}</div>
+      </div>
+    </section>
+  )}
   <CtaTarifa />
 </Base>
 <style>
   .photo { border-radius: var(--radius-xl); width: 100%; }
   .seals { display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: center; background: var(--ink); border-radius: var(--radius); padding: 40px 32px; }
+  .place { display: grid; gap: 6px; font-style: normal; }
+  .place strong { margin-bottom: 4px; }
+  .place a:not(.arrow-link) { color: var(--ink); }
+  .place .arrow-link { margin-top: 10px; }
   .made-badge { display: grid; justify-items: center; gap: 10px; color: var(--white); font-size: .85rem; text-align: center; max-width: 160px; }
 </style>

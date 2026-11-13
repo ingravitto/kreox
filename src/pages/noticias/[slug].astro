@@ -18,7 +18,12 @@ export async function getStaticPaths() {
 const { n, all } = Astro.props as { n: CollectionEntry<'noticias'>; all: CollectionEntry<'noticias'>[] };
 const { Content } = await render(n);
 const url = noticiaUrl(n);
-const related = all.filter((o) => o.id !== n.id && o.data.category === n.data.category).slice(0, 3);
+// Relacionadas: siempre 3. Prioridad: misma categoría, productos en común, y después guías de nivelación (línea principal).
+const score = (o: CollectionEntry<'noticias'>) =>
+  (o.data.category === n.data.category ? 4 : 0) +
+  o.data.products.filter((p) => n.data.products.includes(p)).length * 2 +
+  (o.data.category === 'nivelacion' ? 1 : 0);
+const related = all.filter((o) => o.id !== n.id).map((o, i) => ({ o, s: score(o), i })).sort((x, y) => y.s - x.s || x.i - y.i).slice(0, 3).map((x) => x.o);
 const PRODUCT_LINKS: Record<string, { label: string; href: string }> = {
   piko: { label: 'PIKO · nivelador para suelo radiante', href: `${NIVELACION}piko/` },
   universal: { label: 'Nivelador Universal para recrecidos', href: `${NIVELACION}nivelador-universal/` },
@@ -66,7 +71,7 @@ const schema = [article, ...(n.data.faq.length ? [faqSchema(n.data.faq)] : [])];
   {related.length > 0 && (
     <section class="section section--paper">
       <div class="container">
-        <h2>Más noticias de {CATEGORIAS[n.data.category].toLowerCase()}</h2>
+        <h2>Sigue leyendo</h2>
         <div class="grid grid-3">{related.map((r) => <NoticiaCard n={r} />)}</div>
       </div>
     </section>
