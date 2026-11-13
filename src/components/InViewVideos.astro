@@ -1,6 +1,8 @@
 ---
 // Vídeos con controles (reel, instalación): se reproducen solos y sin sonido al entrar en pantalla,
-// se pausan al salir y ofrecen un botón "Activar sonido". Con "reducir movimiento" no arrancan solos.
+// se pausan al salir y ofrecen un botón "Activar/Quitar sonido". Sin botones de play/pausa visibles:
+// la pausa (WCAG 2.2.2) se hace tocando el vídeo o con el botón que aparece solo con el teclado.
+// Con "reducir movimiento" no arrancan solos.
 // Marcado esperado: <div data-inview-wrap> <video data-inview data-poster="..." muted ...> <button data-unmute> </div>
 ---
 <script>
@@ -23,12 +25,23 @@
       else if (!e.isIntersecting && !v.paused) { auto = true; v.pause(); }
     }, { threshold: 0.35 });
     io.observe(v);
-    const syncSound = () => { if (btn) btn.hidden = !v.muted; };
+    const tg = w.querySelector<HTMLButtonElement>('[data-av-toggle]');
+    const syncPlay = () => {
+      if (!tg) return;
+      tg.setAttribute('aria-label', v.paused ? 'Reproducir vídeo' : 'Pausar vídeo');
+      tg.setAttribute('aria-pressed', String(v.paused));
+      tg.classList.toggle('is-paused', v.paused);
+    };
+    v.addEventListener('play', syncPlay); v.addEventListener('pause', syncPlay); syncPlay();
+    const toggle = () => { if (v.paused) v.play().catch(() => {}); else v.pause(); };
+    tg?.addEventListener('click', toggle);
+    v.addEventListener('click', toggle);
+    const label = btn?.querySelector('span');
+    const syncSound = () => { if (label) label.textContent = v.muted ? 'Activar sonido' : 'Quitar sonido'; btn?.setAttribute('aria-pressed', String(!v.muted)); };
     v.addEventListener('volumechange', syncSound); syncSound();
     btn?.addEventListener('click', () => {
-      v.muted = false; v.volume = 1;
-      if (v.paused) v.play().catch(() => {});
-      v.focus();
+      v.muted = !v.muted;
+      if (!v.muted) { v.volume = 1; if (v.paused) v.play().catch(() => {}); }
     });
   });
 </script>

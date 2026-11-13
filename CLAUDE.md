@@ -26,7 +26,8 @@ Las URLs de la web WordPress anterior se redirigen en `public/.htaccess`. Si cam
 ## Accesibilidad y rendimiento (no romper)
 - Objetivo: Lighthouse 100 en accesibilidad, buenas prácticas y SEO, y ≥ 95 en rendimiento (móvil). axe sin errores WCAG 2.2 AA.
 - Texto arena sobre fondo claro: usar `var(--sand-strong)` (#7d6447). `var(--sand)` solo sobre fondo oscuro (`.section--dark`, `.on-dark`).
-- Todo lo que se mueva solo más de 5 s necesita botón de pausa (`AutoVideo`, `Marquee`) y debe pararse con `prefers-reduced-motion`.
+- Los vídeos y el `Marquee` se reproducen solos **sin botones de play/pausa visibles** (decisión del cliente). Para cumplir WCAG 2.2.2 se pausan tocándolos y llevan un botón de pausa que solo aparece con el foco del teclado (`.av-toggle`, `.mq-toggle`). Con `prefers-reduced-motion` no arrancan solos.
+- Vídeos con sonido (reel, instalación): `data-inview` + botón "Activar sonido"; sin `controls`.
 - El titular (H1) del hero no lleva animación de opacidad: es el elemento LCP.
 - Vídeos: siempre con `AutoVideo` (preload none, póster diferido). No poner `poster` directo en vídeos fuera de la primera pantalla.
 - Submenús: botón con `aria-expanded`; Escape cierra.

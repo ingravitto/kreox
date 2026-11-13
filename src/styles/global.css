@@ -229,3 +229,11 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
 .unmute:hover { background: rgba(18,18,17,.92); }
 .unmute[hidden] { display: none; }
 html.m-lock { overflow: hidden; }
+
+/* Pausa de vídeos: sin botón visible (decisión del cliente). Aparece solo con el foco del teclado (WCAG 2.2.2). */
+.av-toggle { position: absolute; right: 16px; bottom: 16px; z-index: 3; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); background: rgba(18,18,17,.75); color: #fff; display: grid; place-content: center; cursor: pointer; }
+.av-toggle:not(:focus-visible) { opacity: 0; pointer-events: none; }
+.av-toggle svg { width: 14px; height: 14px; }
+.av-toggle .i-play, .av-toggle.is-paused .i-pause { display: none; }
+.av-toggle.is-paused .i-play { display: block; }
+[data-inview-wrap] .av-toggle { top: 16px; bottom: auto; }

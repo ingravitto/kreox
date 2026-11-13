@@ -13,6 +13,7 @@ const row = [...items, ...items];
 <script>
   document.querySelectorAll<HTMLElement>('[data-marquee]').forEach((m) => {
     const b = m.querySelector<HTMLButtonElement>('[data-mq-toggle]')!;
+    m.querySelector('.track')?.addEventListener('click', () => b.click());
     b.addEventListener('click', () => {
       const paused = m.classList.toggle('is-paused');
       b.setAttribute('aria-pressed', String(paused));
@@ -22,12 +23,13 @@ const row = [...items, ...items];
   });
 </script>
 <style>
-  .marquee { position: relative; background: var(--sand); color: var(--ink); overflow: hidden; padding: 20px 56px 20px 0; border-block: 1px solid rgba(0,0,0,.06); }
+  .marquee { position: relative; background: var(--sand); color: var(--ink); overflow: hidden; padding: 20px 0; border-block: 1px solid rgba(0,0,0,.06); }
   .marquee.dark { background: var(--graphite); color: var(--sand); }
   .track { display: flex; width: max-content; animation: slide 38s linear infinite; }
   span { display: inline-flex; align-items: center; gap: 28px; padding-right: 28px; font-size: clamp(0.9rem, 1.5vw, 1.1rem); font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; white-space: nowrap; }
   i { font-style: normal; font-size: 0.8em; opacity: 0.55; }
   .marquee:hover .track, .marquee.is-paused .track { animation-play-state: paused; }
+  .mq-toggle:not(:focus-visible) { opacity: 0; pointer-events: none; }
   .mq-toggle { position: absolute; right: 8px; top: 50%; translate: 0 -50%; width: 40px; height: 40px; border-radius: 50%; border: 1px solid currentColor; background: inherit; color: inherit; font-size: .7rem; cursor: pointer; }
   @media (prefers-reduced-motion: reduce) { .track { animation: none; } }
   @keyframes slide { to { transform: translateX(-50%); } }
