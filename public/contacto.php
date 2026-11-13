@@ -29,14 +29,13 @@ if (!empty($_POST['web']) || ($ts > 0 && time() - $ts < 3)) {
 
 $nombre    = campo('nombre', 120);
 $empresa   = campo('empresa', 120);
-$localidad = campo('localidad', 120);
 $email     = campo('email', 160);
 $telefono  = campo('telefono', 40);
 $interes   = campo('interes', 40);
 $mensaje   = mb_substr(trim((string)($_POST['mensaje'] ?? '')), 0, 3000);
 $privacidad = ($_POST['privacidad'] ?? '') === '1';
 
-$intereses = ['nivelacion' => 'Nivelación autonivelante', 'azulejos' => 'Colocación de azulejos', 'ambos' => 'Ambos', 'exportacion' => 'Exportación / distribución'];
+$intereses = ['nivelacion' => 'Nivelación autonivelante', 'azulejos' => 'Colocación de azulejos', 'exportacion' => 'Distribución / exportación', 'otra' => 'Otra consulta'];
 
 if ($nombre === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || !$privacidad) {
     volver('/contacto/?error=1');
@@ -46,7 +45,6 @@ $asunto = '[Web KREOX] Consulta · ' . ($intereses[$interes] ?? 'Sin especificar
 $cuerpo = "Nueva solicitud desde kreox.es\n\n"
     . "Nombre: $nombre\n"
     . "Empresa: $empresa\n"
-    . "Localidad: $localidad\n"
     . "Email: $email\n"
     . "Teléfono: $telefono\n"
     . 'Interés: ' . ($intereses[$interes] ?? $interes) . "\n\n"

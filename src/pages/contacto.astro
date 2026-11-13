@@ -39,37 +39,92 @@ import WaIcon from '../components/WaIcon.astro';
           <li><strong>Dirección</strong>{SITE.address.street} · {SITE.address.postalCode} {SITE.address.city} ({SITE.address.region})</li>
         </ul>
       </div>
-      <form class="card form" method="post" action="/contacto.php">
-        <p class="err" hidden data-err>No hemos podido enviar el formulario. Revisa los campos o escríbenos a {SITE.email}.</p>
-        <label>Nombre<input name="nombre" autocomplete="name" required maxlength="120" /></label>
-        <label>Empresa<input name="empresa" autocomplete="organization" maxlength="120" /></label>
-        <label>Localidad<input name="localidad" autocomplete="address-level2" maxlength="120" /></label>
-        <label>Correo electrónico*<input type="email" name="email" autocomplete="email" required maxlength="160" /></label>
-        <label>Teléfono<input type="tel" name="telefono" autocomplete="tel" maxlength="40" /></label>
-        <label>¿Qué te interesa?
-          <select name="interes">
-            <option value="nivelacion">Nivelación con mortero autonivelante (PIKO / Universal)</option>
-            <option value="azulejos">Colocación de azulejos (Kalzo / Kuñas / Alikates)</option>
-            <option value="ambos">Ambos</option>
-            <option value="exportacion">Exportación / distribución</option>
-          </select>
-        </label>
-        <label>Mensaje<textarea name="mensaje" rows="5" maxlength="3000"></textarea></label>
+      <form class="card form" method="post" action="/contacto.php" novalidate data-form>
+        <div class="fhead">
+          <h2 class="ftitle">Escríbenos</h2>
+          <a class="wa-alt" href={SITE.whatsapp} target="_blank" rel="noopener"><WaIcon size={16} /> ¿Prefieres WhatsApp?<span class="visually-hidden"> (abre WhatsApp)</span></a>
+        </div>
+        <p class="err" hidden data-err role="alert">No hemos podido enviar el formulario. Revisa los campos o escríbenos a {SITE.email}.</p>
+
+        <div class="row">
+          <div class="f">
+            <label for="f-nombre">Nombre <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-nombre" name="nombre" autocomplete="name" required maxlength="120" placeholder="Tu nombre" aria-describedby="e-nombre" />
+            <p class="ferr" id="e-nombre" hidden>Escribe tu nombre.</p>
+          </div>
+          <div class="f">
+            <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-email" type="email" name="email" autocomplete="email" inputmode="email" required maxlength="160" placeholder="nombre@empresa.es" aria-describedby="e-email" />
+            <p class="ferr" id="e-email" hidden>Escribe un email válido.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="f">
+            <label for="f-tel">Teléfono <span class="opt">(opcional)</span></label>
+            <input id="f-tel" type="tel" name="telefono" autocomplete="tel" inputmode="tel" maxlength="40" placeholder="600 000 000" />
+          </div>
+          <div class="f">
+            <label for="f-empresa">Empresa <span class="opt">(opcional)</span></label>
+            <input id="f-empresa" name="empresa" autocomplete="organization" maxlength="120" placeholder="Nombre de tu empresa" />
+          </div>
+        </div>
+
+        <fieldset class="f">
+          <legend>¿Sobre qué es tu consulta?</legend>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="interes" value="nivelacion" checked /> <span>Nivelación (PIKO / Universal)</span></label>
+            <label class="pill"><input type="radio" name="interes" value="azulejos" /> <span>Azulejos</span></label>
+            <label class="pill"><input type="radio" name="interes" value="exportacion" /> <span>Distribución / exportación</span></label>
+            <label class="pill"><input type="radio" name="interes" value="otra" /> <span>Otra</span></label>
+          </div>
+        </fieldset>
+
+        <div class="f">
+          <label for="f-msg">Mensaje <span class="opt">(opcional)</span></label>
+          <textarea id="f-msg" name="mensaje" rows="3" maxlength="3000" placeholder="Cuéntanos tu obra o tu duda: metros, tipo de soporte, plazos…"></textarea>
+        </div>
+
         <div class="hp" aria-hidden="true"><label>Web<input name="web" tabindex="-1" autocomplete="off" /></label></div>
         <input type="hidden" name="ts" value="" />
-        <label class="check"><input type="checkbox" name="privacidad" value="1" required /> <span>He leído y acepto la <a href="/politica-privacidad/">política de privacidad</a>.</span></label>
-        <button class="btn btn--dark" type="submit">Enviar consulta</button>
+
+        <div class="f">
+          <label class="check"><input type="checkbox" name="privacidad" value="1" required aria-describedby="e-priv" /> <span>Acepto la <a href="/politica-privacidad/">política de privacidad</a>. <span class="req" aria-hidden="true">*</span></span></label>
+          <p class="ferr" id="e-priv" hidden>Necesitamos tu aceptación para responderte.</p>
+        </div>
+        <div class="fsubmit">
+          <button class="btn btn--dark" type="submit">Enviar consulta <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+          <p class="muted fnote"><span aria-hidden="true">*</span> Campos obligatorios</p>
+        </div>
       </form>
     </div>
   </section>
 </Base>
 <script>
-  const form = document.querySelector<HTMLFormElement>('form.form')!;
+  const form = document.querySelector<HTMLFormElement>('[data-form]')!;
   const q = new URLSearchParams(location.search);
   const interes = q.get('interes');
-  if (interes) (form.elements.namedItem('interes') as HTMLSelectElement).value = interes;
+  if (interes) { const r = form.querySelector<HTMLInputElement>(`input[name="interes"][value="${interes}"]`); if (r) r.checked = true; }
   if (q.get('error')) form.querySelector<HTMLElement>('[data-err]')!.hidden = false;
   (form.elements.namedItem('ts') as HTMLInputElement).value = String(Math.floor(Date.now() / 1000));
+  // Validación accesible: mensajes junto al campo, foco en el primer error
+  const checks: [string, string][] = [['nombre', 'e-nombre'], ['email', 'e-email'], ['privacidad', 'e-priv']];
+  const validate = (el: HTMLInputElement, errId: string) => {
+    const ok = el.checkValidity();
+    el.setAttribute('aria-invalid', String(!ok));
+    document.getElementById(errId)!.hidden = ok;
+    return ok;
+  };
+  checks.forEach(([n, e]) => {
+    const el = form.elements.namedItem(n) as HTMLInputElement;
+    el.addEventListener('blur', () => { if (el.value || el.type === 'checkbox') validate(el, e); });
+    el.addEventListener('input', () => { if (el.getAttribute('aria-invalid') === 'true') validate(el, e); });
+  });
+  form.addEventListener('submit', (ev) => {
+    let first: HTMLInputElement | null = null;
+    checks.forEach(([n, e]) => { const el = form.elements.namedItem(n) as HTMLInputElement; if (!validate(el, e) && !first) first = el; });
+    if (first) { ev.preventDefault(); (first as HTMLInputElement).focus(); return; }
+    const b = form.querySelector<HTMLButtonElement>('button[type="submit"]')!; b.disabled = true; b.textContent = 'Enviando…';
+  });
 </script>
 <style>
   .wa-num { margin: 14px 0 0; color: var(--on-dark-soft); font-size: .9rem; }
@@ -79,11 +134,35 @@ import WaIcon from '../components/WaIcon.astro';
   .contact a { text-decoration: none; color: var(--ink); font-weight: 500; }
   .contact a:hover { color: var(--sand-strong); }
   .contact strong { display: block; font-size: 0.7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--sand-strong); font-weight: 600; margin-bottom: 4px; }
-  .form { display: grid; gap: 14px; }
-  .form label { display: grid; gap: 6px; font-weight: 600; font-size: 0.9rem; color: var(--ink); }
-  .form input:not([type='checkbox']), .form select, .form textarea { font: inherit; font-weight: 400; padding: 12px 14px; border: 1px solid #cfc8bd; border-radius: var(--radius-sm); width: 100%; background: var(--white); }
-  .form .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; }
-  .form .check input { width: 18px; height: 18px; margin-top: 4px; accent-color: var(--ink); }
+  .form { display: grid; gap: 18px; padding: clamp(22px, 3vw, 36px); }
+  .fhead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 16px; }
+  .ftitle { font-size: 1.35rem; margin: 0; }
+  .wa-alt { display: inline-flex; align-items: center; gap: 6px; font-size: .88rem; font-weight: 600; color: #075e54; text-decoration: none; }
+  .wa-alt:hover { text-decoration: underline; }
+  .row { display: grid; gap: 18px; }
+  @media (min-width: 560px) { .row { grid-template-columns: 1fr 1fr; } }
+  .f { display: grid; gap: 6px; margin: 0; padding: 0; border: 0; min-width: 0; }
+  .f > label, legend { font-weight: 600; font-size: .86rem; color: var(--ink); padding: 0; }
+  legend { margin-bottom: 8px; }
+  .req { color: #9b2c1f; }
+  .opt { font-weight: 400; color: var(--text-soft); }
+  .form input:not([type='checkbox']):not([type='radio']), .form textarea { font: inherit; font-size: 1rem; font-weight: 400; min-height: 48px; padding: 11px 14px; border: 1px solid #b9b3a9; border-radius: var(--radius-sm); width: 100%; background: var(--white); color: var(--ink); transition: border-color .2s, box-shadow .2s; }
+  .form textarea { min-height: 96px; resize: vertical; }
+  .form input::placeholder, .form textarea::placeholder { color: #8a867f; }
+  .form input:focus, .form textarea:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px rgba(199,178,154,.45); }
+  .form [aria-invalid='true'] { border-color: #9b2c1f !important; }
+  .ferr { margin: 0; font-size: .82rem; color: #9b2c1f; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill { position: relative; cursor: pointer; }
+  .pill input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .pill span { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border: 1px solid #b9b3a9; border-radius: 999px; font-size: .9rem; transition: background .2s, color .2s, border-color .2s; }
+  .pill input:checked + span { background: var(--ink); color: var(--white); border-color: var(--ink); }
+  .pill input:focus-visible + span { outline: 2px solid var(--sand-strong); outline-offset: 2px; }
+  .form .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-size: .92rem; }
+  .form .check input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--ink); flex: none; }
+  .fsubmit { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+  .fsubmit .btn { flex: 1 1 220px; }
+  .fnote { margin: 0; font-size: .82rem; }
   .hp { position: absolute; left: -5000px; }
   .err { background: #fbeeee; color: #9b2c1f; padding: 12px; border-radius: var(--radius-sm); margin: 0; }
 </style>
