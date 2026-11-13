@@ -19,7 +19,7 @@
   --on-dark: #d8d5cf;
   --on-dark-soft: #9c9890;
   --sand: #c7b29a;
-  --sand-strong: #b39a7e;
+  --sand-strong: #7d6447; /* arena para texto sobre fondo claro: 4,97:1 sobre #f3f2ef */
   --sand-soft: #ece4da;
   --paper: #f3f2ef;
   --white: #ffffff;
@@ -36,9 +36,19 @@
   --shadow: 0 24px 60px -24px rgba(18, 18, 17, 0.25);
   --container: 1240px;
   --gutter: clamp(16px, 4vw, 40px);
-  --font: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font: 'Poppins', 'Poppins Fallback', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --header-h: 76px;
+}
+
+/* Fuente de respaldo con las métricas de Poppins: evita saltos (CLS) mientras carga la tipografía */
+@font-face {
+  font-family: 'Poppins Fallback';
+  src: local('Arial'), local('Helvetica'), local('Liberation Sans');
+  ascent-override: 92.33%;
+  descent-override: 30.78%;
+  line-gap-override: 8.79%;
+  size-adjust: 113.73%;
 }
 
 *,
@@ -101,7 +111,7 @@ strong { font-weight: 600; color: inherit; }
 
 .eyebrow {
   display: inline-flex; align-items: center; gap: 12px;
-  font-size: 0.74rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase;
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--sand-strong); margin-bottom: 1.2em;
 }
 .eyebrow::before { content: ''; width: 28px; height: 1px; background: currentColor; }
@@ -112,7 +122,8 @@ strong { font-weight: 600; color: inherit; }
 .lead strong { font-weight: 600; }
 .muted { color: var(--text-soft); font-size: 0.92rem; }
 .section--dark .muted, .section--graphite .muted { color: var(--on-dark-soft); }
-.sand { color: var(--sand); }
+.sand { color: var(--sand-strong); }
+.section--dark .sand, .section--graphite .sand, .on-dark .sand, .hero .sand { color: var(--sand); }
 .center { text-align: center; }
 .mt-0 { margin-top: 0; }
 

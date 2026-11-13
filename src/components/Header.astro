@@ -15,14 +15,18 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 
     <nav class="desktop" aria-label="Principal">
       <ul class="menu">
-        {NAV.map((item) => (
-          <li class={'children' in item ? 'has-sub' : ''}>
-            <a href={item.href} class:list={[{ active: isActive(item.href), hl: 'highlight' in item }]}>
+        {NAV.map((item, idx) => (
+          <li class={'children' in item ? 'has-sub' : ''} data-sub-li>
+            <a href={item.href} class:list={[{ active: isActive(item.href), hl: 'highlight' in item }]} aria-current={isActive(item.href) ? 'page' : undefined}>
               {item.label}
-              {'children' in item && <svg width="9" height="9" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4" /></svg>}
             </a>
             {'children' in item && (
-              <div class="sub">
+              <button type="button" class="sub-toggle" aria-expanded="false" aria-controls={`sub-${idx}`} aria-label={`Ver productos de ${item.label}`} data-sub-toggle>
+                <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4" /></svg>
+              </button>
+            )}
+            {'children' in item && (
+              <div class="sub" id={`sub-${idx}`}>
                 <ul>
                   {item.children.map((c) => (
                     <li>
@@ -67,6 +71,28 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 </header>
 
 <script>
+  // Submenús accesibles: botón con aria-expanded, Escape cierra y devuelve el foco, clic fuera cierra.
+  const lis = [...document.querySelectorAll<HTMLElement>('[data-sub-li]')];
+  const closeAll = (except?: HTMLElement) => lis.forEach((li) => {
+    if (li === except) return;
+    li.classList.remove('open');
+    li.querySelector('[data-sub-toggle]')?.setAttribute('aria-expanded', 'false');
+  });
+  lis.forEach((li) => {
+    const btn = li.querySelector<HTMLButtonElement>('[data-sub-toggle]');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      const open = !li.classList.contains('open');
+      closeAll(li);
+      li.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', String(open));
+    });
+    li.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && li.classList.contains('open')) { li.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); btn.focus(); }
+    });
+    li.addEventListener('focusout', (e) => { if (!li.contains(e.relatedTarget as Node)) { li.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); } });
+  });
+  document.addEventListener('click', (e) => { if (!(e.target as HTMLElement).closest('[data-sub-li]')) closeAll(); });
   const h = document.querySelector<HTMLElement>('[data-header]');
   if (h) {
     const on = () => h.classList.toggle('is-scrolled', window.scrollY > 24);
@@ -84,12 +110,16 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 
   .desktop { display: none; margin-inline: auto; }
   .menu { list-style: none; display: flex; gap: 2px; margin: 0; padding: 0; }
-  .menu > li { position: relative; }
+  .menu > li { position: relative; display: flex; align-items: center; }
+  .sub-toggle { display: inline-grid; place-content: center; width: 28px; height: 28px; margin-left: -8px; border: 0; border-radius: 50%; background: transparent; color: rgba(255,255,255,.75); cursor: pointer; }
+  .sub-toggle:hover { background: rgba(255,255,255,.08); color: var(--white); }
+  .sub-toggle svg { transition: transform .2s; }
+  .open .sub-toggle svg { transform: rotate(180deg); }
   .menu > li > a { display: inline-flex; align-items: center; gap: 7px; color: rgba(255,255,255,.82); text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 10px 14px; border-radius: 999px; transition: color .2s, background .2s; }
   .menu > li > a:hover, .menu > li > a.active { color: var(--white); background: rgba(255,255,255,.07); }
   .menu > li > a.hl { color: var(--sand); }
   .sub { position: absolute; top: 100%; left: 50%; translate: -50% 0; padding-top: 12px; opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .25s var(--ease), transform .25s var(--ease), visibility .25s; }
-  .has-sub:hover .sub, .has-sub:focus-within .sub { opacity: 1; visibility: visible; transform: none; }
+  .has-sub:hover .sub, .has-sub.open .sub { opacity: 1; visibility: visible; transform: none; }
   .sub ul { list-style: none; margin: 0; padding: 10px; background: var(--ink-2); border: 1px solid var(--line-dark); border-radius: var(--radius); box-shadow: 0 30px 60px rgba(0,0,0,.45); min-width: 340px; }
   .sub a { display: block; padding: 12px 14px; border-radius: 12px; text-decoration: none; color: var(--white); transition: background .2s; }
   .sub a:hover { background: rgba(255,255,255,.06); }

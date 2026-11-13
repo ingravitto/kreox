@@ -48,7 +48,7 @@ const { eyebrow, title, accent, lead, crumbs, bg, bgAlt = '', product, productAl
   .compact h1 { font-size: clamp(2rem, 4.4vw, 3.6rem); }
   .lead { color: var(--on-dark); max-width: 640px; }
   .media { position: relative; display: grid; place-items: center; }
-  .media :global(img) { position: relative; width: min(100%, 440px); border-radius: var(--radius-xl); border: 1px solid var(--line-dark); box-shadow: 0 40px 80px -30px rgba(0,0,0,.8); animation: float 7s ease-in-out infinite; }
+  .media :global(img) { position: relative; width: min(100%, 440px); border-radius: var(--radius-xl); border: 1px solid var(--line-dark); box-shadow: 0 40px 80px -30px rgba(0,0,0,.8); }
   .glow { position: absolute; width: 70%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(200,225,29,.22), rgba(31,111,209,.12) 45%, transparent 70%); filter: blur(30px); }
   @keyframes kenburns { from { transform: scale(1.08); } to { transform: scale(1); } }
   @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }

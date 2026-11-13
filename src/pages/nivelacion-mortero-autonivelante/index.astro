@@ -9,6 +9,7 @@ import Faq from '../../components/Faq.astro';
 import CtaTarifa from '../../components/CtaTarifa.astro';
 import { NIVELACION, PRODUCTOS, M2_POR_NIVELADOR } from '../../data/site';
 import { faqSchema } from '../../data/schema';
+import { FAQ_NIVELACION } from '../../data/faqs';
 
 import imgBanner from '../../assets/img/niveladores-piko-universal-kreox.jpg';
 import imgPiko from '../../assets/img/piko-nivelador-suelo-radiante-kreox.png';
@@ -18,14 +19,7 @@ import imgBase from '../../assets/img/base-niveladora-universal-recambio.png';
 import imgAnilla from '../../assets/img/anilla-metalica-niveladora-universal.png';
 import imgLamina from '../../assets/img/lamina-polietileno-bajo-solera.png';
 
-const faqs = [
-  { q: '¿Qué es un sistema de nivelación para mortero autonivelante?', a: 'Es un conjunto de niveladores que se colocan sobre el soporte antes del vertido y marcan, con una anilla regulable por láser, la altura de acabado del mortero autonivelante. Sirve para controlar el espesor y conseguir una superficie uniforme.' },
-  { q: '¿Qué diferencia hay entre PIKO y el Nivelador Universal?', a: 'El PIKO tiene punta y se clava en la placa de aislamiento del suelo radiante. El Nivelador Universal tiene base plana y se apoya sobre superficies duras, por lo que está pensado para recrecidos.' },
-  { q: '¿Cuántos niveladores necesito por m²?', a: `Se recomienda aproximadamente un nivelador cada ${M2_POR_NIVELADOR} m². Para 100 m², unos ${Math.ceil(100 / M2_POR_NIVELADOR)} niveladores.` },
-  { q: '¿Por qué no usar trípodes de acero?', a: 'Pesan cerca de 1 kg cada uno, se oxidan con el pH alcalino del mortero, se limpian mal y requieren asentar bien sus tres patas. Los niveladores KREOX pesan entre 20 y 250 g, no se oxidan y se colocan en segundos.' },
-  { q: '¿Son reutilizables?', a: 'Sí. Se retiran tras el vertido, se limpian y se vuelven a usar. Las piezas que se desgastan (arandela, base y anilla metálica) se venden como recambio.' },
-  { q: '¿Dónde se fabrican?', a: 'En España, en Ibi (Alicante). KREOX es una empresa familiar de tercera generación y sus niveladores son productos patentados.' },
-];
+const faqs = FAQ_NIVELACION;
 
 const steps = [
   { title: 'Coloca los niveladores', text: `Uno cada ${M2_POR_NIVELADOR} m² aprox.: clavado (PIKO) o apoyado (Universal).` },
@@ -39,7 +33,16 @@ const steps = [
   title="Sistemas de nivelación para mortero autonivelante | KREOX"
   description="Niveladores PIKO y Universal para mortero autonivelante: sustituyen al trípode de acero en suelo radiante y recrecidos. Ligeros, sin óxido y fabricados en España."
   breadcrumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }]}
-  schema={[faqSchema(faqs)]}
+  schema={[faqSchema(faqs), {
+    '@type': 'ItemList',
+    name: 'Sistemas de nivelación para mortero autonivelante KREOX',
+    itemListElement: [
+      { name: 'PIKO · Nivelador para suelo radiante', url: PRODUCTOS.piko.url },
+      { name: 'Nivelador Universal para recrecidos', url: PRODUCTOS.universal.url },
+      { name: 'Recambios para niveladores', url: `${NIVELACION}recambios/` },
+      { name: 'Lámina de polietileno bajo solera', url: `${NIVELACION}lamina-bajo-solera/` },
+    ].map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, url: `https://kreox.es${it.url}` })),
+  }]}
 >
   <PageHero
     eyebrow="Pavimentación con mortero autonivelante"

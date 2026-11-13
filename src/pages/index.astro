@@ -42,7 +42,7 @@ const steps = [
   <!-- HERO -->
   <section class="hero section--dark">
     <Image src={imgHero} alt="Niveladores PIKO y Universal de KREOX sobre mortero autonivelante recién vertido" widths={[960, 1600, 1920]} sizes="100vw" class="hero-bg" loading="eager" fetchpriority="high" />
-    <div class="hero-video"><AutoVideo src="/videos/hero-niveladores-kreox.mp4" poster={imgHero} label="PIKO y Nivelador Universal sobre mortero autonivelante" eager /></div>
+    <div class="hero-video"><AutoVideo src="/videos/hero-niveladores-kreox.mp4" poster={imgHero} label="PIKO y Nivelador Universal sobre mortero autonivelante" /></div>
     <div class="hero-shade" aria-hidden="true"></div>
     <div class="container hero-in on-dark">
       <span class="eyebrow">Innovation for construction</span>
@@ -60,6 +60,19 @@ const steps = [
       </dl>
     </div>
     <a class="scroll" href="#niveladores" aria-label="Ir a los niveladores"><span></span></a>
+  </section>
+
+  <!-- SELECTOR RÁPIDO -->
+  <section class="chooser" aria-labelledby="chooser-h">
+    <div class="container">
+      <h2 id="chooser-h" class="ch-h">¿Qué vas a nivelar?</h2>
+      <ul class="ch-list">
+        <li><a href={PRODUCTOS.piko.url}><span class="ch-k">Suelo radiante</span><span class="ch-v">PIKO →</span></a></li>
+        <li><a href={PRODUCTOS.universal.url}><span class="ch-k">Recrecido sobre forjado o solera</span><span class="ch-v">Nivelador Universal →</span></a></li>
+        <li><a href={AZULEJOS}><span class="ch-k">Colocación de azulejos</span><span class="ch-v">Kalzo y Kuñas →</span></a></li>
+        <li><a href={`${NIVELACION}calculadora/`}><span class="ch-k">¿Cuántos necesito?</span><span class="ch-v">Calculadora →</span></a></li>
+      </ul>
+    </div>
   </section>
 
   <Marquee items={['Producto patentado', 'Fabricado en España', 'Material reciclado', 'Sin óxido', 'Reutilizable', 'Compatible con láser', 'Tercera generación']} />
@@ -254,35 +267,43 @@ const steps = [
 
 <style>
   .rel { position: relative; }
+  .chooser { background: var(--ink); border-top: 1px solid var(--line-dark); padding: 28px 0 36px; }
+  .ch-h { color: var(--white); font-size: 1.05rem; font-weight: 500; letter-spacing: 0; margin-bottom: 16px; }
+  .ch-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  .ch-list a { display: flex; flex-direction: column; gap: 4px; min-height: 76px; justify-content: center; padding: 16px 20px; border-radius: var(--radius); border: 1px solid var(--line-dark); background: rgba(255,255,255,.04); color: var(--on-dark); text-decoration: none; transition: border-color .25s, background .25s, transform .25s var(--ease); }
+  .ch-list a:hover, .ch-list a:focus-visible { border-color: var(--sand); background: rgba(199,178,154,.08); transform: translateY(-2px); }
+  .ch-k { font-size: .9rem; color: var(--on-dark-soft); }
+  .ch-v { font-size: 1.1rem; font-weight: 600; color: var(--white); }
   /* Hero */
   .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; padding: calc(var(--header-h) + 60px) 0 clamp(56px, 8vw, 96px); }
   .hero-bg, .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 75% center; }
   .hero-video :global(video) { object-position: 70% center; background: transparent; }
+  .hero-video :global(.av-toggle) { bottom: 22%; right: 8%; }
   @media (min-width: 960px) {
     .hero { background: #050505; }
-    .hero-bg, .hero-video { inset: auto 0 auto auto; top: 50%; width: min(72%, 1180px); height: auto; aspect-ratio: 16 / 9; transform: translateY(-46%); -webkit-mask-image: radial-gradient(ellipse 62% 60% at 60% 56%, #000 48%, transparent 100%); mask-image: radial-gradient(ellipse 62% 60% at 60% 56%, #000 48%, transparent 100%); }
-    .hero-bg, .hero-video :global(video) { object-position: center; }
+    .hero-bg, .hero-video { inset: auto 0 auto auto; top: 50%; width: min(72%, 1180px); height: auto; aspect-ratio: 16 / 9; transform: translateY(-46%); }
+    .hero-bg, .hero-video :global(video) { object-position: center; -webkit-mask-image: radial-gradient(ellipse 62% 60% at 60% 56%, #000 48%, transparent 100%); mask-image: radial-gradient(ellipse 62% 60% at 60% 56%, #000 48%, transparent 100%); }
     .hero-shade { background: linear-gradient(0deg, rgba(18,18,17,.85) 0%, rgba(18,18,17,0) 40%) !important; }
   }
   .hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(18,18,17,.92) 0%, rgba(18,18,17,.6) 38%, rgba(18,18,17,0) 62%), linear-gradient(0deg, rgba(18,18,17,.85) 0%, rgba(18,18,17,0) 40%); }
   .hero-in { position: relative; z-index: 1; }
   @media (max-width: 959px) {
     .hero { align-items: flex-start; padding-bottom: 46vh; background: #050505; }
-    .hero-bg, .hero-video { inset: auto 0 0 0; top: auto; height: 50vh; -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 32%); mask-image: linear-gradient(180deg, transparent 0%, #000 32%); }
-    .hero-bg, .hero-video :global(video) { object-position: 62% center; }
+    .hero-bg, .hero-video { inset: auto 0 0 0; top: auto; height: 50vh; }
+    .hero-bg, .hero-video :global(video) { object-position: 62% center; -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 32%); mask-image: linear-gradient(180deg, transparent 0%, #000 32%); }
     .scroll { display: none; }
   }
   @media (max-width: 959px) { .hero-shade { display: none; } }
   .hero h1 { max-width: 15ch; font-size: clamp(2.6rem, 6.4vw, 5.6rem); }
   .hero .lead { max-width: 560px; color: var(--on-dark); }
   .hero .stats { max-width: 720px; margin-top: clamp(36px, 5vw, 64px); }
-  .hero .eyebrow, .hero h1, .hero .lead, .hero .btn-row, .hero .stats { animation: rise 1s var(--ease) both; }
-  .hero h1 { animation-delay: .1s; } .hero .lead { animation-delay: .2s; } .hero .btn-row { animation-delay: .3s; } .hero .stats { animation-delay: .45s; }
+  .hero .lead, .hero .btn-row, .hero .stats { animation: rise 1s var(--ease) both; }
+  .hero .lead { animation-delay: .2s; } .hero .btn-row { animation-delay: .3s; } .hero .stats { animation-delay: .45s; }
   .scroll { position: absolute; right: var(--gutter); bottom: 40px; width: 26px; height: 44px; border: 1px solid rgba(255,255,255,.4); border-radius: 99px; display: none; }
   .scroll span { position: absolute; left: 50%; top: 9px; width: 3px; height: 8px; border-radius: 3px; background: var(--sand); translate: -50% 0; animation: wheel 1.8s ease-in-out infinite; }
   @media (min-width: 960px) { .scroll { display: block; } }
   @keyframes heroZoom { from { transform: scale(1.1); } to { transform: scale(1); } }
-  @keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+  @keyframes rise { from { transform: translateY(18px); } to { transform: none; } }
   @keyframes wheel { 0% { opacity: 0; transform: translateY(0); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(12px); } }
 
   .head-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 0 40px; margin-bottom: clamp(36px, 5vw, 64px); }

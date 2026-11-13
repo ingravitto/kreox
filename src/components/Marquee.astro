@@ -3,17 +3,32 @@ interface Props { items: string[]; dark?: boolean }
 const { items, dark = false } = Astro.props;
 const row = [...items, ...items];
 ---
-<div class:list={['marquee', { dark }]} aria-label={items.join(' · ')} role="note">
+<div class:list={['marquee', { dark }]} data-marquee>
+  <p class="visually-hidden">{items.join(' · ')}</p>
   <div class="track" aria-hidden="true">
     {row.map((t) => <span>{t}<i>✦</i></span>)}
   </div>
+  <button type="button" class="mq-toggle" data-mq-toggle aria-label="Pausar animación" aria-pressed="false">❚❚</button>
 </div>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-marquee]').forEach((m) => {
+    const b = m.querySelector<HTMLButtonElement>('[data-mq-toggle]')!;
+    b.addEventListener('click', () => {
+      const paused = m.classList.toggle('is-paused');
+      b.setAttribute('aria-pressed', String(paused));
+      b.setAttribute('aria-label', paused ? 'Reanudar animación' : 'Pausar animación');
+      b.textContent = paused ? '▶' : '❚❚';
+    });
+  });
+</script>
 <style>
-  .marquee { background: var(--sand); color: var(--ink); overflow: hidden; padding: 20px 0; border-block: 1px solid rgba(0,0,0,.06); }
+  .marquee { position: relative; background: var(--sand); color: var(--ink); overflow: hidden; padding: 20px 56px 20px 0; border-block: 1px solid rgba(0,0,0,.06); }
   .marquee.dark { background: var(--graphite); color: var(--sand); }
   .track { display: flex; width: max-content; animation: slide 38s linear infinite; }
   span { display: inline-flex; align-items: center; gap: 28px; padding-right: 28px; font-size: clamp(0.9rem, 1.5vw, 1.1rem); font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; white-space: nowrap; }
   i { font-style: normal; font-size: 0.8em; opacity: 0.55; }
-  .marquee:hover .track { animation-play-state: paused; }
+  .marquee:hover .track, .marquee.is-paused .track { animation-play-state: paused; }
+  .mq-toggle { position: absolute; right: 8px; top: 50%; translate: 0 -50%; width: 40px; height: 40px; border-radius: 50%; border: 1px solid currentColor; background: inherit; color: inherit; font-size: .7rem; cursor: pointer; }
+  @media (prefers-reduced-motion: reduce) { .track { animation: none; } }
   @keyframes slide { to { transform: translateX(-50%); } }
 </style>

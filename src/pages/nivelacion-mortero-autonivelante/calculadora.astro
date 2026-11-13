@@ -7,18 +7,14 @@ import Faq from '../../components/Faq.astro';
 import CtaTarifa from '../../components/CtaTarifa.astro';
 import { NIVELACION, PRODUCTOS, M2_POR_NIVELADOR } from '../../data/site';
 import { faqSchema } from '../../data/schema';
+import { FAQ_CALCULADORA } from '../../data/faqs';
 
 const url = `${NIVELACION}calculadora/`;
 const rows = [25, 50, 100, 200, 500, 1000].map((m2) => {
   const uds = Math.ceil(m2 / M2_POR_NIVELADOR);
   return { m2, uds, piko: Math.ceil(uds / PRODUCTOS.piko.caja), uni: Math.ceil(uds / PRODUCTOS.universal.caja) };
 });
-const faqs = [
-  { q: '¿Cuántos niveladores de mortero autonivelante se necesitan por m²?', a: `Como referencia, KREOX recomienda un nivelador cada ${M2_POR_NIVELADOR} m² aproximadamente. Para 100 m² son unos ${Math.ceil(100 / M2_POR_NIVELADOR)} niveladores.` },
-  { q: '¿Cuántos m² cubre una caja de PIKO?', a: `Una caja trae ${PRODUCTOS.piko.caja} PIKO, suficiente para unos ${PRODUCTOS.piko.caja * M2_POR_NIVELADOR} m² en un mismo vertido con la densidad recomendada.` },
-  { q: '¿Cuántos m² cubre una caja de Niveladores Universales?', a: `Una caja trae ${PRODUCTOS.universal.caja} niveladores, suficiente para unos ${PRODUCTOS.universal.caja * M2_POR_NIVELADOR} m² en un mismo vertido con la densidad recomendada.` },
-  { q: 'Si los niveladores son reutilizables, ¿necesito tantos?', a: 'Necesitas los suficientes para la superficie que vas a verter de una vez. Después se retiran, se limpian y se reutilizan en el siguiente vertido u obra.' },
-];
+const faqs = FAQ_CALCULADORA;
 ---
 <Base
   overlay

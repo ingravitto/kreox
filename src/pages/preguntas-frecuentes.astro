@@ -1,0 +1,125 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaTarifa from '../components/CtaTarifa.astro';
+import imgHeroBg from '../assets/img/hf-niveladores-estudio-mortero.jpg';
+import { FAQ_NIVELACION, FAQ_PIKO, FAQ_UNIVERSAL, FAQ_CALCULADORA, FAQ_TRIPODE } from '../data/faqs';
+import { TILE_FAQ } from '../data/azulejos';
+import { faqSchema } from '../data/schema';
+import { NIVELACION, AZULEJOS } from '../data/site';
+
+const url = '/preguntas-frecuentes/';
+const grupos = [
+  { id: 'nivelacion', title: 'Nivelación con mortero autonivelante', link: { href: NIVELACION, label: 'Sistemas de nivelación' }, faqs: FAQ_NIVELACION },
+  { id: 'piko', title: 'PIKO · suelo radiante', link: { href: `${NIVELACION}piko/`, label: 'Ficha del PIKO' }, faqs: FAQ_PIKO },
+  { id: 'universal', title: 'Nivelador Universal · recrecidos', link: { href: `${NIVELACION}nivelador-universal/`, label: 'Ficha del Nivelador Universal' }, faqs: FAQ_UNIVERSAL },
+  { id: 'cantidades', title: 'Cantidades y cálculo', link: { href: `${NIVELACION}calculadora/`, label: 'Calculadora de niveladores' }, faqs: FAQ_CALCULADORA },
+  { id: 'tripode', title: 'PIKO frente al trípode de acero', link: { href: `${NIVELACION}piko-vs-tripode/`, label: 'Comparativa completa' }, faqs: FAQ_TRIPODE },
+  { id: 'azulejos', title: 'Colocación de azulejos', link: { href: AZULEJOS, label: 'Sistema para azulejos' }, faqs: TILE_FAQ },
+];
+// Schema: cada pregunta una sola vez
+const seen = new Set<string>();
+const all = grupos.flatMap((g) => g.faqs).filter((f) => (seen.has(f.q) ? false : (seen.add(f.q), true)));
+---
+<Base
+  overlay
+  title="Preguntas frecuentes sobre niveladores y autonivelante | KREOX"
+  description="Respuestas claras sobre PIKO, Nivelador Universal, cuántos niveladores por m², trípodes de acero, recambios y colocación de azulejos KREOX."
+  breadcrumbs={[{ name: 'Preguntas frecuentes', url }]}
+  schema={[faqSchema(all)]}
+>
+  <PageHero
+    compact
+    eyebrow="Ayuda"
+    title="Preguntas"
+    accent="frecuentes"
+    lead={`${all.length} respuestas claras sobre nuestros niveladores para mortero autonivelante y el sistema de colocación de azulejos.`}
+    bg={imgHeroBg}
+    crumbs={[{ name: 'Preguntas frecuentes', url }]}
+  />
+
+  <section class="section">
+    <div class="container layout">
+      <aside class="side">
+        <label class="search">
+          <span>Buscar una pregunta</span>
+          <input type="search" placeholder="Ej.: suelo radiante, láser, m²…" data-faq-search autocomplete="off" />
+        </label>
+        <p class="muted" aria-live="polite" data-faq-count></p>
+        <nav aria-label="Temas">
+          <ul>
+            {grupos.map((g) => <li><a href={`#${g.id}`}>{g.title} <span>{g.faqs.length}</span></a></li>)}
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="groups">
+        {grupos.map((g) => (
+          <section class="group" id={g.id} aria-labelledby={`h-${g.id}`} data-faq-group>
+            <div class="ghead">
+              <h2 id={`h-${g.id}`}>{g.title}</h2>
+              <a class="arrow-link" href={g.link.href}>{g.link.label}</a>
+            </div>
+            {g.faqs.map((f) => (
+              <details data-faq>
+                <summary><h3>{f.q}</h3><span class="ic" aria-hidden="true"></span></summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </section>
+        ))}
+        <p class="empty" hidden data-faq-empty>No hemos encontrado esa pregunta. <a class="link" href="/contacto/">Escríbenos</a> y te respondemos.</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaTarifa title="¿No encuentras tu respuesta?" text="Llámanos o escríbenos: nuestro departamento comercial te asesora sin compromiso." />
+</Base>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>('[data-faq-search]')!;
+  const count = document.querySelector<HTMLElement>('[data-faq-count]')!;
+  const empty = document.querySelector<HTMLElement>('[data-faq-empty]')!;
+  const norm = (t: string) => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  const items = [...document.querySelectorAll<HTMLDetailsElement>('[data-faq]')];
+  const run = () => {
+    const q = norm(input.value.trim());
+    let n = 0;
+    items.forEach((d) => {
+      const hit = !q || norm(d.textContent || '').includes(q);
+      d.hidden = !hit; if (hit) n++;
+      if (q && hit) d.open = true;
+    });
+    document.querySelectorAll<HTMLElement>('[data-faq-group]').forEach((g) => { g.hidden = !g.querySelector('[data-faq]:not([hidden])'); });
+    empty.hidden = n > 0;
+    count.textContent = q ? `${n} ${n === 1 ? 'resultado' : 'resultados'}` : '';
+  };
+  input.addEventListener('input', run);
+</script>
+
+<style>
+  .layout { display: grid; gap: 40px; }
+  @media (min-width: 960px) { .layout { grid-template-columns: 300px 1fr; gap: 64px; align-items: start; } .side { position: sticky; top: calc(var(--header-h) + 24px); } }
+  .search span { display: block; font-weight: 600; font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 8px; }
+  .search input { width: 100%; font: inherit; font-size: 1.05rem; padding: 14px 16px; border: 1px solid #b9b3a9; border-radius: var(--radius-sm); background: var(--white); }
+  .search input:focus { outline: 2px solid var(--sand-strong); outline-offset: 2px; }
+  .side nav ul { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 2px; }
+  .side nav a { display: flex; justify-content: space-between; gap: 12px; padding: 10px 12px; border-radius: 10px; text-decoration: none; color: var(--ink); }
+  .side nav a:hover { background: var(--paper); }
+  .side nav a span { color: var(--text-soft); font-size: .85rem; }
+  .group { margin-bottom: 56px; scroll-margin-top: calc(var(--header-h) + 24px); }
+  .ghead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 24px; margin-bottom: 8px; }
+  .ghead h2 { font-size: clamp(1.4rem, 2.4vw, 1.9rem); margin: 0; }
+  details { border-bottom: 1px solid var(--line); }
+  summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 20px; align-items: center; padding: 20px 0; }
+  summary::-webkit-details-marker { display: none; }
+  summary h3 { margin: 0; font-size: 1.05rem; font-weight: 500; }
+  summary:hover h3 { color: var(--sand-strong); }
+  .ic { flex: none; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line); position: relative; }
+  .ic::before, .ic::after { content: ''; position: absolute; left: 50%; top: 50%; width: 11px; height: 1.5px; background: var(--ink); translate: -50% -50%; }
+  .ic::after { rotate: 90deg; transition: rotate .3s var(--ease); }
+  details[open] .ic { background: var(--sand); border-color: var(--sand); }
+  details[open] .ic::after { rotate: 0deg; }
+  details p { margin: 0 0 22px; color: var(--text); max-width: 680px; }
+  .empty { font-size: 1.05rem; }
+</style>

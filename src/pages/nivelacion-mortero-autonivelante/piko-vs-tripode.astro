@@ -9,6 +9,7 @@ import Faq from '../../components/Faq.astro';
 import CtaTarifa from '../../components/CtaTarifa.astro';
 import { NIVELACION, PRODUCTOS, M2_POR_NIVELADOR } from '../../data/site';
 import { faqSchema } from '../../data/schema';
+import { FAQ_TRIPODE } from '../../data/faqs';
 import imgTriPesado from '../../assets/img/tripodes-acero-pesados.jpg';
 import imgTriOxido from '../../assets/img/tripodes-acero-oxidados.jpg';
 import imgTriMortero from '../../assets/img/tripode-acero-en-mortero.jpg';
@@ -18,11 +19,7 @@ import imgLaser from '../../assets/img/piko-laser-receptor-suelo-radiante.jpg';
 
 const url = `${NIVELACION}piko-vs-tripode/`;
 const n = Math.ceil(100 / M2_POR_NIVELADOR);
-const faqs = [
-  { q: '¿Por qué se oxidan los trípodes de nivelación?', a: 'Porque son de acero y el mortero tiene un pH alcalino. El contacto repetido con el mortero los corroe, los hace menos duraderos y dificulta su limpieza.' },
-  { q: '¿Cuánto peso ahorro con PIKO frente a trípodes?', a: `Con un nivelador cada ${M2_POR_NIVELADOR} m², 100 m² necesitan unos ${n} niveladores: unos ${(n * PRODUCTOS.tripode.pesoG) / 1000} kg en trípodes de acero frente a unos ${(n * PRODUCTOS.piko.pesoG) / 1000} kg en PIKO.` },
-  { q: '¿El PIKO es igual de preciso que un trípode?', a: 'Sí. La altura se marca igualmente con láser (habitual o con receptor) y la anilla del PIKO se ajusta a esa línea. Además, la anilla sirve de referencia visual durante el vertido.' },
-];
+const faqs = FAQ_TRIPODE;
 ---
 <Base
   overlay

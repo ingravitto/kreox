@@ -124,6 +124,7 @@ const uid = `cf-${kind}`;
       </li>
     ))}
   </ol>
+  <p class="visually-hidden" aria-live="polite" data-cf-live></p>
   <button type="button" class="btn btn--dark play" data-cf-play>
     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="currentColor"/></svg>
     Ver animación completa
@@ -135,10 +136,16 @@ const uid = `cf-${kind}`;
     const items = [...root.querySelectorAll<HTMLElement>('[data-cf-item]')];
     const num = root.querySelector<HTMLElement>('[data-cf-num]')!;
     const title = root.querySelector<HTMLElement>('[data-cf-title]')!;
+    const live = root.querySelector<HTMLElement>('[data-cf-live]');
     let timer: number | undefined;
     const set = (n: number) => {
       root.dataset.step = String(n);
-      items.forEach((it) => it.classList.toggle('on', Number(it.dataset.cfItem) === n));
+      items.forEach((it) => {
+        const on = Number(it.dataset.cfItem) === n;
+        it.classList.toggle('on', on);
+        it.querySelector('button')?.setAttribute('aria-current', on ? 'step' : 'false');
+      });
+      if (live && n > 0) live.textContent = `Paso ${n} de ${items.length}: ${items[n - 1]?.querySelector('strong')?.textContent ?? ''}`;
       num.textContent = String(Math.max(1, n));
       const cur = items[Math.max(0, n - 1)];
       title.textContent = cur?.querySelector('strong')?.textContent ?? '';
@@ -214,8 +221,9 @@ const uid = `cf-${kind}`;
 
   .list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
   @media (min-width: 960px) { .list li { min-height: 34vh; display: flex; align-items: center; } .list li:last-child { min-height: 30vh; } }
-  .list button { all: unset; box-sizing: border-box; cursor: pointer; display: flex; gap: 20px; width: 100%; padding: 22px 0; border-top: 1px solid var(--line); opacity: .45; transition: opacity .35s; }
-  .list li.on button, .list button:hover { opacity: 1; }
+  .list button { all: unset; box-sizing: border-box; cursor: pointer; display: flex; gap: 20px; width: 100%; padding: 22px 0 22px 16px; border-top: 1px solid var(--line); border-left: 3px solid transparent; transition: border-color .35s, background .35s; }
+  .list li.on button { border-left-color: var(--sand-strong); background: var(--paper); }
+  .list button:hover { background: var(--paper); }
   .list button:focus-visible { outline: 2px solid var(--sand); outline-offset: 4px; }
   .n { flex: none; width: 46px; height: 46px; border-radius: 50%; display: grid; place-content: center; border: 1px solid var(--line); font-weight: 600; font-size: .8rem; letter-spacing: .1em; color: var(--sand-strong); transition: background .35s, color .35s, border-color .35s; }
   .list li.on .n { background: var(--ink); color: var(--sand); border-color: var(--ink); }

@@ -23,6 +23,8 @@ export const GET: APIRoute = async () => {
 - [Calculadora de niveladores](${U}${NIVELACION}calculadora/)
 - [Comparativa PIKO vs trípode de acero](${U}${NIVELACION}piko-vs-tripode/)
 - [Página general de sistemas de nivelación](${U}${NIVELACION})
+- [Preguntas frecuentes](${U}/preguntas-frecuentes/)
+- [Información completa para IA](${U}/llms-full.txt)
 
 ## Colocación de azulejos
 

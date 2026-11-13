@@ -37,8 +37,17 @@ interface Props {
 const p = Astro.props;
 const url = p.kind === 'piko' ? `${NIVELACION}piko/` : `${NIVELACION}nivelador-universal/`;
 const filmThumb = p.film ? await getImage({ src: p.film.poster, width: 1280, format: 'jpeg' }) : undefined;
+const howTo = {
+  '@type': 'HowTo',
+  name: `Cómo nivelar mortero autonivelante con ${p.name}`,
+  description: `Proceso de nivelación de mortero autonivelante con ${p.name} de KREOX en ${p.steps.length} pasos.`,
+  tool: [{ '@type': 'HowToTool', name: p.name }, { '@type': 'HowToTool', name: 'Láser nivelador (habitual o con receptor)' }],
+  supply: [{ '@type': 'HowToSupply', name: 'Mortero autonivelante' }],
+  step: p.steps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.title, text: s.text, url: `${SITE.url}${url}#como-se-usa` })),
+};
 const schema = [
   ...p.seo.schema,
+  howTo,
   ...(p.film && filmThumb
     ? [{
         '@type': 'VideoObject',
@@ -207,7 +216,7 @@ const schema = [
 
   .plano { margin: 0; background: #dcdcdc; border-radius: var(--radius-xl); padding: clamp(14px, 2vw, 24px); }
   .plano :global(img) { border-radius: var(--radius); width: 100%; }
-  .plano figcaption { font-size: 0.78rem; color: var(--text-soft); padding: 12px 6px 0; }
+  .plano figcaption { font-size: 0.82rem; color: #45443f; padding: 12px 6px 0; }
   .specs { background: transparent; }
   .specs th, .specs td { padding: 16px 0; border-color: #dcd7cf; }
   .specs th { width: 40%; padding-right: 16px; }

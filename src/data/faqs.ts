@@ -59,3 +59,25 @@ export const FAQ_UNIVERSAL = [
     a: 'Base reforzada, más dura y resistente durante el fraguado, y anilla con aditivo de fibra en un nuevo color más visible en obra. Todas las mejoras se probaron en obra real antes de lanzarlas.',
   },
 ];
+
+export const FAQ_NIVELACION = [
+  { q: '¿Qué es un sistema de nivelación para mortero autonivelante?', a: 'Es un conjunto de niveladores que se colocan sobre el soporte antes del vertido y marcan, con una anilla regulable por láser, la altura de acabado del mortero autonivelante. Sirve para controlar el espesor y conseguir una superficie uniforme.' },
+  { q: '¿Qué diferencia hay entre PIKO y el Nivelador Universal?', a: 'El PIKO tiene punta y se clava en la placa de aislamiento del suelo radiante. El Nivelador Universal tiene base plana y se apoya sobre superficies duras, por lo que está pensado para recrecidos.' },
+  { q: '¿Cuántos niveladores necesito por m²?', a: `Se recomienda aproximadamente un nivelador cada ${M2_POR_NIVELADOR} m². Para 100 m², unos ${Math.ceil(100 / M2_POR_NIVELADOR)} niveladores.` },
+  { q: '¿Por qué no usar trípodes de acero?', a: 'Pesan cerca de 1 kg cada uno, se oxidan con el pH alcalino del mortero, se limpian mal y requieren asentar bien sus tres patas. Los niveladores KREOX pesan entre 20 y 250 g, no se oxidan y se colocan en segundos.' },
+  { q: '¿Son reutilizables?', a: 'Sí. Se retiran tras el vertido, se limpian y se vuelven a usar. Las piezas que se desgastan (arandela, base y anilla metálica) se venden como recambio.' },
+  { q: '¿Dónde se fabrican?', a: 'En España, en Ibi (Alicante). KREOX es una empresa familiar de tercera generación y sus niveladores son productos patentados.' },
+];
+
+export const FAQ_CALCULADORA = [
+  { q: '¿Cuántos niveladores de mortero autonivelante se necesitan por m²?', a: `Como referencia, KREOX recomienda un nivelador cada ${M2_POR_NIVELADOR} m² aproximadamente. Para 100 m² son unos ${Math.ceil(100 / M2_POR_NIVELADOR)} niveladores.` },
+  { q: '¿Cuántos m² cubre una caja de PIKO?', a: `Una caja trae ${PRODUCTOS.piko.caja} PIKO, suficiente para unos ${PRODUCTOS.piko.caja * M2_POR_NIVELADOR} m² en un mismo vertido con la densidad recomendada.` },
+  { q: '¿Cuántos m² cubre una caja de Niveladores Universales?', a: `Una caja trae ${PRODUCTOS.universal.caja} niveladores, suficiente para unos ${PRODUCTOS.universal.caja * M2_POR_NIVELADOR} m² en un mismo vertido con la densidad recomendada.` },
+  { q: 'Si los niveladores son reutilizables, ¿necesito tantos?', a: 'Necesitas los suficientes para la superficie que vas a verter de una vez. Después se retiran, se limpian y se reutilizan en el siguiente vertido u obra.' },
+];
+
+export const FAQ_TRIPODE = [
+  { q: '¿Por qué se oxidan los trípodes de nivelación?', a: 'Porque son de acero y el mortero tiene un pH alcalino. El contacto repetido con el mortero los corroe, los hace menos duraderos y dificulta su limpieza.' },
+  { q: '¿Cuánto peso ahorro con PIKO frente a trípodes?', a: `Con un nivelador cada ${M2_POR_NIVELADOR} m², 100 m² necesitan unos ${Math.ceil(100 / M2_POR_NIVELADOR)} niveladores: unos ${(Math.ceil(100 / M2_POR_NIVELADOR) * PRODUCTOS.tripode.pesoG) / 1000} kg en trípodes de acero frente a unos ${(Math.ceil(100 / M2_POR_NIVELADOR) * PRODUCTOS.piko.pesoG) / 1000} kg en PIKO.` },
+  { q: '¿El PIKO es igual de preciso que un trípode?', a: 'Sí. La altura se marca igualmente con láser (habitual o con receptor) y la anilla del PIKO se ajusta a esa línea. Además, la anilla sirve de referencia visual durante el vertido.' },
+];

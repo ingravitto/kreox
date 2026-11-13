@@ -58,6 +58,7 @@ export const NAV = [
   },
   { label: 'Noticias', href: '/noticias/' },
   { label: 'Empresa', href: '/empresa/' },
+  { label: 'Ayuda', href: '/preguntas-frecuentes/' },
 ] as const;
 
 // Densidad recomendada publicada por KREOX: aprox. 1 nivelador cada 2 m².

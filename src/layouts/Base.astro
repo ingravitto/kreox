@@ -4,6 +4,9 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import JsonLd from '../components/JsonLd.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import MobileBar from '../components/MobileBar.astro';
+import f400 from '@fontsource/poppins/files/poppins-latin-400-normal.woff2?url';
+import f600 from '@fontsource/poppins/files/poppins-latin-600-normal.woff2?url';
 import { SITE } from '../data/site';
 import { organizationSchema, websiteSchema, breadcrumbSchema } from '../data/schema';
 
@@ -39,6 +42,8 @@ const graph = [organizationSchema(), websiteSchema(), ...(crumbs ? [breadcrumbSc
     <link rel="canonical" href={canonical} />
     <meta name="robots" content={robots} />
     <meta name="theme-color" content="#121211" />
+    <link rel="preload" href={f600} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={f400} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="alternate" type="application/rss+xml" title="Noticias KREOX" href="/noticias/rss.xml" />
     <script is:inline>document.documentElement.classList.replace('no-js', 'js');</script>
@@ -50,7 +55,11 @@ const graph = [organizationSchema(), websiteSchema(), ...(crumbs ? [breadcrumbSc
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={title} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
     <JsonLd data={{ '@context': 'https://schema.org', '@graph': graph }} />
     <slot name="head" />
@@ -63,6 +72,7 @@ const graph = [organizationSchema(), websiteSchema(), ...(crumbs ? [breadcrumbSc
       <slot />
     </main>
     <Footer />
+    <MobileBar />
     <script>
       // Entrada suave de bloques al hacer scroll (respeta prefers-reduced-motion vía CSS).
       const els = document.querySelectorAll('[data-reveal]');
