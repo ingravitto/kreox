@@ -44,6 +44,7 @@ const year = new Date().getFullYear();
         <address>
           {SITE.address.street}<br />{SITE.address.postalCode} {SITE.address.city} ({SITE.address.region})<br />
           <a href={SITE.phoneHref}>{SITE.phone}</a><br />
+          WhatsApp: <a href={SITE.whatsapp} target="_blank" rel="noopener">{SITE.whatsappDisplay}<span class="visually-hidden"> (se abre en una nueva ventana)</span></a><br />
           <a href={`mailto:${SITE.email}`}>{SITE.email}</a><br />
           Exportación: <a href={`mailto:${SITE.emailExport}`}>{SITE.emailExport}</a>
         </address>

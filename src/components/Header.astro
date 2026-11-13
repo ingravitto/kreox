@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import logo from '../assets/img/kreox-logo-blanco.png';
-import { NAV, SITE } from '../data/site';
+import { NAV, SITE, TARIFA, waTarifa } from '../data/site';
 interface Props { overlay?: boolean }
 const { overlay = false } = Astro.props;
 const path = Astro.url.pathname;
@@ -49,7 +49,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
         <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1z" fill="currentColor"/></svg>
         <span>{SITE.phone}</span>
       </a>
-      <a class="btn btn--sand cta" href="/contacto/">Tarifa 2026</a>
+      <a class="btn btn--sand cta" href={waTarifa()} target="_blank" rel="noopener">{TARIFA}<span class="visually-hidden"> (abre WhatsApp)</span></a>
     </div>
 
     <details class="mobile">
@@ -63,7 +63,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
             )}
           </div>
         ))}
-        <a class="btn btn--sand" href="/contacto/">Pide tarifa 2026</a>
+        <a class="btn btn--sand" href={waTarifa()} target="_blank" rel="noopener">Nueva {TARIFA.toLowerCase()}<span class="visually-hidden"> (abre WhatsApp)</span></a>
         <a class="m-phone" href={SITE.phoneHref}>{SITE.phone}</a>
       </nav>
     </details>

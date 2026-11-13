@@ -5,7 +5,7 @@ import Base from '../../layouts/Base.astro';
 import Steps from '../../components/Steps.astro';
 import Faq from '../../components/Faq.astro';
 import CtaTarifa from '../../components/CtaTarifa.astro';
-import { AZULEJOS, SITE } from '../../data/site';
+import { AZULEJOS, SITE, waTarifa } from '../../data/site';
 import { TILE_PRODUCTS, TILE_FAQ, type TileProduct } from '../../data/azulejos';
 import { faqSchema, ORG_ID } from '../../data/schema';
 
@@ -45,7 +45,7 @@ const schema = [
     crumbs={[{ name: 'Azulejos', url: AZULEJOS }, { name: p.name, url }]}
   >
     <div class="btn-row">
-      <a class="btn btn--sand" href="/contacto/?interes=azulejos">Pedir tarifa 2026</a>
+      <a class="btn btn--sand" href={waTarifa("azulejos")} target="_blank" rel="noopener">Pedir tarifa 2027<span class="visually-hidden"> (abre WhatsApp)</span></a>
       <a class="btn btn--ghost" href={SITE.tileCalculator}>Calculadora de piezas</a>
     </div>
   </PageHero>
@@ -84,7 +84,7 @@ const schema = [
   </section>
 
   <Faq faqs={TILE_FAQ} />
-  <CtaTarifa interes="azulejos" text="Te enviamos la tarifa de Kalzos, Kuñas y Alikates." />
+  <CtaTarifa interes="azulejos" text="Escríbenos por WhatsApp y te enviamos la tarifa 2027 de Kalzos, Kuñas y Alikates." />
 </Base>
 <style>
   .pimg { border-radius: 22px; width: 100%; aspect-ratio: 1; object-fit: cover; }

@@ -42,7 +42,7 @@ if ($nombre === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || !$privacidad
     volver('/contacto/?error=1');
 }
 
-$asunto = '[Web KREOX] Solicitud de tarifa · ' . ($intereses[$interes] ?? 'Sin especificar');
+$asunto = '[Web KREOX] Consulta · ' . ($intereses[$interes] ?? 'Sin especificar');
 $cuerpo = "Nueva solicitud desde kreox.es\n\n"
     . "Nombre: $nombre\n"
     . "Empresa: $empresa\n"

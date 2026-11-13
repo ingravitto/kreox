@@ -36,7 +36,7 @@ const steps = [
 ---
 <Base
   title="KREOX · Niveladores para mortero autonivelante y azulejos"
-  description="Fabricante español de niveladores para mortero autonivelante (PIKO y Universal) y sistemas de colocación de azulejos. Material reciclado. Pide tarifa 2026."
+  description="Fabricante español de niveladores para mortero autonivelante (PIKO y Universal) y sistemas de colocación de azulejos. Material reciclado. Tarifa 2027 por WhatsApp."
   overlay
 >
   <!-- HERO -->
@@ -46,8 +46,8 @@ const steps = [
     <div class="hero-shade" aria-hidden="true"></div>
     <div class="container hero-in on-dark">
       <span class="eyebrow">Innovation for construction</span>
-      <h1>Sistemas de nivelación para mortero autonivelante, <span class="sand">fabricados en España</span></h1>
-      <p class="lead">PIKO y el Nivelador Universal sustituyen al trípode de acero: <strong>hasta 50 veces más ligeros, sin óxido y reutilizables</strong>. Para suelo radiante y recrecidos.</p>
+      <h1>Niveladores para mortero autonivelante <span class="sand">fabricados en España</span></h1>
+      <p class="lead">PIKO y Nivelador Universal sustituyen al trípode de acero: <strong>hasta 50 veces más ligeros, sin óxido y reutilizables</strong>.</p>
       <div class="btn-row">
         <a class="btn btn--sand" href={PRODUCTOS.piko.url}>Descubre PIKO <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
         <a class="btn btn--ghost" href={PRODUCTOS.universal.url}>Nivelador Universal</a>
@@ -284,7 +284,7 @@ const steps = [
   .ch-k { font-size: .9rem; color: var(--on-dark-soft); }
   .ch-v { font-size: 1.1rem; font-weight: 600; color: var(--white); }
   /* Hero */
-  .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; padding: calc(var(--header-h) + 60px) 0 clamp(56px, 8vw, 96px); }
+  .hero { position: relative; min-height: min(100svh, 820px); display: flex; align-items: center; overflow: hidden; padding: calc(var(--header-h) + 32px) 0 clamp(40px, 5vw, 64px); }
   .hero-bg, .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 75% center; }
   .hero-video :global(video) { object-position: 70% center; background: transparent; }
   .hero-video :global(.av-toggle) { bottom: 22%; right: 8%; }
@@ -297,15 +297,18 @@ const steps = [
   .hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(18,18,17,.92) 0%, rgba(18,18,17,.6) 38%, rgba(18,18,17,0) 62%), linear-gradient(0deg, rgba(18,18,17,.85) 0%, rgba(18,18,17,0) 40%); }
   .hero-in { position: relative; z-index: 1; }
   @media (max-width: 959px) {
-    .hero { align-items: flex-start; padding-bottom: 46vh; background: #050505; }
-    .hero-bg, .hero-video { inset: auto 0 0 0; top: auto; height: 50vh; }
+    .hero { align-items: flex-start; padding-bottom: 36vh; background: #050505; }
+    .hero .stats { display: none; }
+    .hero-bg, .hero-video { inset: auto 0 0 0; top: auto; height: 40vh; }
     .hero-bg, .hero-video :global(video) { object-position: 62% center; -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 32%); mask-image: linear-gradient(180deg, transparent 0%, #000 32%); }
     .scroll { display: none; }
   }
   @media (max-width: 959px) { .hero-shade { display: none; } }
-  .hero h1 { max-width: 15ch; font-size: clamp(2.6rem, 6.4vw, 5.6rem); }
+  .hero h1 { max-width: 19ch; font-size: clamp(2.2rem, 4.3vw, 3.9rem); }
   .hero .lead { max-width: 560px; color: var(--on-dark); }
-  .hero .stats { max-width: 720px; margin-top: clamp(36px, 5vw, 64px); }
+  .hero .stats { max-width: 640px; margin-top: clamp(28px, 3.5vw, 44px); }
+  .hero .stats dt { font-size: clamp(1.6rem, 2.6vw, 2.2rem); }
+  .hero .btn-row { margin-top: 1.5em; }
   .hero .lead, .hero .btn-row, .hero .stats { animation: rise 1s var(--ease) both; }
   .hero .lead { animation-delay: .2s; } .hero .btn-row { animation-delay: .3s; } .hero .stats { animation-delay: .45s; }
   .scroll { position: absolute; right: var(--gutter); bottom: 40px; width: 26px; height: 44px; border: 1px solid rgba(255,255,255,.4); border-radius: 99px; display: none; }

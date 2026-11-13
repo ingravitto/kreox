@@ -13,7 +13,7 @@ import WeightBars from './WeightBars.astro';
 import Calculadora from './Calculadora.astro';
 import Faq from './Faq.astro';
 import CtaTarifa from './CtaTarifa.astro';
-import { NIVELACION, SITE } from '../data/site';
+import { NIVELACION, SITE, waTarifa } from '../data/site';
 
 interface Props {
   kind: 'piko' | 'universal';
@@ -77,7 +77,7 @@ const schema = [
   <PageHero eyebrow={p.hero.eyebrow} title={p.hero.title} accent={p.hero.accent} lead={p.hero.lead} bg={p.hero.bg} bgAlt={p.hero.bgAlt} product={p.hero.product} productAlt={p.hero.productAlt} crumbs={[{ name: 'Nivelación', url: NIVELACION }, { name: p.name, url }]}>
     <div class="chips hero-chips"><span class="chip chip--sand">Producto patentado</span><span class="chip">Fabricado en España</span><span class="chip">Reutilizable</span></div>
     <div class="btn-row">
-      <a class="btn btn--sand" href="/contacto/?interes=nivelacion">Pedir tarifa 2026 <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+      <a class="btn btn--sand" href={waTarifa("nivelacion")} target="_blank" rel="noopener">Pedir tarifa 2027 <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="visually-hidden"> (abre WhatsApp)</span></a>
       <a class="btn btn--ghost" href="#calculadora">¿Cuántos necesito?</a>
     </div>
   </PageHero>

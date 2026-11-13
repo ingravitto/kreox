@@ -1,11 +1,12 @@
 ---
 import { Image } from 'astro:assets';
 import bg from '../assets/img/fondo-piedra-productos-kreox.jpg';
-import { SITE } from '../data/site';
+import { SITE, waTarifa } from '../data/site';
+import WaIcon from './WaIcon.astro';
 interface Props { title?: string; text?: string; interes?: 'nivelacion' | 'azulejos' }
 const {
-  title = 'Pide la tarifa 2026',
-  text = 'Te enviamos la tarifa y te asesoramos sobre cuántos niveladores necesitas para tu obra.',
+  title = 'Pide la nueva tarifa 2027',
+  text = 'Escríbenos por WhatsApp y te enviamos la tarifa 2027. Te asesoramos sobre cuántos niveladores necesitas para tu obra.',
   interes = 'nivelacion',
 } = Astro.props;
 ---
@@ -17,7 +18,7 @@ const {
     <h2>{title}</h2>
     <p class="lead">{text}</p>
     <div class="btn-row">
-      <a class="btn btn--sand" href={`/contacto/?interes=${interes}`}>Pedir tarifa <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+      <a class="btn btn--sand" href={waTarifa(interes)} target="_blank" rel="noopener"><WaIcon size={16} /> Pedir tarifa por WhatsApp<span class="visually-hidden"> (abre WhatsApp)</span></a>
       <a class="btn btn--ghost" href={SITE.phoneHref}>{SITE.phone}</a>
     </div>
   </div>

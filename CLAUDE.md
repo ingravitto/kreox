@@ -30,3 +30,8 @@ Las URLs de la web WordPress anterior se redirigen en `public/.htaccess`. Si cam
 - El titular (H1) del hero no lleva animación de opacidad: es el elemento LCP.
 - Vídeos: siempre con `AutoVideo` (preload none, póster diferido). No poner `poster` directo en vídeos fuera de la primera pantalla.
 - Submenús: botón con `aria-expanded`; Escape cierra.
+
+## Tarifa y contacto
+- La tarifa (ahora **Tarifa 2027**) se pide **solo por WhatsApp**: usar `waTarifa(interes)` de `src/data/site.ts` en cualquier botón de tarifa. Nunca enlazar la tarifa al formulario.
+- Barra fija del móvil: solo "WhatsApp" y "Nueva tarifa 2027" (las dos abren WhatsApp). En escritorio, botón flotante de WhatsApp.
+- El formulario de /contacto/ es para otras consultas.

@@ -4,7 +4,7 @@ import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import Faq from '../../components/Faq.astro';
 import CtaTarifa from '../../components/CtaTarifa.astro';
-import { AZULEJOS, SITE, NIVELACION } from '../../data/site';
+import { AZULEJOS, SITE, NIVELACION, waTarifa } from '../../data/site';
 import { TILE_PRODUCTS, TILE_FAQ } from '../../data/azulejos';
 import { faqSchema } from '../../data/schema';
 import imgSistema from '../../assets/img/sistema-nivelacion-azulejos-kreox.png';
@@ -27,7 +27,7 @@ import imgSistema from '../../assets/img/sistema-nivelacion-azulejos-kreox.png';
   >
     <div class="chips" style="margin-top:24px"><span class="chip chip--sand">Compatible con todas las kuñas</span><span class="chip">Rotura limpia</span><span class="chip">Losas de 3 a 15 mm</span></div>
     <div class="btn-row">
-      <a class="btn btn--sand" href="/contacto/?interes=azulejos">Pedir tarifa 2026</a>
+      <a class="btn btn--sand" href={waTarifa("azulejos")} target="_blank" rel="noopener">Pedir tarifa 2027<span class="visually-hidden"> (abre WhatsApp)</span></a>
       <a class="btn btn--ghost" href={SITE.tileCalculator}>Calculadora de piezas</a>
     </div>
   </PageHero>
@@ -63,7 +63,7 @@ import imgSistema from '../../assets/img/sistema-nivelacion-azulejos-kreox.png';
   </section>
 
   <Faq faqs={TILE_FAQ} />
-  <CtaTarifa interes="azulejos" text="Te enviamos la tarifa de Kalzos, Kuñas y Alikates." />
+  <CtaTarifa interes="azulejos" text="Escríbenos por WhatsApp y te enviamos la tarifa 2027 de Kalzos, Kuñas y Alikates." />
 </Base>
 <style>
   .hero-img { border-radius: 22px; width: 100%; }

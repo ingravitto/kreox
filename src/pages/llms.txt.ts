@@ -37,7 +37,7 @@ ${noticias.map((n) => `- [${n.data.title}](${U}${noticiaUrl(n)}) (${n.data.date.
 ## Empresa y contacto
 
 - [Empresa](${U}/empresa/)
-- [Contacto y tarifa 2026](${U}/contacto/): ${SITE.phone} · ${SITE.email} · exportación: ${SITE.emailExport}
+- [Contacto](${U}/contacto/). La tarifa 2027 se pide por WhatsApp (${SITE.whatsappDisplay}). Teléfono ${SITE.phone} · ${SITE.email} · exportación: ${SITE.emailExport}
 - Dirección: ${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.city} (${SITE.address.region}), España
 `;
   return new Response(txt, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });

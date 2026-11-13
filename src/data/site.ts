@@ -27,7 +27,17 @@ export const SITE = {
     tiktok: 'https://www.tiktok.com/@kreox.es',
   },
   tileCalculator: 'https://calculadora.kreox.es/',
+  whatsapp: `https://api.whatsapp.com/send?phone=34611875047&text=${encodeURIComponent('Hola, quiero información sobre los niveladores KREOX.')}`,
+  whatsappDisplay: '+34 611 87 50 47',
 } as const;
+
+export const TARIFA = 'Tarifa 2027';
+const WA_BASE = 'https://api.whatsapp.com/send?phone=34611875047&text=';
+/** La tarifa se pide por WhatsApp. `interes` personaliza el mensaje ya escrito. */
+export function waTarifa(interes: 'nivelacion' | 'azulejos' | 'general' = 'general') {
+  const linea = interes === 'nivelacion' ? ' de niveladores para mortero autonivelante' : interes === 'azulejos' ? ' de colocación de azulejos' : '';
+  return WA_BASE + encodeURIComponent(`Hola, quiero recibir la nueva tarifa 2027 de KREOX${linea}.`);
+}
 
 export const NIVELACION = '/nivelacion-mortero-autonivelante/';
 export const AZULEJOS = '/colocacion-azulejos/';

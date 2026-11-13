@@ -1,0 +1,23 @@
+---
+// Botón flotante de WhatsApp (solo escritorio; en móvil está en la barra inferior).
+// Es un enlace normal: no carga scripts de terceros ni instala cookies.
+import WaIcon from './WaIcon.astro';
+import { SITE } from '../data/site';
+---
+<aside class="wa-wrap" aria-label="Contacto rápido por WhatsApp">
+<a class="wa" href={SITE.whatsapp} target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp (se abre en una nueva ventana)">
+  <span class="wa-label" aria-hidden="true">¿Hablamos? <strong>WhatsApp</strong></span>
+  <span class="wa-btn"><WaIcon size={28} /></span>
+</a>
+</aside>
+<style>
+  .wa { position: fixed; right: 24px; bottom: 24px; z-index: 45; display: none; align-items: center; gap: 12px; text-decoration: none; }
+  @media (min-width: 960px) { .wa { display: inline-flex; } }
+  .wa-btn { width: 58px; height: 58px; border-radius: 50%; display: grid; place-content: center; background: #075e54; color: #fff; box-shadow: 0 12px 30px -8px rgba(0,0,0,.45); transition: transform .25s var(--ease), background .25s; }
+  .wa-label { padding: 10px 16px; border-radius: 999px; background: var(--white); color: var(--ink); font-size: .85rem; box-shadow: 0 10px 30px -10px rgba(0,0,0,.35); opacity: 0; transform: translateX(8px); transition: opacity .25s, transform .25s var(--ease); pointer-events: none; }
+  .wa-label strong { color: #0b6b60; }
+  .wa:hover .wa-btn, .wa:focus-visible .wa-btn { transform: scale(1.06); background: #064d45; }
+  .wa:hover .wa-label, .wa:focus-visible .wa-label { opacity: 1; transform: none; }
+  .wa:focus-visible { outline: none; }
+  .wa:focus-visible .wa-btn { outline: 3px solid var(--sand); outline-offset: 3px; }
+</style>

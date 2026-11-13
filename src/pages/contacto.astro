@@ -2,30 +2,38 @@
 import PageHero from '../components/PageHero.astro';
 import imgHeroBg from '../assets/img/fondo-piedra-productos-kreox.jpg';
 import Base from '../layouts/Base.astro';
-import { SITE } from '../data/site';
+import { SITE, waTarifa } from '../data/site';
+import WaIcon from '../components/WaIcon.astro';
 ---
 <Base
   overlay
-  title="Contacto y tarifa 2026 | KREOX"
-  description="Pide la tarifa 2026 de KREOX o contacta con nuestro departamento comercial: +34 965 552 170, comercial@kreox.es. Ibi (Alicante)."
+  title="Contacto y tarifa 2027 por WhatsApp | KREOX"
+  description="Pide la tarifa 2027 de KREOX por WhatsApp (+34 611 87 50 47) o contacta con nuestro departamento comercial: +34 965 552 170, comercial@kreox.es."
   breadcrumbs={[{ name: 'Contacto', url: '/contacto/' }]}
 >
   <PageHero
     compact
     eyebrow="Consigue nuestra tarifa"
-    title="Pide la tarifa 2026 o"
-    accent="resuelve tus dudas"
-    lead="Rellena el formulario y nuestro departamento comercial te responde con la tarifa y el asesoramiento que necesites para tu obra."
+    title="Pide la"
+    accent="tarifa 2027"
+    lead="La tarifa se pide por WhatsApp: escríbenos y te la enviamos con el asesoramiento para tu obra."
     bg={imgHeroBg}
     crumbs={[{ name: 'Contacto', url: '/contacto/' }]}
-  />
+  >
+    <div class="btn-row">
+      <a class="btn btn--sand wa-big" href={waTarifa()} target="_blank" rel="noopener"><WaIcon size={18} /> Pedir tarifa 2027 por WhatsApp<span class="visually-hidden"> (abre WhatsApp)</span></a>
+    </div>
+    <p class="wa-num">WhatsApp {SITE.whatsappDisplay}</p>
+  </PageHero>
   <section class="section">
     <div class="container split split--top">
       <div>
-        <span class="eyebrow">Hablamos</span>
+        <span class="eyebrow">Otras consultas</span>
         <h2>Departamento comercial</h2>
+        <p class="muted">Para dudas técnicas, distribución o exportación, escríbenos o usa el formulario.</p>
         <ul class="contact">
           <li><strong>Teléfono</strong><a href={SITE.phoneHref}>{SITE.phone}</a></li>
+          <li><strong>WhatsApp</strong><a href={SITE.whatsapp} target="_blank" rel="noopener">{SITE.whatsappDisplay}<span class="visually-hidden"> (se abre en una nueva ventana)</span></a></li>
           <li><strong>Comercial</strong><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
           <li><strong>Exportación</strong><a href={`mailto:${SITE.emailExport}`}>{SITE.emailExport}</a></li>
           <li><strong>Dirección</strong>{SITE.address.street} · {SITE.address.postalCode} {SITE.address.city} ({SITE.address.region})</li>
@@ -50,7 +58,7 @@ import { SITE } from '../data/site';
         <div class="hp" aria-hidden="true"><label>Web<input name="web" tabindex="-1" autocomplete="off" /></label></div>
         <input type="hidden" name="ts" value="" />
         <label class="check"><input type="checkbox" name="privacidad" value="1" required /> <span>He leído y acepto la <a href="/politica-privacidad/">política de privacidad</a>.</span></label>
-        <button class="btn btn--dark" type="submit">Enviar y pedir tarifa</button>
+        <button class="btn btn--dark" type="submit">Enviar consulta</button>
       </form>
     </div>
   </section>
@@ -64,6 +72,8 @@ import { SITE } from '../data/site';
   (form.elements.namedItem('ts') as HTMLInputElement).value = String(Math.floor(Date.now() / 1000));
 </script>
 <style>
+  .wa-num { margin: 14px 0 0; color: var(--on-dark-soft); font-size: .9rem; }
+  .wa-big { font-size: .82rem; }
   .top { align-items: start; }
   .contact { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 22px; font-size: 1.1rem; }
   .contact a { text-decoration: none; color: var(--ink); font-weight: 500; }
