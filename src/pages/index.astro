@@ -153,13 +153,23 @@ const steps = [
   <section class="how section section--dark grain">
     <Image src={imgSuelo} alt="Niveladores PIKO clavados en un suelo radiante con la línea del láser a la altura de las anillas" widths={[960, 1920]} sizes="100vw" class="how-bg" />
     <div class="how-shade" aria-hidden="true"></div>
-    <div class="container rel">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow">Cómo funciona</span>
-        <h2>Nivelado perfecto en 4 pasos</h2>
-        <p>Sin trípodes que asentar ni óxido que limpiar. Compatible con láser habitual y con láser con receptor.</p>
+    <div class="container rel how-grid">
+      <div>
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Cómo funciona</span>
+          <h2>Nivelado perfecto en 4 pasos</h2>
+          <p>Sin trípodes que asentar ni óxido que limpiar. Compatible con láser habitual y con láser con receptor.</p>
+        </div>
+        <Steps steps={steps} dark />
       </div>
-      <Steps steps={steps} dark />
+      <figure class="reel" data-reveal>
+        <video controls preload="none" playsinline poster="/videos/reel-kreox-piko-universal-poster.jpg" width="720" height="1280" aria-label="Vídeo: cómo se nivela un suelo con PIKO y Nivelador Universal">
+          <source src="/videos/reel-kreox-piko-universal.mp4" type="video/mp4" />
+          <track kind="captions" src="/videos/reel-kreox-piko-universal.es.vtt" srclang="es" label="Español" default />
+          Tu navegador no puede reproducir el vídeo. <a href="/videos/reel-kreox-piko-universal.mp4">Descárgalo aquí</a>.
+        </video>
+        <figcaption>Míralo en 20 segundos · con sonido y subtítulos</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -338,6 +348,11 @@ const steps = [
 
   /* Cómo funciona */
   .how { overflow: hidden; }
+  .how-grid { display: grid; gap: 40px; align-items: center; }
+  @media (min-width: 1000px) { .how-grid { grid-template-columns: 1fr 340px; gap: 64px; } .how-grid :global(.steps) { grid-template-columns: repeat(2, 1fr); } }
+  .reel { margin: 0 auto; width: 100%; max-width: 340px; }
+  .reel video { width: 100%; aspect-ratio: 9 / 16; border-radius: 24px; background: #000; border: 1px solid var(--line-dark); box-shadow: 0 30px 60px -20px rgba(0,0,0,.8); }
+  .reel figcaption { margin-top: 12px; text-align: center; font-size: .85rem; color: var(--on-dark-soft); }
   .how-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .45; }
   .film-grid { display: grid; gap: 18px; }
   @media (min-width: 860px) { .film-grid { grid-template-columns: 1fr 1fr; } }

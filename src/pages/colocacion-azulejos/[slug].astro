@@ -1,6 +1,5 @@
 ---
 import PageHero from '../../components/PageHero.astro';
-import imgHeroBg from '../../assets/img/fondo-piedra-productos-kreox.jpg';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import Steps from '../../components/Steps.astro';
@@ -41,7 +40,6 @@ const schema = [
     eyebrow="Colocación de azulejos"
     title={p.name}
     lead={p.intro}
-    bg={imgHeroBg}
     product={p.img}
     productAlt={p.alt}
     crumbs={[{ name: 'Azulejos', url: AZULEJOS }, { name: p.name, url }]}

@@ -7,8 +7,6 @@ import { productSchema, faqSchema } from '../../data/schema';
 import imgProducto from '../../assets/img/piko-nivelador-suelo-radiante-kreox.png';
 import imgBg from '../../assets/img/hf-piko-suelo-radiante-laser.jpg';
 import imgPlano from '../../assets/img/piko-medidas-plano.png';
-import imgComo from '../../assets/img/piko-como-funciona-suelo-radiante.png';
-import imgLaser from '../../assets/img/piko-laser-receptor-suelo-radiante.jpg';
 import imgCaja from '../../assets/img/caja-100-piko.jpg';
 import imgLimpieza from '../../assets/img/piko-limpieza-reutilizable.jpg';
 import imgTriPesado from '../../assets/img/tripodes-acero-pesados.jpg';
@@ -89,10 +87,6 @@ const schema = [
     { title: 'Ajusta la anilla', text: 'Deslízala hasta la línea marcada por el láser.' },
     { title: 'Vierte y retira', text: 'Mortero hasta la anilla. Después retira el PIKO y límpialo para la próxima obra.' },
   ]}
-  stepsMedia={[
-    { img: imgComo, alt: 'Esquema del PIKO clavado en la placa de aislamiento con la anilla a la altura del mortero autonivelante' },
-    { img: imgLaser, alt: 'Instalador ajustando un PIKO sobre placa de tetones con láser y receptor' },
-  ]}
   gallery={[
     { img: imgTriPesado, alt: 'Operario cargando decenas de trípodes de acero', caption: 'Trípodes: pesados', good: false },
     { img: imgTriOxido, alt: 'Trípodes de acero oxidados por el mortero', caption: 'Trípodes: se oxidan', good: false },
@@ -106,6 +100,16 @@ const schema = [
   ]}
   other={{ name: '¿Superficie dura, sin aislamiento?', text: 'Usa el Nivelador Universal, con base plana para recrecidos →', href: `${NIVELACION}nivelador-universal/`, img: imgUni, alt: 'Nivelador Universal' }}
   film={{ src: '/videos/piko-vertido-suelo-radiante.mp4', poster: imgBg, label: 'Vertido de mortero autonivelante sobre suelo radiante con niveladores PIKO', title: 'El mortero llega a la anilla', accent: 'y se queda plano.' }}
+  video={{
+    src: '/videos/reel-kreox-piko-universal.mp4',
+    poster: '/videos/reel-kreox-piko-universal-poster.jpg',
+    captions: '/videos/reel-kreox-piko-universal.es.vtt',
+    eyebrow: 'En 20 segundos',
+    title: 'Nivelar un suelo nunca fue tan fácil',
+    checks: ['Lo clavas en el aislamiento.', 'Marcas la altura con el láser.', 'Subes la anilla y viertes el mortero.'],
+    text: 'Vídeo con sonido y subtítulos en español.',
+    duration: 22,
+  }}
   faqs={FAQ_PIKO}
   faqTitle="Preguntas frecuentes sobre el PIKO"
   cta={{ title: '¿Vas a nivelar un suelo radiante?', text: 'Pide la tarifa 2026 y te asesoramos sobre cuántos PIKO necesitas para tu obra.' }}

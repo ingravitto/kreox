@@ -65,9 +65,11 @@ const IMAGES: Record<string, Img[]> = {
   [`${NIVELACION}lamina-bajo-solera/`]: [{ src: lamina, title: 'Lámina de polietileno bajo solera' }],
 };
 
+const REEL: Vid = { file: '/videos/reel-kreox-piko-universal.mp4', thumb: pikoSuelo, title: 'Nivelar un suelo nunca fue tan fácil: PIKO y Nivelador Universal', description: 'Cómo se nivela mortero autonivelante con PIKO en suelo radiante y con Nivelador Universal en recrecidos, en 20 segundos.', duration: 22 };
+
 const VIDEOS: Record<string, Vid[]> = {
-  '/': [{ file: '/videos/hero-niveladores-kreox.mp4', thumb: hero, title: 'Niveladores KREOX sobre mortero autonivelante', description: 'PIKO y Nivelador Universal de KREOX sobre mortero autonivelante recién vertido.', duration: 12 }],
-  [`${NIVELACION}piko/`]: [{ file: '/videos/piko-vertido-suelo-radiante.mp4', thumb: pikoSuelo, title: 'PIKO: vertido de mortero autonivelante sobre suelo radiante', description: 'El mortero autonivelante cubre el suelo radiante y sube hasta la anilla de los niveladores PIKO, marcada con láser.', duration: 8 }],
+  '/': [{ file: '/videos/hero-niveladores-kreox.mp4', thumb: hero, title: 'Niveladores KREOX sobre mortero autonivelante', description: 'PIKO y Nivelador Universal de KREOX sobre mortero autonivelante recién vertido.', duration: 12 }, REEL],
+  [`${NIVELACION}piko/`]: [{ file: '/videos/piko-vertido-suelo-radiante.mp4', thumb: pikoSuelo, title: 'PIKO: vertido de mortero autonivelante sobre suelo radiante', description: 'El mortero autonivelante cubre el suelo radiante y sube hasta la anilla de los niveladores PIKO, marcada con láser.', duration: 8 }, REEL],
   [`${NIVELACION}nivelador-universal/`]: [
     { file: '/videos/universal-vertido-recrecido.mp4', thumb: uniVertido, title: 'Nivelador Universal: recrecido con mortero autonivelante', description: 'El mortero autonivelante avanza sobre la solera entre los Niveladores Universales de KREOX.', duration: 8 },
     { file: '/videos/nivelador-universal-instalacion.mp4', thumb: uniPlano, title: 'Instalación del Nivelador Universal en obra', description: 'Marcado de la cota con láser con receptor y ajuste de la anilla del Nivelador Universal.', duration: 119 },

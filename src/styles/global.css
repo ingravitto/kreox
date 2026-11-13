@@ -121,7 +121,7 @@ strong { font-weight: 600; color: inherit; }
 .lead { font-size: clamp(1.08rem, 1.6vw, 1.28rem); line-height: 1.6; font-weight: 300; }
 .lead strong { font-weight: 600; }
 .muted { color: var(--text-soft); font-size: 0.92rem; }
-.section--dark .muted, .section--graphite .muted { color: var(--on-dark-soft); }
+.section--dark .muted, .section--graphite .muted, .on-dark .muted { color: var(--on-dark-soft); }
 .sand { color: var(--sand-strong); }
 .section--dark .sand, .section--graphite .sand, .on-dark .sand, .hero .sand { color: var(--sand); }
 .center { text-align: center; }

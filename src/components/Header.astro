@@ -10,7 +10,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 <header class:list={['site-header', { overlay }]} data-header>
   <div class="container bar">
     <a href="/" class="logo" aria-label="KREOX, ir a la portada">
-      <Image src={logo} alt="KREOX" width={150} loading="eager" />
+      <Image src={logo} alt="KREOX" width={112} densities={[1, 2]} loading="eager" />
     </a>
 
     <nav class="desktop" aria-label="Principal">

@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import logo from '../assets/img/kreox-logo-blanco.png';
-import madeSpain from '../assets/img/fabricado-en-espana.png';
 import Partners from './Partners.astro';
 import { SITE, NIVELACION, AZULEJOS } from '../data/site';
 const year = new Date().getFullYear();
@@ -10,10 +9,13 @@ const year = new Date().getFullYear();
   <div class="container">
     <div class="top">
       <div class="brand">
-        <Image src={logo} alt="KREOX" width={150} />
+        <Image src={logo} alt="KREOX" width={120} densities={[1, 2]} class="flogo" />
         <p class="claim">Innovation for construction</p>
         <p>Fabricantes de sistemas de nivelación para mortero autonivelante y para la colocación de azulejos. Empresa familiar de tercera generación en Ibi (Alicante).</p>
-        <div class="made"><Image src={madeSpain} alt="" width={40} /> <span>Diseñado y fabricado en España</span></div>
+        <div class="made">
+          <svg class="ene" viewBox="0 0 48 48" aria-hidden="true"><rect x="1.5" y="1.5" width="45" height="45" rx="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15 15.5h18v3.2H15z" fill="currentColor"/><path d="M15.5 36V22.5h4.6v2.1c1.2-1.6 3-2.5 5.2-2.5 3.9 0 6.2 2.6 6.2 6.8V36h-4.7v-6.4c0-2.3-1.1-3.5-3-3.5-2.1 0-3.6 1.4-3.6 3.9v6z" fill="currentColor"/></svg>
+          <span>Diseñado y fabricado en España</span>
+        </div>
       </div>
       <nav aria-label="Nivelación autonivelante">
         <h2>Nivelación</h2>
@@ -68,9 +70,10 @@ const year = new Date().getFullYear();
   .site-footer { background: var(--ink); color: var(--on-dark-soft); font-size: 0.92rem; padding-top: clamp(64px, 8vw, 110px); overflow: hidden; }
   .top { display: grid; gap: 40px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); }
   @media (min-width: 960px) { .top { grid-template-columns: 1.5fr 1fr 1fr 1.2fr; } }
-  .brand :global(img) { width: 120px; }
+  .brand :global(.flogo) { width: 120px; height: auto; }
   .claim { margin: 14px 0 18px; font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--sand); }
-  .made { display: flex; align-items: center; gap: 12px; color: var(--white); font-size: 0.85rem; margin-top: 20px; }
+  .made { display: flex; align-items: center; gap: 12px; color: var(--white); font-size: 0.88rem; margin-top: 22px; }
+  .ene { width: 36px; height: 36px; flex: none; color: var(--sand); }
   h2 { color: var(--white); font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; margin-bottom: 18px; }
   ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
   a { color: var(--on-dark); text-decoration: none; transition: color .2s; }

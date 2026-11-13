@@ -23,8 +23,8 @@ interface Props {
   plano: { img: ImageMetadata; alt: string };
   specs: [string, string][];
   steps: { title: string; text: string }[];
-  stepsMedia: { img: ImageMetadata; alt: string }[];
-  video?: { src: string; poster: string; text: string };
+  stepsMedia?: { img: ImageMetadata; alt: string }[];
+  video?: { src: string; poster: string; text: string; title?: string; eyebrow?: string; checks?: string[]; captions?: string; ratio?: string; duration?: number };
   film?: { src: string; poster: ImageMetadata; label: string; title: string; accent: string };
   gallery?: { img: ImageMetadata; alt: string; caption: string; good: boolean }[];
   parts: { img: ImageMetadata; alt: string; name: string; caja: string }[];
@@ -59,6 +59,18 @@ const schema = [
         publisher: { '@id': `${SITE.url}/#organization` },
       }]
     : []),
+  ...(p.video
+    ? [{
+        '@type': 'VideoObject',
+        name: p.video.title ? `${p.video.title} · ${p.name}` : `Instalación del ${p.name} en obra`,
+        description: p.video.text,
+        thumbnailUrl: new URL(p.video.poster, SITE.url).href,
+        contentUrl: new URL(p.video.src, SITE.url).href,
+        uploadDate: '2026-11-13',
+        ...(p.video.duration ? { duration: `PT${p.video.duration}S` } : {}),
+        publisher: { '@id': `${SITE.url}/#organization` },
+      }]
+    : []),
 ];
 ---
 <Base title={p.seo.title} description={p.seo.description} ogType="product" image={p.seo.image} overlay breadcrumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }, { name: p.name, url }]} schema={schema}>
@@ -80,9 +92,9 @@ const schema = [
 
   <section class="section section--paper" id="datos">
     <div class="container">
-      <div class="section-head section-head--center" data-reveal>
-        <span class="eyebrow">Ficha técnica</span>
-        <h2>{p.name}, <span class="sand">al milímetro</span></h2>
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Ficha técnica · al milímetro</span>
+        <h2>Datos técnicos del {p.name}</h2>
       </div>
       <div class="split split--top">
         <figure class="plano" data-reveal>
@@ -106,18 +118,25 @@ const schema = [
         <p>Pulsa cada paso o baja con el scroll y verás el proceso en un corte de la obra.</p>
       </div>
       <ComoFunciona kind={p.kind} steps={p.steps} />
-      <div class:list={['media-row', { 'with-video': !!p.video }]}>
-        {p.stepsMedia.map((m) => <div class="m" data-reveal><Image src={m.img} alt={m.alt} widths={[600, 1000, 1477]} sizes="(min-width: 960px) 600px, 92vw" /></div>)}
-        {p.video && (
-          <div class="video" data-reveal>
-            <video controls preload="none" playsinline poster={p.video.poster} width="404" height="720">
-              <source src={p.video.src} type="video/mp4" />
-              Tu navegador no puede reproducir el vídeo. <a href={p.video.src}>Descárgalo aquí</a>.
-            </video>
+      {p.video && (
+        <div class="install" data-reveal>
+          <div class="install-copy on-dark">
+            <span class="eyebrow">{p.video.eyebrow ?? 'Instalación real'}</span>
+            <h3>{p.video.title ?? 'Así se coloca en obra'}</h3>
+            <ul class="checks">
+              {(p.video.checks ?? ['Marcado de la cota con láser con receptor.', 'También funciona con láser habitual.', 'Ajuste de la anilla hasta la línea marcada por el láser.']).map((c) => <li>{c}</li>)}
+            </ul>
             <p class="muted">{p.video.text}</p>
           </div>
-        )}
-      </div>
+          <div class="install-video">
+            <video controls preload="none" playsinline poster={p.video.poster} width="404" height="720" aria-label={`Vídeo de instalación del ${p.name}`}>
+              <source src={p.video.src} type="video/mp4" />
+              {p.video.captions && <track kind="captions" src={p.video.captions} srclang="es" label="Español" default />}
+              Tu navegador no puede reproducir el vídeo. <a href={p.video.src}>Descárgalo aquí</a>.
+            </video>
+          </div>
+        </div>
+      )}
     </div>
   </section>
 
@@ -214,20 +233,23 @@ const schema = [
   .kpis dt small { font-size: 0.45em; color: var(--sand); margin-left: 4px; letter-spacing: 0; }
   .kpis dd { margin: 10px 0 0; color: var(--on-dark-soft); font-size: 0.74rem; letter-spacing: .16em; text-transform: uppercase; }
 
+  @media (min-width: 960px) { .plano { position: sticky; top: calc(var(--header-h) + 28px); } }
   .plano { margin: 0; background: #dcdcdc; border-radius: var(--radius-xl); padding: clamp(14px, 2vw, 24px); }
   .plano :global(img) { border-radius: var(--radius); width: 100%; }
   .plano figcaption { font-size: 0.82rem; color: #45443f; padding: 12px 6px 0; }
   .specs { background: transparent; }
-  .specs th, .specs td { padding: 16px 0; border-color: #dcd7cf; }
+  .specs th, .specs td { padding: 14px 0; border-color: #dcd7cf; }
   .specs th { width: 40%; padding-right: 16px; }
   .specs :global(a) { color: var(--sand-strong); }
 
-  .media-row { display: grid; gap: 20px; margin-top: clamp(36px, 5vw, 64px); align-items: center; }
-  @media (min-width: 960px) { .media-row { grid-template-columns: 1fr 1fr; } .media-row.with-video { grid-template-columns: 1.4fr 0.6fr; } }
-  .m { border-radius: var(--radius-xl); overflow: hidden; background: var(--paper); }
-  .m :global(img) { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 16 / 10; }
-  .video video { width: 100%; max-width: 320px; margin: 0 auto; border-radius: var(--radius-xl); background: #000; aspect-ratio: 404 / 720; }
-  .video p { text-align: center; margin-top: 12px; }
+  .install { display: grid; gap: 0; margin-top: clamp(40px, 6vw, 80px); background: var(--ink); border-radius: var(--radius-xl); overflow: hidden; }
+  @media (min-width: 860px) { .install { grid-template-columns: 1.2fr 0.8fr; align-items: center; } }
+  .install-copy { padding: clamp(28px, 4vw, 56px); }
+  .install-copy h3 { color: var(--white); font-size: clamp(1.5rem, 2.6vw, 2.1rem); margin-bottom: .8em; }
+  .install-copy .checks { color: var(--on-dark); }
+  .install-copy .muted { margin: 24px 0 0; }
+  .install-video { padding: clamp(20px, 3vw, 36px); display: grid; place-items: center; background: radial-gradient(ellipse at center, #2a2a28, var(--ink) 70%); }
+  .install-video video { width: 100%; max-width: 300px; aspect-ratio: 404 / 720; border-radius: 22px; background: #000; box-shadow: 0 30px 60px -20px rgba(0,0,0,.7); }
 
   .gallery { display: grid; gap: 14px; grid-template-columns: repeat(2, 1fr); margin-top: clamp(40px, 5vw, 72px); }
   @media (min-width: 760px) { .gallery { grid-template-columns: repeat(4, 1fr); } }
