@@ -9,8 +9,8 @@ export const SITE = {
   tagline: 'Sistemas de nivelación para mortero autonivelante',
   description:
     'Fabricante español de sistemas de nivelación para mortero autonivelante (PIKO y Nivelador Universal) y de soluciones para la colocación de azulejos.',
-  phone: '+34 965 552 170',
-  phoneHref: 'tel:+34965552170',
+  phone: '+34 611 87 50 47',
+  phoneHref: 'tel:+34611875047',
   email: 'comercial@kreox.es',
   emailExport: 'natalia@kreox.es',
   address: {

@@ -128,12 +128,15 @@ const schema = [
             </ul>
             <p class="muted">{p.video.text}</p>
           </div>
-          <div class="install-video">
-            <video controls preload="none" playsinline poster={p.video.poster} width="404" height="720" aria-label={`Vídeo de instalación del ${p.name}`}>
+          <div class="install-video" data-inview-wrap>
+            <div class="iv">
+            <video data-inview controls muted loop preload="none" playsinline data-poster={p.video.poster} width="404" height="720" aria-label={`Vídeo de instalación del ${p.name}`}>
               <source src={p.video.src} type="video/mp4" />
               {p.video.captions && <track kind="captions" src={p.video.captions} srclang="es" label="Español" default />}
               Tu navegador no puede reproducir el vídeo. <a href={p.video.src}>Descárgalo aquí</a>.
             </video>
+            <button type="button" class="unmute" data-unmute><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 00-2.5-4v8a4.5 4.5 0 002.5-4zM14 3.2v2.1a7 7 0 010 13.4v2.1a9 9 0 000-17.6z" fill="currentColor"/></svg>Activar sonido</button>
+            </div>
           </div>
         </div>
       )}
@@ -249,6 +252,7 @@ const schema = [
   .install-copy .checks { color: var(--on-dark); }
   .install-copy .muted { margin: 24px 0 0; }
   .install-video { padding: clamp(20px, 3vw, 36px); display: grid; place-items: center; background: radial-gradient(ellipse at center, #2a2a28, var(--ink) 70%); }
+  .iv { position: relative; width: 100%; max-width: 300px; }
   .install-video video { width: 100%; max-width: 300px; aspect-ratio: 404 / 720; border-radius: 22px; background: #000; box-shadow: 0 30px 60px -20px rgba(0,0,0,.7); }
 
   .gallery { display: grid; gap: 14px; grid-template-columns: repeat(2, 1fr); margin-top: clamp(40px, 5vw, 72px); }

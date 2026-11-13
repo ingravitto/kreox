@@ -21,8 +21,8 @@ import imgArandela from '../assets/img/arandela-niveladora-recambio.png';
 import imgBase from '../assets/img/base-niveladora-universal-recambio.png';
 import imgAnilla from '../assets/img/anilla-metalica-niveladora-universal.png';
 import imgLineas from '../assets/img/lineas-azulejos.jpg';
-import imgFabrica from '../assets/img/fabrica-kreox-ibi.jpg';
-import imgSello from '../assets/img/sello-producto-patentado.png';
+import imgFabrica from '../assets/img/niveladores-piko-universal-kreox.jpg';
+import SelloPatentado from '../components/SelloPatentado.astro';
 
 const noticias = await getNoticias();
 const destacadas = [...noticias.filter((n) => n.data.category === 'nivelacion'), ...noticias.filter((n) => n.data.category !== 'nivelacion')].slice(0, 3);
@@ -163,11 +163,14 @@ const steps = [
         <Steps steps={steps} dark />
       </div>
       <figure class="reel" data-reveal>
-        <video controls preload="none" playsinline poster="/videos/reel-kreox-piko-universal-poster.jpg" width="720" height="1280" aria-label="Vídeo: cómo se nivela un suelo con PIKO y Nivelador Universal">
+        <div class="reel-v" data-inview-wrap>
+        <video data-inview controls muted loop preload="none" playsinline data-poster="/videos/reel-kreox-piko-universal-poster.jpg" width="720" height="1280" aria-label="Vídeo: cómo se nivela un suelo con PIKO y Nivelador Universal">
           <source src="/videos/reel-kreox-piko-universal.mp4" type="video/mp4" />
           Tu navegador no puede reproducir el vídeo. <a href="/videos/reel-kreox-piko-universal.mp4">Descárgalo aquí</a>.
         </video>
-        <figcaption>Míralo en 30 segundos · con sonido y subtítulos</figcaption>
+        <button type="button" class="unmute" data-unmute><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 00-2.5-4v8a4.5 4.5 0 002.5-4zM14 3.2v2.1a7 7 0 010 13.4v2.1a9 9 0 000-17.6z" fill="currentColor"/></svg>Activar sonido</button>
+        </div>
+        <figcaption>Cómo se nivela un suelo, en 30 segundos</figcaption>
       </figure>
     </div>
   </section>
@@ -200,7 +203,7 @@ const steps = [
     <div class="container split">
       <div class="nov-media" data-reveal>
         <Image src={imgDetalle} alt="Detalle de la anilla verde lima con aditivo de fibra sobre el fuste azul del PIKO" widths={[600, 1100]} sizes="(min-width: 960px) 560px, 92vw" class="nov-img" />
-        <Image src={imgSello} alt="Producto patentado" widths={[200, 400]} sizes="140px" class="nov-sello" />
+        <div class="nov-sello"><SelloPatentado size={132} /></div>
       </div>
       <div data-reveal>
         <span class="eyebrow">Novedades 2026</span>
@@ -253,7 +256,7 @@ const steps = [
         </dl>
         <div class="btn-row"><a class="btn btn--sand" href="/empresa/">Conócenos</a></div>
       </div>
-      <div data-reveal><Image src={imgFabrica} alt="Fabricación y envasado de productos KREOX en Ibi, Alicante" widths={[600, 1013]} sizes="(min-width: 960px) 560px, 92vw" class="fab" /></div>
+      <div data-reveal><Image src={imgFabrica} alt="Niveladores PIKO y Universal de KREOX, fabricados en Ibi (Alicante)" widths={[600, 1100]} sizes="(min-width: 960px) 560px, 92vw" class="fab" /></div>
     </div>
   </section>
 
@@ -353,6 +356,7 @@ const steps = [
   .how-grid { display: grid; gap: 40px; align-items: center; }
   @media (min-width: 1000px) { .how-grid { grid-template-columns: 1fr 340px; gap: 64px; } .how-grid :global(.steps) { grid-template-columns: repeat(2, 1fr); } }
   .reel { margin: 0 auto; width: 100%; max-width: 340px; }
+  .reel-v { position: relative; }
   .reel video { width: 100%; aspect-ratio: 9 / 16; border-radius: 24px; background: #000; border: 1px solid var(--line-dark); box-shadow: 0 30px 60px -20px rgba(0,0,0,.8); }
   .reel figcaption { margin-top: 12px; text-align: center; font-size: .85rem; color: var(--on-dark-soft); }
   .how-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .45; }
@@ -368,7 +372,7 @@ const steps = [
   /* Novedades */
   .nov-media { position: relative; }
   .nov-img { border-radius: var(--radius-xl); width: 100%; }
-  .nov-sello { position: absolute; right: -10px; bottom: -30px; width: 130px; filter: drop-shadow(0 10px 20px rgba(0,0,0,.5)); background: var(--ink); border-radius: 50%; padding: 6px; }
+  .nov-sello { position: absolute; right: clamp(-8px, -1vw, 16px); bottom: -28px; }
 
   /* Azulejos */
   .tiles { overflow: hidden; }

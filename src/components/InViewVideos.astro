@@ -1,0 +1,34 @@
+---
+// Vídeos con controles (reel, instalación): se reproducen solos y sin sonido al entrar en pantalla,
+// se pausan al salir y ofrecen un botón "Activar sonido". Con "reducir movimiento" no arrancan solos.
+// Marcado esperado: <div data-inview-wrap> <video data-inview data-poster="..." muted ...> <button data-unmute> </div>
+---
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('[data-inview-wrap]').forEach((w) => {
+    const v = w.querySelector<HTMLVideoElement>('video[data-inview]');
+    if (!v) return;
+    const btn = w.querySelector<HTMLButtonElement>('[data-unmute]');
+    let userPaused = reduce;
+    let auto = false; // la pausa/reproducción la ha hecho el script, no la persona
+    v.muted = true;
+    const near = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { if (v.dataset.poster) v.poster = v.dataset.poster; near.disconnect(); }
+    }, { rootMargin: '600px 0px' });
+    near.observe(v);
+    v.addEventListener('pause', () => { if (!auto) userPaused = true; auto = false; });
+    v.addEventListener('play', () => { if (!auto) userPaused = false; auto = false; });
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !userPaused && v.paused) { auto = true; v.play().catch(() => { auto = false; }); }
+      else if (!e.isIntersecting && !v.paused) { auto = true; v.pause(); }
+    }, { threshold: 0.35 });
+    io.observe(v);
+    const syncSound = () => { if (btn) btn.hidden = !v.muted; };
+    v.addEventListener('volumechange', syncSound); syncSound();
+    btn?.addEventListener('click', () => {
+      v.muted = false; v.volume = 1;
+      if (v.paused) v.play().catch(() => {});
+      v.focus();
+    });
+  });
+</script>

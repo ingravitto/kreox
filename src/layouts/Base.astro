@@ -6,6 +6,7 @@ import JsonLd from '../components/JsonLd.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import MobileBar from '../components/MobileBar.astro';
 import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import InViewVideos from '../components/InViewVideos.astro';
 import f400 from '@fontsource/poppins/files/poppins-latin-400-normal.woff2?url';
 import f600 from '@fontsource/poppins/files/poppins-latin-600-normal.woff2?url';
 import { SITE } from '../data/site';
@@ -75,6 +76,7 @@ const graph = [organizationSchema(), websiteSchema(), ...(crumbs ? [breadcrumbSc
     <Footer />
     <MobileBar />
     <WhatsAppFloat />
+    <InViewVideos />
     <script>
       // Entrada suave de bloques al hacer scroll (respeta prefers-reduced-motion vía CSS).
       const els = document.querySelectorAll('[data-reveal]');
