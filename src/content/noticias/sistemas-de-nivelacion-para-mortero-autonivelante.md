@@ -5,8 +5,8 @@ description: 'Qué es un sistema de nivelación para mortero autonivelante, por 
 date: 2026-03-11
 category: nivelacion
 products: [piko, universal, recambios]
-image: ../../assets/img/niveladores-piko-universal-kreox.jpg
-imageAlt: 'Niveladores KREOX PIKO y Universal'
+image: ../../assets/img/noticias/sistemas-nivelacion-piko-universal-patentado.jpg
+imageAlt: 'Niveladores PIKO y Nivelador Universal de KREOX en azul con anillas verde lima y el sello de producto patentado'
 faq:
   - q: '¿Qué es un sistema de nivelación para mortero autonivelante?'
     a: 'Son herramientas que controlan con precisión la altura, el espesor y la distribución del mortero durante la instalación de pavimentos, para obtener superficies perfectamente niveladas.'
@@ -43,9 +43,13 @@ El mortero autonivelante fluye y se nivela de forma natural, pero sin un sistema
 
 El [PIKO](/nivelacion-mortero-autonivelante/piko/) está diseñado para instalaciones sobre placas de aislamiento de **suelo radiante**: se instala rápido, regula la altura con precisión y se mantiene estable durante el vertido.
 
+![PIKO de KREOX en azul con la anilla verde lima de alta visibilidad y el sello de producto patentado](../../assets/img/noticias/piko-nuevo-color.jpg)
+
 ### Nivelador Universal para recrecidos
 
 El [Nivelador Universal](/nivelacion-mortero-autonivelante/nivelador-universal/) es una solución versátil para recrecidos: base optimizada para más estabilidad, regulación precisa, alta resistencia al uso continuo y compatibilidad con distintos tipos de superficie.
+
+![Nivelador Universal de KREOX en azul con base y anilla verde lima de alta visibilidad](../../assets/img/noticias/nivelador-universal-nuevo-color.jpg)
 
 ## Innovación continua
 

@@ -4,6 +4,8 @@ description: 'Los sistemas de nivelación de baldosas KREOX rompen por el punto 
 date: 2024-06-12
 category: azulejos
 products: [kalzo, kunas]
+image: ../../assets/img/noticias/rotura-perfecta-kalzo.jpg
+imageAlt: 'Kalzos rojos con kuñas blancas en la junta entre dos baldosas de gran formato'
 ---
 
 En construcción, la precisión y la eficiencia son cruciales. Los sistemas de nivelación de baldosas KREOX están diseñados para una **rotura perfecta sin dejar sobrantes**.

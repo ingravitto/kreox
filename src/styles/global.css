@@ -236,3 +236,10 @@ html.m-lock { overflow: hidden; }
 .av-toggle .i-play, .av-toggle.is-paused .i-pause { display: none; }
 .av-toggle.is-paused .i-play { display: block; }
 [data-inview-wrap] .av-toggle { top: 16px; bottom: auto; }
+
+/* Imágenes dentro de las noticias (Markdown). Varias seguidas en el mismo párrafo → cuadrícula. */
+.prose img { display: block; max-width: 100%; height: auto; margin: 1.8em auto; border-radius: var(--radius); background: #0b0b0b; }
+.prose p:has(> img + img) { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 1.8em 0; }
+.prose p:has(> img + img) img { margin: 0; width: 100%; }
+/* Listados (noticias): las columnas mantienen su ancho aunque haya una sola tarjeta */
+.grid-3.grid-fill { grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); }

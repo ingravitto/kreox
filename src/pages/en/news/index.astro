@@ -30,7 +30,7 @@ const groups = (Object.keys(CATEGORIES_EN) as (keyof typeof CATEGORIES_EN)[])
       {groups.map((g) => (
         <section class="group" id={g.k}>
           <h2>{g.label}</h2>
-          <div class="grid grid-3">{g.items.map((n) => <NoticiaCard n={n} />)}</div>
+          <div class="grid grid-3 grid-fill">{g.items.map((n) => <NoticiaCard n={n} />)}</div>
         </section>
       ))}
     </div>

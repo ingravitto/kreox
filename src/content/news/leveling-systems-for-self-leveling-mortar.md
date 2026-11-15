@@ -5,8 +5,8 @@ description: 'What a leveling system for self-leveling mortar is, why to use pro
 date: 2026-03-11
 category: nivelacion
 products: [piko, universal, recambios]
-image: ../../assets/img/niveladores-piko-universal-kreox.jpg
-imageAlt: 'KREOX PIKO and Nivelador Universal levelers'
+image: ../../assets/img/noticias/sistemas-nivelacion-piko-universal-patentado.jpg
+imageAlt: 'KREOX PIKO and Nivelador Universal levelers in blue with lime green rings and the patented product seal'
 faq:
   - q: 'What is a leveling system for self-leveling mortar?'
     a: 'Tools that precisely control the height, thickness and spread of the mortar during floor installation, to obtain perfectly level surfaces.'
@@ -45,9 +45,13 @@ Self-leveling mortar flows and levels naturally, but without a control system th
 
 The [PIKO](/en/self-leveling-mortar-levelers/piko/) is designed for installations over **underfloor heating** insulation boards: it is quick to install, adjusts the height precisely and stays stable during pouring.
 
+![KREOX PIKO in blue with the high-visibility lime green ring and the patented product seal](../../assets/img/noticias/piko-nuevo-color.jpg)
+
 ### Nivelador Universal for screeds
 
 The [Nivelador Universal](/en/self-leveling-mortar-levelers/universal-leveler/) is a versatile solution for screeds: a base optimized for more stability, precise adjustment, high resistance to continuous use and compatibility with different types of surface.
+
+![KREOX Nivelador Universal in blue with high-visibility lime green base and ring](../../assets/img/noticias/nivelador-universal-nuevo-color.jpg)
 
 ## Continuous innovation
 

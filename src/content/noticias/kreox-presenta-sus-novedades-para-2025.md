@@ -5,8 +5,8 @@ description: 'KREOX lanza en 2025 el PIKO y el Nivelador Universal: niveladores 
 date: 2025-01-09
 category: nivelacion
 products: [piko, universal]
-image: ../../assets/img/piko-nivelador-suelo-radiante-kreox.png
-imageAlt: 'PIKO de KREOX'
+image: ../../assets/img/noticias/novedades-kreox-2025.jpg
+imageAlt: 'Novedad 2025 de KREOX: niveladores PIKO y Nivelador Universal junto a Kalzos y Kuñas sobre fondo oscuro'
 ---
 
 En 2025, KREOX lanza nuevas soluciones diseñadas específicamente para optimizar la **pavimentación con mortero autonivelante**. La renovada gama mejora la precisión, la eficiencia y la facilidad de uso en cada instalación.
