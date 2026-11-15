@@ -34,6 +34,8 @@ jobs:
         run: npm run build
         env:
           PUBLIC_NOINDEX: ${{ github.event.inputs.destino == 'produccion' && '0' || '1' }}
+          # ID de medición de Google Analytics 4 (G-XXXXXXX). Variable de GitHub, no es secreta. Vacía = sin Analytics.
+          PUBLIC_GA_ID: ${{ vars.GA_MEASUREMENT_ID }}
       - name: Control de calidad SEO
         run: npm run check
       - uses: actions/upload-artifact@v4
