@@ -1,0 +1,14 @@
+# Panel de kreox.es: solo index.php y /assets/ son accesibles. Todo lo que empieza por "_" queda bloqueado.
+Options -Indexes
+DirectoryIndex index.php
+RedirectMatch 404 ^/panel/_
+<FilesMatch "^(_|\.)">
+  Require all denied
+</FilesMatch>
+<IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow"
+  Header always set X-Content-Type-Options "nosniff"
+  <FilesMatch "\.(css|js|png)$">
+    Header set Cache-Control "public, max-age=86400"
+  </FilesMatch>
+</IfModule>

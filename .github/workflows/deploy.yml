@@ -53,6 +53,22 @@ jobs:
         with:
           name: web
           path: dist/
+      # La configuración del panel (/panel/) se escribe aquí, después de descargar el artefacto:
+      # los secretos nunca entran en el artefacto de la construcción ni en el repositorio.
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts
+          path: repo
+      - name: Configurar el panel
+        env:
+          PANEL_USERS: ${{ secrets.PANEL_USERS }}
+          PANEL_GITHUB_TOKEN: ${{ secrets.PANEL_GITHUB_TOKEN }}
+          GOOGLE_SA_JSON: ${{ secrets.GOOGLE_SA_JSON }}
+          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
+          GSC_SITE: ${{ vars.GSC_SITE }}
+          DESTINO: ${{ github.event.inputs.destino }}
+          REPO: ${{ github.repository }}
+        run: php repo/scripts/panel-config.php > dist/panel/_config.php
       - name: Publicar por FTPS en el hosting
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:

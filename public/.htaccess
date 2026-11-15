@@ -105,6 +105,11 @@ RewriteRule ^xmlrpc\.php$ - [F,L]
   Header always set Strict-Transport-Security "max-age=31536000"
 </IfModule>
 
+# Archivos internos que nunca deben servirse (estado del despliegue FTP)
+<FilesMatch "^\.ftp-deploy-sync-state\.json$">
+  Require all denied
+</FilesMatch>
+
 # Caché: los archivos de /_astro/ llevan hash en el nombre y no cambian nunca
 <IfModule mod_expires.c>
   ExpiresActive On
