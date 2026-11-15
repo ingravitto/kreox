@@ -21,6 +21,13 @@ Archivo Markdown nuevo en `src/content/noticias/<slug>.md` con este frontmatter:
 - Portada, contacto y FAQ son vistas compartidas (`src/views/`) con los textos de los dos idiomas; el resto de páginas inglesas están en `src/pages/en/`. Si cambia un texto o dato en español, actualizar también el inglés.
 - Noticias en inglés: colección `news` (`src/content/news/`); su pareja española se declara en `NEWS_PAIRS` de `src/i18n/routes.ts`.
 
+## Panel (/panel/) y Analytics
+- El panel (PHP, `public/panel/`) guarda cambios en `main` y lanza el despliegue. Guía: `docs/panel.md`.
+- `src/data/seo-overrides.json` lo escribe el panel: `{ "/ruta/": { "title", "description" } }`. Base.astro lo aplica; no cambiar su forma.
+- Noticias creadas en el panel: imagen en `src/assets/img/noticias/`, mismo frontmatter. Las reglas de "Noticias" se validan también en el panel (`public/panel/_lib/noticias.php`); si cambian, actualizar ambos.
+- La configuración del panel (usuarios, tokens) se escribe en el job de despliegue desde GitHub Secrets. Nunca en el repositorio ni en el artefacto.
+- Google Analytics 4 solo se carga tras "Aceptar" en el banner (`Analytics.astro`); Aceptar y Rechazar con el mismo peso visual. Eventos: `click_tarifa`, `click_whatsapp`, `click_telefono`, `generate_lead`. Si se añade otra herramienta con cookies, actualizar las dos políticas de cookies.
+
 ## Comprobaciones antes de hacer commit
 ```
 npm run build && npm run check

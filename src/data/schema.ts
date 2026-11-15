@@ -38,7 +38,7 @@ export function websiteSchema() {
     '@id': `${SITE.url}/#website`,
     url: `${SITE.url}/`,
     name: SITE.name,
-    inLanguage: 'es',
+    inLanguage: ['es', 'en'],
     publisher: { '@id': ORG_ID },
   };
 }

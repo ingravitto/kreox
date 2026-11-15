@@ -28,7 +28,7 @@ const T = {
 {id && (
   <>
     <section class="ck" aria-label={T.region} data-ck hidden>
-      <p>{T.text} <a href={T.policy}>{T.more}</a></p>
+      <p>{T.text}{" "}<a href={T.policy}>{T.more}</a></p>
       <div class="ck-btns">
         <button type="button" class="ck-btn" data-ck-reject>{T.reject}</button>
         <button type="button" class="ck-btn ck-btn--ok" data-ck-accept>{T.accept}</button>
@@ -86,7 +86,7 @@ const T = {
         if (c && c.a) load();
         else if (!c) {
           // Se muestra cuando la página ya ha cargado, para no competir con el contenido principal.
-          var later = function () { (window.requestIdleCallback || setTimeout)(show, 1); };
+          var later = function () { if ('requestIdleCallback' in window) window.requestIdleCallback(show, { timeout: 2000 }); else setTimeout(show, 1); };
           if (document.readyState === 'complete') later(); else window.addEventListener('load', later);
         }
       })();

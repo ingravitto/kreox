@@ -7,6 +7,8 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import MobileBar from '../components/MobileBar.astro';
 import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 import InViewVideos from '../components/InViewVideos.astro';
+import Analytics from '../components/Analytics.astro';
+import seoOverrides from '../data/seo-overrides.json';
 import f400 from '@fontsource/poppins/files/poppins-latin-400-normal.woff2?url';
 import f600 from '@fontsource/poppins/files/poppins-latin-600-normal.woff2?url';
 import f300 from '@fontsource/poppins/files/poppins-latin-300-normal.woff2?url';
@@ -29,7 +31,11 @@ interface Props {
   overlay?: boolean;
 }
 
-const { title, description, image = '/img/og-kreox-niveladores.jpg', ogType = 'website', schema = [], breadcrumbs, noindex = false, overlay = false } = Astro.props;
+const { title: pTitle, description: pDescription, image = '/img/og-kreox-niveladores.jpg', ogType = 'website', schema = [], breadcrumbs, noindex = false, overlay = false } = Astro.props;
+// Título y descripción personalizados desde el panel (/panel/ → SEO). Si no hay, los de la página.
+const ov = (seoOverrides as Record<string, { title?: string; description?: string }>)[Astro.url.pathname];
+const title = ov?.title || pTitle;
+const description = ov?.description || pDescription;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
 const ogImage = new URL(image, SITE.url).href;
 // En el entorno de pruebas (staging) se publica con PUBLIC_NOINDEX=1 para que Google no lo indexe.
@@ -78,6 +84,8 @@ const graph = [organizationSchema(), websiteSchema(), ...(crumbs ? [breadcrumbSc
     <meta name="twitter:image" content={ogImage} />
 
     <JsonLd data={{ '@context': 'https://schema.org', '@graph': graph }} />
+    {/* Navegación casi instantánea: el navegador precarga la página al pasar el ratón o el dedo por un enlace interno. */}
+    <script type="speculationrules" is:inline set:html={JSON.stringify({ prefetch: [{ where: { and: [{ href_matches: '/*' }, { not: { href_matches: ['/panel/*', '/*.php', '/*\\?*'] } }] }, eagerness: 'moderate' }] })} />
     <slot name="head" />
   </head>
   <body class:list={[{ 'has-overlay': overlay }]}>
@@ -91,6 +99,7 @@ const graph = [organizationSchema(), websiteSchema(), ...(crumbs ? [breadcrumbSc
     <MobileBar />
     <WhatsAppFloat />
     <InViewVideos />
+    <Analytics />
     <script>
       // Entrada suave de bloques al hacer scroll (respeta prefers-reduced-motion vía CSS).
       const els = document.querySelectorAll('[data-reveal]');
