@@ -1,0 +1,106 @@
+---
+// Google Analytics 4 con consentimiento previo (RGPD / guía de cookies de la AEPD):
+// - GA solo se carga si la persona pulsa "Aceptar". "Rechazar" es igual de fácil y no carga nada.
+// - La elección se recuerda 12 meses (localStorage, técnico y necesario) y se puede cambiar con [data-ck-open].
+// - Eventos para el panel: click_tarifa, click_whatsapp, click_telefono y generate_lead (página de gracias).
+// Sin PUBLIC_GA_ID (variable de GitHub GA_MEASUREMENT_ID) no se pinta nada: ni banner ni script.
+const id = import.meta.env.PUBLIC_GA_ID as string | undefined;
+const lang = Astro.currentLocale === 'en' || Astro.url.pathname.startsWith('/en/') ? 'en' : 'es';
+const T = {
+  es: {
+    region: 'Aviso de cookies',
+    text: 'Usamos cookies de Google Analytics para saber cuántas personas visitan la web y qué páginas les resultan útiles. Solo se activan si las aceptas.',
+    more: 'Más información',
+    policy: '/politica-cookies/',
+    accept: 'Aceptar',
+    reject: 'Rechazar',
+  },
+  en: {
+    region: 'Cookie notice',
+    text: 'We use Google Analytics cookies to understand how many people visit the site and which pages they find useful. They are only set if you accept them.',
+    more: 'More information',
+    policy: '/en/cookie-policy/',
+    accept: 'Accept',
+    reject: 'Reject',
+  },
+}[lang];
+---
+{id && (
+  <>
+    <section class="ck" aria-label={T.region} data-ck hidden>
+      <p>{T.text} <a href={T.policy}>{T.more}</a></p>
+      <div class="ck-btns">
+        <button type="button" class="ck-btn" data-ck-reject>{T.reject}</button>
+        <button type="button" class="ck-btn ck-btn--ok" data-ck-accept>{T.accept}</button>
+      </div>
+    </section>
+    <script is:inline define:vars={{ id }}>
+      (function () {
+        var KEY = 'kreox-consent';
+        var MAX = 365 * 24 * 3600 * 1000;
+        var box = document.querySelector('[data-ck]');
+        var read = function () {
+          try { var c = JSON.parse(localStorage.getItem(KEY) || 'null'); return c && Date.now() - c.t < MAX ? c : null; } catch (e) { return null; }
+        };
+        var save = function (ok) { try { localStorage.setItem(KEY, JSON.stringify({ a: ok, t: Date.now() })); } catch (e) {} };
+        var loaded = false;
+        var load = function () {
+          if (loaded) return;
+          loaded = true;
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function () { window.dataLayer.push(arguments); };
+          gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
+          gtag('js', new Date());
+          gtag('config', id);
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id);
+          document.head.appendChild(s);
+          var p = location.pathname;
+          if (p === '/gracias/' || p === '/en/thank-you/') gtag('event', 'generate_lead', { form: 'contacto' });
+        };
+        var show = function () { box.hidden = false; };
+        var hide = function () { box.hidden = true; };
+        box.querySelector('[data-ck-accept]').addEventListener('click', function () { save(true); hide(); load(); });
+        box.querySelector('[data-ck-reject]').addEventListener('click', function () {
+          var had = loaded;
+          save(false); hide();
+          // Si ya estaba aceptado y se rechaza ahora, se recarga para dejar de medir en esta visita.
+          if (had) location.reload();
+        });
+        document.addEventListener('click', function (e) {
+          var open = e.target.closest && e.target.closest('[data-ck-open]');
+          if (open) { e.preventDefault(); show(); box.querySelector('[data-ck-accept]').focus(); return; }
+          if (!loaded || !window.gtag) return;
+          var a = e.target.closest && e.target.closest('a[href]');
+          if (!a) return;
+          var h = a.getAttribute('href');
+          if (/api\.whatsapp\.com|wa\.me/.test(h)) {
+            var t = decodeURIComponent(h).toLowerCase();
+            gtag('event', /tarifa|price list/.test(t) ? 'click_tarifa' : 'click_whatsapp', { link_url: h.split('&text')[0], page_path: location.pathname });
+          } else if (h.indexOf('tel:') === 0) {
+            gtag('event', 'click_telefono', { page_path: location.pathname });
+          }
+        });
+        var c = read();
+        if (c && c.a) load();
+        else if (!c) {
+          // Se muestra cuando la página ya ha cargado, para no competir con el contenido principal.
+          var later = function () { (window.requestIdleCallback || setTimeout)(show, 1); };
+          if (document.readyState === 'complete') later(); else window.addEventListener('load', later);
+        }
+      })();
+    </script>
+  </>
+)}
+<style>
+  .ck { position: fixed; left: 16px; right: 16px; bottom: calc(82px + env(safe-area-inset-bottom)); z-index: 60; display: grid; gap: 12px; padding: 16px 18px; background: var(--ink); color: var(--white); border: 1px solid var(--line-dark); border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,.35); font-size: .88rem; line-height: 1.5; }
+  .ck[hidden] { display: none; }
+  .ck p { margin: 0; color: var(--on-dark); }
+  .ck a { color: var(--sand); }
+  .ck-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  /* Aceptar y Rechazar con el mismo peso visual (guía de cookies de la AEPD) */
+  .ck-btn { min-height: 44px; border-radius: 999px; border: 1px solid var(--sand); background: transparent; color: var(--white); font: 600 .9rem/1 var(--font); cursor: pointer; }
+  .ck-btn:hover { background: rgba(255,255,255,.1); }
+  @media (min-width: 960px) { .ck { left: 24px; right: auto; bottom: 24px; max-width: 460px; } }
+</style>

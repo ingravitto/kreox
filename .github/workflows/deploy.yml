@@ -79,3 +79,11 @@ jobs:
           port: 21
           local-dir: ./dist/
           server-dir: ${{ github.event.inputs.destino == 'produccion' && secrets.FTP_DIR_PRODUCCION || secrets.FTP_DIR_PRUEBAS }}
+      # IndexNow: avisa a Bing, Yandex y otros buscadores de todas las URLs al publicar en producción.
+      - name: Avisar a los buscadores (IndexNow)
+        if: github.event.inputs.destino == 'produccion'
+        continue-on-error: true
+        run: |
+          URLS=$(grep -o '<loc>[^<]*</loc>' dist/sitemap.xml | sed 's/<[^>]*>//g' | jq -R . | jq -s .)
+          jq -n --argjson u "$URLS" '{host:"kreox.es",key:"84631e4c2d8c08323393c04b66ba076e",keyLocation:"https://kreox.es/84631e4c2d8c08323393c04b66ba076e.txt",urlList:$u}' > indexnow.json
+          curl -sS -o /dev/null -w "IndexNow: HTTP %{http_code}\n" -H 'Content-Type: application/json; charset=utf-8' --data @indexnow.json https://api.indexnow.org/indexnow
