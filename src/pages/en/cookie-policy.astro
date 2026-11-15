@@ -1,0 +1,13 @@
+---
+// English version of /politica-cookies/ (keep both in sync if analytics are added)
+import Legal from '../../layouts/Legal.astro';
+import { SITE } from '../../data/site';
+---
+<Legal title="Cookie policy" description="Information about the use of cookies on kreox.es: the site does not set its own or third-party cookies." url="/en/cookie-policy/" updated="November 2026">
+  <h2>This site does not use cookies</h2>
+  <p>kreox.es <strong>does not set its own or third-party cookies</strong>, whether analytics or advertising. Fonts and videos are served from our own server, with no connections to external services.</p>
+  <h2>Links to other sites</h2>
+  <p>Some links lead to third-party sites (social networks or the tile piece calculator at {SITE.tileCalculator.replace('https://', '')}). Those sites may use their own cookies, governed by their own policies.</p>
+  <h2>Changes</h2>
+  <p>If in the future we add tools that use cookies (for example, analytics), we will update this policy and ask for your consent before setting them.</p>
+</Legal>

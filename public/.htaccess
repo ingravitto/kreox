@@ -74,22 +74,18 @@ RewriteRule ^registro-users/?$ /contacto/ [R=301,L]
 # Sitemaps de Yoast
 RewriteRule ^(sitemap_index|post-sitemap|page-sitemap|category-sitemap|wp-sitemap)\.xml$ /sitemap.xml [R=301,L]
 
-# Versión en inglés: redirección TEMPORAL (302) a la versión en español hasta publicar /en/
-RewriteRule ^en/?$ / [R=302,L]
-RewriteRule ^en/home/?$ / [R=302,L]
-RewriteRule ^en/solutions-for-flooring-systems-using-self-leveling-mortar/?$ /nivelacion-mortero-autonivelante/ [R=302,L]
-RewriteRule ^en/solutions-for-flooring-systems-using-self-leveling-mortar/leveler-insulation-1-tip/?$ /nivelacion-mortero-autonivelante/piko/ [R=302,L]
-RewriteRule ^en/solutions-for-flooring-systems-using-self-leveling-mortar/universal-raised-leveler/?$ /nivelacion-mortero-autonivelante/nivelador-universal/ [R=302,L]
-RewriteRule ^en/solutions-for-tile-installation/?$ /colocacion-azulejos/ [R=302,L]
-RewriteRule ^en/solutions-for-tile-installation/alikates-tile-pliers/?$ /colocacion-azulejos/alikates/ [R=302,L]
-RewriteRule ^en/solutions-for-tile-installation/kalzo-spacer-clip/?$ /colocacion-azulejos/kalzo-separador/ [R=302,L]
-RewriteRule ^en/solutions-for-tile-installation/stain-resistant-kuna-leveling-wedge/?$ /colocacion-azulejos/kuna-antimanchas/ [R=302,L]
-RewriteRule ^en/solutions-for-tile-installation/kuna-leveling-wedge/?$ /colocacion-azulejos/kuna-niveladora/ [R=302,L]
-RewriteRule ^en/company/?$ /empresa/ [R=302,L]
-RewriteRule ^en/contact/?$ /contacto/ [R=302,L]
-RewriteRule ^en/news/?$ /noticias/ [R=302,L]
-RewriteRule ^en/piece-calculator/?$ https://calculadora.kreox.es/ [R=302,L]
-RewriteRule ^en/ / [R=302,L]
+# Versión en inglés: URLs de la web WordPress anterior → nuevas páginas /en/ (301 permanentes).
+# /en/, /en/company/, /en/contact/ y /en/news/ existen con la misma URL y no necesitan regla.
+RewriteRule ^en/home/?$ /en/ [R=301,L]
+RewriteRule ^en/solutions-for-flooring-systems-using-self-leveling-mortar/?$ /en/self-leveling-mortar-levelers/ [R=301,L]
+RewriteRule ^en/solutions-for-flooring-systems-using-self-leveling-mortar/leveler-insulation-1-tip/?$ /en/self-leveling-mortar-levelers/piko/ [R=301,L]
+RewriteRule ^en/solutions-for-flooring-systems-using-self-leveling-mortar/universal-raised-leveler/?$ /en/self-leveling-mortar-levelers/universal-leveler/ [R=301,L]
+RewriteRule ^en/solutions-for-tile-installation/?$ /en/tile-leveling-system/ [R=301,L]
+RewriteRule ^en/solutions-for-tile-installation/alikates-tile-pliers/?$ /en/tile-leveling-system/alikates-tile-pliers/ [R=301,L]
+RewriteRule ^en/solutions-for-tile-installation/kalzo-spacer-clip/?$ /en/tile-leveling-system/kalzo-spacer-clip/ [R=301,L]
+RewriteRule ^en/solutions-for-tile-installation/stain-resistant-kuna-leveling-wedge/?$ /en/tile-leveling-system/stain-resistant-kuna-wedge/ [R=301,L]
+RewriteRule ^en/solutions-for-tile-installation/kuna-leveling-wedge/?$ /en/tile-leveling-system/kuna-leveling-wedge/ [R=301,L]
+RewriteRule ^en/piece-calculator/?$ https://calculadora.kreox.es/ [R=301,L]
 
 # Restos de WordPress
 RewriteRule ^wp-(admin|login\.php|content|includes|json) / [R=301,L]

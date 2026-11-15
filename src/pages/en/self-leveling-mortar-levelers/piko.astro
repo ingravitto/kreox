@@ -1,0 +1,119 @@
+---
+// English version of /nivelacion-mortero-autonivelante/piko/
+import ProductPage from '../../../components/ProductPage.astro';
+import { PRODUCTOS, M2_POR_NIVELADOR } from '../../../data/site';
+import { PATHS } from '../../../i18n/routes';
+import { FAQ_PIKO_EN } from '../../../data/en/faqs';
+import { productSchema, faqSchema } from '../../../data/schema';
+
+import imgProducto from '../../../assets/img/piko-nivelador-suelo-radiante-kreox.png';
+import imgBg from '../../../assets/img/hf-piko-suelo-radiante-laser.jpg';
+import imgPlano from '../../../assets/img/piko-medidas-plano.png';
+import imgCaja from '../../../assets/img/caja-100-piko.jpg';
+import imgLimpieza from '../../../assets/img/piko-limpieza-reutilizable.jpg';
+import imgTriPesado from '../../../assets/img/tripodes-acero-pesados.jpg';
+import imgTriOxido from '../../../assets/img/tripodes-acero-oxidados.jpg';
+import imgArandela from '../../../assets/img/arandela-niveladora-recambio.png';
+import imgBase from '../../../assets/img/base-niveladora-universal-recambio.png';
+import imgAnilla from '../../../assets/img/anilla-metalica-niveladora-universal.png';
+import imgUni from '../../../assets/img/nivelador-universal-recrecido-kreox.png';
+
+const P = PRODUCTOS.piko;
+const R = PATHS.en;
+const url = R.piko;
+const M = P.medidas;
+
+const schema = [
+  productSchema({
+    id: url,
+    name: P.nombreCompleto,
+    alternateName: ['PIKO KREOX', 'Leveler Insulation 1 Tip'],
+    description: 'Leveler for self-leveling mortar that is pushed into the insulation board of underfloor heating and marks the finished height with a laser-adjustable ring. It replaces the steel tripod: about 20 g per unit, rust-free and reusable.',
+    images: [imgProducto.src, imgPlano.src],
+    weightG: P.pesoG,
+    category: 'Self-leveling mortar levelers',
+    related: R.universal,
+    props: [
+      ['Use', 'Underfloor heating on insulation board'],
+      ['Fixing', 'Pushed into the insulation'],
+      ['Packaging', `Box of ${P.caja} units`],
+      ['Recommended density', `1 leveler every ${M2_POR_NIVELADOR} m² approx.`],
+      ['Dimensions (mm)', `Shaft ${M.altoMm} + tip ${M.puntaMm}; base Ø${M.baseMm}; washer Ø${M.arandelaMm}`],
+      ['Laser compatibility', 'Standard laser and laser with receiver'],
+      ['Reusable', 'Yes'],
+      ['Patent', 'Patented product'],
+    ],
+  }),
+  faqSchema(FAQ_PIKO_EN),
+];
+---
+<ProductPage
+  kind="piko"
+  name="PIKO"
+  seo={{
+    title: 'PIKO: self-leveling mortar leveler for floor heating | KREOX',
+    description: 'KREOX PIKO replaces the steel tripod in underfloor heating: 20 g, rust-free, reusable and laser compatible. Patented product, made in Spain.',
+    schema,
+    image: imgProducto.src,
+  }}
+  hero={{
+    eyebrow: 'Self-leveling mortar leveler',
+    title: 'PIKO, the leveler for',
+    accent: 'underfloor heating',
+    lead: `Pushed into the insulation board, it marks the exact height of the mortar. <strong>${P.pesoG} g versus ~1 kg</strong> for a steel tripod, <strong>rust-free</strong> and <strong>reusable</strong>.`,
+    bg: imgBg,
+    bgAlt: 'PIKO levelers pushed into underfloor heating with the laser line at the height of the rings',
+    product: imgProducto,
+    productAlt: 'KREOX PIKO, blue leveler with a lime-green ring for self-leveling mortar',
+  }}
+  kpis={[
+    { v: String(P.pesoG), u: 'g', l: 'Weight per unit' },
+    { v: String(M.altoMm + M.puntaMm), u: 'mm', l: 'Total height' },
+    { v: String(P.caja), u: 'units', l: 'Per box' },
+    { v: String(M2_POR_NIVELADOR), u: 'm²', l: 'Per leveler (approx.)' },
+  ]}
+  plano={{ img: imgPlano, alt: `PIKO dimension drawing: ${M.altoMm} mm shaft, ${M.puntaMm} mm tip, ${M.baseMm} mm base and ${M.arandelaMm} mm washer` }}
+  specs={[
+    ['Use', 'Self-leveling mortar over underfloor heating insulation board'],
+    ['Fixing', 'Tip pushed into the insulation'],
+    ['Weight', `≈ ${P.pesoG} g`],
+    ['Dimensions', `Shaft ${M.altoMm} mm + tip ${M.puntaMm} mm · base Ø${M.baseMm} mm · shaft ${M.fusteMm} mm · washer Ø${M.arandelaMm} mm`],
+    ['Packaging', `Box of ${P.caja} units`],
+    ['Placement', `1 leveler every ${M2_POR_NIVELADOR} m² approx.`],
+    ['Adjustment', 'Sliding ring; 2026 version with fiber additive'],
+    ['Laser', 'Standard and with receiver'],
+    ['Spare part', `<a href="${R.recambios}">Leveling washer</a> (box of 150)`],
+    ['Origin', 'Designed and made in Ibi (Alicante, Spain) · patented'],
+  ]}
+  steps={[
+    { title: 'Push in the PIKO', text: `Into the underfloor heating insulation board, no tools needed. Roughly one every ${M2_POR_NIVELADOR} m².` },
+    { title: 'Mark the level', text: 'With a laser level, standard or with receiver.' },
+    { title: 'Adjust the ring', text: 'Slide it up to the line marked by the laser.' },
+    { title: 'Pour and remove', text: 'Mortar up to the ring. Then remove the PIKO and clean it for the next job.' },
+  ]}
+  gallery={[
+    { img: imgTriPesado, alt: 'Worker carrying dozens of steel tripods', caption: 'Tripods: heavy', good: false },
+    { img: imgTriOxido, alt: 'Steel tripods rusted by the mortar', caption: 'Tripods: they rust', good: false },
+    { img: imgCaja, alt: 'Box of 100 PIKO levelers', caption: 'PIKO: 100 units per box', good: true },
+    { img: imgLimpieza, alt: 'PIKO being cleaned in a bucket of water to reuse it', caption: 'PIKO: cleans with water', good: true },
+  ]}
+  parts={[
+    { img: imgArandela, alt: 'Leveling washer with fiber additive', name: 'Leveling washer', caja: 'PIKO spare part · box of 150' },
+    { img: imgBase, alt: 'Universal leveling base', name: 'Universal leveling base', caja: 'For the Universal · box of 40' },
+    { img: imgAnilla, alt: 'Universal metal leveling ring', name: 'Metal ring', caja: 'For the Universal · box of 40' },
+  ]}
+  other={{ name: 'Hard surface, no insulation?', text: 'Use the Nivelador Universal, with a flat base for screeds →', href: R.universal, img: imgUni, alt: 'Nivelador Universal' }}
+  film={{ src: '/videos/piko-vertido-suelo-radiante.mp4', poster: imgBg, label: 'Pouring self-leveling mortar over underfloor heating with PIKO levelers', title: 'The mortar reaches the ring', accent: 'and stays flat.' }}
+  video={{
+    src: '/videos/reel-kreox-piko-universal.mp4',
+    poster: '/videos/reel-kreox-piko-universal-poster.jpg',
+    eyebrow: 'In 30 seconds',
+    title: 'Leveling a floor has never been easier',
+    checks: ['Push it into the insulation.', 'Mark the height with the laser.', 'Raise the ring and pour the mortar.'],
+    text: 'Video with sound and Spanish subtitles.',
+    duration: 32,
+  }}
+  faqs={FAQ_PIKO_EN}
+  faqTitle="Frequently asked questions about PIKO"
+  cta={{ title: 'Leveling an underfloor heating floor?', text: 'Ask for the 2027 price list on WhatsApp and we will help you work out how many PIKO you need for your job.' }}
+/>

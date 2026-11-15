@@ -6,6 +6,8 @@ import type { ImageMetadata } from 'astro';
 import { existsSync } from 'node:fs';
 interface Props { src: string; poster: ImageMetadata; label: string; class?: string; eager?: boolean }
 const { src, poster, label, class: cls } = Astro.props;
+import { useT } from '../i18n/ui';
+const { t } = useT(Astro.url);
 const p = await getImage({ src: poster, width: Math.min(1600, poster.width), format: 'webp', quality: 68 });
 const pSm = await getImage({ src: poster, width: Math.min(720, poster.width), format: 'webp', quality: 62 });
 // Si existe public/videos/<nombre>-m.mp4 (854 px), el móvil descarga esa versión ligera.
@@ -29,7 +31,7 @@ const hasMobile = existsSync(new URL(`../../public${srcMobile}`, import.meta.url
     {hasMobile && <source src={srcMobile} type="video/mp4" media="(max-width: 767px)" />}
     <source src={src} type="video/mp4" />
   </video>
-  <button type="button" class="av-toggle" data-av-toggle aria-label="Pausar vídeo" aria-pressed="false">
+  <button type="button" class="av-toggle" data-av-toggle aria-label={t('pauseVideo')} aria-pressed="false">
     <svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2h3v12H4zM9 2h3v12H9z" fill="currentColor"/></svg>
     <svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="currentColor"/></svg>
   </button>
@@ -43,7 +45,8 @@ const hasMobile = existsSync(new URL(`../../public${srcMobile}`, import.meta.url
     let userPaused = Boolean(reduce || saveData);
     const sync = () => {
       const paused = v.paused;
-      btn.setAttribute('aria-label', paused ? 'Reproducir vídeo' : 'Pausar vídeo');
+      const en = document.documentElement.lang === 'en';
+      btn.setAttribute('aria-label', paused ? (en ? 'Play video' : 'Reproducir vídeo') : (en ? 'Pause video' : 'Pausar vídeo'));
       btn.setAttribute('aria-pressed', String(paused));
       btn.classList.toggle('is-paused', paused);
     };

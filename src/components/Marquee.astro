@@ -2,13 +2,15 @@
 interface Props { items: string[]; dark?: boolean }
 const { items, dark = false } = Astro.props;
 const row = [...items, ...items];
+import { useT } from '../i18n/ui';
+const { t } = useT(Astro.url);
 ---
 <div class:list={['marquee', { dark }]} data-marquee>
   <p class="visually-hidden">{items.join(' · ')}</p>
   <div class="track" aria-hidden="true">
     {row.map((t) => <span>{t}<i>✦</i></span>)}
   </div>
-  <button type="button" class="mq-toggle" data-mq-toggle aria-label="Pausar animación" aria-pressed="false">❚❚</button>
+  <button type="button" class="mq-toggle" data-mq-toggle aria-label={t('pauseAnim')} aria-pressed="false">❚❚</button>
 </div>
 <script>
   document.querySelectorAll<HTMLElement>('[data-marquee]').forEach((m) => {
@@ -17,7 +19,8 @@ const row = [...items, ...items];
     b.addEventListener('click', () => {
       const paused = m.classList.toggle('is-paused');
       b.setAttribute('aria-pressed', String(paused));
-      b.setAttribute('aria-label', paused ? 'Reanudar animación' : 'Pausar animación');
+      const en = document.documentElement.lang === 'en';
+      b.setAttribute('aria-label', paused ? (en ? 'Resume animation' : 'Reanudar animación') : (en ? 'Pause animation' : 'Pausar animación'));
       b.textContent = paused ? '▶' : '❚❚';
     });
   });

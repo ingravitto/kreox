@@ -1,0 +1,90 @@
+---
+// English version of /noticias/[slug]/ for the articles translated into English (src/content/news/)
+import PageHero from '../../../components/PageHero.astro';
+import imgHeroBg from '../../../assets/img/fondo-piedra-productos-kreox.jpg';
+import { Image } from 'astro:assets';
+import { render, type CollectionEntry } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import Faq from '../../../components/Faq.astro';
+import CtaTarifa from '../../../components/CtaTarifa.astro';
+import NoticiaCard from '../../../components/NoticiaCard.astro';
+import { getNews, CATEGORIES_EN, dateEn, newsUrl } from '../../../data/noticias';
+import { faqSchema, ORG_ID } from '../../../data/schema';
+import { SITE } from '../../../data/site';
+import { PATHS } from '../../../i18n/routes';
+
+export async function getStaticPaths() {
+  const all = await getNews();
+  return all.map((n) => ({ params: { slug: n.id }, props: { n, all } }));
+}
+const { n, all } = Astro.props as { n: CollectionEntry<'news'>; all: CollectionEntry<'news'>[] };
+const { Content } = await render(n);
+const R = PATHS.en;
+const url = newsUrl(n);
+// Related: same category, shared products, then leveling guides (main business line).
+const score = (o: CollectionEntry<'news'>) =>
+  (o.data.category === n.data.category ? 4 : 0) +
+  o.data.products.filter((p) => n.data.products.includes(p)).length * 2 +
+  (o.data.category === 'nivelacion' ? 1 : 0);
+const related = all.filter((o) => o.id !== n.id).map((o, i) => ({ o, s: score(o), i })).sort((x, y) => y.s - x.s || x.i - y.i).slice(0, 3).map((x) => x.o);
+const PRODUCT_LINKS: Record<string, { label: string; href: string }> = {
+  piko: { label: 'PIKO · leveler for underfloor heating', href: R.piko },
+  universal: { label: 'Nivelador Universal for screeds', href: R.universal },
+  recambios: { label: 'Spare parts for levelers', href: R.recambios },
+  kalzo: { label: 'Kalzo spacer clip', href: R.kalzo },
+  kunas: { label: 'Kuña leveling wedge', href: R.kunaNiveladora },
+  alikates: { label: 'Alikates tile pliers', href: R.alikates },
+};
+const article = {
+  '@type': 'NewsArticle',
+  headline: n.data.title,
+  description: n.data.description,
+  datePublished: n.data.date.toISOString(),
+  dateModified: (n.data.updated ?? n.data.date).toISOString(),
+  inLanguage: 'en',
+  mainEntityOfPage: `${SITE.url}${url}`,
+  author: { '@type': 'Organization', name: 'KREOX' },
+  publisher: { '@id': ORG_ID },
+  ...(n.data.image ? { image: [new URL(n.data.image.src, SITE.url).href] } : {}),
+};
+const schema = [article, ...(n.data.faq.length ? [faqSchema(n.data.faq)] : [])];
+---
+<Base overlay title={n.data.seoTitle ?? `${n.data.title} | KREOX`} description={n.data.description} ogType="article" image={n.data.image?.src} breadcrumbs={[{ name: 'News', url: R.noticias }, { name: n.data.title, url }]} schema={schema}>
+  <PageHero compact eyebrow={CATEGORIES_EN[n.data.category]} title={n.data.title} lead={n.data.description} bg={imgHeroBg} crumbs={[{ name: 'News', url: R.noticias }, { name: n.data.title, url }]} />
+  <article class="section">
+    <div class="container">
+      <header class="prose head">
+        <div class="meta">
+          <span class="chip">{CATEGORIES_EN[n.data.category]}</span>
+          <time datetime={n.data.date.toISOString()}>{dateEn(n.data.date)}</time>
+          {n.data.updated && <span>· Updated on <time datetime={n.data.updated.toISOString()}>{dateEn(n.data.updated)}</time></span>}
+        </div>
+      </header>
+      {n.data.image && <Image src={n.data.image} alt={n.data.imageAlt ?? ''} widths={[700, 1100]} sizes="(min-width: 900px) 760px, 92vw" class="cover" loading="eager" />}
+      <div class="prose body"><Content /></div>
+      {n.data.products.length > 0 && (
+        <aside class="prose card prods">
+          <h2>Products in this article</h2>
+          <ul>{n.data.products.map((p) => <li><a href={PRODUCT_LINKS[p].href}>{PRODUCT_LINKS[p].label}</a></li>)}</ul>
+        </aside>
+      )}
+    </div>
+  </article>
+  {n.data.faq.length > 0 && <Faq faqs={n.data.faq} />}
+  {related.length > 0 && (
+    <section class="section section--paper">
+      <div class="container">
+        <h2>Keep reading</h2>
+        <div class="grid grid-3">{related.map((r) => <NoticiaCard n={r} />)}</div>
+      </div>
+    </section>
+  )}
+  <CtaTarifa interes={n.data.category === 'azulejos' ? 'azulejos' : 'nivelacion'} />
+</Base>
+<style>
+  .head { margin-bottom: 28px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 0.85rem; color: var(--text-soft); margin-bottom: 14px; }
+  .cover { max-width: 760px; width: 100%; border-radius: var(--radius); margin-bottom: 32px; background: #0b0b0b; }
+  .prods { margin-top: 36px; }
+  .prods h2 { margin-top: 0; font-size: 1.1rem; }
+</style>

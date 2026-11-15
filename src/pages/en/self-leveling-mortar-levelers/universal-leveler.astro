@@ -1,0 +1,101 @@
+---
+// English version of /nivelacion-mortero-autonivelante/nivelador-universal/
+import ProductPage from '../../../components/ProductPage.astro';
+import { PRODUCTOS, M2_POR_NIVELADOR } from '../../../data/site';
+import { PATHS } from '../../../i18n/routes';
+import { FAQ_UNIVERSAL_EN } from '../../../data/en/faqs';
+import { productSchema, faqSchema } from '../../../data/schema';
+
+import imgProducto from '../../../assets/img/nivelador-universal-recrecido-kreox.png';
+import imgBg from '../../../assets/img/hf-universal-recrecido-vertido.jpg';
+import imgPlano from '../../../assets/img/nivelador-universal-medidas-plano.png';
+import imgArandela from '../../../assets/img/arandela-niveladora-recambio.png';
+import imgBase from '../../../assets/img/base-niveladora-universal-recambio.png';
+import imgAnilla from '../../../assets/img/anilla-metalica-niveladora-universal.png';
+import imgPiko from '../../../assets/img/piko-nivelador-suelo-radiante-kreox.png';
+
+const P = PRODUCTOS.universal;
+const R = PATHS.en;
+const url = R.universal;
+const M = P.medidas;
+
+const schema = [
+  productSchema({
+    id: url,
+    name: P.nombreCompleto,
+    alternateName: ['Nivelador Universal KREOX', 'Universal raised leveler'],
+    description: 'Leveler with a flat, reinforced base to mark the finished height of self-leveling mortar in screeds on any surface. Laser adjustable, reusable, rust-free and with spare parts by piece. About 250 g per unit.',
+    images: [imgProducto.src, imgPlano.src],
+    weightG: P.pesoG,
+    category: 'Self-leveling mortar levelers',
+    related: R.piko,
+    props: [
+      ['Use', 'Screeds on any surface'],
+      ['Support', 'Rests on its flat base'],
+      ['Packaging', `Box of ${P.caja} units`],
+      ['Recommended density', `1 leveler every ${M2_POR_NIVELADOR} m² approx.`],
+      ['Dimensions (mm)', `Shaft ${M.altoMm}; base ${M.baseAltoMm} high and Ø${M.baseMm}; washer Ø${M.arandelaMm}`],
+      ['Laser compatibility', 'Standard laser and laser with receiver'],
+      ['Spare parts', 'Universal leveling base, universal metal leveling ring, leveling washer'],
+      ['Patent', 'Patented product'],
+    ],
+  }),
+  faqSchema(FAQ_UNIVERSAL_EN),
+];
+---
+<ProductPage
+  kind="universal"
+  name="Nivelador Universal"
+  seo={{
+    title: 'Nivelador Universal: leveler for self-leveling screeds | KREOX',
+    description: 'KREOX Nivelador Universal: universal raised leveler with a flat, reinforced base for self-leveling mortar screeds on any surface. Reusable, with spare parts.',
+    schema,
+    image: imgProducto.src,
+  }}
+  hero={{
+    eyebrow: 'Self-leveling mortar leveler',
+    title: 'Nivelador Universal for',
+    accent: 'screeds',
+    lead: `A flat, reinforced base to mark the height of the mortar on a <strong>slab, subfloor or existing floor</strong>. <strong>${P.pesoG} g</strong>, rust-free and with spare parts by piece.`,
+    bg: imgBg,
+    bgAlt: 'Self-leveling mortar flowing between Nivelador Universal levelers on a slab',
+    product: imgProducto,
+    productAlt: 'KREOX Nivelador Universal with a lime-green base and blue shaft',
+  }}
+  kpis={[
+    { v: String(P.pesoG), u: 'g', l: 'Weight per unit' },
+    { v: String(M.baseMm), u: 'mm', l: 'Base diameter' },
+    { v: String(P.caja), u: 'units', l: 'Per box' },
+    { v: '3', u: 'parts', l: 'Replaceable' },
+  ]}
+  plano={{ img: imgPlano, alt: `Nivelador Universal dimension drawing: ${M.altoMm} mm shaft, base ${M.baseAltoMm} mm high and ${M.baseMm} mm in diameter, ${M.arandelaMm} mm washer` }}
+  specs={[
+    ['Use', 'Screeds and floor leveling with self-leveling mortar'],
+    ['Support', 'Flat, stable base (reinforced in 2026)'],
+    ['Weight', `≈ ${P.pesoG} g`],
+    ['Dimensions', `Shaft ${M.altoMm} mm · base ${M.baseAltoMm} mm high and Ø${M.baseMm} mm · shaft ${M.fusteMm} mm · washer Ø${M.arandelaMm} mm`],
+    ['Packaging', `Box of ${P.caja} units`],
+    ['Placement', `1 leveler every ${M2_POR_NIVELADOR} m² approx.`],
+    ['Adjustment', 'Sliding ring; 2026 version with fiber additive'],
+    ['Laser', 'Standard and with receiver'],
+    ['Spare parts', `<a href="${R.recambios}">Base, metal ring and washer</a>`],
+    ['Origin', 'Designed and made in Ibi (Alicante, Spain) · patented'],
+  ]}
+  steps={[
+    { title: 'Set the leveler down', text: `On the surface to be screeded: the flat base keeps it stable. Roughly one every ${M2_POR_NIVELADOR} m².` },
+    { title: 'Mark the level', text: 'With a laser level, standard or with receiver.' },
+    { title: 'Adjust the ring', text: 'Slide it up to the line marked by the laser.' },
+    { title: 'Pour and remove', text: 'Mortar up to the ring; remove the leveler and clean it for the next job.' },
+  ]}
+  video={{ src: '/videos/nivelador-universal-instalacion.mp4', poster: '/videos/nivelador-universal-instalacion-poster.jpg', text: 'Real installation: marking with a laser with receiver and adjusting the ring. Audio in Spanish.', duration: 119 }}
+  parts={[
+    { img: imgBase, alt: 'Universal leveling base spare part', name: 'Universal leveling base', caja: 'Reinforced 2026 · box of 40' },
+    { img: imgAnilla, alt: 'Universal metal leveling ring spare part', name: 'Metal ring', caja: 'Box of 40' },
+    { img: imgArandela, alt: 'Leveling washer with fiber additive', name: 'Leveling washer', caja: 'Box of 150' },
+  ]}
+  other={{ name: 'Underfloor heating with insulation board?', text: 'Use the PIKO: it is pushed in and weighs just 20 g →', href: R.piko, img: imgPiko, alt: 'PIKO' }}
+  film={{ src: '/videos/universal-vertido-recrecido.mp4', poster: imgBg, label: 'Pouring self-leveling mortar on a screed with Nivelador Universal levelers', title: 'A perfect screed', accent: 'on any substrate.' }}
+  faqs={FAQ_UNIVERSAL_EN}
+  faqTitle="Frequently asked questions about the Nivelador Universal"
+  cta={{ title: 'Got a screed under way?', text: 'Ask on WhatsApp for the 2027 price list for Nivelador Universal levelers and spare parts.' }}
+/>

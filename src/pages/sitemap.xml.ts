@@ -3,7 +3,9 @@ import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { SITE, NIVELACION, AZULEJOS } from '../data/site';
 import { TILE_PRODUCTS } from '../data/azulejos';
-import { getNoticias, noticiaUrl } from '../data/noticias';
+import { getNoticias, noticiaUrl, getNews, newsUrl } from '../data/noticias';
+import { TILE_PRODUCTS_EN } from '../data/en/tiles';
+import { PATHS, alternates } from '../i18n/routes';
 
 import piko from '../assets/img/piko-nivelador-suelo-radiante-kreox.png';
 import pikoPlano from '../assets/img/piko-medidas-plano.png';
@@ -40,6 +42,14 @@ const STATIC = [
   '/politica-cookies/',
 ];
 
+// Versión en inglés (mismas páginas; /en/thank-you/ no se indexa).
+const E = PATHS.en;
+const STATIC_EN = [
+  E.home, E.nivelacion, E.piko, E.universal, E.recambios, E.lamina, E.calculadora, E.vsTripode, E.faq,
+  E.azulejos, ...TILE_PRODUCTS_EN.map((p) => `${E.azulejos}${p.slug}/`),
+  E.noticias, E.empresa, E.contacto, E.avisoLegal, E.privacidad, E.cookies,
+];
+
 type Img = { src: ImageMetadata; title: string };
 type Vid = { file: string; thumb: ImageMetadata; title: string; description: string; duration: number };
 
@@ -63,6 +73,25 @@ const IMAGES: Record<string, Img[]> = {
     { src: anillaMetal, title: 'Anilla metálica niveladora universal' },
   ],
   [`${NIVELACION}lamina-bajo-solera/`]: [{ src: lamina, title: 'Lámina de polietileno bajo solera' }],
+  [E.home]: [{ src: hero, title: 'KREOX PIKO and Nivelador Universal levelers on self-leveling mortar' }],
+  [E.nivelacion]: [{ src: pikoSuelo, title: 'PIKO levelers on underfloor heating with a laser' }, { src: estudio, title: 'KREOX PIKO and Nivelador Universal levelers' }],
+  [E.piko]: [
+    { src: piko, title: 'KREOX PIKO, self-leveling mortar leveler for underfloor heating' },
+    { src: pikoPlano, title: 'PIKO dimensions' },
+    { src: pikoSuelo, title: 'PIKO pushed into an underfloor heating board with a laser' },
+    { src: anilla, title: 'PIKO ring with fiber additive' },
+  ],
+  [E.universal]: [
+    { src: uni, title: 'KREOX Nivelador Universal for screeds' },
+    { src: uniPlano, title: 'Nivelador Universal dimensions' },
+    { src: uniVertido, title: 'Self-leveling mortar screed with Nivelador Universal levelers' },
+  ],
+  [E.recambios]: [
+    { src: arandela, title: 'Leveling washer spare part' },
+    { src: base, title: 'Universal leveling base spare part' },
+    { src: anillaMetal, title: 'Universal metal leveling ring' },
+  ],
+  [E.lamina]: [{ src: lamina, title: 'Underslab polyethylene sheet' }],
 };
 
 const REEL: Vid = { file: '/videos/reel-kreox-piko-universal.mp4', thumb: pikoSuelo, title: 'Nivelar un suelo nunca fue tan fácil: PIKO y Nivelador Universal', description: 'Cómo se nivela mortero autonivelante con PIKO en suelo radiante y con Nivelador Universal en recrecidos, en 30 segundos.', duration: 32 };
@@ -74,6 +103,9 @@ const VIDEOS: Record<string, Vid[]> = {
     { file: '/videos/universal-vertido-recrecido.mp4', thumb: uniVertido, title: 'Nivelador Universal: recrecido con mortero autonivelante', description: 'El mortero autonivelante avanza sobre la solera entre los Niveladores Universales de KREOX.', duration: 8 },
     { file: '/videos/nivelador-universal-instalacion.mp4', thumb: uniPlano, title: 'Instalación del Nivelador Universal en obra', description: 'Marcado de la cota con láser con receptor y ajuste de la anilla del Nivelador Universal.', duration: 119 },
   ],
+  [E.home]: [{ file: '/videos/hero-niveladores-kreox.mp4', thumb: hero, title: 'KREOX levelers on self-leveling mortar', description: 'KREOX PIKO and Nivelador Universal on freshly poured self-leveling mortar.', duration: 12 }],
+  [E.piko]: [{ file: '/videos/piko-vertido-suelo-radiante.mp4', thumb: pikoSuelo, title: 'PIKO: pouring self-leveling mortar over underfloor heating', description: 'Self-leveling mortar covers the underfloor heating and rises up to the ring of the PIKO levelers, set with a laser.', duration: 8 }],
+  [E.universal]: [{ file: '/videos/universal-vertido-recrecido.mp4', thumb: uniVertido, title: 'Nivelador Universal: self-leveling mortar screed', description: 'Self-leveling mortar flows over the slab between KREOX Nivelador Universal levelers.', duration: 8 }],
 };
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -92,15 +124,23 @@ async function entry(path: string, lastmod?: string) {
       return `<video:video><video:thumbnail_loc>${abs(t.src)}</video:thumbnail_loc><video:title>${esc(v.title)}</video:title><video:description>${esc(v.description)}</video:description><video:content_loc>${abs(v.file)}</video:content_loc><video:duration>${v.duration}</video:duration><video:family_friendly>yes</video:family_friendly></video:video>`;
     }),
   );
-  return `<url><loc>${SITE.url}${path}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}${imgs.join('')}${vids.join('')}</url>`;
+  // hreflang: cada URL declara sus versiones en español e inglés (y x-default = español).
+  const alt = alternates(path);
+  const links = alt.es && alt.en
+    ? ['es', 'en'].map((l) => `<xhtml:link rel="alternate" hreflang="${l}" href="${abs(alt[l as 'es' | 'en']!)}"/>`).join('') + `<xhtml:link rel="alternate" hreflang="x-default" href="${abs(alt.es)}"/>`
+    : '';
+  return `<url><loc>${SITE.url}${path}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}${links}${imgs.join('')}${vids.join('')}</url>`;
 }
 
 export const GET: APIRoute = async () => {
   const noticias = await getNoticias();
+  const news = await getNews();
   const urls = [
     ...(await Promise.all(STATIC.map((u) => entry(u)))),
     ...(await Promise.all(noticias.map((n) => entry(noticiaUrl(n), (n.data.updated ?? n.data.date).toISOString().slice(0, 10))))),
+    ...(await Promise.all(STATIC_EN.map((u) => entry(u)))),
+    ...(await Promise.all(news.map((n) => entry(newsUrl(n), (n.data.updated ?? n.data.date).toISOString().slice(0, 10))))),
   ];
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n${urls.join('\n')}\n</urlset>\n`;
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join('\n')}\n</urlset>\n`;
   return new Response(xml, { headers: { 'Content-Type': 'application/xml; charset=utf-8' } });
 };

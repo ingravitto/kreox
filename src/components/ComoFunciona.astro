@@ -7,13 +7,15 @@ interface Props {
   steps: { title: string; text: string }[];
 }
 const { kind, steps } = Astro.props;
+import { useT } from '../i18n/ui';
+const { t } = useT(Astro.url);
 const isPiko = kind === 'piko';
 const ground = isPiko ? 300 : 306; // cota del soporte (aislamiento o forjado)
 const laserY = 214;
 const mortarH = ground - laserY;
 const uid = `cf-${kind}`;
 ---
-<div class="cf" data-cf data-step="0" id={uid}>
+<div class="cf" data-cf data-step="0" id={uid} data-l-step={t('cfStep')} data-l-of={t('cfOf')}>
   <div class="stage" aria-hidden="true">
     <div class="stage-in">
       <svg viewBox="0 0 640 420" role="img">
@@ -46,17 +48,17 @@ const uid = `cf-${kind}`;
             <rect x="0" y={ground} width="640" height="40" fill="#1d1d1c" />
             {Array.from({ length: 16 }).map((_, i) => <rect x={i * 40 + 6} y={ground - 14} width="28" height="16" rx="3" fill="#2a2a28" />)}
             {Array.from({ length: 8 }).map((_, i) => <circle cx={i * 80 + 40 + (i % 2 ? 0 : 0)} cy={ground - 6} r="7" fill="#b3322a" />)}
-            <text x="16" y={ground + 28} class="lbl dim">Placa de aislamiento · suelo radiante</text>
+            <text x="16" y={ground + 28} class="lbl dim">{t('cfInsulation')}</text>
           </g>
         )}
-        {!isPiko && <text x="16" y={ground + 30} class="lbl dim">Forjado / solera existente</text>}
+        {!isPiko && <text x="16" y={ground + 30} class="lbl dim">{t('cfSlab')}</text>}
 
         <!-- Mortero autonivelante -->
         <g class="mortar">
           <rect x="0" y={laserY} width="640" height={mortarH} fill={`url(#${uid}-mortar)`} />
           <rect x="0" y={laserY} width="640" height="3" fill="#d9d7d1" />
         </g>
-        <text x="16" y={laserY + 30} class="lbl mortar-lbl">Mortero autonivelante</text>
+        <text x="16" y={laserY + 30} class="lbl mortar-lbl">{t('cfMortar')}</text>
 
         <!-- Láser -->
         <g class="laser">
@@ -68,7 +70,7 @@ const uid = `cf-${kind}`;
           </g>
           <rect class="beam" x="70" y={laserY - 1.5} width="570" height="3" rx="1.5" fill="#ff3b2f" filter={`url(#${uid}-glow)`} />
           <rect class="beam-dash" x="70" y={laserY - 1.5} width="570" height="3" fill={`url(#${uid}-dash)`} />
-          <text x="86" y={laserY - 12} class="lbl laser-lbl">Cota de acabado (láser)</text>
+          <text x="86" y={laserY - 12} class="lbl laser-lbl">{t('cfLaser')}</text>
         </g>
 
         <!-- Nivelador -->
@@ -99,12 +101,12 @@ const uid = `cf-${kind}`;
         <!-- Indicadores -->
         <g class="ok">
           <rect x="430" y="120" width="180" height="44" rx="22" fill="#121211" stroke="#c7b29a" />
-          <text x="520" y="148" text-anchor="middle" class="lbl ok-lbl">✓ Superficie nivelada</text>
+          <text x="520" y="148" text-anchor="middle" class="lbl ok-lbl">{t('cfLeveled')}</text>
         </g>
         <g class="adjust">
           <path d="M366 168 L366 204" stroke="#c7b29a" stroke-width="2" marker-end="" />
           <path d="M360 196 L366 206 L372 196" fill="none" stroke="#c7b29a" stroke-width="2" />
-          <text x="380" y="190" class="lbl sand-lbl">Ajusta la anilla</text>
+          <text x="380" y="190" class="lbl sand-lbl">{t('cfAdjust')}</text>
         </g>
       </svg>
       <div class="hud">
@@ -127,7 +129,7 @@ const uid = `cf-${kind}`;
   <p class="visually-hidden" aria-live="polite" data-cf-live></p>
   <button type="button" class="btn btn--dark play" data-cf-play>
     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="currentColor"/></svg>
-    Ver animación completa
+    {t('cfPlay')}
   </button>
 </div>
 
@@ -145,7 +147,7 @@ const uid = `cf-${kind}`;
         it.classList.toggle('on', on);
         it.querySelector('button')?.setAttribute('aria-current', on ? 'step' : 'false');
       });
-      if (live && n > 0) live.textContent = `Paso ${n} de ${items.length}: ${items[n - 1]?.querySelector('strong')?.textContent ?? ''}`;
+      if (live && n > 0) live.textContent = `${root.dataset.lStep} ${n} ${root.dataset.lOf} ${items.length}: ${items[n - 1]?.querySelector('strong')?.textContent ?? ''}`;
       num.textContent = String(Math.max(1, n));
       const cur = items[Math.max(0, n - 1)];
       title.textContent = cur?.querySelector('strong')?.textContent ?? '';

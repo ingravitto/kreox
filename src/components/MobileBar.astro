@@ -1,13 +1,15 @@
 ---
 import WaIcon from './WaIcon.astro';
-import { SITE, waTarifa } from '../data/site';
+import { waTarifa, waInfo } from '../data/site';
+import { useT } from '../i18n/ui';
+const { lang, t } = useT(Astro.url);
 ---
-<nav class="mbar" aria-label="Accesos rápidos">
-  <a href={SITE.whatsapp} class="wa" target="_blank" rel="noopener" aria-label="WhatsApp (se abre en una nueva ventana)">
+<nav class="mbar" aria-label={t('quickAccess')}>
+  <a href={waInfo(lang)} class="wa" target="_blank" rel="noopener" aria-label={`WhatsApp${t('newWindow')}`}>
     <WaIcon size={18} />
     WhatsApp
   </a>
-  <a href={waTarifa()} class="quote" target="_blank" rel="noopener">Nueva tarifa 2027<span class="visually-hidden"> (abre WhatsApp)</span></a>
+  <a href={waTarifa('general', lang)} class="quote" target="_blank" rel="noopener">{t('newPriceList')}<span class="visually-hidden">{t('opensWhatsApp')}</span></a>
 </nav>
 <style>
   .mbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: grid; grid-template-columns: 1fr 1.25fr; gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: rgba(18,18,17,.94); backdrop-filter: blur(10px); border-top: 1px solid var(--line-dark); }

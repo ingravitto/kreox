@@ -1,0 +1,95 @@
+---
+// English version of /empresa/
+import PageHero from '../../components/PageHero.astro';
+import imgHeroBg from '../../assets/img/packaging-kreox-kalzo-kuna.jpg';
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import CtaTarifa from '../../components/CtaTarifa.astro';
+import { SITE, waInfo } from '../../data/site';
+import { PATHS } from '../../i18n/routes';
+import imgFabrica from '../../assets/img/hero-productos-kreox.jpg';
+import SelloPatentado from '../../components/SelloPatentado.astro';
+import EneIcon from '../../components/EneIcon.astro';
+
+const R = PATHS.en;
+---
+<Base
+  overlay
+  title="KREOX · Spanish manufacturer of leveling systems"
+  description="KREOX is a third-generation family manufacturer in Ibi (Alicante, Spain). We design and make levelers for self-leveling mortar and tile installation."
+  breadcrumbs={[{ name: 'Company', url: R.empresa }]}
+>
+  <PageHero
+    eyebrow="Third generation"
+    title="Three generations manufacturing in"
+    accent="Ibi (Alicante)"
+    lead="A constant search for perfection in improving our products. We are a <strong>Spanish manufacturer</strong>."
+    bg={imgHeroBg}
+    bgAlt="Bags of KREOX Kalzo and stain-resistant Kuña"
+    crumbs={[{ name: 'Company', url: R.empresa }]}
+  />
+  <section class="section">
+    <div class="container split">
+      <div data-reveal>
+        <span class="eyebrow">How we like to describe ourselves</span>
+        <h2>A Spanish manufacturer</h2>
+        <p class="lead">We design and make in Spain the <a class="link" href={R.piko}>PIKO</a> and <a class="link" href={R.universal}>Nivelador Universal</a> levelers for self-leveling mortar, and the Kalzo, Kuña and Alikates <a class="link" href={R.azulejos}>tile leveling system</a>.</p>
+        <p class="muted">KREOX is a brand of {SITE.legalName}</p>
+      </div>
+      <Image src={imgFabrica} alt="KREOX product range: PIKO and Nivelador Universal levelers, Kalzos and Kuñas" widths={[600, 1100]} sizes="(min-width: 960px) 520px, 92vw" class="photo" />
+    </div>
+  </section>
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section-head"><h2>What being a manufacturer means</h2></div>
+      <div class="grid grid-4">
+        <div class="card"><h3>Competitive prices</h3><p class="muted mt-0">Direct manufacturer prices.</p></div>
+        <div class="card"><h3>Guaranteed quality</h3><p class="muted mt-0">Improvements are tested on real jobs before launch.</p></div>
+        <div class="card"><h3>Fast orders</h3><p class="muted mt-0">Made in Spain, no import delays.</p></div>
+        <div class="card"><h3>Made in Spain</h3><p class="muted mt-0">Designed and made in Spain from recycled material.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container split">
+      <div>
+        <h2>Innovation and patents</h2>
+        <p>Our levelers for self-leveling mortar are <strong>patented products</strong>, and every year we add improvements that come from the experience of professionals on site: in 2026, the ring with fiber additive, the new high-visibility color and the reinforced Nivelador Universal base.</p>
+        <p>Our products also offer a superior grip and are made from recycled material.</p>
+      </div>
+      <div class="seals">
+        <SelloPatentado size={170} />
+        <div class="made-badge"><EneIcon size={110} /><span>Designed and made in Spain</span></div>
+      </div>
+    </div>
+  </section>
+  <section class="section section--paper">
+    <div class="container split split--top">
+      <div>
+        <span class="eyebrow">Where we are</span>
+        <h2>We manufacture in Ibi, in the Foia de Castalla (Alicante, Spain)</h2>
+        <p>From our facilities in Ibi we design, manufacture and ship KREOX levelers for self-leveling mortar and the tile leveling system. We serve professionals and distributors, and we have a dedicated contact for distribution and export.</p>
+        <p class="muted">KREOX is a member of AIMPLAS, AIJU and IBIAE, the Foia de Castalla Business Association.</p>
+      </div>
+      <address class="card place">
+        <strong>{SITE.legalName}</strong>
+        <span>{SITE.address.street}</span>
+        <span>{SITE.address.postalCode} {SITE.address.city} ({SITE.address.region}), Spain</span>
+        <a href={waInfo('en')} target="_blank" rel="noopener">WhatsApp {SITE.whatsappDisplay}<span class="visually-hidden"> (opens in a new window)</span></a>
+        <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        <a href={`mailto:${SITE.emailExport}`}>Export: {SITE.emailExport}</a>
+        <a class="arrow-link" href={R.contacto}>Go to contact</a>
+      </address>
+    </div>
+  </section>
+  <CtaTarifa />
+</Base>
+<style>
+  .photo { border-radius: var(--radius-xl); width: 100%; }
+  .seals { display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: center; background: var(--ink); border-radius: var(--radius); padding: 40px 32px; }
+  .place { display: grid; gap: 6px; font-style: normal; }
+  .place strong { margin-bottom: 4px; }
+  .place a:not(.arrow-link) { color: var(--ink); }
+  .place .arrow-link { margin-top: 10px; }
+  .made-badge { display: grid; justify-items: center; gap: 10px; color: var(--white); font-size: .85rem; text-align: center; max-width: 160px; }
+</style>

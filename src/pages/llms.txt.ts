@@ -1,7 +1,9 @@
 import type { APIRoute } from 'astro';
 import { SITE, NIVELACION, AZULEJOS, PRODUCTOS, M2_POR_NIVELADOR } from '../data/site';
 import { TILE_PRODUCTS } from '../data/azulejos';
-import { getNoticias, noticiaUrl } from '../data/noticias';
+import { getNoticias, noticiaUrl, getNews, newsUrl } from '../data/noticias';
+import { TILE_PRODUCTS_EN } from '../data/en/tiles';
+import { PATHS } from '../i18n/routes';
 
 // Resumen para asistentes de IA (https://llmstxt.org). Se regenera en cada build con los datos actuales.
 export const GET: APIRoute = async () => {
@@ -9,6 +11,8 @@ export const GET: APIRoute = async () => {
   const P = PRODUCTOS.piko;
   const N = PRODUCTOS.universal;
   const noticias = (await getNoticias()).filter((n) => n.data.category === 'nivelacion');
+  const news = await getNews();
+  const E = PATHS.en;
   const txt = `# KREOX
 
 > Fabricante español (${SITE.address.city}, ${SITE.address.region}) de sistemas de nivelación para mortero autonivelante y de soluciones para la colocación de azulejos. Empresa familiar de tercera generación (${SITE.legalName}). Productos diseñados y fabricados en España; niveladores patentados.
@@ -39,6 +43,18 @@ ${noticias.map((n) => `- [${n.data.title}](${U}${noticiaUrl(n)}) (${n.data.date.
 - [Empresa](${U}/empresa/)
 - [Contacto](${U}/contacto/). La tarifa 2027 se pide por WhatsApp (${SITE.whatsappDisplay}). Teléfono ${SITE.phone} · ${SITE.email} · exportación: ${SITE.emailExport}
 - Dirección: ${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.city} (${SITE.address.region}), España
+
+## English
+
+> Spanish manufacturer (${SITE.address.city}, ${SITE.address.region}) of leveling systems for self-leveling mortar and tile installation. Third-generation family business (${SITE.legalName}). Designed and made in Spain; patented levelers. English pages: ${U}${E.home}
+
+- [PIKO](${U}${E.piko}): leveler pushed into the insulation board of underfloor heating; marks the self-leveling mortar height with a laser-adjustable ring (standard laser or with receiver). Replaces the steel tripod: about ${P.pesoG} g versus ~1 kg, rust-free, reusable. Box of ${P.caja}.
+- [Nivelador Universal](${U}${E.universal}): universal raised leveler with a flat, reinforced base for self-leveling mortar screeds on any surface. About ${N.pesoG} g, laser adjustable, reusable, with spare parts. Box of ${N.caja}.
+- Recommended density: roughly 1 leveler every ${M2_POR_NIVELADOR} m² (100 m² ≈ ${Math.ceil(100 / M2_POR_NIVELADOR)} levelers).
+- [Spare parts](${U}${E.recambios}) · [Leveler calculator](${U}${E.calculadora}) · [PIKO vs steel tripod](${U}${E.vsTripode}) · [Leveling systems](${U}${E.nivelacion}) · [FAQ](${U}${E.faq})
+- Tile leveling system: ${TILE_PRODUCTS_EN.map((p) => `[${p.name}](${U}${E.azulejos}${p.slug}/)`).join(' · ')}
+${news.map((n) => `- [${n.data.title}](${U}${newsUrl(n)}) (${n.data.date.toISOString().slice(0, 10)})`).join('\n')}
+- [Company](${U}${E.empresa}) · [Contact](${U}${E.contacto}). The 2027 price list is requested on WhatsApp (${SITE.whatsappDisplay}). Export: ${SITE.emailExport}
 `;
   return new Response(txt, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 };

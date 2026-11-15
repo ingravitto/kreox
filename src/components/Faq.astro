@@ -2,15 +2,17 @@
 // Preguntas frecuentes visibles. El mismo array se pasa a faqSchema() en la página,
 // así lo que lee Google y las IA coincide siempre con lo que ve el usuario.
 interface Props { faqs: { q: string; a: string }[]; title?: string; id?: string }
-const { faqs, title = 'Preguntas frecuentes', id = 'preguntas-frecuentes' } = Astro.props;
+import { useT } from '../i18n/ui';
+const { lang, t, P } = useT(Astro.url);
+const { faqs, title = t('faqTitle'), id = lang === 'en' ? 'faq' : 'preguntas-frecuentes' } = Astro.props;
 ---
 <section class="section section--paper" id={id}>
   <div class="container split split--top">
     <div class="head">
       <span class="eyebrow">FAQ</span>
       <h2>{title}</h2>
-      <p class="muted">¿No encuentras tu respuesta? Escríbenos y te contestamos.</p>
-      <a class="arrow-link" href="/contacto/">Contactar</a>
+      <p class="muted">{t('faqNotFound')}</p>
+      <a class="arrow-link" href={P.contacto}>{t('faqContact')}</a>
     </div>
     <div class="faq">
       {faqs.map((f, i) => (

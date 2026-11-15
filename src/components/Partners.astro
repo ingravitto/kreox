@@ -3,13 +3,15 @@ import { Image } from 'astro:assets';
 import aimplas from '../assets/img/socio-aimplas.png';
 import aiju from '../assets/img/socio-aiju.png';
 import ibiae from '../assets/img/socio-ibiae.png';
+import { useT } from '../i18n/ui';
+const { t } = useT(Astro.url);
 ---
 <div class="partners">
-  <span class="label">Estamos asociados</span>
+  <span class="label">{t('partners')}</span>
   <ul>
-    <li><Image src={aimplas} alt="AIMPLAS, Plastics Technology Centre" widths={[120, 180, 260, 520]} sizes="(min-width: 960px) 170px, 100px" /></li>
-    <li><Image src={aiju} alt="AIJU, Instituto Tecnológico de producto infantil y ocio" widths={[120, 180, 260, 520]} sizes="(min-width: 960px) 170px, 100px" /></li>
-    <li><Image src={ibiae} alt="IBIAE, Asociación de Empresarios Foia de Castalla" widths={[120, 180, 260, 520]} sizes="(min-width: 960px) 150px, 90px" /></li>
+    <li><Image src={aimplas} alt={t('aimplasAlt')} widths={[120, 180, 260, 520]} sizes="(min-width: 960px) 170px, 100px" /></li>
+    <li><Image src={aiju} alt={t('aijuAlt')} widths={[120, 180, 260, 520]} sizes="(min-width: 960px) 170px, 100px" /></li>
+    <li><Image src={ibiae} alt={t('ibiaeAlt')} widths={[120, 180, 260, 520]} sizes="(min-width: 960px) 150px, 90px" /></li>
   </ul>
 </div>
 <style>

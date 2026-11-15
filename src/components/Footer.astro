@@ -2,7 +2,9 @@
 import { Image } from 'astro:assets';
 import logo from '../assets/img/kreox-logo-blanco.png';
 import Partners from './Partners.astro';
-import { SITE, NIVELACION, AZULEJOS } from '../data/site';
+import { SITE, waInfo } from '../data/site';
+import { useT } from '../i18n/ui';
+const { lang, t, P } = useT(Astro.url);
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
@@ -11,42 +13,42 @@ const year = new Date().getFullYear();
       <div class="brand">
         <Image src={logo} alt="KREOX" width={120} densities={[1, 2]} class="flogo" />
         <p class="claim">Innovation for construction</p>
-        <p>Fabricantes de sistemas de nivelación para mortero autonivelante y para la colocación de azulejos. Empresa familiar de tercera generación en Ibi (Alicante).</p>
+        <p>{t('footerAbout')}</p>
         <div class="made">
           <svg class="ene" viewBox="0 0 48 48" aria-hidden="true"><rect x="1.5" y="1.5" width="45" height="45" rx="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15 15.5h18v3.2H15z" fill="currentColor"/><path d="M15.5 36V22.5h4.6v2.1c1.2-1.6 3-2.5 5.2-2.5 3.9 0 6.2 2.6 6.2 6.8V36h-4.7v-6.4c0-2.3-1.1-3.5-3-3.5-2.1 0-3.6 1.4-3.6 3.9v6z" fill="currentColor"/></svg>
-          <span>Diseñado y fabricado en España</span>
+          <span>{t('madeInSpain')}</span>
         </div>
       </div>
-      <nav aria-label="Nivelación autonivelante">
-        <h2>Nivelación</h2>
+      <nav aria-label={t('footerLevelingAria')}>
+        <h2>{t('footerLeveling')}</h2>
         <ul>
-          <li><a href={`${NIVELACION}piko/`}>PIKO · suelo radiante</a></li>
-          <li><a href={`${NIVELACION}nivelador-universal/`}>Nivelador Universal</a></li>
-          <li><a href={`${NIVELACION}recambios/`}>Recambios</a></li>
-          <li><a href={`${NIVELACION}lamina-bajo-solera/`}>Lámina bajo solera</a></li>
-          <li><a href={`${NIVELACION}calculadora/`}>Calculadora</a></li>
-          <li><a href={`${NIVELACION}piko-vs-tripode/`}>PIKO vs trípode</a></li>
-          <li><a href="/preguntas-frecuentes/">Preguntas frecuentes</a></li>
+          <li><a href={P.piko}>{t('fPiko')}</a></li>
+          <li><a href={P.universal}>{t('fUniversal')}</a></li>
+          <li><a href={P.recambios}>{t('fParts')}</a></li>
+          <li><a href={P.lamina}>{t('fSheet')}</a></li>
+          <li><a href={P.calculadora}>{t('fCalc')}</a></li>
+          <li><a href={P.vsTripode}>{t('fVs')}</a></li>
+          <li><a href={P.faq}>{t('fFaq')}</a></li>
         </ul>
       </nav>
-      <nav aria-label="Colocación de azulejos">
-        <h2>Azulejos</h2>
+      <nav aria-label={t('footerTilesAria')}>
+        <h2>{t('footerTiles')}</h2>
         <ul>
-          <li><a href={`${AZULEJOS}kalzo-separador/`}>Kalzo Separador</a></li>
-          <li><a href={`${AZULEJOS}kuna-niveladora/`}>Kuña Niveladora</a></li>
-          <li><a href={`${AZULEJOS}kuna-antimanchas/`}>Kuña Antimanchas</a></li>
-          <li><a href={`${AZULEJOS}alikates/`}>Alikates</a></li>
-          <li><a href={SITE.tileCalculator}>Calculadora de piezas</a></li>
+          <li><a href={P.kalzo}>{lang === 'en' ? 'Kalzo spacer clip' : 'Kalzo Separador'}</a></li>
+          <li><a href={P.kunaNiveladora}>{lang === 'en' ? 'Kuña leveling wedge' : 'Kuña Niveladora'}</a></li>
+          <li><a href={P.kunaAntimanchas}>{lang === 'en' ? 'Stain-resistant Kuña' : 'Kuña Antimanchas'}</a></li>
+          <li><a href={P.alikates}>{lang === 'en' ? 'Alikates tile pliers' : 'Alikates'}</a></li>
+          <li><a href={SITE.tileCalculator}>{t('fTileCalc')}</a></li>
         </ul>
       </nav>
       <div>
-        <h2>Contacto</h2>
+        <h2>{t('contact')}</h2>
         <address>
           {SITE.address.street}<br />{SITE.address.postalCode} {SITE.address.city} ({SITE.address.region})<br />
           <a href={SITE.phoneHref}>{SITE.phone}</a><br />
-          WhatsApp: <a href={SITE.whatsapp} target="_blank" rel="noopener">{SITE.whatsappDisplay}<span class="visually-hidden"> (se abre en una nueva ventana)</span></a><br />
+          WhatsApp: <a href={waInfo(lang)} target="_blank" rel="noopener">{SITE.whatsappDisplay}<span class="visually-hidden">{t('newWindow')}</span></a><br />
           <a href={`mailto:${SITE.email}`}>{SITE.email}</a><br />
-          Exportación: <a href={`mailto:${SITE.emailExport}`}>{SITE.emailExport}</a>
+          {t('export')}: <a href={`mailto:${SITE.emailExport}`}>{SITE.emailExport}</a>
         </address>
         <ul class="social">
           <li><a href={SITE.social.youtube} rel="me">YouTube</a></li>
@@ -61,9 +63,9 @@ const year = new Date().getFullYear();
   <div class="giant" aria-hidden="true"><span class="wordmark">Kreox</span></div>
   <div class="container legal">
     <span>© {year} KREOX · {SITE.legalName}</span>
-    <a href="/aviso-legal/">Aviso legal</a>
-    <a href="/politica-privacidad/">Privacidad</a>
-    <a href="/politica-cookies/">Cookies</a>
+    <a href={P.avisoLegal}>{t('legalNotice')}</a>
+    <a href={P.privacidad}>{t('privacy')}</a>
+    <a href={P.cookies}>{t('cookies')}</a>
   </div>
 </footer>
 

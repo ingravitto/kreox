@@ -1,0 +1,27 @@
+---
+// English version of /politica-privacidad/
+import Legal from '../../layouts/Legal.astro';
+import { SITE } from '../../data/site';
+---
+<Legal title="Privacy policy" description="How KREOX (TALLERES LA PAZ, S.L.) processes the personal data you send us through the contact form and what your rights are." url="/en/privacy-policy/" updated="November 2026">
+  <h2>Data controller</h2>
+  <ul>
+    <li><strong>Controller:</strong> {SITE.legalName} (KREOX brand)</li>
+    <li><strong>Tax ID (CIF):</strong> {SITE.cif}</li>
+    <li><strong>Address:</strong> {SITE.address.street}, {SITE.address.postalCode} {SITE.address.city} ({SITE.address.region}), Spain</li>
+    <li><strong>Phone:</strong> {SITE.phone}</li>
+    <li><strong>Email:</strong> <a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+  </ul>
+  <h2>What data we process and why</h2>
+  <p>Through the contact form we collect your name and email and, if you provide them, your phone number, company, the subject of your enquiry and your message. We use them <strong>only to reply to your enquiry and send you the price list or the sales information you request</strong>.</p>
+  <h2>Legal basis</h2>
+  <p>The consent you give by ticking the acceptance box (Art. 6.1.a GDPR) and, where applicable, taking steps at your request prior to entering into a contract (Art. 6.1.b GDPR).</p>
+  <h2>Retention</h2>
+  <p>We keep the data for as long as necessary to handle your request and, afterwards, for the applicable legal periods.</p>
+  <h2>Recipients</h2>
+  <p>We do not share your data with third parties unless required by law. The web hosting and email provider processes the data on our behalf as a data processor.</p>
+  <h2>Your rights</h2>
+  <p>You can exercise your rights of access, rectification, erasure, objection, restriction and portability by writing to <a href={`mailto:${SITE.email}`}>{SITE.email}</a> or to the postal address above. You can also lodge a complaint with the Spanish Data Protection Agency (<a href="https://www.aepd.es">www.aepd.es</a>).</p>
+  <h2>Legislation</h2>
+  <p>Regulation (EU) 2016/679 (GDPR), Spanish Organic Law 3/2018 (LOPDGDD) and Spanish Law 34/2002 (LSSI-CE). This English version is provided for information; in case of discrepancy, the <a href="/politica-privacidad/" hreflang="es" lang="es">Spanish version</a> prevails.</p>
+</Legal>

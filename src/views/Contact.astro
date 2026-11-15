@@ -1,0 +1,233 @@
+---
+// Página de contacto compartida por /contacto/ y /en/contact/: mismo formulario (contacto.php), textos según el idioma.
+import PageHero from '../components/PageHero.astro';
+import imgHeroBg from '../assets/img/fondo-piedra-productos-kreox.jpg';
+import Base from '../layouts/Base.astro';
+import { SITE, waTarifa, waInfo } from '../data/site';
+import WaIcon from '../components/WaIcon.astro';
+import Faq from '../components/Faq.astro';
+import { faqSchema } from '../data/schema';
+import { useT } from '../i18n/ui';
+
+const { lang, P } = useT(Astro.url);
+const EN = lang === 'en';
+const T = EN
+  ? {
+      title: 'Contact and 2027 price list on WhatsApp | KREOX',
+      description: `Ask for the KREOX 2027 price list on WhatsApp (${SITE.whatsappDisplay}) or write to our sales team: ${SITE.email}.`,
+      crumb: 'Contact', eyebrow: 'Get our price list', heroTitle: 'Ask for the', heroAccent: '2027 price list',
+      heroLead: 'The price list is requested on WhatsApp: message us and we will send it with advice for your job.',
+      waBig: 'Ask for the 2027 price list on WhatsApp', opens: ' (opens WhatsApp)', newWin: ' (opens in a new window)',
+      otherEyebrow: 'Other enquiries', otherTitle: 'Sales team', otherText: 'For technical questions, distribution or export, write to us or use the form.',
+      phone: 'Phone', sales: 'Sales', exportLbl: 'Export', address: 'Address', country: ', Spain',
+      formTitle: 'Write to us', waAlt: 'Prefer WhatsApp?',
+      err: `We could not send the form. Please check the fields or write to us at ${SITE.email}.`,
+      name: 'Name', namePh: 'Your name', nameErr: 'Please enter your name.',
+      emailPh: 'name@company.com', emailErr: 'Please enter a valid email.',
+      tel: 'Phone', optional: '(optional)', telPh: '+44 7700 900000', company: 'Company', companyPh: 'Your company name',
+      topic: 'What is your enquiry about?', tNiv: 'Leveling (PIKO / Universal)', tAzu: 'Tiles', tExp: 'Distribution / export', tOtra: 'Other',
+      msg: 'Message', msgPh: 'Tell us about your job or your question: square meters, type of substrate, timing…',
+      privacy1: 'I accept the', privacy2: 'privacy policy', privErr: 'We need your consent to reply to you.',
+      submit: 'Send enquiry', required: 'Required fields', sending: 'Sending…',
+      faqTitle: 'Questions about contact and the price list',
+      faqs: [
+        { q: 'How do I get the KREOX 2027 price list?', a: `Message us on WhatsApp at ${SITE.whatsappDisplay} and we will send you the 2027 price list. The price list is only available on WhatsApp.` },
+        { q: 'Can I ask only for the self-leveling mortar levelers price list?', a: 'Yes. Tell us in your message whether you are interested in the PIKO and Universal levelers, the spare parts or the tile leveling system and we will advise you on what you need for your job.' },
+        { q: 'Who do I write to about distribution or export?', a: `For distribution and export, write to ${SITE.emailExport}. For any other sales enquiry, write to ${SITE.email}.` },
+        { q: 'Where is KREOX?', a: `At ${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.city} (${SITE.address.region}, Spain), where we design and make our products.` },
+        { q: 'What is the contact form for?', a: 'For technical questions and anything other than the price list. Our sales team will reply.' },
+      ],
+    }
+  : {
+      title: 'Contacto y tarifa 2027 por WhatsApp | KREOX',
+      description: 'Pide la tarifa 2027 de KREOX por WhatsApp (+34 611 87 50 47) o escribe a nuestro departamento comercial: comercial@kreox.es.',
+      crumb: 'Contacto', eyebrow: 'Consigue nuestra tarifa', heroTitle: 'Pide la', heroAccent: 'tarifa 2027',
+      heroLead: 'La tarifa se pide por WhatsApp: escríbenos y te la enviamos con el asesoramiento para tu obra.',
+      waBig: 'Pedir tarifa 2027 por WhatsApp', opens: ' (abre WhatsApp)', newWin: ' (se abre en una nueva ventana)',
+      otherEyebrow: 'Otras consultas', otherTitle: 'Departamento comercial', otherText: 'Para dudas técnicas, distribución o exportación, escríbenos o usa el formulario.',
+      phone: 'Teléfono', sales: 'Comercial', exportLbl: 'Exportación', address: 'Dirección', country: '',
+      formTitle: 'Escríbenos', waAlt: '¿Prefieres WhatsApp?',
+      err: `No hemos podido enviar el formulario. Revisa los campos o escríbenos a ${SITE.email}.`,
+      name: 'Nombre', namePh: 'Tu nombre', nameErr: 'Escribe tu nombre.',
+      emailPh: 'nombre@empresa.es', emailErr: 'Escribe un email válido.',
+      tel: 'Teléfono', optional: '(opcional)', telPh: '600 000 000', company: 'Empresa', companyPh: 'Nombre de tu empresa',
+      topic: '¿Sobre qué es tu consulta?', tNiv: 'Nivelación (PIKO / Universal)', tAzu: 'Azulejos', tExp: 'Distribución / exportación', tOtra: 'Otra',
+      msg: 'Mensaje', msgPh: 'Cuéntanos tu obra o tu duda: metros, tipo de soporte, plazos…',
+      privacy1: 'Acepto la', privacy2: 'política de privacidad', privErr: 'Necesitamos tu aceptación para responderte.',
+      submit: 'Enviar consulta', required: 'Campos obligatorios', sending: 'Enviando…',
+      faqTitle: 'Preguntas sobre contacto y tarifa',
+      // Preguntas de contacto: solo datos de site.ts y las reglas de tarifa (por WhatsApp).
+      faqs: [
+        { q: '¿Cómo consigo la tarifa 2027 de KREOX?', a: `Escríbenos por WhatsApp al ${SITE.whatsappDisplay} y te enviamos la tarifa 2027. La tarifa se pide solo por WhatsApp.` },
+        { q: '¿Puedo pedir solo la tarifa de niveladores para mortero autonivelante?', a: 'Sí. Indícanos en el mensaje si te interesan los niveladores PIKO y Universal, los recambios o el sistema de colocación de azulejos y te asesoramos sobre lo que necesitas para tu obra.' },
+        { q: '¿A quién escribo para distribución o exportación?', a: `Para distribución y exportación escribe a ${SITE.emailExport}. Para el resto de consultas comerciales, a ${SITE.email}.` },
+        { q: '¿Dónde está KREOX?', a: `En ${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.city} (${SITE.address.region}), donde diseñamos y fabricamos nuestros productos.` },
+        { q: '¿Para qué sirve el formulario de contacto?', a: 'Para consultas técnicas y cualquier otra pregunta que no sea la tarifa. Te responde nuestro departamento comercial.' },
+      ],
+    };
+const faqs = T.faqs;
+---
+<Base
+  overlay
+  title={T.title}
+  description={T.description}
+  breadcrumbs={[{ name: T.crumb, url: P.contacto }]}
+  schema={[faqSchema(faqs)]}
+>
+  <PageHero
+    compact
+    eyebrow={T.eyebrow}
+    title={T.heroTitle}
+    accent={T.heroAccent}
+    lead={T.heroLead}
+    bg={imgHeroBg}
+    crumbs={[{ name: T.crumb, url: P.contacto }]}
+  >
+    <div class="btn-row">
+      <a class="btn btn--sand wa-big" href={waTarifa('general', lang)} target="_blank" rel="noopener"><WaIcon size={18} /> {T.waBig}<span class="visually-hidden">{T.opens}</span></a>
+    </div>
+    <p class="wa-num">WhatsApp {SITE.whatsappDisplay}</p>
+  </PageHero>
+  <section class="section">
+    <div class="container split split--top">
+      <div>
+        <span class="eyebrow">{T.otherEyebrow}</span>
+        <h2>{T.otherTitle}</h2>
+        <p class="muted">{T.otherText}</p>
+        <ul class="contact">
+          <li><strong>{T.phone}</strong><a href={SITE.phoneHref}>{SITE.phone}</a></li>
+          <li><strong>WhatsApp</strong><a href={waInfo(lang)} target="_blank" rel="noopener">{SITE.whatsappDisplay}<span class="visually-hidden">{T.newWin}</span></a></li>
+          <li><strong>{T.sales}</strong><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+          <li><strong>{T.exportLbl}</strong><a href={`mailto:${SITE.emailExport}`}>{SITE.emailExport}</a></li>
+          <li><strong>{T.address}</strong>{SITE.address.street} · {SITE.address.postalCode} {SITE.address.city} ({SITE.address.region}){T.country}</li>
+        </ul>
+      </div>
+      <form class="card form" method="post" action="/contacto.php" novalidate data-form data-sending={T.sending}>
+        <input type="hidden" name="lang" value={lang} />
+        <div class="fhead">
+          <h2 class="ftitle">{T.formTitle}</h2>
+          <a class="wa-alt" href={waInfo(lang)} target="_blank" rel="noopener"><WaIcon size={16} /> {T.waAlt}<span class="visually-hidden">{T.opens}</span></a>
+        </div>
+        <p class="err" hidden data-err role="alert">{T.err}</p>
+
+        <div class="row">
+          <div class="f">
+            <label for="f-nombre">{T.name} <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-nombre" name="nombre" autocomplete="name" required maxlength="120" placeholder={T.namePh} aria-describedby="e-nombre" />
+            <p class="ferr" id="e-nombre" hidden>{T.nameErr}</p>
+          </div>
+          <div class="f">
+            <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-email" type="email" name="email" autocomplete="email" inputmode="email" required maxlength="160" placeholder={T.emailPh} aria-describedby="e-email" />
+            <p class="ferr" id="e-email" hidden>{T.emailErr}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="f">
+            <label for="f-tel">{T.tel} <span class="opt">{T.optional}</span></label>
+            <input id="f-tel" type="tel" name="telefono" autocomplete="tel" inputmode="tel" maxlength="40" placeholder={T.telPh} />
+          </div>
+          <div class="f">
+            <label for="f-empresa">{T.company} <span class="opt">{T.optional}</span></label>
+            <input id="f-empresa" name="empresa" autocomplete="organization" maxlength="120" placeholder={T.companyPh} />
+          </div>
+        </div>
+
+        <fieldset class="f">
+          <legend>{T.topic}</legend>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="interes" value="nivelacion" checked /> <span>{T.tNiv}</span></label>
+            <label class="pill"><input type="radio" name="interes" value="azulejos" /> <span>{T.tAzu}</span></label>
+            <label class="pill"><input type="radio" name="interes" value="exportacion" /> <span>{T.tExp}</span></label>
+            <label class="pill"><input type="radio" name="interes" value="otra" /> <span>{T.tOtra}</span></label>
+          </div>
+        </fieldset>
+
+        <div class="f">
+          <label for="f-msg">{T.msg} <span class="opt">{T.optional}</span></label>
+          <textarea id="f-msg" name="mensaje" rows="3" maxlength="3000" placeholder={T.msgPh}></textarea>
+        </div>
+
+        <div class="hp" aria-hidden="true"><label>Web<input name="web" tabindex="-1" autocomplete="off" /></label></div>
+        <input type="hidden" name="ts" value="" />
+
+        <div class="f">
+          <label class="check"><input type="checkbox" name="privacidad" value="1" required aria-describedby="e-priv" /> <span>{T.privacy1} <a href={P.privacidad}>{T.privacy2}</a>. <span class="req" aria-hidden="true">*</span></span></label>
+          <p class="ferr" id="e-priv" hidden>{T.privErr}</p>
+        </div>
+        <div class="fsubmit">
+          <button class="btn btn--dark" type="submit">{T.submit} <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+          <p class="muted fnote"><span aria-hidden="true">*</span> {T.required}</p>
+        </div>
+      </form>
+    </div>
+  </section>
+  <Faq faqs={faqs} title={T.faqTitle} />
+</Base>
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-form]')!;
+  const q = new URLSearchParams(location.search);
+  const interes = q.get('interes');
+  if (interes) { const r = form.querySelector<HTMLInputElement>(`input[name="interes"][value="${interes}"]`); if (r) r.checked = true; }
+  if (q.get('error')) form.querySelector<HTMLElement>('[data-err]')!.hidden = false;
+  (form.elements.namedItem('ts') as HTMLInputElement).value = String(Math.floor(Date.now() / 1000));
+  // Validación accesible: mensajes junto al campo, foco en el primer error
+  const checks: [string, string][] = [['nombre', 'e-nombre'], ['email', 'e-email'], ['privacidad', 'e-priv']];
+  const validate = (el: HTMLInputElement, errId: string) => {
+    const ok = el.checkValidity();
+    el.setAttribute('aria-invalid', String(!ok));
+    document.getElementById(errId)!.hidden = ok;
+    return ok;
+  };
+  checks.forEach(([n, e]) => {
+    const el = form.elements.namedItem(n) as HTMLInputElement;
+    el.addEventListener('blur', () => { if (el.value || el.type === 'checkbox') validate(el, e); });
+    el.addEventListener('input', () => { if (el.getAttribute('aria-invalid') === 'true') validate(el, e); });
+  });
+  form.addEventListener('submit', (ev) => {
+    let first: HTMLInputElement | null = null;
+    checks.forEach(([n, e]) => { const el = form.elements.namedItem(n) as HTMLInputElement; if (!validate(el, e) && !first) first = el; });
+    if (first) { ev.preventDefault(); (first as HTMLInputElement).focus(); return; }
+    const b = form.querySelector<HTMLButtonElement>('button[type="submit"]')!; b.disabled = true; b.textContent = form.dataset.sending || 'Enviando…';
+  });
+</script>
+<style>
+  .wa-num { margin: 14px 0 0; color: var(--on-dark-soft); font-size: .9rem; }
+  .wa-big { font-size: .82rem; }
+  .top { align-items: start; }
+  .contact { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 22px; font-size: 1.1rem; }
+  .contact a { text-decoration: none; color: var(--ink); font-weight: 500; }
+  .contact a:hover { color: var(--sand-strong); }
+  .contact strong { display: block; font-size: 0.7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--sand-strong); font-weight: 600; margin-bottom: 4px; }
+  .form { display: grid; gap: 18px; padding: clamp(22px, 3vw, 36px); }
+  .fhead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 16px; }
+  .ftitle { font-size: 1.35rem; margin: 0; }
+  .wa-alt { display: inline-flex; align-items: center; gap: 6px; font-size: .88rem; font-weight: 600; color: #075e54; text-decoration: none; }
+  .wa-alt:hover { text-decoration: underline; }
+  .row { display: grid; gap: 18px; }
+  @media (min-width: 560px) { .row { grid-template-columns: 1fr 1fr; } }
+  .f { display: grid; gap: 6px; margin: 0; padding: 0; border: 0; min-width: 0; }
+  .f > label, legend { font-weight: 600; font-size: .86rem; color: var(--ink); padding: 0; }
+  legend { margin-bottom: 8px; }
+  .req { color: #9b2c1f; }
+  .opt { font-weight: 400; color: var(--text-soft); }
+  .form input:not([type='checkbox']):not([type='radio']), .form textarea { font: inherit; font-size: 1rem; font-weight: 400; min-height: 48px; padding: 11px 14px; border: 1px solid #b9b3a9; border-radius: var(--radius-sm); width: 100%; background: var(--white); color: var(--ink); transition: border-color .2s, box-shadow .2s; }
+  .form textarea { min-height: 96px; resize: vertical; }
+  .form input::placeholder, .form textarea::placeholder { color: #8a867f; }
+  .form input:focus, .form textarea:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px rgba(199,178,154,.45); }
+  .form [aria-invalid='true'] { border-color: #9b2c1f !important; }
+  .ferr { margin: 0; font-size: .82rem; color: #9b2c1f; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill { position: relative; cursor: pointer; }
+  .pill input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .pill span { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border: 1px solid #b9b3a9; border-radius: 999px; font-size: .9rem; transition: background .2s, color .2s, border-color .2s; }
+  .pill input:checked + span { background: var(--ink); color: var(--white); border-color: var(--ink); }
+  .pill input:focus-visible + span { outline: 2px solid var(--sand-strong); outline-offset: 2px; }
+  .form .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-size: .92rem; }
+  .form .check input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--ink); flex: none; }
+  .fsubmit { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+  .fsubmit .btn { flex: 1 1 220px; }
+  .fnote { margin: 0; font-size: .82rem; }
+  .hp { position: absolute; left: -5000px; }
+  .err { background: #fbeeee; color: #9b2c1f; padding: 12px; border-radius: var(--radius-sm); margin: 0; }
+</style>
