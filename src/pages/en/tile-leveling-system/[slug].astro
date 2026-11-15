@@ -1,0 +1,96 @@
+---
+// English version of /colocacion-azulejos/[slug]/
+import PageHero from '../../../components/PageHero.astro';
+import { Image } from 'astro:assets';
+import Base from '../../../layouts/Base.astro';
+import Steps from '../../../components/Steps.astro';
+import Faq from '../../../components/Faq.astro';
+import CtaTarifa from '../../../components/CtaTarifa.astro';
+import { SITE, waTarifa } from '../../../data/site';
+import { PATHS } from '../../../i18n/routes';
+import { TILE_PRODUCTS_EN, TILE_FAQ_EN } from '../../../data/en/tiles';
+import { faqSchema, ORG_ID } from '../../../data/schema';
+
+export function getStaticPaths() {
+  return TILE_PRODUCTS_EN.map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+const { p } = Astro.props as { p: (typeof TILE_PRODUCTS_EN)[number] };
+const R = PATHS.en;
+const url = `${R.azulejos}${p.slug}/`;
+const others = TILE_PRODUCTS_EN.filter((o) => o.slug !== p.slug);
+const schema = [
+  {
+    '@type': 'Product',
+    '@id': `${SITE.url}${url}#product`,
+    url: `${SITE.url}${url}`,
+    name: p.name,
+    description: `${p.intro} ${p.body}`,
+    brand: { '@type': 'Brand', name: 'KREOX' },
+    manufacturer: { '@id': ORG_ID },
+    category: 'Tile leveling systems',
+    image: [new URL(p.img.src, SITE.url).href],
+    countryOfOrigin: 'ES',
+    additionalProperty: [
+      ...p.presentacion.map((v) => ({ '@type': 'PropertyValue', name: 'Packaging', value: v })),
+      ...(p.extra ?? []).map((e) => ({ '@type': 'PropertyValue', name: e.label, value: e.value })),
+    ],
+  },
+  faqSchema(TILE_FAQ_EN),
+];
+---
+<Base overlay title={p.title} description={p.description} ogType="product" image={p.img.src} breadcrumbs={[{ name: 'Tile installation', url: R.azulejos }, { name: p.name, url }]} schema={schema}>
+  <PageHero
+    eyebrow="Tile installation"
+    title={p.name}
+    lead={p.intro}
+    product={p.img}
+    productAlt={p.alt}
+    crumbs={[{ name: 'Tiles', url: R.azulejos }, { name: p.name, url }]}
+  >
+    <div class="btn-row">
+      <a class="btn btn--sand" href={waTarifa('azulejos', 'en')} target="_blank" rel="noopener">Ask for the 2027 price list<span class="visually-hidden"> (opens WhatsApp)</span></a>
+      <a class="btn btn--ghost" href={SITE.tileCalculator}>Tile piece calculator</a>
+    </div>
+  </PageHero>
+  <section class="section section--paper">
+    <div class="container split split--top">
+      <div><span class="eyebrow">Product sheet</span><h2>{p.name}</h2><p class="lead">{p.body}</p></div>
+      <table class="specs">
+        <tbody>
+          <tr><th scope="row">Packaging</th><td>{p.presentacion.join(' · ')}</td></tr>
+          {p.extra?.map((e) => <tr><th scope="row">{e.label}</th><td>{e.value}</td></tr>)}
+          <tr><th scope="row">Origin</th><td>Designed and made in Spain from recycled material</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section-head"><h2>How to use it</h2></div>
+      <Steps steps={p.steps} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><h2>Related products</h2></div>
+      <div class="grid grid-3">
+        {others.map((o) => (
+          <a class="card rel" href={`${R.azulejos}${o.slug}/`}>
+            <Image src={o.img} alt={o.alt} widths={[240, 480]} sizes="120px" />
+            <div><h3>{o.name}</h3><span class="muted">See product →</span></div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={TILE_FAQ_EN} />
+  <CtaTarifa interes="azulejos" text="Message us on WhatsApp and we will send you the 2027 price list for Kalzos, Kuñas and Alikates." />
+</Base>
+<style>
+  .rel { display: flex; gap: 16px; align-items: center; text-decoration: none; color: inherit; }
+  .rel :global(img) { width: 96px; height: 96px; object-fit: cover; border-radius: 10px; flex: none; }
+  .rel h3 { margin: 0 0 4px; font-size: 1.05rem; }
+</style>

@@ -1,8 +1,10 @@
 ---
 interface Props { items: { name: string; url: string }[]; dark?: boolean }
 const { items, dark = false } = Astro.props;
+import { useT } from '../i18n/ui';
+const { t } = useT(Astro.url);
 ---
-<nav class:list={['crumbs', { 'container': !dark, dark }]} aria-label="Migas de pan">
+<nav class:list={['crumbs', { 'container': !dark, dark }]} aria-label={t('breadcrumbs')}>
   <ol>
     {items.map((it, i) => (
       <li>

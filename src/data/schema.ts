@@ -74,6 +74,8 @@ export function productSchema(p: {
   images: string[];
   weightG?: number;
   related?: string;
+  /** Categoría en el idioma de la página (por defecto, español). */
+  category?: string;
   props: [string, string][];
 }) {
   return {
@@ -85,7 +87,7 @@ export function productSchema(p: {
     description: p.description,
     brand: { '@type': 'Brand', name: SITE.name },
     manufacturer: { '@id': ORG_ID },
-    category: 'Niveladores para mortero autonivelante',
+    category: p.category ?? 'Niveladores para mortero autonivelante',
     image: p.images.map((i) => new URL(i, SITE.url).href),
     countryOfOrigin: 'ES',
     ...(p.weightG ? { weight: { '@type': 'QuantitativeValue', value: p.weightG, unitCode: 'GRM' } } : {}),

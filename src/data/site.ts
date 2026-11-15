@@ -33,11 +33,18 @@ export const SITE = {
 
 export const TARIFA = 'Tarifa 2027';
 const WA_BASE = 'https://api.whatsapp.com/send?phone=34611875047&text=';
-/** La tarifa se pide por WhatsApp. `interes` personaliza el mensaje ya escrito. */
-export function waTarifa(interes: 'nivelacion' | 'azulejos' | 'general' = 'general') {
+/** La tarifa se pide por WhatsApp. `interes` personaliza el mensaje ya escrito; `lang` lo escribe en inglés en /en/. */
+export function waTarifa(interes: 'nivelacion' | 'azulejos' | 'general' = 'general', lang: 'es' | 'en' = 'es') {
+  if (lang === 'en') {
+    const line = interes === 'nivelacion' ? ' for self-leveling mortar levelers' : interes === 'azulejos' ? ' for the tile leveling system' : '';
+    return WA_BASE + encodeURIComponent(`Hello, I would like to receive the KREOX 2027 price list${line}.`);
+  }
   const linea = interes === 'nivelacion' ? ' de niveladores para mortero autonivelante' : interes === 'azulejos' ? ' de colocación de azulejos' : '';
   return WA_BASE + encodeURIComponent(`Hola, quiero recibir la nueva tarifa 2027 de KREOX${linea}.`);
 }
+/** Enlace general de WhatsApp con el mensaje en el idioma de la página. */
+export const waInfo = (lang: 'es' | 'en' = 'es') =>
+  lang === 'en' ? WA_BASE + encodeURIComponent('Hello, I would like information about KREOX levelers.') : SITE.whatsapp;
 
 export const NIVELACION = '/nivelacion-mortero-autonivelante/';
 export const AZULEJOS = '/colocacion-azulejos/';
@@ -69,6 +76,37 @@ export const NAV = [
   { label: 'Noticias', href: '/noticias/' },
   { label: 'Empresa', href: '/empresa/' },
   { label: 'Ayuda', href: '/preguntas-frecuentes/' },
+] as const;
+
+const EN_NIV = '/en/self-leveling-mortar-levelers/';
+const EN_AZU = '/en/tile-leveling-system/';
+export const NAV_EN = [
+  {
+    label: 'Self-leveling mortar',
+    href: EN_NIV,
+    highlight: true,
+    children: [
+      { label: 'PIKO · Underfloor heating', href: `${EN_NIV}piko/`, note: '20 g · replaces the steel tripod' },
+      { label: 'Nivelador Universal · Screeds', href: `${EN_NIV}universal-leveler/`, note: 'Flat base for any surface' },
+      { label: 'Spare parts and accessories', href: `${EN_NIV}spare-parts/`, note: 'Replace only the worn part' },
+      { label: 'Underslab polyethylene sheet', href: `${EN_NIV}underslab-polyethylene-sheet/`, note: 'Slab waterproofing' },
+      { label: 'Leveler calculator', href: `${EN_NIV}calculator/`, note: 'How many do I need?' },
+      { label: 'PIKO vs steel tripod', href: `${EN_NIV}piko-vs-steel-tripod/`, note: 'Comparison' },
+    ],
+  },
+  {
+    label: 'Tile installation',
+    href: EN_AZU,
+    children: [
+      { label: 'Kalzo spacer clip', href: `${EN_AZU}kalzo-spacer-clip/` },
+      { label: 'Kuña leveling wedge', href: `${EN_AZU}kuna-leveling-wedge/` },
+      { label: 'Stain-resistant Kuña', href: `${EN_AZU}stain-resistant-kuna-wedge/` },
+      { label: 'Alikates tile pliers', href: `${EN_AZU}alikates-tile-pliers/` },
+    ],
+  },
+  { label: 'News', href: '/en/news/' },
+  { label: 'Company', href: '/en/company/' },
+  { label: 'FAQ', href: '/en/faq/' },
 ] as const;
 
 // Densidad recomendada publicada por KREOX: aprox. 1 nivelador cada 2 m².

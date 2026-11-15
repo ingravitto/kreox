@@ -1,0 +1,44 @@
+---
+// English version of /noticias/ (only articles translated into English)
+import PageHero from '../../../components/PageHero.astro';
+import imgHeroBg from '../../../assets/img/hero-productos-kreox.jpg';
+import Base from '../../../layouts/Base.astro';
+import NoticiaCard from '../../../components/NoticiaCard.astro';
+import { getNews, CATEGORIES_EN } from '../../../data/noticias';
+import { PATHS } from '../../../i18n/routes';
+const R = PATHS.en;
+const news = await getNews();
+const groups = (Object.keys(CATEGORIES_EN) as (keyof typeof CATEGORIES_EN)[])
+  .map((k) => ({ k, label: CATEGORIES_EN[k], items: news.filter((n) => n.data.category === k) }))
+  .filter((g) => g.items.length);
+---
+<Base
+  overlay
+  title="Self-leveling mortar leveling news and guides | KREOX"
+  description="KREOX news and guides on leveling systems for self-leveling mortar, PIKO, the Nivelador Universal and tile installation."
+  breadcrumbs={[{ name: 'News', url: R.noticias }]}
+>
+  <PageHero compact eyebrow="News" title="News and guides from" accent="KREOX" lead="Product news, guides and updates on our leveling systems." bg={imgHeroBg} crumbs={[{ name: 'News', url: R.noticias }]} />
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <nav class="cats" aria-label="Categories">
+          {groups.map((g) => <a class="chip" href={`#${g.k}`}>{g.label} ({g.items.length})</a>)}
+        </nav>
+        <p class="muted">More news is available in <a class="link" href="/noticias/" hreflang="es" lang="es">Spanish</a>.</p>
+      </div>
+      {groups.map((g) => (
+        <section class="group" id={g.k}>
+          <h2>{g.label}</h2>
+          <div class="grid grid-3">{g.items.map((n) => <NoticiaCard n={n} />)}</div>
+        </section>
+      ))}
+    </div>
+  </section>
+</Base>
+<style>
+  .cats { display: flex; flex-wrap: wrap; gap: 8px; }
+  .cats a { text-decoration: none; }
+  .group { margin-top: 48px; }
+  .group h2 { font-size: 1.4rem; margin-bottom: 28px; }
+</style>

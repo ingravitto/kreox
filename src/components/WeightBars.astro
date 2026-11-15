@@ -1,19 +1,21 @@
 ---
 // Visualización del peso a mover para nivelar 100 m² (dato calculado con los pesos que publica KREOX).
 import { PRODUCTOS, M2_POR_NIVELADOR } from '../data/site';
+import { useT } from '../i18n/ui';
+const { t, locale } = useT(Astro.url);
 const n = Math.ceil(100 / M2_POR_NIVELADOR);
 const rows = [
-  { label: 'Trípodes de acero', kg: (n * PRODUCTOS.tripode.pesoG) / 1000, tone: 'bad' },
+  { label: t('wbTripods'), kg: (n * PRODUCTOS.tripode.pesoG) / 1000, tone: 'bad' },
   { label: 'Nivelador Universal', kg: (n * PRODUCTOS.universal.pesoG) / 1000, tone: 'mid' },
   { label: 'PIKO', kg: (n * PRODUCTOS.piko.pesoG) / 1000, tone: 'good' },
 ];
 const max = rows[0].kg;
-const fmt = (v: number) => v.toLocaleString('es-ES', { maximumFractionDigits: 1 });
+const fmt = (v: number) => v.toLocaleString(locale, { maximumFractionDigits: 1 });
 ---
 <figure class="wb on-dark" data-reveal>
   <figcaption>
-    <span class="eyebrow">Peso a mover en obra</span>
-    <strong>Para nivelar 100 m² ({n} puntos de nivel)</strong>
+    <span class="eyebrow">{t('wbEyebrow')}</span>
+    <strong>{t('wbTitle', { n })}</strong>
   </figcaption>
   <ul>
     {rows.map((r) => (
@@ -23,7 +25,7 @@ const fmt = (v: number) => v.toLocaleString('es-ES', { maximumFractionDigits: 1 
       </li>
     ))}
   </ul>
-  <p class="muted">Cálculo orientativo: 1 nivelador cada {M2_POR_NIVELADOR} m²; trípode ≈ 1 kg, Universal ≈ {PRODUCTOS.universal.pesoG} g, PIKO ≈ {PRODUCTOS.piko.pesoG} g.</p>
+  <p class="muted">{t('wbNote', { m2: M2_POR_NIVELADOR, uni: PRODUCTOS.universal.pesoG, piko: PRODUCTOS.piko.pesoG })}</p>
 </figure>
 <style>
   .wb { margin: 0; padding: clamp(24px, 3vw, 40px); border-radius: var(--radius-xl); background: var(--ink); color: var(--on-dark); }

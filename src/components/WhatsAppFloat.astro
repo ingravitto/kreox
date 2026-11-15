@@ -2,11 +2,13 @@
 // Botón flotante de WhatsApp (solo escritorio; en móvil está en la barra inferior).
 // Es un enlace normal: no carga scripts de terceros ni instala cookies.
 import WaIcon from './WaIcon.astro';
-import { SITE } from '../data/site';
+import { waInfo } from '../data/site';
+import { useT } from '../i18n/ui';
+const { lang, t } = useT(Astro.url);
 ---
-<aside class="wa-wrap" aria-label="Contacto rápido por WhatsApp">
-<a class="wa" href={SITE.whatsapp} target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp (se abre en una nueva ventana)">
-  <span class="wa-label" aria-hidden="true">¿Hablamos? <strong>WhatsApp</strong></span>
+<aside class="wa-wrap" aria-label={t('waFloatAria')}>
+<a class="wa" href={waInfo(lang)} target="_blank" rel="noopener" aria-label={t('waFloatLink')}>
+  <span class="wa-label" aria-hidden="true">{t('waFloatLabel')} <strong>WhatsApp</strong></span>
   <span class="wa-btn"><WaIcon size={28} /></span>
 </a>
 </aside>

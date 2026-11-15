@@ -3,10 +3,12 @@ import { Image } from 'astro:assets';
 import bg from '../assets/img/fondo-piedra-productos-kreox.jpg';
 import { SITE, waTarifa } from '../data/site';
 import WaIcon from './WaIcon.astro';
+import { useT } from '../i18n/ui';
+const { lang, t } = useT(Astro.url);
 interface Props { title?: string; text?: string; interes?: 'nivelacion' | 'azulejos' }
 const {
-  title = 'Pide la nueva tarifa 2027',
-  text = 'Escríbenos por WhatsApp y te enviamos la tarifa 2027. Te asesoramos sobre cuántos niveladores necesitas para tu obra.',
+  title = t('ctaTitle'),
+  text = t('ctaText'),
   interes = 'nivelacion',
 } = Astro.props;
 ---
@@ -14,11 +16,11 @@ const {
   <Image src={bg} alt="" widths={[960, 1920]} sizes="100vw" class="bg" />
   <div class="shade" aria-hidden="true"></div>
   <div class="container inner on-dark" data-reveal>
-    <span class="eyebrow">Consigue nuestra tarifa</span>
+    <span class="eyebrow">{t('ctaEyebrow')}</span>
     <h2>{title}</h2>
     <p class="lead">{text}</p>
     <div class="btn-row">
-      <a class="btn btn--sand" href={waTarifa(interes)} target="_blank" rel="noopener"><WaIcon size={16} /> Pedir tarifa por WhatsApp<span class="visually-hidden"> (abre WhatsApp)</span></a>
+      <a class="btn btn--sand" href={waTarifa(interes, lang)} target="_blank" rel="noopener"><WaIcon size={16} /> {t('ctaButton')}<span class="visually-hidden">{t('opensWhatsApp')}</span></a>
       <a class="btn btn--ghost" href={SITE.phoneHref}>{SITE.phone}</a>
     </div>
   </div>

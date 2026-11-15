@@ -7,6 +7,10 @@
 ---
 <script>
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const en = document.documentElement.lang === 'en';
+  const L = en
+    ? { play: 'Play video', pause: 'Pause video', on: 'Turn sound on', off: 'Turn sound off' }
+    : { play: 'Reproducir vídeo', pause: 'Pausar vídeo', on: 'Activar sonido', off: 'Quitar sonido' };
   document.querySelectorAll<HTMLElement>('[data-inview-wrap]').forEach((w) => {
     const v = w.querySelector<HTMLVideoElement>('video[data-inview]');
     if (!v) return;
@@ -28,7 +32,7 @@
     const tg = w.querySelector<HTMLButtonElement>('[data-av-toggle]');
     const syncPlay = () => {
       if (!tg) return;
-      tg.setAttribute('aria-label', v.paused ? 'Reproducir vídeo' : 'Pausar vídeo');
+      tg.setAttribute('aria-label', v.paused ? L.play : L.pause);
       tg.setAttribute('aria-pressed', String(v.paused));
       tg.classList.toggle('is-paused', v.paused);
     };
@@ -37,7 +41,7 @@
     tg?.addEventListener('click', toggle);
     v.addEventListener('click', toggle);
     const label = btn?.querySelector('span');
-    const syncSound = () => { if (label) label.textContent = v.muted ? 'Activar sonido' : 'Quitar sonido'; btn?.setAttribute('aria-pressed', String(!v.muted)); };
+    const syncSound = () => { if (label) label.textContent = v.muted ? L.on : L.off; btn?.setAttribute('aria-pressed', String(!v.muted)); };
     v.addEventListener('volumechange', syncSound); syncSound();
     btn?.addEventListener('click', () => {
       v.muted = !v.muted;

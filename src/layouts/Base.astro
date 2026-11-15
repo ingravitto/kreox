@@ -13,6 +13,8 @@ import f300 from '@fontsource/poppins/files/poppins-latin-300-normal.woff2?url';
 import f500 from '@fontsource/poppins/files/poppins-latin-500-normal.woff2?url';
 import { SITE } from '../data/site';
 import { organizationSchema, websiteSchema, breadcrumbSchema } from '../data/schema';
+import { useT } from '../i18n/ui';
+import { alternates } from '../i18n/routes';
 
 interface Crumb { name: string; url: string }
 interface Props {
@@ -33,17 +35,24 @@ const ogImage = new URL(image, SITE.url).href;
 // En el entorno de pruebas (staging) se publica con PUBLIC_NOINDEX=1 para que Google no lo indexe.
 const robots = noindex || import.meta.env.PUBLIC_NOINDEX === '1' ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
 
-const crumbs = breadcrumbs ? [{ name: 'Inicio', url: '/' }, ...breadcrumbs] : undefined;
+const { lang, t, P } = useT(Astro.url);
+// hreflang: versiones de esta página en cada idioma (x-default = español).
+const alt = alternates(Astro.url.pathname);
+const hreflang = Object.entries(alt).map(([l, href]) => ({ l, href: new URL(href, SITE.url).href }));
+const xDefault = alt.es ? new URL(alt.es, SITE.url).href : undefined;
+const crumbs = breadcrumbs ? [{ name: t('home'), url: P.home }, ...breadcrumbs] : undefined;
 const graph = [organizationSchema(), websiteSchema(), ...(crumbs ? [breadcrumbSchema(crumbs)] : []), ...schema];
 ---
 <!doctype html>
-<html lang="es" class="no-js">
+<html lang={lang} class="no-js">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {!noindex && hreflang.length > 1 && hreflang.map((h) => <link rel="alternate" hreflang={h.l} href={h.href} />)}
+    {!noindex && hreflang.length > 1 && xDefault && <link rel="alternate" hreflang="x-default" href={xDefault} />}
     <meta name="robots" content={robots} />
     <meta name="theme-color" content="#121211" />
     <link rel="preload" href={f600} as="font" type="font/woff2" crossorigin />
@@ -51,12 +60,13 @@ const graph = [organizationSchema(), websiteSchema(), ...(crumbs ? [breadcrumbSc
     <link rel="preload" href={f300} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={f500} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="alternate" type="application/rss+xml" title="Noticias KREOX" href="/noticias/rss.xml" />
+    {lang === 'es' && <link rel="alternate" type="application/rss+xml" title={t('rssTitle')} href="/noticias/rss.xml" />}
     <script is:inline>document.documentElement.classList.replace('no-js', 'js');</script>
 
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="KREOX" />
-    <meta property="og:locale" content="es_ES" />
+    <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'es_ES'} />
+    {hreflang.length > 1 && <meta property="og:locale:alternate" content={lang === 'en' ? 'es_ES' : 'en_US'} />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -71,7 +81,7 @@ const graph = [organizationSchema(), websiteSchema(), ...(crumbs ? [breadcrumbSc
     <slot name="head" />
   </head>
   <body class:list={[{ 'has-overlay': overlay }]}>
-    <a class="skip" href="#contenido">Saltar al contenido</a>
+    <a class="skip" href="#contenido">{t('skip')}</a>
     <Header overlay={overlay} />
     <main id="contenido">
       {crumbs && !overlay && <Breadcrumbs items={crumbs} />}

@@ -17,6 +17,11 @@ function campo(string $nombre, int $max = 200): string {
     return mb_substr($v, 0, $max);
 }
 
+// Idioma del formulario: /en/contact/ envía lang=en y vuelve a las páginas en inglés.
+$en = ($_POST['lang'] ?? '') === 'en';
+$pContacto = $en ? '/en/contact/' : '/contacto/';
+$pGracias  = $en ? '/en/thank-you/' : '/gracias/';
+
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     volver('/contacto/');
 }
@@ -24,7 +29,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
 // Antispam: campo trampa relleno o envío en menos de 3 segundos.
 $ts = (int)($_POST['ts'] ?? 0);
 if (!empty($_POST['web']) || ($ts > 0 && time() - $ts < 3)) {
-    volver('/gracias/');
+    volver($pGracias);
 }
 
 $nombre    = campo('nombre', 120);
@@ -38,16 +43,17 @@ $privacidad = ($_POST['privacidad'] ?? '') === '1';
 $intereses = ['nivelacion' => 'Nivelación autonivelante', 'azulejos' => 'Colocación de azulejos', 'exportacion' => 'Distribución / exportación', 'otra' => 'Otra consulta'];
 
 if ($nombre === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || !$privacidad) {
-    volver('/contacto/?error=1');
+    volver($pContacto . '?error=1');
 }
 
-$asunto = '[Web KREOX] Consulta · ' . ($intereses[$interes] ?? 'Sin especificar');
+$asunto = '[Web KREOX]' . ($en ? ' [EN]' : '') . ' Consulta · ' . ($intereses[$interes] ?? 'Sin especificar');
 $cuerpo = "Nueva solicitud desde kreox.es\n\n"
     . "Nombre: $nombre\n"
     . "Empresa: $empresa\n"
     . "Email: $email\n"
     . "Teléfono: $telefono\n"
-    . 'Interés: ' . ($intereses[$interes] ?? $interes) . "\n\n"
+    . 'Interés: ' . ($intereses[$interes] ?? $interes) . "\n"
+    . 'Idioma de la web: ' . ($en ? 'inglés (/en/)' : 'español') . "\n\n"
     . "Mensaje:\n$mensaje\n\n"
     . 'Aceptó la política de privacidad: sí · ' . date('d/m/Y H:i') . "\n";
 
@@ -60,4 +66,4 @@ $cabeceras = [
 
 $ok = mail(DESTINO, '=?UTF-8?B?' . base64_encode($asunto) . '?=', $cuerpo, implode("\r\n", $cabeceras), '-f' . REMITENTE);
 
-volver($ok ? '/gracias/' : '/contacto/?error=1');
+volver($ok ? $pGracias : $pContacto . '?error=1');

@@ -1,0 +1,26 @@
+---
+// English version of /aviso-legal/
+import Legal from '../../layouts/Legal.astro';
+import { SITE } from '../../data/site';
+---
+<Legal title="Legal notice" description="Legal notice for kreox.es, the website of KREOX (TALLERES LA PAZ, S.L.): owner details, terms of use and intellectual property." url="/en/legal-notice/" updated="November 2026">
+  <h2>Website owner</h2>
+  <p>In compliance with Spanish Law 34/2002 on Information Society Services and Electronic Commerce (LSSI-CE), the details of the owner of this website are as follows:</p>
+  <ul>
+    <li><strong>Company name:</strong> {SITE.legalName}</li>
+    <li><strong>Tax ID (CIF):</strong> {SITE.cif}</li>
+    <li><strong>Registered address:</strong> {SITE.address.street}, {SITE.address.postalCode} {SITE.address.city} ({SITE.address.region}), Spain</li>
+    <li><strong>Phone:</strong> {SITE.phone}</li>
+    <li><strong>Email:</strong> <a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+    <li><strong>Brand:</strong> KREOX</li>
+  </ul>
+  <h2>Terms of use</h2>
+  <p>Accessing this website makes you a user and implies acceptance of these terms. Users agree to make appropriate use of the content, in accordance with the law, good faith and public order.</p>
+  <p>The owner may change the information on the website without prior notice and is not responsible for the content of third-party sites that may be accessed through links.</p>
+  <h2>Product information</h2>
+  <p>The technical data, quantities and calculations published (including the leveler calculator) are approximate. For each job, please confirm quantities and use with our sales team.</p>
+  <h2>Intellectual and industrial property</h2>
+  <p>The content of this website (texts, photographs, videos, designs, logos and trademarks, including the KREOX brand and the names PIKO, Kalzo, Kuña and Alikates) belongs to the owner or to third parties who have authorized its use. Products identified as patented are protected by industrial property law. Reproduction, distribution or modification without prior written authorization is prohibited.</p>
+  <h2>Applicable law</h2>
+  <p>These terms are governed by Spanish law. This English version is provided for information; in case of discrepancy, the <a href="/aviso-legal/" hreflang="es" lang="es">Spanish version</a> prevails.</p>
+</Legal>

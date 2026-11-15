@@ -1,0 +1,479 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Steps from '../components/Steps.astro';
+import Marquee from '../components/Marquee.astro';
+import WeightBars from '../components/WeightBars.astro';
+import NoticiaCard from '../components/NoticiaCard.astro';
+import CtaTarifa from '../components/CtaTarifa.astro';
+import AutoVideo from '../components/AutoVideo.astro';
+import { PRODUCTOS, M2_POR_NIVELADOR } from '../data/site';
+import { TILE_PRODUCTS } from '../data/azulejos';
+import { TILE_PRODUCTS_EN } from '../data/en/tiles';
+import { getNoticias, getNews } from '../data/noticias';
+import { useT } from '../i18n/ui';
+
+import imgHero from '../assets/img/hf-hero-video-poster.jpg';
+import imgPiko from '../assets/img/piko-nivelador-suelo-radiante-kreox.png';
+import imgUni from '../assets/img/nivelador-universal-recrecido-kreox.png';
+import imgSuelo from '../assets/img/hf-piko-suelo-radiante-laser.jpg';
+import imgUniVertido from '../assets/img/hf-universal-recrecido-vertido.jpg';
+import imgDetalle from '../assets/img/hf-anilla-fibra-macro.jpg';
+import imgArandela from '../assets/img/arandela-niveladora-recambio.png';
+import imgBase from '../assets/img/base-niveladora-universal-recambio.png';
+import imgAnilla from '../assets/img/anilla-metalica-niveladora-universal.png';
+import imgLineas from '../assets/img/lineas-azulejos.jpg';
+import imgFabrica from '../assets/img/niveladores-piko-universal-kreox.jpg';
+import SelloPatentado from '../components/SelloPatentado.astro';
+
+// Portada compartida por / (español) y /en/ (inglés): mismo diseño, textos de T según el idioma de la URL.
+const { lang, P } = useT(Astro.url);
+const EN = lang === 'en';
+const tiles = EN ? TILE_PRODUCTS_EN.map((p) => ({ ...p, href: `${P.azulejos}${p.slug}/` })) : TILE_PRODUCTS.map((p) => ({ ...p, href: `${P.azulejos}${p.slug}/` }));
+const posts = EN ? await getNews() : await getNoticias();
+const destacadas = [...posts.filter((n) => n.data.category === 'nivelacion'), ...posts.filter((n) => n.data.category !== 'nivelacion')].slice(0, 3);
+const featuredNews = EN ? '/en/news/leveling-systems-for-self-leveling-mortar/' : '/noticias/sistemas-de-nivelacion-para-mortero-autonivelante/';
+
+const T = EN
+  ? {
+      title: 'KREOX · Self-leveling mortar levelers and tile systems',
+      description: 'Spanish manufacturer of levelers for self-leveling mortar, PIKO and Nivelador Universal, and tile leveling systems. Ask for the 2027 price list on WhatsApp.',
+      heroAlt: 'KREOX PIKO and Nivelador Universal levelers on freshly poured self-leveling mortar',
+      heroVideo: 'PIKO and Nivelador Universal on self-leveling mortar',
+      h1: 'Levelers for self-leveling mortar', h1Accent: 'made in Spain',
+      lead: 'PIKO and Nivelador Universal replace the steel tripod: <strong>up to 50 times lighter, rust-free and reusable</strong>.',
+      discoverPiko: 'Discover PIKO', statPiko: 'One PIKO weighs', statTripod: 'One tripod weighs', statRust: 'Rust', statBox: 'PIKO per box',
+      toLevelers: 'Go to the levelers',
+      chooser: 'What are you leveling?',
+      ch: [['Underfloor heating', 'PIKO →'], ['Screed on a slab or subfloor', 'Nivelador Universal →'], ['Tile installation', 'Kalzo and Kuñas →'], ['How many do I need?', 'Calculator →']],
+      marquee: ['Patented product', 'Made in Spain', 'Recycled material', 'Rust-free', 'Reusable', 'Laser compatible', 'Third generation'],
+      prodEyebrow: 'Leveling with self-leveling mortar', prodTitle: 'Two levelers. One method.',
+      prodSide: 'Mark the level with a laser, adjust the ring and pour. Choose according to your substrate.',
+      pikoAlt: 'KREOX PIKO, leveler for underfloor heating', pikoChip: 'Underfloor heating',
+      pikoText: (g: number) => `Pushed into the insulation board. Replaces the tripod with just ${g} g.`, box: 'Box', seePiko: 'See PIKO',
+      uniAlt: 'KREOX Nivelador Universal for screeds', uniChip: 'Screeds', uniText: 'Flat, reinforced base to rest it on any surface.', base: 'Base', seeUni: 'See Universal',
+      tool: 'Tool', howMany: 'How many levelers do I need?', units: 'm² → units', calc: 'Calculate',
+      partsEyebrow: 'Spare parts', partsTitle: 'Replace only the worn part', washer: 'Leveling washer', uniBase: 'Universal leveling base', ring: 'Universal metal leveling ring', seeParts: 'See spare parts',
+      cmpEyebrow: 'Comparison', cmpTitle: 'PIKO versus the steel tripod', compare: 'Compare',
+      wEyebrow: 'Goodbye to the steel tripod', wTitle: 'Less weight, zero rust, more work done.',
+      wLead: 'Steel tripods weigh about 1 kg, corrode with the alkaline pH of the mortar and all three legs must be seated. KREOX levelers are placed in seconds, cleaned with water and have a visual ring to check the level.',
+      fullCmp: 'See the full comparison',
+      howAlt: 'PIKO levelers pushed into underfloor heating with the laser line at the height of the rings',
+      howEyebrow: 'How it works', howTitle: 'A perfect level in 4 steps', howText: 'No tripods to seat and no rust to clean. Works with a standard laser and with a laser with receiver.',
+      steps: [
+        { title: 'Place', text: `One leveler roughly every ${M2_POR_NIVELADOR} m²: PIKO pushed into the insulation or Universal resting on the substrate.` },
+        { title: 'Mark with a laser', text: 'Standard laser or laser with receiver: both work.' },
+        { title: 'Adjust the ring', text: 'Up to the laser line. The ring is your visual reference.' },
+        { title: 'Pour and reuse', text: 'Mortar up to the ring; remove, clean and on to the next job.' },
+      ],
+      reelAria: 'Video: how a floor is leveled with PIKO and Nivelador Universal', noVideo: 'Your browser cannot play this video.', download: 'Download it here', pause: 'Pause video', sound: 'Turn sound on',
+      reelCap: 'How a floor is leveled, in 30 seconds',
+      filmEyebrow: 'On site', filmTitle: 'The mortar rises.', filmAccent: 'The ring rules.', filmSide: 'The self-leveling mortar flows up to the ring of each leveler and stays flat. No tripods, no rust.',
+      clipPiko: 'Pouring self-leveling mortar over underfloor heating with PIKO levelers', clipPikoCap: 'Underfloor heating',
+      clipUni: 'Pouring self-leveling mortar on a screed with Nivelador Universal levelers', clipUniCap: 'Screeds', see: 'See',
+      novAlt: 'Close-up of the lime-green fiber-reinforced ring on the blue PIKO shaft', novEyebrow: 'New for 2026', novTitle: 'Fiber-reinforced ring, new color and reinforced base.',
+      novChecks: ['Ring with fiber additive: longer life and firmer adjustment.', 'New high-visibility color on site.', 'Harder Nivelador Universal base, safer to remove.', 'Everything tested on real jobs before launch.'],
+      novRead: 'Read the news',
+      tilesEyebrow: 'Solutions for', tilesTitle: 'Tile installation', tilesAll: 'See all solutions',
+      coEyebrow: 'Third generation', coTitle: 'A constant search for perfection.',
+      coLead: 'Kreox was born from experience passed down over the years by three generations of our family. We are a Spanish manufacturer based in Ibi (Alicante).',
+      coGen: 'Generation', coSpain: 'Made in Spain', coRecycled: 'Recycled material', coMeet: 'About us',
+      fabAlt: 'KREOX PIKO and Nivelador Universal levelers, made in Ibi (Alicante, Spain)',
+      newsEyebrow: 'News', newsTitle: 'The latest from KREOX', newsAll: 'All news',
+    }
+  : {
+      title: 'KREOX · Niveladores para mortero autonivelante y azulejos',
+      description: 'Fabricante español de niveladores para mortero autonivelante, PIKO y Universal, y de sistemas para colocar azulejos. Pide la tarifa 2027 por WhatsApp.',
+      heroAlt: 'Niveladores PIKO y Universal de KREOX sobre mortero autonivelante recién vertido',
+      heroVideo: 'PIKO y Nivelador Universal sobre mortero autonivelante',
+      h1: 'Niveladores para mortero autonivelante', h1Accent: 'fabricados en España',
+      lead: 'PIKO y Nivelador Universal sustituyen al trípode de acero: <strong>hasta 50 veces más ligeros, sin óxido y reutilizables</strong>.',
+      discoverPiko: 'Descubre PIKO', statPiko: 'Pesa un PIKO', statTripod: 'Pesa un trípode', statRust: 'Óxido', statBox: 'PIKO por caja',
+      toLevelers: 'Ir a los niveladores',
+      chooser: '¿Qué vas a nivelar?',
+      ch: [['Suelo radiante', 'PIKO →'], ['Recrecido sobre forjado o solera', 'Nivelador Universal →'], ['Colocación de azulejos', 'Kalzo y Kuñas →'], ['¿Cuántos necesito?', 'Calculadora →']],
+      marquee: ['Producto patentado', 'Fabricado en España', 'Material reciclado', 'Sin óxido', 'Reutilizable', 'Compatible con láser', 'Tercera generación'],
+      prodEyebrow: 'Nivelación con mortero autonivelante', prodTitle: 'Dos niveladores. Un mismo método.',
+      prodSide: 'Marca la cota con láser, ajusta la anilla y vierte. Elige según el soporte de tu obra.',
+      pikoAlt: 'PIKO de KREOX, nivelador para suelo radiante', pikoChip: 'Suelo radiante',
+      pikoText: (g: number) => `Se clava en la placa de aislamiento. Sustituye al trípode con solo ${g} g.`, box: 'Caja', seePiko: 'Ver PIKO',
+      uniAlt: 'Nivelador Universal de KREOX para recrecidos', uniChip: 'Recrecidos', uniText: 'Base plana y reforzada para apoyarlo sobre cualquier superficie.', base: 'Base', seeUni: 'Ver Universal',
+      tool: 'Herramienta', howMany: '¿Cuántos niveladores necesito?', units: 'm² → uds', calc: 'Calcular',
+      partsEyebrow: 'Recambios', partsTitle: 'Cambia solo la pieza gastada', washer: 'Arandela niveladora', uniBase: 'Base niveladora universal', ring: 'Anilla metálica niveladora universal', seeParts: 'Ver recambios',
+      cmpEyebrow: 'Comparativa', cmpTitle: 'PIKO frente al trípode de acero', compare: 'Comparar',
+      wEyebrow: 'Adiós al trípode de acero', wTitle: 'Menos peso, cero óxido, más obra.',
+      wLead: 'Los trípodes metálicos pesan cerca de 1 kg, se corroen con el pH alcalino del mortero y hay que asentar sus tres patas. Los niveladores KREOX se colocan en segundos, se limpian con agua y llevan una anilla visual para comprobar el nivel.',
+      fullCmp: 'Ver comparativa completa',
+      howAlt: 'Niveladores PIKO clavados en un suelo radiante con la línea del láser a la altura de las anillas',
+      howEyebrow: 'Cómo funciona', howTitle: 'Nivelado perfecto en 4 pasos', howText: 'Sin trípodes que asentar ni óxido que limpiar. Compatible con láser habitual y con láser con receptor.',
+      steps: [
+        { title: 'Coloca', text: `Un nivelador cada ${M2_POR_NIVELADOR} m² aprox.: PIKO clavado en el aislamiento o Universal apoyado.` },
+        { title: 'Marca con láser', text: 'Láser habitual o con receptor: los dos sirven.' },
+        { title: 'Ajusta la anilla', text: 'Hasta la línea del láser. La anilla es tu referencia visual.' },
+        { title: 'Vierte y reutiliza', text: 'Mortero hasta la anilla; retira, limpia y a la siguiente obra.' },
+      ],
+      reelAria: 'Vídeo: cómo se nivela un suelo con PIKO y Nivelador Universal', noVideo: 'Tu navegador no puede reproducir el vídeo.', download: 'Descárgalo aquí', pause: 'Pausar vídeo', sound: 'Activar sonido',
+      reelCap: 'Cómo se nivela un suelo, en 30 segundos',
+      filmEyebrow: 'En obra', filmTitle: 'El mortero sube.', filmAccent: 'La anilla manda.', filmSide: 'El autonivelante fluye hasta la anilla de cada nivelador y queda plano. Sin trípodes, sin óxido.',
+      clipPiko: 'Vertido de mortero autonivelante sobre suelo radiante con niveladores PIKO', clipPikoCap: 'Suelo radiante',
+      clipUni: 'Vertido de mortero autonivelante en un recrecido con Niveladores Universales', clipUniCap: 'Recrecidos', see: 'Ver',
+      novAlt: 'Detalle de la anilla verde lima con aditivo de fibra sobre el fuste azul del PIKO', novEyebrow: 'Novedades 2026', novTitle: 'Anilla con fibra, nuevo color y base reforzada.',
+      novChecks: ['Anilla con aditivo de fibra: más vida útil y regulación más firme.', 'Nuevo color de alta visibilidad en obra.', 'Base del Nivelador Universal más dura y segura al retirarla.', 'Todo probado en obra real antes de lanzarlo.'],
+      novRead: 'Leer la novedad',
+      tilesEyebrow: 'Soluciones para', tilesTitle: 'La colocación de azulejos', tilesAll: 'Ver todas las soluciones',
+      coEyebrow: 'Tercera generación', coTitle: 'Búsqueda constante de la perfección.',
+      coLead: 'Kreox nace de la experiencia transmitida durante años por las tres generaciones de nuestra familia. Somos fabricantes nacionales, en Ibi (Alicante).',
+      coGen: 'Generación', coSpain: 'Hecho en España', coRecycled: 'Material reciclado', coMeet: 'Conócenos',
+      fabAlt: 'Niveladores PIKO y Universal de KREOX, fabricados en Ibi (Alicante)',
+      newsEyebrow: 'Noticias', newsTitle: 'Lo último de KREOX', newsAll: 'Todas las noticias',
+    };
+
+---
+<Base
+  title={T.title}
+  description={T.description}
+  overlay
+>
+  <!-- HERO -->
+  <section class="hero section--dark">
+    <Image src={imgHero} alt={T.heroAlt} widths={[960, 1600, 1920]} sizes="100vw" class="hero-bg" loading="eager" fetchpriority="high" />
+    <div class="hero-video"><AutoVideo src="/videos/hero-niveladores-kreox.mp4" poster={imgHero} label={T.heroVideo} /></div>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="container hero-in on-dark">
+      <span class="eyebrow">Innovation for construction</span>
+      <h1>{T.h1} <span class="sand">{T.h1Accent}</span></h1>
+      <p class="lead" set:html={T.lead} />
+      <div class="btn-row">
+        <a class="btn btn--sand" href={P.piko}>{T.discoverPiko} <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+        <a class="btn btn--ghost" href={P.universal}>Nivelador Universal</a>
+      </div>
+      <dl class="stats">
+        <div><dt><em>{PRODUCTOS.piko.pesoG}</em> g</dt><dd>{T.statPiko}</dd></div>
+        <div><dt>≈ 1 kg</dt><dd>{T.statTripod}</dd></div>
+        <div><dt><em>0</em></dt><dd>{T.statRust}</dd></div>
+        <div><dt>{PRODUCTOS.piko.caja}</dt><dd>{T.statBox}</dd></div>
+      </dl>
+    </div>
+    <a class="scroll" href="#niveladores" aria-label={T.toLevelers}><span></span></a>
+  </section>
+
+  <!-- SELECTOR RÁPIDO -->
+  <section class="chooser" aria-labelledby="chooser-h">
+    <div class="container">
+      <h2 id="chooser-h" class="ch-h">{T.chooser}</h2>
+      <ul class="ch-list">
+        {[P.piko, P.universal, P.azulejos, P.calculadora].map((href, i) => (
+          <li><a href={href}><span class="ch-k">{T.ch[i][0]}</span><span class="ch-v">{T.ch[i][1]}</span></a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Marquee items={T.marquee} />
+
+  <!-- PRODUCTOS -->
+  <section class="section" id="niveladores">
+    <div class="container">
+      <div class="head-row">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">{T.prodEyebrow}</span>
+          <h2>{T.prodTitle}</h2>
+        </div>
+        <p class="muted side" data-reveal>{T.prodSide}</p>
+      </div>
+      <div class="bento">
+        <a class="prod p1" href={P.piko} data-reveal>
+          <div class="pimg"><Image src={imgPiko} alt={T.pikoAlt} widths={[420, 640]} sizes="(min-width: 960px) 360px, 80vw" /></div>
+          <div class="ptext">
+            <span class="chip chip--sand">{T.pikoChip}</span>
+            <h3>PIKO</h3>
+            <p>{T.pikoText(PRODUCTOS.piko.pesoG)}</p>
+            <ul class="specs-inline"><li>{PRODUCTOS.piko.medidas.altoMm} mm</li><li>{PRODUCTOS.piko.pesoG} g</li><li>{T.box} {PRODUCTOS.piko.caja}</li></ul>
+            <span class="arrow-link">{T.seePiko}</span>
+          </div>
+        </a>
+        <a class="prod p2" href={P.universal} data-reveal style="--d:.1s">
+          <div class="pimg"><Image src={imgUni} alt={T.uniAlt} widths={[420, 640]} sizes="(min-width: 960px) 360px, 80vw" /></div>
+          <div class="ptext">
+            <span class="chip chip--sand">{T.uniChip}</span>
+            <h3>Nivelador Universal</h3>
+            <p>{T.uniText}</p>
+            <ul class="specs-inline"><li>{T.base} Ø{PRODUCTOS.universal.medidas.baseMm} mm</li><li>{PRODUCTOS.universal.pesoG} g</li><li>{T.box} {PRODUCTOS.universal.caja}</li></ul>
+            <span class="arrow-link">{T.seeUni}</span>
+          </div>
+        </a>
+        <a class="mini m1" href={P.calculadora} data-reveal>
+          <span class="eyebrow">{T.tool}</span>
+          <h3>{T.howMany}</h3>
+          <span class="big">{T.units}</span>
+          <span class="arrow-link">{T.calc}</span>
+        </a>
+        <a class="mini m2" href={P.recambios} data-reveal style="--d:.1s">
+          <span class="eyebrow">{T.partsEyebrow}</span>
+          <h3>{T.partsTitle}</h3>
+          <div class="parts">
+            <Image src={imgArandela} alt={T.washer} widths={[160]} sizes="64px" />
+            <Image src={imgBase} alt={T.uniBase} widths={[160]} sizes="64px" />
+            <Image src={imgAnilla} alt={T.ring} widths={[160]} sizes="64px" />
+          </div>
+          <span class="arrow-link">{T.seeParts}</span>
+        </a>
+        <a class="mini m3" href={P.vsTripode} data-reveal style="--d:.2s">
+          <span class="eyebrow">{T.cmpEyebrow}</span>
+          <h3>{T.cmpTitle}</h3>
+          <span class="big">1 kg → 20 g</span>
+          <span class="arrow-link">{T.compare}</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PESO -->
+  <section class="section section--paper">
+    <div class="container split">
+      <div data-reveal>
+        <span class="eyebrow">{T.wEyebrow}</span>
+        <h2>{T.wTitle}</h2>
+        <p class="lead">{T.wLead}</p>
+        <div class="btn-row">
+          <a class="btn btn--dark" href={P.vsTripode}>{T.fullCmp}</a>
+        </div>
+      </div>
+      <WeightBars />
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA -->
+  <section class="how section section--dark grain">
+    <Image src={imgSuelo} alt={T.howAlt} widths={[960, 1920]} sizes="100vw" class="how-bg" />
+    <div class="how-shade" aria-hidden="true"></div>
+    <div class="container rel how-grid">
+      <div>
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">{T.howEyebrow}</span>
+          <h2>{T.howTitle}</h2>
+          <p>{T.howText}</p>
+        </div>
+        <Steps steps={T.steps} dark />
+      </div>
+      <figure class="reel" data-reveal>
+        <div class="reel-v" data-inview-wrap>
+        <video data-inview muted loop preload="none" playsinline data-poster="/videos/reel-kreox-piko-universal-poster.jpg" width="720" height="1280" aria-label={T.reelAria}>
+          <source src="/videos/reel-kreox-piko-universal.mp4" type="video/mp4" />
+          {T.noVideo} <a href="/videos/reel-kreox-piko-universal.mp4">{T.download}</a>.
+        </video>
+        <button type="button" class="av-toggle" data-av-toggle aria-label={T.pause} aria-pressed="false"><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2h3v12H4zM9 2h3v12H9z" fill="currentColor"/></svg><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="currentColor"/></svg></button>
+        <button type="button" class="unmute" data-unmute><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 00-2.5-4v8a4.5 4.5 0 002.5-4zM14 3.2v2.1a7 7 0 010 13.4v2.1a9 9 0 000-17.6z" fill="currentColor"/></svg><span>{T.sound}</span></button>
+        </div>
+        <figcaption>{T.reelCap}</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- EN OBRA (vídeos) -->
+  <section class="section section--dark film">
+    <div class="container">
+      <div class="head-row">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">{T.filmEyebrow}</span>
+          <h2>{T.filmTitle} <span class="sand">{T.filmAccent}</span></h2>
+        </div>
+        <p class="muted side" data-reveal>{T.filmSide}</p>
+      </div>
+      <div class="film-grid">
+        <a class="clip" href={P.piko} data-reveal>
+          <AutoVideo src="/videos/piko-vertido-suelo-radiante.mp4" poster={imgSuelo} label={T.clipPiko} />
+          <span class="clip-cap"><span class="chip chip--sand">PIKO</span> {T.clipPikoCap} <span class="arrow-link">{T.see}</span></span>
+        </a>
+        <a class="clip" href={P.universal} data-reveal style="--d:.1s">
+          <AutoVideo src="/videos/universal-vertido-recrecido.mp4" poster={imgUniVertido} label={T.clipUni} />
+          <span class="clip-cap"><span class="chip chip--sand">Universal</span> {T.clipUniCap} <span class="arrow-link">{T.see}</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOVEDADES -->
+  <section class="section">
+    <div class="container split">
+      <div class="nov-media" data-reveal>
+        <Image src={imgDetalle} alt={T.novAlt} widths={[600, 1100]} sizes="(min-width: 960px) 560px, 92vw" class="nov-img" />
+        <div class="nov-sello"><SelloPatentado size={132} /></div>
+      </div>
+      <div data-reveal>
+        <span class="eyebrow">{T.novEyebrow}</span>
+        <h2>{T.novTitle}</h2>
+        <ul class="checks">
+          {T.novChecks.map((c) => <li>{c}</li>)}
+        </ul>
+        <div class="btn-row"><a class="btn btn--dark" href={featuredNews}>{T.novRead}</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AZULEJOS -->
+  <section class="tiles section section--paper">
+    <Image src={imgLineas} alt="" widths={[960]} sizes="60vw" class="lineart" />
+    <div class="container rel">
+      <div class="head-row">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">{T.tilesEyebrow}</span>
+          <h2>{T.tilesTitle}</h2>
+        </div>
+        <a class="btn btn--ghost side" href={P.azulejos} data-reveal>{T.tilesAll}</a>
+      </div>
+      <div class="grid grid-4">
+        {tiles.map((p, i) => (
+          <a class="tile" href={p.href} data-reveal style={`--d:${i * 0.08}s`}>
+            <div class="tile-img"><Image src={p.img} alt={p.alt} widths={[300, 600]} sizes="(min-width: 960px) 280px, 45vw" /></div>
+            <h3>{p.name}</h3>
+            <span class="arrow-link">{T.see}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- EMPRESA -->
+  <section class="section section--graphite grain">
+    <div class="container split">
+      <div data-reveal>
+        <span class="eyebrow">{T.coEyebrow}</span>
+        <h2>{T.coTitle}</h2>
+        <p class="lead">{T.coLead}</p>
+        <dl class="stats">
+          <div><dt>3ª</dt><dd>{T.coGen}</dd></div>
+          <div><dt>100<em class="sand">%</em></dt><dd>{T.coSpain}</dd></div>
+          <div><dt>♻</dt><dd>{T.coRecycled}</dd></div>
+        </dl>
+        <div class="btn-row"><a class="btn btn--sand" href={P.empresa}>{T.coMeet}</a></div>
+      </div>
+      <div data-reveal><Image src={imgFabrica} alt={T.fabAlt} widths={[600, 1100]} sizes="(min-width: 960px) 560px, 92vw" class="fab" /></div>
+    </div>
+  </section>
+
+  <!-- NOTICIAS -->
+  <section class="section">
+    <div class="container">
+      <div class="head-row">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">{T.newsEyebrow}</span>
+          <h2>{T.newsTitle}</h2>
+        </div>
+        <a class="btn btn--ghost side" href={P.noticias} data-reveal>{T.newsAll}</a>
+      </div>
+      <div class="grid grid-3">{destacadas.map((n) => <NoticiaCard n={n} />)}</div>
+    </div>
+  </section>
+
+  <CtaTarifa />
+</Base>
+
+<style>
+  .rel { position: relative; }
+  .chooser { background: var(--ink); border-top: 1px solid var(--line-dark); padding: 28px 0 36px; }
+  .ch-h { color: var(--white); font-size: 1.05rem; font-weight: 500; letter-spacing: 0; margin-bottom: 16px; }
+  .ch-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  .ch-list a { display: flex; flex-direction: column; gap: 4px; min-height: 76px; justify-content: center; padding: 16px 20px; border-radius: var(--radius); border: 1px solid var(--line-dark); background: rgba(255,255,255,.04); color: var(--on-dark); text-decoration: none; transition: border-color .25s, background .25s, transform .25s var(--ease); }
+  .ch-list a:hover, .ch-list a:focus-visible { border-color: var(--sand); background: rgba(199,178,154,.08); transform: translateY(-2px); }
+  .ch-k { font-size: .9rem; color: var(--on-dark-soft); }
+  .ch-v { font-size: 1.1rem; font-weight: 600; color: var(--white); }
+  /* Hero */
+  .hero { position: relative; min-height: min(100svh, 820px); display: flex; align-items: center; overflow: hidden; padding: calc(var(--header-h) + 32px) 0 clamp(40px, 5vw, 64px); }
+  .hero-bg, .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 75% center; }
+  .hero-video :global(video) { object-position: 70% center; background: transparent; }
+  .hero-video :global(.av-toggle) { bottom: 22%; right: 8%; }
+  @media (min-width: 960px) {
+    .hero { background: #050505; }
+    .hero-bg, .hero-video { inset: auto 0 auto auto; top: 50%; width: min(72%, 1180px); height: auto; aspect-ratio: 16 / 9; transform: translateY(-46%); }
+    .hero-bg, .hero-video :global(video) { object-position: center; -webkit-mask-image: radial-gradient(ellipse 62% 60% at 60% 56%, #000 48%, transparent 100%); mask-image: radial-gradient(ellipse 62% 60% at 60% 56%, #000 48%, transparent 100%); }
+    .hero-shade { background: linear-gradient(0deg, rgba(18,18,17,.85) 0%, rgba(18,18,17,0) 40%) !important; }
+  }
+  .hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(18,18,17,.92) 0%, rgba(18,18,17,.6) 38%, rgba(18,18,17,0) 62%), linear-gradient(0deg, rgba(18,18,17,.85) 0%, rgba(18,18,17,0) 40%); }
+  .hero-in { position: relative; z-index: 1; }
+  @media (max-width: 959px) {
+    .hero { align-items: flex-start; padding-bottom: 36vh; background: #050505; }
+    .hero .stats { display: none; }
+    .hero-bg, .hero-video { inset: auto 0 0 0; top: auto; height: 40vh; }
+    .hero-bg, .hero-video :global(video) { object-position: 62% center; -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 32%); mask-image: linear-gradient(180deg, transparent 0%, #000 32%); }
+    .scroll { display: none; }
+  }
+  @media (max-width: 959px) { .hero-shade { display: none; } }
+  .hero h1 { max-width: 19ch; font-size: clamp(2.2rem, 4.3vw, 3.9rem); }
+  .hero .lead { max-width: 560px; color: var(--on-dark); }
+  .hero .stats { max-width: 640px; margin-top: clamp(28px, 3.5vw, 44px); }
+  .hero .stats dt { font-size: clamp(1.6rem, 2.6vw, 2.2rem); }
+  .hero .btn-row { margin-top: 1.5em; }
+  .hero .lead, .hero .btn-row, .hero .stats { animation: rise 1s var(--ease) both; }
+  .hero .lead { animation-delay: .2s; } .hero .btn-row { animation-delay: .3s; } .hero .stats { animation-delay: .45s; }
+  .scroll { position: absolute; right: var(--gutter); bottom: 40px; width: 26px; height: 44px; border: 1px solid rgba(255,255,255,.4); border-radius: 99px; display: none; }
+  .scroll span { position: absolute; left: 50%; top: 9px; width: 3px; height: 8px; border-radius: 3px; background: var(--sand); translate: -50% 0; animation: wheel 1.8s ease-in-out infinite; }
+  @media (min-width: 960px) { .scroll { display: block; } }
+  @keyframes heroZoom { from { transform: scale(1.1); } to { transform: scale(1); } }
+  @keyframes rise { from { transform: translateY(18px); } to { transform: none; } }
+  @keyframes wheel { 0% { opacity: 0; transform: translateY(0); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(12px); } }
+
+  .head-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 0 40px; margin-bottom: clamp(36px, 5vw, 64px); }
+  .head-row .section-head { margin-bottom: 0; }
+  .side { max-width: 340px; margin: 16px 0 0; }
+
+  /* Bento de productos */
+  .bento { display: grid; gap: 18px; grid-template-columns: 1fr; }
+  @media (min-width: 760px) { .bento { grid-template-columns: repeat(6, 1fr); } .p1, .p2 { grid-column: span 3; } .mini { grid-column: span 2; } }
+  .prod { position: relative; display: grid; background: #000; color: var(--on-dark); border-radius: var(--radius-xl); overflow: hidden; text-decoration: none; isolation: isolate; transition: transform .45s var(--ease); }
+  .prod:hover { transform: translateY(-6px); }
+  .prod::before { content: ''; position: absolute; inset: auto -20% -40% -20%; height: 70%; background: radial-gradient(ellipse at center, rgba(200,225,29,.18), transparent 65%); z-index: -1; transition: opacity .45s; opacity: .6; }
+  .prod:hover::before { opacity: 1; }
+  .pimg { overflow: hidden; }
+  .pimg :global(img) { width: 100%; max-height: 420px; object-fit: contain; transition: transform .8s var(--ease); }
+  .prod:hover .pimg :global(img) { transform: scale(1.04); }
+  .ptext { padding: 4px clamp(24px, 3vw, 36px) clamp(26px, 3vw, 36px); }
+  .ptext h3 { color: var(--white); font-size: clamp(1.8rem, 3vw, 2.5rem); margin: 18px 0 10px; letter-spacing: -0.03em; }
+  .ptext p { color: var(--on-dark-soft); }
+  .specs-inline { list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-wrap: wrap; gap: 0; }
+  .specs-inline li { font-size: 0.8rem; letter-spacing: .08em; color: var(--white); padding: 0 14px; border-left: 1px solid var(--line-dark); }
+  .specs-inline li:first-child { padding-left: 0; border: 0; }
+  .prod .arrow-link { color: var(--sand); }
+  .mini { display: flex; flex-direction: column; gap: 6px; padding: clamp(22px, 2.6vw, 30px); border-radius: var(--radius-xl); background: var(--paper); text-decoration: none; transition: transform .45s var(--ease), background .3s; min-height: 240px; }
+  .mini:hover { transform: translateY(-6px); background: var(--sand-soft); }
+  .mini .eyebrow { margin-bottom: .4em; }
+  .mini h3 { margin: 0; }
+  .mini .big { font-size: clamp(1.6rem, 2.6vw, 2.2rem); font-weight: 600; letter-spacing: -0.03em; color: var(--sand-strong); margin: auto 0 10px; }
+  .mini .arrow-link { margin-top: auto; }
+  .parts { display: flex; gap: 10px; margin: auto 0 10px; }
+  .parts :global(img) { width: 64px; height: 64px; object-fit: contain; }
+
+  /* Cómo funciona */
+  .how { overflow: hidden; }
+  .how-grid { display: grid; gap: 40px; align-items: center; }
+  @media (min-width: 1000px) { .how-grid { grid-template-columns: 1fr 340px; gap: 64px; } .how-grid :global(.steps) { grid-template-columns: repeat(2, 1fr); } }
+  .reel { margin: 0 auto; width: 100%; max-width: 340px; }
+  .reel-v { position: relative; }
+  .reel video { width: 100%; aspect-ratio: 9 / 16; border-radius: 24px; background: #000; border: 1px solid var(--line-dark); box-shadow: 0 30px 60px -20px rgba(0,0,0,.8); }
+  .reel figcaption { margin-top: 12px; text-align: center; font-size: .85rem; color: var(--on-dark-soft); }
+  .how-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .45; }
+  .film-grid { display: grid; gap: 18px; }
+  @media (min-width: 860px) { .film-grid { grid-template-columns: 1fr 1fr; } }
+  .clip { position: relative; display: block; border-radius: var(--radius-xl); overflow: hidden; aspect-ratio: 16 / 10; text-decoration: none; border: 1px solid var(--line-dark); }
+  .clip :global(video) { transition: transform 1.2s var(--ease); }
+  .clip:hover :global(video) { transform: scale(1.04); }
+  .clip-cap { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px; padding: 60px 22px 20px; color: var(--white); font-weight: 500; background: linear-gradient(0deg, rgba(0,0,0,.75), transparent); }
+  .clip-cap .arrow-link { margin-left: auto; }
+  .how-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,18,17,.9), rgba(18,18,17,.7) 50%, rgba(18,18,17,.95)); }
+
+  /* Novedades */
+  .nov-media { position: relative; }
+  .nov-img { border-radius: var(--radius-xl); width: 100%; }
+  .nov-sello { position: absolute; right: clamp(-8px, -1vw, 16px); bottom: -28px; }
+
+  /* Azulejos */
+  .tiles { overflow: hidden; }
+  .lineart { position: absolute; right: -8%; top: 4%; width: min(60vw, 820px); opacity: .5; mix-blend-mode: multiply; pointer-events: none; }
+  .tile { display: block; text-decoration: none; }
+  .tile-img { border-radius: var(--radius); overflow: hidden; margin-bottom: 16px; }
+  .tile-img :global(img) { width: 100%; aspect-ratio: 1; object-fit: cover; transition: transform .8s var(--ease); }
+  .tile:hover .tile-img :global(img) { transform: scale(1.06); }
+  .tile h3 { margin-bottom: 6px; }
+
+  .fab { border-radius: var(--radius-xl); width: 100%; }
+</style>

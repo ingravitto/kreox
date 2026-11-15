@@ -2,6 +2,8 @@
 // Sello "Producto patentado" vectorial: nítido a cualquier tamaño, completo y con los colores de la marca.
 interface Props { size?: number; class?: string; tone?: 'dark' | 'light' }
 const { size = 140, class: cls, tone = 'dark' } = Astro.props;
+import { useT } from '../i18n/ui';
+const { t } = useT(Astro.url);
 const id = `s${Math.random().toString(36).slice(2, 8)}`;
 // Borde ondulado: 36 picos alrededor de un círculo
 const n = 36, R = 96, r = 90, cx = 100, cy = 100;
@@ -11,7 +13,7 @@ const pts = Array.from({ length: n * 2 }, (_, i) => {
   return `${(cx + rad * Math.cos(a)).toFixed(2)},${(cy + rad * Math.sin(a)).toFixed(2)}`;
 }).join(' ');
 ---
-<svg class:list={['sello', tone, cls]} width={size} height={size} viewBox="0 0 200 200" role="img" aria-label="Producto patentado">
+<svg class:list={['sello', tone, cls]} width={size} height={size} viewBox="0 0 200 200" role="img" aria-label={t('sealAria')}>
   <defs>
     <path id={`${id}-top`} d="M 38 100 A 62 62 0 0 1 162 100" />
     <path id={`${id}-bot`} d="M 30 100 A 70 70 0 0 0 170 100" />
@@ -20,8 +22,8 @@ const pts = Array.from({ length: n * 2 }, (_, i) => {
   <circle cx="100" cy="100" r="80" class="ring" />
   <circle cx="100" cy="100" r="38" class="core" />
   <path d="M82 101 l12 12 l24 -26" class="check" />
-  <text class="t-top"><textPath href={`#${id}-top`} startOffset="50%" text-anchor="middle">PRODUCTO</textPath></text>
-  <text class="t-bot"><textPath href={`#${id}-bot`} startOffset="50%" text-anchor="middle">PATENTADO</textPath></text>
+  <text class="t-top"><textPath href={`#${id}-top`} startOffset="50%" text-anchor="middle">{t('sealTop')}</textPath></text>
+  <text class="t-bot"><textPath href={`#${id}-bot`} startOffset="50%" text-anchor="middle">{t('sealBottom')}</textPath></text>
 </svg>
 <style>
   .sello { display: block; filter: drop-shadow(0 14px 26px rgba(0,0,0,.35)); }

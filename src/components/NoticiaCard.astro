@@ -1,18 +1,17 @@
 ---
 import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
-import { CATEGORIAS, fecha, noticiaUrl } from '../data/noticias';
+import { postCategory, postDate, postUrl, postIsEn, type Post } from '../data/noticias';
 import fallback from '../assets/img/fondo-piedra-productos-kreox.jpg';
-interface Props { n: CollectionEntry<'noticias'> }
+interface Props { n: Post }
 const { n } = Astro.props;
 const img = n.data.image ?? fallback;
 ---
 <article class="nc" data-reveal>
   <div class="ph"><Image src={img} alt={n.data.image ? (n.data.imageAlt ?? '') : ''} widths={[400, 720]} sizes="(min-width: 960px) 380px, 92vw" /></div>
-  <div class="meta"><span>{CATEGORIAS[n.data.category]}</span><time datetime={n.data.date.toISOString()}>{fecha(n.data.date)}</time></div>
-  <h3><a href={noticiaUrl(n)}>{n.data.title}</a></h3>
+  <div class="meta"><span>{postCategory(n)}</span><time datetime={n.data.date.toISOString()}>{postDate(n)}</time></div>
+  <h3><a href={postUrl(n)}>{n.data.title}</a></h3>
   <p>{n.data.description}</p>
-  <span class="arrow-link" aria-hidden="true">Leer</span>
+  <span class="arrow-link" aria-hidden="true">{postIsEn(n) ? 'Read' : 'Leer'}</span>
 </article>
 <style>
   .nc { position: relative; display: flex; flex-direction: column; }

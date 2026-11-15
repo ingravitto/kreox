@@ -13,9 +13,10 @@ import WeightBars from './WeightBars.astro';
 import Calculadora from './Calculadora.astro';
 import Faq from './Faq.astro';
 import CtaTarifa from './CtaTarifa.astro';
-import { NIVELACION, SITE, waTarifa } from '../data/site';
+import { SITE, waTarifa } from '../data/site';
+import { useT } from '../i18n/ui';
 import NoticiaCard from './NoticiaCard.astro';
-import { getNoticias } from '../data/noticias';
+import { getNoticias, getNews } from '../data/noticias';
 
 interface Props {
   kind: 'piko' | 'universal';
@@ -37,16 +38,59 @@ interface Props {
   name: string;
 }
 const p = Astro.props;
+const { lang, P } = useT(Astro.url);
+const EN = lang === 'en';
+// Textos fijos de la plantilla en cada idioma
+const L = EN
+  ? {
+      crumb: 'Self-leveling mortar', crumbShort: 'Leveling', chips: ['Patented product', 'Made in Spain', 'Reusable'],
+      ask: 'Ask for the 2027 price list', howMany: 'How many do I need?', opens: ' (opens WhatsApp)',
+      dataEyebrow: 'Technical sheet · to the millimeter', dataTitle: `${p.name} technical data`, plano: 'Dimensions in millimeters according to the manufacturer’s drawing.',
+      howEyebrow: 'How it works', howTitle: `How ${p.name} levels,`, howAccent: 'step by step.', howText: 'Tap each step or scroll down and you will see the process in a cross-section of the job.',
+      installEyebrow: 'Real installation', installTitle: 'This is how it is placed on site',
+      installChecks: ['Finished level marked with a laser with receiver.', 'Also works with a standard laser.', 'Ring adjusted to the line marked by the laser.'],
+      videoAria: `${p.name} installation video`, noVideo: 'Your browser cannot play this video.', download: 'Download it here', pause: 'Pause video', sound: 'Turn sound on',
+      onSite: 'On site',
+      marquee: ['Rust-free', 'Reusable', 'Standard laser or laser with receiver', 'Visual level ring', 'Spare parts by piece', 'Patented product'],
+      vsEyebrow: 'Versus the steel tripod', vsTitle: 'Everything a tripod does,', vsAccent: 'without its problems.',
+      vsText: `The steel tripod weighs about 1 kg, rusts with the alkaline pH of the mortar and all three legs must be firmly seated. ${p.name} is placed in seconds and cleaned with water.`,
+      impEyebrow: 'Continuous improvement · 2026', impTitle: 'Fiber-reinforced ring.', impAccent: 'Spare parts by piece.',
+      impText: 'More resistance to continuous use, a new high-visibility color and, when a part wears out, you replace only that part.', seeParts: 'See spare parts',
+      calcEyebrow: 'Calculator', calcTitle: 'How many do you need for your job?', calcText: 'Enter the square meters you are going to pour: we give you levelers, boxes and the weight you save compared with the tripod.',
+      guidesEyebrow: 'Guides and news', guidesTitle: `Get the most out of ${p.name}`,
+      howToName: `How to level self-leveling mortar with ${p.name}`, howToDesc: `Leveling process for self-leveling mortar with KREOX ${p.name} in ${p.steps.length} steps.`,
+      laserTool: 'Laser level (standard or with receiver)', mortar: 'Self-leveling mortar', filmName: `${p.name}: pouring self-leveling mortar`, installName: `${p.name} installation on site`,
+    }
+  : {
+      crumb: 'Nivelación autonivelante', crumbShort: 'Nivelación', chips: ['Producto patentado', 'Fabricado en España', 'Reutilizable'],
+      ask: 'Pedir tarifa 2027', howMany: '¿Cuántos necesito?', opens: ' (abre WhatsApp)',
+      dataEyebrow: 'Ficha técnica · al milímetro', dataTitle: `Datos técnicos del ${p.name}`, plano: 'Medidas en milímetros según el plano del fabricante.',
+      howEyebrow: 'Cómo funciona', howTitle: `Así nivela ${p.name},`, howAccent: 'paso a paso.', howText: 'Pulsa cada paso o baja con el scroll y verás el proceso en un corte de la obra.',
+      installEyebrow: 'Instalación real', installTitle: 'Así se coloca en obra',
+      installChecks: ['Marcado de la cota con láser con receptor.', 'También funciona con láser habitual.', 'Ajuste de la anilla hasta la línea marcada por el láser.'],
+      videoAria: `Vídeo de instalación del ${p.name}`, noVideo: 'Tu navegador no puede reproducir el vídeo.', download: 'Descárgalo aquí', pause: 'Pausar vídeo', sound: 'Activar sonido',
+      onSite: 'En obra',
+      marquee: ['Sin óxido', 'Reutilizable', 'Láser habitual o con receptor', 'Anilla visual de nivel', 'Recambios por piezas', 'Producto patentado'],
+      vsEyebrow: 'Frente al trípode de acero', vsTitle: 'Lo mismo que un trípode,', vsAccent: 'sin sus problemas.',
+      vsText: `El trípode metálico pesa cerca de 1 kg, se oxida con el pH alcalino del mortero y obliga a asentar sus tres patas. ${p.name} se coloca en segundos y se limpia con agua.`,
+      impEyebrow: 'Mejora continua · 2026', impTitle: 'Anilla con fibra.', impAccent: 'Recambios por piezas.',
+      impText: 'Más resistencia al uso continuo, nuevo color de alta visibilidad y, cuando una pieza se gasta, cambias solo esa pieza.', seeParts: 'Ver recambios',
+      calcEyebrow: 'Calculadora', calcTitle: '¿Cuántos necesitas para tu obra?', calcText: 'Introduce los metros cuadrados que vas a verter: te damos niveladores, cajas y el peso que te ahorras frente al trípode.',
+      guidesEyebrow: 'Guías y noticias', guidesTitle: `Aprende a sacarle partido al ${p.name}`,
+      howToName: `Cómo nivelar mortero autonivelante con ${p.name}`, howToDesc: `Proceso de nivelación de mortero autonivelante con ${p.name} de KREOX en ${p.steps.length} pasos.`,
+      laserTool: 'Láser nivelador (habitual o con receptor)', mortar: 'Mortero autonivelante', filmName: `${p.name}: vertido de mortero autonivelante`, installName: `Instalación del ${p.name} en obra`,
+    };
 // Guías y noticias que mencionan este producto (enlazado interno hacia el contenido editorial)
-const guias = (await getNoticias()).filter((n) => n.data.products.includes(p.kind)).slice(0, 3);
-const url = p.kind === 'piko' ? `${NIVELACION}piko/` : `${NIVELACION}nivelador-universal/`;
+const guias = (EN ? await getNews() : await getNoticias()).filter((n) => n.data.products.includes(p.kind)).slice(0, 3);
+const url = p.kind === 'piko' ? P.piko : P.universal;
 const filmThumb = p.film ? await getImage({ src: p.film.poster, width: 1280, format: 'jpeg' }) : undefined;
 const howTo = {
   '@type': 'HowTo',
-  name: `Cómo nivelar mortero autonivelante con ${p.name}`,
-  description: `Proceso de nivelación de mortero autonivelante con ${p.name} de KREOX en ${p.steps.length} pasos.`,
-  tool: [{ '@type': 'HowToTool', name: p.name }, { '@type': 'HowToTool', name: 'Láser nivelador (habitual o con receptor)' }],
-  supply: [{ '@type': 'HowToSupply', name: 'Mortero autonivelante' }],
+  name: L.howToName,
+  description: L.howToDesc,
+  inLanguage: lang,
+  tool: [{ '@type': 'HowToTool', name: p.name }, { '@type': 'HowToTool', name: L.laserTool }],
+  supply: [{ '@type': 'HowToSupply', name: L.mortar }],
   step: p.steps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.title, text: s.text, url: `${SITE.url}${url}#como-se-usa` })),
 };
 const schema = [
@@ -55,7 +99,7 @@ const schema = [
   ...(p.film && filmThumb
     ? [{
         '@type': 'VideoObject',
-        name: `${p.name}: vertido de mortero autonivelante`,
+        name: L.filmName,
         description: p.film.label,
         thumbnailUrl: new URL(filmThumb.src, SITE.url).href,
         contentUrl: new URL(p.film.src, SITE.url).href,
@@ -66,7 +110,7 @@ const schema = [
   ...(p.video
     ? [{
         '@type': 'VideoObject',
-        name: p.video.title ? `${p.video.title} · ${p.name}` : `Instalación del ${p.name} en obra`,
+        name: p.video.title ? `${p.video.title} · ${p.name}` : L.installName,
         description: p.video.text,
         thumbnailUrl: new URL(p.video.poster, SITE.url).href,
         contentUrl: new URL(p.video.src, SITE.url).href,
@@ -77,12 +121,12 @@ const schema = [
     : []),
 ];
 ---
-<Base title={p.seo.title} description={p.seo.description} ogType="product" image={p.seo.image} overlay breadcrumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }, { name: p.name, url }]} schema={schema}>
-  <PageHero eyebrow={p.hero.eyebrow} title={p.hero.title} accent={p.hero.accent} lead={p.hero.lead} bg={p.hero.bg} bgAlt={p.hero.bgAlt} product={p.hero.product} productAlt={p.hero.productAlt} crumbs={[{ name: 'Nivelación', url: NIVELACION }, { name: p.name, url }]}>
-    <div class="chips hero-chips"><span class="chip chip--sand">Producto patentado</span><span class="chip">Fabricado en España</span><span class="chip">Reutilizable</span></div>
+<Base title={p.seo.title} description={p.seo.description} ogType="product" image={p.seo.image} overlay breadcrumbs={[{ name: L.crumb, url: P.nivelacion }, { name: p.name, url }]} schema={schema}>
+  <PageHero eyebrow={p.hero.eyebrow} title={p.hero.title} accent={p.hero.accent} lead={p.hero.lead} bg={p.hero.bg} bgAlt={p.hero.bgAlt} product={p.hero.product} productAlt={p.hero.productAlt} crumbs={[{ name: L.crumbShort, url: P.nivelacion }, { name: p.name, url }]}>
+    <div class="chips hero-chips"><span class="chip chip--sand">{L.chips[0]}</span><span class="chip">{L.chips[1]}</span><span class="chip">{L.chips[2]}</span></div>
     <div class="btn-row">
-      <a class="btn btn--sand" href={waTarifa("nivelacion")} target="_blank" rel="noopener">Pedir tarifa 2027 <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="visually-hidden"> (abre WhatsApp)</span></a>
-      <a class="btn btn--ghost" href="#calculadora">¿Cuántos necesito?</a>
+      <a class="btn btn--sand" href={waTarifa("nivelacion", lang)} target="_blank" rel="noopener">{L.ask} <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="visually-hidden">{L.opens}</span></a>
+      <a class="btn btn--ghost" href="#calculadora">{L.howMany}</a>
     </div>
   </PageHero>
 
@@ -97,13 +141,13 @@ const schema = [
   <section class="section section--paper" id="datos">
     <div class="container">
       <div class="section-head" data-reveal>
-        <span class="eyebrow">Ficha técnica · al milímetro</span>
-        <h2>Datos técnicos del {p.name}</h2>
+        <span class="eyebrow">{L.dataEyebrow}</span>
+        <h2>{L.dataTitle}</h2>
       </div>
       <div class="split split--top">
         <figure class="plano" data-reveal>
           <Image src={p.plano.img} alt={p.plano.alt} widths={[600, 1000, 1232]} sizes="(min-width: 960px) 600px, 92vw" />
-          <figcaption>Medidas en milímetros según el plano del fabricante.</figcaption>
+          <figcaption>{L.plano}</figcaption>
         </figure>
         <div data-reveal style="--d:.1s">
           <table class="specs">
@@ -117,30 +161,30 @@ const schema = [
   <section class="section" id="como-se-usa">
     <div class="container">
       <div class="section-head" data-reveal>
-        <span class="eyebrow">Cómo funciona</span>
-        <h2>Así nivela {p.name}, <span class="sand">paso a paso.</span></h2>
-        <p>Pulsa cada paso o baja con el scroll y verás el proceso en un corte de la obra.</p>
+        <span class="eyebrow">{L.howEyebrow}</span>
+        <h2>{L.howTitle} <span class="sand">{L.howAccent}</span></h2>
+        <p>{L.howText}</p>
       </div>
       <ComoFunciona kind={p.kind} steps={p.steps} />
       {p.video && (
         <div class="install" data-reveal>
           <div class="install-copy on-dark">
-            <span class="eyebrow">{p.video.eyebrow ?? 'Instalación real'}</span>
-            <h3>{p.video.title ?? 'Así se coloca en obra'}</h3>
+            <span class="eyebrow">{p.video.eyebrow ?? L.installEyebrow}</span>
+            <h3>{p.video.title ?? L.installTitle}</h3>
             <ul class="checks">
-              {(p.video.checks ?? ['Marcado de la cota con láser con receptor.', 'También funciona con láser habitual.', 'Ajuste de la anilla hasta la línea marcada por el láser.']).map((c) => <li>{c}</li>)}
+              {(p.video.checks ?? L.installChecks).map((c) => <li>{c}</li>)}
             </ul>
             <p class="muted">{p.video.text}</p>
           </div>
           <div class="install-video" data-inview-wrap>
             <div class="iv">
-            <video data-inview muted loop preload="none" playsinline data-poster={p.video.poster} width="404" height="720" aria-label={`Vídeo de instalación del ${p.name}`}>
+            <video data-inview muted loop preload="none" playsinline data-poster={p.video.poster} width="404" height="720" aria-label={L.videoAria}>
               <source src={p.video.src} type="video/mp4" />
               {p.video.captions && <track kind="captions" src={p.video.captions} srclang="es" label="Español" default />}
-              Tu navegador no puede reproducir el vídeo. <a href={p.video.src}>Descárgalo aquí</a>.
+              {L.noVideo} <a href={p.video.src}>{L.download}</a>.
             </video>
-            <button type="button" class="av-toggle" data-av-toggle aria-label="Pausar vídeo" aria-pressed="false"><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2h3v12H4zM9 2h3v12H9z" fill="currentColor"/></svg><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="currentColor"/></svg></button>
-            <button type="button" class="unmute" data-unmute><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 00-2.5-4v8a4.5 4.5 0 002.5-4zM14 3.2v2.1a7 7 0 010 13.4v2.1a9 9 0 000-17.6z" fill="currentColor"/></svg><span>Activar sonido</span></button>
+            <button type="button" class="av-toggle" data-av-toggle aria-label={L.pause} aria-pressed="false"><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2h3v12H4zM9 2h3v12H9z" fill="currentColor"/></svg><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="currentColor"/></svg></button>
+            <button type="button" class="unmute" data-unmute><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 00-2.5-4v8a4.5 4.5 0 002.5-4zM14 3.2v2.1a7 7 0 010 13.4v2.1a9 9 0 000-17.6z" fill="currentColor"/></svg><span>{L.sound}</span></button>
             </div>
           </div>
         </div>
@@ -153,21 +197,21 @@ const schema = [
       <AutoVideo src={p.film.src} poster={p.film.poster} label={p.film.label} />
       <div class="filmshade" aria-hidden="true"></div>
       <div class="container filmcopy on-dark" data-reveal>
-        <span class="eyebrow">En obra</span>
+        <span class="eyebrow">{L.onSite}</span>
         <h2>{p.film.title} <span class="sand">{p.film.accent}</span></h2>
       </div>
     </section>
   )}
 
-  <Marquee dark items={['Sin óxido', 'Reutilizable', 'Láser habitual o con receptor', 'Anilla visual de nivel', 'Recambios por piezas', 'Producto patentado']} />
+  <Marquee dark items={L.marquee} />
 
   <section class="section" id="comparativa">
     <div class="container">
       <div class="split">
         <div data-reveal>
-          <span class="eyebrow">Frente al trípode de acero</span>
-          <h2>Lo mismo que un trípode, <span class="sand">sin sus problemas.</span></h2>
-          <p class="lead">El trípode metálico pesa cerca de 1 kg, se oxida con el pH alcalino del mortero y obliga a asentar sus tres patas. {p.name} se coloca en segundos y se limpia con agua.</p>
+          <span class="eyebrow">{L.vsEyebrow}</span>
+          <h2>{L.vsTitle} <span class="sand">{L.vsAccent}</span></h2>
+          <p class="lead">{L.vsText}</p>
         </div>
         <WeightBars />
       </div>
@@ -189,15 +233,15 @@ const schema = [
     <div class="container">
       <div class="head-row">
         <div class="section-head" data-reveal>
-          <span class="eyebrow">Mejora continua · 2026</span>
-          <h2>Anilla con fibra. <span class="sand">Recambios por piezas.</span></h2>
-          <p>Más resistencia al uso continuo, nuevo color de alta visibilidad y, cuando una pieza se gasta, cambias solo esa pieza.</p>
+          <span class="eyebrow">{L.impEyebrow}</span>
+          <h2>{L.impTitle} <span class="sand">{L.impAccent}</span></h2>
+          <p>{L.impText}</p>
         </div>
-        <a class="btn btn--ghost" href={`${NIVELACION}recambios/`} data-reveal>Ver recambios</a>
+        <a class="btn btn--ghost" href={P.recambios} data-reveal>{L.seeParts}</a>
       </div>
       <div class="grid grid-3">
         {p.parts.map((x, i) => (
-          <a class="card part" href={`${NIVELACION}recambios/`} data-reveal style={`--d:${i * 0.08}s`}>
+          <a class="card part" href={P.recambios} data-reveal style={`--d:${i * 0.08}s`}>
             <Image src={x.img} alt={x.alt} widths={[300, 600]} sizes="220px" />
             <h3>{x.name}</h3><p class="muted">{x.caja}</p>
           </a>
@@ -209,9 +253,9 @@ const schema = [
   <section class="section section--paper" id="calculadora">
     <div class="container split split--top">
       <div data-reveal>
-        <span class="eyebrow">Calculadora</span>
-        <h2>¿Cuántos necesitas para tu obra?</h2>
-        <p class="lead">Introduce los metros cuadrados que vas a verter: te damos niveladores, cajas y el peso que te ahorras frente al trípode.</p>
+        <span class="eyebrow">{L.calcEyebrow}</span>
+        <h2>{L.calcTitle}</h2>
+        <p class="lead">{L.calcText}</p>
         <a class="other" href={p.other.href}>
           <Image src={p.other.img} alt={p.other.alt} widths={[200, 400]} sizes="96px" />
           <span><strong>{p.other.name}</strong>{p.other.text}</span>
@@ -225,7 +269,7 @@ const schema = [
   {guias.length > 0 && (
     <section class="section section--paper">
       <div class="container">
-        <div class="section-head"><span class="eyebrow">Guías y noticias</span><h2>Aprende a sacarle partido al {p.name}</h2></div>
+        <div class="section-head"><span class="eyebrow">{L.guidesEyebrow}</span><h2>{L.guidesTitle}</h2></div>
         <div class="grid grid-3">{guias.map((g) => <NoticiaCard n={g} />)}</div>
       </div>
     </section>

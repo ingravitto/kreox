@@ -1,0 +1,62 @@
+---
+// English version of /nivelacion-mortero-autonivelante/calculadora/
+import PageHero from '../../../components/PageHero.astro';
+import imgHeroBg from '../../../assets/img/suelo-radiante-piko-bn.jpg';
+import Base from '../../../layouts/Base.astro';
+import Calculadora from '../../../components/Calculadora.astro';
+import Faq from '../../../components/Faq.astro';
+import CtaTarifa from '../../../components/CtaTarifa.astro';
+import { PRODUCTOS, M2_POR_NIVELADOR } from '../../../data/site';
+import { PATHS } from '../../../i18n/routes';
+import { faqSchema } from '../../../data/schema';
+import { FAQ_CALCULADORA_EN } from '../../../data/en/faqs';
+
+const R = PATHS.en;
+const url = R.calculadora;
+const rows = [25, 50, 100, 200, 500, 1000].map((m2) => {
+  const uds = Math.ceil(m2 / M2_POR_NIVELADOR);
+  return { m2, uds, piko: Math.ceil(uds / PRODUCTOS.piko.caja), uni: Math.ceil(uds / PRODUCTOS.universal.caja) };
+});
+const faqs = FAQ_CALCULADORA_EN;
+---
+<Base
+  overlay
+  title="Leveler calculator for self-leveling mortar | KREOX"
+  description="Work out how many PIKO or Nivelador Universal levelers you need for your self-leveling mortar job: units, boxes and weight versus the steel tripod."
+  breadcrumbs={[{ name: 'Self-leveling mortar levelers', url: R.nivelacion }, { name: 'Calculator', url }]}
+  schema={[faqSchema(faqs)]}
+>
+  <PageHero
+    compact
+    eyebrow="Self-leveling mortar · tool"
+    title="Leveler"
+    accent="calculator"
+    lead="Square meters → levelers, boxes and the weight you save compared with the tripod."
+    bg={imgHeroBg}
+    crumbs={[{ name: 'Leveling', url: R.nivelacion }, { name: 'Calculator', url }]}
+  />
+  <section class="section section--tight calc-wrap">
+    <div class="container container--narrow"><Calculadora /></div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section-head">
+        <h2>Quick quantity table</h2>
+        <p>With one leveler every {M2_POR_NIVELADOR} m². PIKO in boxes of {PRODUCTOS.piko.caja} units and Nivelador Universal in boxes of {PRODUCTOS.universal.caja} units.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Area</th><th scope="col">Levelers</th><th scope="col">Boxes of PIKO</th><th scope="col">Boxes of Universal</th></tr></thead>
+          <tbody>
+            {rows.map((r) => <tr><th scope="row">{r.m2.toLocaleString('en-US')} m²</th><td>{r.uds.toLocaleString('en-US')}</td><td>{r.piko}</td><td>{r.uni}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p class="muted">Approximate quantities. Please confirm them for your job with our sales team.</p>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} />
+  <CtaTarifa />
+</Base>

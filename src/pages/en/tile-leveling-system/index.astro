@@ -1,0 +1,76 @@
+---
+// English version of /colocacion-azulejos/
+import PageHero from '../../../components/PageHero.astro';
+import { Image } from 'astro:assets';
+import Base from '../../../layouts/Base.astro';
+import Faq from '../../../components/Faq.astro';
+import CtaTarifa from '../../../components/CtaTarifa.astro';
+import { SITE, waTarifa } from '../../../data/site';
+import { PATHS } from '../../../i18n/routes';
+import { TILE_PRODUCTS_EN, TILE_FAQ_EN } from '../../../data/en/tiles';
+import { faqSchema } from '../../../data/schema';
+import imgSistema from '../../../assets/img/sistema-nivelacion-azulejos-kreox.png';
+
+const R = PATHS.en;
+---
+<Base
+  overlay
+  title="Tile leveling system for tile installation | KREOX"
+  description="KREOX Kalzo spacer clip, Kuña leveling wedge, stain-resistant Kuña and Alikates: a tile leveling system made in Spain from recycled material."
+  breadcrumbs={[{ name: 'Tile installation', url: R.azulejos }]}
+  schema={[faqSchema(TILE_FAQ_EN)]}
+>
+  <PageHero
+    eyebrow="Solutions for"
+    title="Tile"
+    accent="installation"
+    lead="Kalzos, Kuñas and Alikates designed and made in Spain to lay ceramic tiles quickly, efficiently and precisely, from recycled material and with a superior grip."
+    product={imgSistema}
+    productAlt="KREOX Kalzo and Kuña: 100% recycled material, better grip and clean break"
+    crumbs={[{ name: 'Tile installation', url: R.azulejos }]}
+  >
+    <div class="chips" style="margin-top:24px"><span class="chip chip--sand">Compatible with every wedge</span><span class="chip">Clean break</span><span class="chip">Tiles from 3 to 15 mm</span></div>
+    <div class="btn-row">
+      <a class="btn btn--sand" href={waTarifa('azulejos', 'en')} target="_blank" rel="noopener">Ask for the 2027 price list<span class="visually-hidden"> (opens WhatsApp)</span></a>
+      <a class="btn btn--ghost" href={SITE.tileCalculator}>Tile piece calculator</a>
+    </div>
+  </PageHero>
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section-head"><h2>Products</h2></div>
+      <div class="grid grid-4">
+        {TILE_PRODUCTS_EN.map((p) => (
+          <a class="card prod" href={`${R.azulejos}${p.slug}/`}>
+            <Image src={p.img} alt={p.alt} widths={[300, 600]} sizes="(min-width: 900px) 260px, 45vw" />
+            <h3>{p.name}</h3>
+            <p class="muted">{p.intro}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div>
+        <h2>Not sure how many pieces you need?</h2>
+        <p>Our calculator estimates the number of Kalzos and Kuñas for your project: enter the tile dimensions and the total area.</p>
+        <a class="btn btn--dark" href={SITE.tileCalculator}>Open the tile piece calculator</a>
+      </div>
+      <div class="card">
+        <h3>Do you also work with self-leveling mortar?</h3>
+        <p class="muted">Discover PIKO and the Nivelador Universal, our levelers that replace the steel tripod.</p>
+        <a href={R.nivelacion}>See leveling systems for self-leveling mortar →</a>
+      </div>
+    </div>
+  </section>
+
+  <Faq faqs={TILE_FAQ_EN} />
+  <CtaTarifa interes="azulejos" text="Message us on WhatsApp and we will send you the 2027 price list for Kalzos, Kuñas and Alikates." />
+</Base>
+<style>
+  .prod { text-decoration: none; color: inherit; }
+  .prod :global(img) { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; margin-bottom: 14px; }
+  .prod p { margin: 0; }
+</style>
