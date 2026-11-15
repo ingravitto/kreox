@@ -59,10 +59,6 @@ const other = langs.find((l) => l.code !== lang)!;
       <nav class="lang" aria-label={t('langSwitch')}>
         {langs.map((l) => <a href={l.href} lang={l.code} hreflang={l.code} aria-current={l.code === lang ? 'true' : undefined}>{l.label}<span class="visually-hidden"> · {l.name}</span></a>)}
       </nav>
-      <a class="phone" href={SITE.phoneHref} aria-label={`${t('call')} ${SITE.phone}`}>
-        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1z" fill="currentColor"/></svg>
-        <span>{SITE.phone}</span>
-      </a>
       <a class="btn btn--sand cta" href={waTarifa('general', lang)} target="_blank" rel="noopener">{t('priceList')}<span class="visually-hidden">{t('opensWhatsApp')}</span></a>
     </div>
 
@@ -172,7 +168,7 @@ const other = langs.find((l) => l.code !== lang)!;
   .sub-toggle:hover { background: rgba(255,255,255,.08); color: var(--white); }
   .sub-toggle svg { transition: transform .2s; }
   .open .sub-toggle svg { transform: rotate(180deg); }
-  .menu > li > a { display: inline-flex; align-items: center; gap: 7px; color: rgba(255,255,255,.82); text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 10px 14px; border-radius: 999px; transition: color .2s, background .2s; }
+  .menu > li > a { white-space: nowrap; display: inline-flex; align-items: center; gap: 7px; color: rgba(255,255,255,.82); text-decoration: none; font-weight: 400; font-size: 0.9rem; padding: 10px 14px; border-radius: 999px; transition: color .2s, background .2s; }
   .menu > li > a:hover, .menu > li > a.active { color: var(--white); background: rgba(255,255,255,.07); }
   .menu > li > a.hl { color: var(--sand); }
   .sub { position: absolute; top: 100%; left: 50%; translate: -50% 0; padding-top: 12px; opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .25s var(--ease), transform .25s var(--ease), visibility .25s; }
@@ -184,8 +180,6 @@ const other = langs.find((l) => l.code !== lang)!;
   .sub span { display: block; font-size: 0.76rem; color: var(--sand); margin-top: 2px; }
 
   .actions { display: none; align-items: center; gap: 18px; }
-  .phone { display: inline-flex; align-items: center; gap: 8px; color: rgba(255,255,255,.82); text-decoration: none; font-size: 0.86rem; white-space: nowrap; }
-  .phone:hover { color: var(--sand); }
   .cta { padding: 0.95em 1.4em; }
 
   .lang { display: flex; gap: 2px; padding: 3px; border: 1px solid rgba(255,255,255,.2); border-radius: 999px; }
@@ -229,9 +223,9 @@ const other = langs.find((l) => l.code !== lang)!;
   .m-tarifa { background: var(--sand); color: var(--ink); }
   .m-phone { grid-column: 1 / -1; text-align: center; color: var(--on-dark-soft); font-size: .9rem; padding: 6px 0 0; }
 
+  @media (min-width: 1120px) and (max-width: 1279px) { .bar { gap: 18px; } .menu > li > a { padding: 10px 10px; font-size: .86rem; } .cta { padding: .95em 1.1em; } }
   @media (min-width: 1120px) {
     .desktop, .actions { display: flex; }
     .m-open, .m-lang { display: none; }
   }
-  @media (min-width: 1120px) and (max-width: 1260px) { .phone span { display: none; } }
 </style>
