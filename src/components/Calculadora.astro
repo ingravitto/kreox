@@ -5,8 +5,8 @@ const { compact = false, defaultProduct = 'piko' } = Astro.props;
 import { useT } from '../i18n/ui';
 const { t, locale } = useT(Astro.url);
 const data = {
-  piko: { caja: PRODUCTOS.piko.caja, peso: PRODUCTOS.piko.pesoG, nombre: 'PIKO' },
-  universal: { caja: PRODUCTOS.universal.caja, peso: PRODUCTOS.universal.pesoG, nombre: 'Nivelador Universal' },
+  piko: { caja: PRODUCTOS.piko.caja, peso: PRODUCTOS.piko.pesoG, nombre: t('prodPiko') },
+  universal: { caja: PRODUCTOS.universal.caja, peso: PRODUCTOS.universal.pesoG, nombre: t('prodUni') },
   tripode: PRODUCTOS.tripode.pesoG,
   m2: M2_POR_NIVELADOR,
   locale,

@@ -17,10 +17,10 @@ const url = P.faq;
 const grupos = EN
   ? [
       { id: 'levelling', title: 'Levelling with liquid screed', link: { href: P.nivelacion, label: 'Levelling systems' }, faqs: FAQ_NIVELACION_EN },
-      { id: 'piko', title: 'PIKO · underfloor heating', link: { href: P.piko, label: 'PIKO product page' }, faqs: FAQ_PIKO_EN },
-      { id: 'universal', title: 'Nivelador Universal · screeds', link: { href: P.universal, label: 'Nivelador Universal product page' }, faqs: FAQ_UNIVERSAL_EN },
+      { id: 'piko', title: 'Insulation Screed Leveller · underfloor heating', link: { href: P.piko, label: 'Product page' }, faqs: FAQ_PIKO_EN },
+      { id: 'universal', title: 'Universal Screed Leveller · screeds', link: { href: P.universal, label: 'Product page' }, faqs: FAQ_UNIVERSAL_EN },
       { id: 'quantities', title: 'Quantities and calculation', link: { href: P.calculadora, label: 'Leveller calculator' }, faqs: FAQ_CALCULADORA_EN },
-      { id: 'tripod', title: 'PIKO versus the metal tripod', link: { href: P.vsTripode, label: 'Full comparison' }, faqs: FAQ_TRIPODE_EN },
+      { id: 'tripod', title: 'Screed levellers versus the metal tripod', link: { href: P.vsTripode, label: 'Full comparison' }, faqs: FAQ_TRIPODE_EN },
       { id: 'tiles', title: 'Tile installation', link: { href: P.azulejos, label: 'Tile levelling system' }, faqs: TILE_FAQ_EN },
     ]
   : [
@@ -37,7 +37,7 @@ const all = grupos.flatMap((g) => g.faqs).filter((f) => (seen.has(f.q) ? false :
 const T = EN
   ? {
       title: 'FAQ about screed levellers | KREOX',
-      description: 'Clear answers about PIKO, Nivelador Universal, how many levellers per m², metal tripods, spare parts and the KREOX tile levelling system.',
+      description: 'Clear answers about the Insulation and Universal Screed Levellers, how many per m², metal tripods, spare parts and the KREOX tile system.',
       crumb: 'FAQ', eyebrow: 'Help', heroTitle: 'Frequently asked', heroAccent: 'questions',
       lead: `${all.length} clear answers about our screed levellers and the tile levelling system.`,
       search: 'Search for a question', searchPh: 'E.g. underfloor heating, laser, m²…', topics: 'Topics',

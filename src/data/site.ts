@@ -44,9 +44,9 @@ const WA_MSG: Record<'es' | 'en', Record<Interes, string>> = {
     general: 'Hola, quiero información sobre los niveladores KREOX.',
   },
   en: {
-    piko: 'Hello, I would like information about the PIKO for underfloor heating.',
-    universal: 'Hello, I would like information about the Nivelador Universal for screeds.',
-    recambios: 'Hello, I would like information about spare parts for PIKO and Nivelador Universal.',
+    piko: 'Hello, I would like information about the Insulation Screed Leveller for underfloor heating.',
+    universal: 'Hello, I would like information about the Universal Screed Leveller for screeds.',
+    recambios: 'Hello, I would like information about spare parts for the Insulation and Universal Screed Levellers.',
     nivelacion: 'Hello, I would like information about KREOX screed levellers.',
     azulejos: 'Hello, I would like information about the KREOX tile levelling system.',
     general: 'Hello, I would like information about KREOX levellers.',
@@ -99,12 +99,12 @@ export const NAV_EN = [
     href: EN_NIV,
     highlight: true,
     children: [
-      { label: 'PIKO · Underfloor heating', href: `${EN_NIV}piko/`, note: '20 g · replaces the metal tripod' },
-      { label: 'Nivelador Universal · Screeds', href: `${EN_NIV}universal-screed-leveller/`, note: 'Flat base for any surface' },
+      { label: 'Insulation Screed Leveller', href: `${EN_NIV}insulation-screed-leveller/`, note: 'Underfloor heating · 20 g, replaces the metal tripod' },
+      { label: 'Universal Screed Leveller', href: `${EN_NIV}universal-screed-leveller/`, note: 'Screeds · flat base for any surface' },
       { label: 'Spare parts and accessories', href: `${EN_NIV}spare-parts/`, note: 'Replace only the worn part' },
       { label: 'Underslab polyethylene sheet', href: `${EN_NIV}underslab-polythene-sheet/`, note: 'Slab waterproofing' },
       { label: 'Leveller calculator', href: `${EN_NIV}calculator/`, note: 'How many do I need?' },
-      { label: 'PIKO vs metal tripod', href: `${EN_NIV}piko-vs-metal-tripod/`, note: 'Comparison' },
+      { label: 'Screed leveller vs metal tripod', href: `${EN_NIV}screed-leveller-vs-metal-tripod/`, note: 'Comparison' },
     ],
   },
   {

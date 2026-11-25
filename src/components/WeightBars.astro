@@ -6,8 +6,8 @@ const { t, locale } = useT(Astro.url);
 const n = Math.ceil(100 / M2_POR_NIVELADOR);
 const rows = [
   { label: t('wbTripods'), kg: (n * PRODUCTOS.tripode.pesoG) / 1000, tone: 'bad' },
-  { label: 'Nivelador Universal', kg: (n * PRODUCTOS.universal.pesoG) / 1000, tone: 'mid' },
-  { label: 'PIKO', kg: (n * PRODUCTOS.piko.pesoG) / 1000, tone: 'good' },
+  { label: t('prodUni'), kg: (n * PRODUCTOS.universal.pesoG) / 1000, tone: 'mid' },
+  { label: t('prodPiko'), kg: (n * PRODUCTOS.piko.pesoG) / 1000, tone: 'good' },
 ];
 const max = rows[0].kg;
 const fmt = (v: number) => v.toLocaleString(locale, { maximumFractionDigits: 1 });

@@ -15,15 +15,15 @@ import imgAnilla from '../../../assets/img/anilla-metalica-niveladora-universal.
 const R = PATHS.en;
 const url = R.recambios;
 const items = [
-  { id: 'levelling-washer', name: 'Levelling washer', img: imgArandela, para: 'PIKO and Nivelador Universal', caja: 150, alt: 'Lime-green levelling washer spare part for PIKO and Nivelador Universal', text: 'The part that marks the height of the screed. 2026 version with fibre additive: more resistant to continuous use and in a colour that is easier to see on site.' },
-  { id: 'universal-levelling-base', name: 'Universal levelling base', img: imgBase, para: 'Nivelador Universal', caja: 40, alt: 'Lime-green universal levelling base spare part', text: 'Flat, reinforced base that keeps the Nivelador Universal stable on any surface. Harder and more resistant during setting.' },
-  { id: 'universal-metal-levelling-ring', name: 'Universal metal levelling ring', img: imgAnilla, para: 'Nivelador Universal', caja: 40, alt: 'Universal metal levelling ring spare part', text: 'Metal part of the Nivelador Universal base, available as a spare part to extend the life of the system.' },
+  { id: 'levelling-washer', name: 'Levelling washer', img: imgArandela, para: 'Insulation and Universal Screed Levellers', caja: 150, alt: 'Lime-green levelling washer spare part for the Insulation and Universal Screed Levellers', text: 'The part that marks the height of the screed. 2026 version with fibre additive: more resistant to continuous use and in a colour that is easier to see on site.' },
+  { id: 'universal-levelling-base', name: 'Universal levelling base', img: imgBase, para: 'Universal Screed Leveller', caja: 40, alt: 'Lime-green universal levelling base spare part', text: 'Flat, reinforced base that keeps the Universal Screed Leveller stable on any surface. Harder and more resistant during setting.' },
+  { id: 'universal-metal-levelling-ring', name: 'Universal metal levelling ring', img: imgAnilla, para: 'Universal Screed Leveller', caja: 40, alt: 'Universal metal levelling ring spare part', text: 'Metal part of the Universal Screed Leveller base, available as a spare part to extend the life of the system.' },
 ];
 // FAQ built only from the data on this page (parts, compatibility and boxes) and WhatsApp contact.
 const [washer, base, ring] = items;
 const faqs = [
   { q: 'What spare parts are there for KREOX levellers?', a: `Three parts: the ${washer.name.toLowerCase()} (for ${washer.para}), the ${base.name.toLowerCase()} and the ${ring.name.toLowerCase()} (both for the ${base.para}).` },
-  { q: 'Which spare part does the PIKO use?', a: `The ${washer.name.toLowerCase()}, the part that marks the height of the screed. The current version has a fibre additive and a colour that is easier to see on site.` },
+  { q: 'Which spare part does the Insulation Screed Leveller use?', a: `The ${washer.name.toLowerCase()}, the part that marks the height of the screed. The current version has a fibre additive and a colour that is easier to see on site.` },
   { q: 'Why buy spare parts instead of new levellers?', a: 'Because the levellers are reusable: they are removed after pouring, cleaned and used again. If a part wears out, only that part is replaced.' },
   { q: 'How are the spare parts sold?', a: `In boxes: ${washer.name.toLowerCase()}, ${washer.caja} units; ${base.name.toLowerCase()}, ${base.caja} units; ${ring.name.toLowerCase()}, ${ring.caja} units.` },
   { q: 'How do I get spare part prices?', a: 'Message us on WhatsApp with the parts you need and we will send you leveller and spare part prices.' },
@@ -35,7 +35,7 @@ const schema = items.map((it) =>
 <Base
   overlay
   title="Spare parts for screed levellers | KREOX"
-  description="Spare parts for PIKO and Nivelador Universal: levelling washer, base and metal ring. Replace only the worn part and extend the life of the system."
+  description="Spare parts for the Insulation and Universal Screed Levellers: levelling washer, base and metal ring. Replace only the worn part."
   breadcrumbs={[{ name: 'Screed levellers', url: R.nivelacion }, { name: 'Spare parts', url }]}
   schema={schema}
 >
@@ -43,7 +43,7 @@ const schema = items.map((it) =>
     compact
     eyebrow="Spare parts and accessories"
     title="Spare parts for"
-    accent="PIKO and Universal levellers"
+    accent="screed levellers"
     lead="When a part wears out, <strong>you replace only that part</strong>: you extend the life of the system and lower the cost per job compared with buying new tripods."
     bg={imgHeroBg}
     crumbs={[{ name: 'Levelling', url: R.nivelacion }, { name: 'Spare parts', url }]}
@@ -82,8 +82,8 @@ const schema = items.map((it) =>
 
   <section class="section">
     <div class="container grid grid-2">
-      <a class="card" href={R.piko}><h3>PIKO →</h3><p class="muted mt-0">Leveller for underfloor heating. Uses the levelling washer.</p></a>
-      <a class="card" href={R.universal}><h3>Nivelador Universal →</h3><p class="muted mt-0">For screeds. Uses the base, metal ring and washer.</p></a>
+      <a class="card" href={R.piko}><h3>Insulation Screed Leveller →</h3><p class="muted mt-0">For underfloor heating. Uses the levelling washer.</p></a>
+      <a class="card" href={R.universal}><h3>Universal Screed Leveller →</h3><p class="muted mt-0">For screeds on any surface. Uses the base, metal ring and washer.</p></a>
     </div>
   </section>
 
