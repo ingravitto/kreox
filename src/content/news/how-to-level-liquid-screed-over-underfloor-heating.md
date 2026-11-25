@@ -5,8 +5,8 @@ description: 'Guide to levelling liquid screed over underfloor heating with Insu
 date: 2026-11-13
 category: nivelacion
 products: [piko, recambios]
-image: ../../assets/img/hf-piko-suelo-radiante-laser.jpg
-imageAlt: 'Insulation Screed Levellers pushed into underfloor heating with the laser line at the height of the rings'
+image: ../../assets/img/hf-piko-mortero-enrasado-anillas.jpg
+imageAlt: 'Freshly poured liquid screed over underfloor heating, flush with the rings of the Insulation Screed Levellers, with the laser on its tripod'
 faq:
   - q: 'How many levellers are needed to level an underfloor heating floor?'
     a: 'As a guide, roughly one every 2 m². For 100 m² that is about 50 levellers, which is half a box of 100 units.'

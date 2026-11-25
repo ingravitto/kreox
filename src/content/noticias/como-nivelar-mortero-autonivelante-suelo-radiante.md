@@ -5,8 +5,8 @@ description: 'Guía para nivelar mortero autonivelante sobre suelo radiante con 
 date: 2026-11-13
 category: nivelacion
 products: [piko, recambios]
-image: ../../assets/img/hf-piko-suelo-radiante-laser.jpg
-imageAlt: 'Niveladores PIKO clavados en suelo radiante con la línea del láser a la altura de las anillas'
+image: ../../assets/img/hf-piko-mortero-enrasado-anillas.jpg
+imageAlt: 'Mortero autonivelante recién vertido sobre suelo radiante, enrasado a la anilla de los niveladores PIKO, con el láser en su trípode'
 faq:
   - q: '¿Cuántos niveladores hacen falta para nivelar un suelo radiante?'
     a: 'Como referencia, uno cada 2 m² aproximadamente. Para 100 m² son unos 50 PIKO, es decir, media caja de 100 unidades.'

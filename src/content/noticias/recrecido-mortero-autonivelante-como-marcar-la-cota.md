@@ -5,8 +5,8 @@ description: 'Cómo marcar la cota de un recrecido con mortero autonivelante sob
 date: 2026-11-12
 category: nivelacion
 products: [universal, recambios]
-image: ../../assets/img/hf-universal-recrecido-vertido.jpg
-imageAlt: 'Mortero autonivelante avanzando entre Niveladores Universales sobre una solera'
+image: ../../assets/img/hf-nivelador-universal-laser-cota-solera.jpg
+imageAlt: 'Niveladores Universales sobre la solera antes del vertido, con la línea roja del láser a la altura de las anillas'
 faq:
   - q: '¿Qué nivelador se usa en un recrecido sobre superficie dura?'
     a: 'El Nivelador Universal, que tiene base plana y se apoya sobre el soporte sin necesidad de clavarlo. El PIKO está pensado para clavarse en la placa de aislamiento del suelo radiante.'

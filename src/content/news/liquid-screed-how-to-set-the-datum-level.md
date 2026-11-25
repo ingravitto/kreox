@@ -5,8 +5,8 @@ description: 'How to mark the datum level of a liquid screed on a slab, subfloor
 date: 2026-11-12
 category: nivelacion
 products: [universal, recambios]
-image: ../../assets/img/hf-universal-recrecido-vertido.jpg
-imageAlt: 'Liquid screed flowing between Universal Screed Levellers on a slab'
+image: ../../assets/img/hf-nivelador-universal-laser-cota-solera.jpg
+imageAlt: 'Universal Screed Levellers on the slab before the pour, with the red laser line at the height of the rings'
 faq:
   - q: 'Which leveller is used for a screed on a hard surface?'
     a: 'The Universal Screed Leveller, which has a flat base and rests on the substrate without being pushed in. The Insulation Screed Leveller is designed to be pushed into the insulation board of underfloor heating.'
