@@ -73,6 +73,9 @@ jobs:
         run: php repo/scripts/panel-config.php > dist/panel/_config.php
       - name: Publicar por FTPS en el hosting
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        # El servidor FTP del hosting falla con TLS 1.3 ("new session ticket: length mismatch"): se fuerza TLS 1.2 (sigue cifrado).
+        env:
+          NODE_OPTIONS: --tls-max-v1.2
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
