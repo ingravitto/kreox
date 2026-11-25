@@ -46,6 +46,7 @@ Las URLs de la web WordPress anterior se redirigen en `public/.htaccess`. Si cam
 - Los vídeos y el `Marquee` se reproducen solos **sin botones de play/pausa visibles** (decisión del cliente). Para cumplir WCAG 2.2.2 se pausan tocándolos y llevan un botón de pausa que solo aparece con el foco del teclado (`.av-toggle`, `.mq-toggle`). Con `prefers-reduced-motion` no arrancan solos.
 - Vídeos con sonido (reel, instalación): `data-inview` + botón "Activar sonido"; sin `controls`.
 - El titular (H1) del hero no lleva animación de opacidad: es el elemento LCP.
+- Al sustituir un vídeo o una imagen de `public/`, cambia el nombre del archivo (p. ej. `-v2`): el navegador los guarda 30 días y seguiría mostrando el antiguo.
 - Vídeos: siempre con `AutoVideo` (preload none, póster diferido). No poner `poster` directo en vídeos fuera de la primera pantalla.
 - Submenús: botón con `aria-expanded`; Escape cierra.
 
