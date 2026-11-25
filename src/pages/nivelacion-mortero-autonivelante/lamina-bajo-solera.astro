@@ -7,6 +7,8 @@ import CtaContacto from '../../components/CtaContacto.astro';
 import { NIVELACION, waConsulta } from '../../data/site';
 import { productSchema } from '../../data/schema';
 import img from '../../assets/img/lamina-polietileno-bajo-solera.png';
+import imgColocacion from '../../assets/img/hf-lamina-bajo-solera-colocacion.jpg';
+import imgMallazo from '../../assets/img/hf-lamina-bajo-solera-mallazo.jpg';
 
 const url = `${NIVELACION}lamina-bajo-solera/`;
 const schema = [
@@ -50,6 +52,20 @@ const schema = [
     </div>
   </section>
   <section class="section section--paper">
+    <div class="container split split--top">
+      <div data-reveal>
+        <span class="eyebrow">Colocación</span>
+        <h2>Sobre la grava, bajo el mallazo</h2>
+        <p class="lead">La lámina se extiende sobre la grava de drenaje y el mallazo se coloca encima, antes de hormigonar la solera. Así el hormigón queda separado del terreno y protegido de la humedad.</p>
+      </div>
+      <div class="lam-gal" data-reveal>
+        <figure><Image src={imgColocacion} alt="Rollo de lámina de polietileno negra desenrollándose sobre la grava de drenaje, con el mallazo apoyado en separadores encima" widths={[600, 1000]} sizes="(min-width: 960px) 540px, 92vw" /><figcaption>1 · Se extiende sobre la grava.</figcaption></figure>
+        <figure><Image src={imgMallazo} alt="Solera preparada: lámina de polietileno negra cubriendo la base de grava y mallazo de acero encima, listo para hormigonar" widths={[600, 1000]} sizes="(min-width: 960px) 540px, 92vw" /><figcaption>2 · El mallazo va encima, listo para hormigonar.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="container">
       <div class="section-head"><h2>Completa tu sistema de pavimentación</h2></div>
       <div class="grid grid-2">
@@ -63,4 +79,8 @@ const schema = [
 <style>
   .pimg { border-radius: 22px; background: var(--sand-soft); width: 100%; }
   a.card { text-decoration: none; color: inherit; }
+  .lam-gal { display: grid; gap: 14px; }
+  .lam-gal figure { margin: 0; }
+  .lam-gal :global(img) { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius); }
+  .lam-gal figcaption { margin-top: 8px; font-size: .92rem; color: var(--text-soft); }
 </style>
