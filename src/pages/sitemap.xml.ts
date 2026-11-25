@@ -71,22 +71,22 @@ const IMAGES: Record<string, Img[]> = {
     { src: anillaMetal, title: 'Anilla metálica niveladora universal' },
   ],
   [`${NIVELACION}lamina-bajo-solera/`]: [{ src: lamina, title: 'Lámina de polietileno bajo solera' }],
-  [E.home]: [{ src: hero, title: 'KREOX PIKO and Nivelador Universal levelers on self-leveling mortar' }],
-  [E.nivelacion]: [{ src: pikoSuelo, title: 'PIKO levelers on underfloor heating with a laser' }, { src: estudio, title: 'KREOX PIKO and Nivelador Universal levelers' }],
+  [E.home]: [{ src: hero, title: 'KREOX PIKO and Nivelador Universal levellers on liquid screed' }],
+  [E.nivelacion]: [{ src: pikoSuelo, title: 'PIKO levellers on underfloor heating with a laser' }, { src: estudio, title: 'KREOX PIKO and Nivelador Universal levellers' }],
   [E.piko]: [
-    { src: piko, title: 'KREOX PIKO, self-leveling mortar leveler for underfloor heating' },
+    { src: piko, title: 'KREOX PIKO, liquid screed leveller for underfloor heating' },
     { src: pikoPlano, title: 'PIKO dimensions' },
     { src: pikoSuelo, title: 'PIKO pushed into an underfloor heating board with a laser' },
   ],
   [E.universal]: [
     { src: uni, title: 'KREOX Nivelador Universal for screeds' },
     { src: uniPlano, title: 'Nivelador Universal dimensions' },
-    { src: uniVertido, title: 'Self-leveling mortar screed with Nivelador Universal levelers' },
+    { src: uniVertido, title: 'Liquid screed with Nivelador Universal levellers' },
   ],
   [E.recambios]: [
-    { src: arandela, title: 'Leveling washer spare part' },
-    { src: base, title: 'Universal leveling base spare part' },
-    { src: anillaMetal, title: 'Universal metal leveling ring' },
+    { src: arandela, title: 'Levelling washer spare part' },
+    { src: base, title: 'Universal levelling base spare part' },
+    { src: anillaMetal, title: 'Universal metal levelling ring' },
   ],
   [E.lamina]: [{ src: lamina, title: 'Underslab polyethylene sheet' }],
 };
@@ -100,9 +100,9 @@ const VIDEOS: Record<string, Vid[]> = {
     { file: '/videos/universal-vertido-recrecido.mp4', thumb: uniVertido, title: 'Nivelador Universal: recrecido con mortero autonivelante', description: 'El mortero autonivelante avanza sobre la solera entre los Niveladores Universales de KREOX.', duration: 8 },
     { file: '/videos/nivelador-universal-instalacion.mp4', thumb: uniPlano, title: 'Instalación del Nivelador Universal en obra', description: 'Marcado de la cota con láser con receptor y ajuste de la anilla del Nivelador Universal.', duration: 119 },
   ],
-  [E.home]: [{ file: '/videos/hero-niveladores-kreox.mp4', thumb: hero, title: 'KREOX levelers on self-leveling mortar', description: 'KREOX PIKO and Nivelador Universal on freshly poured self-leveling mortar.', duration: 12 }],
-  [E.piko]: [{ file: '/videos/piko-vertido-suelo-radiante.mp4', thumb: pikoSuelo, title: 'PIKO: pouring self-leveling mortar over underfloor heating', description: 'Self-leveling mortar covers the underfloor heating and rises up to the ring of the PIKO levelers, set with a laser.', duration: 8 }],
-  [E.universal]: [{ file: '/videos/universal-vertido-recrecido.mp4', thumb: uniVertido, title: 'Nivelador Universal: self-leveling mortar screed', description: 'Self-leveling mortar flows over the slab between KREOX Nivelador Universal levelers.', duration: 8 }],
+  [E.home]: [{ file: '/videos/hero-niveladores-kreox.mp4', thumb: hero, title: 'KREOX levellers on liquid screed', description: 'KREOX PIKO and Nivelador Universal on freshly poured liquid screed.', duration: 12 }],
+  [E.piko]: [{ file: '/videos/piko-vertido-suelo-radiante.mp4', thumb: pikoSuelo, title: 'PIKO: pouring liquid screed over underfloor heating', description: 'Liquid screed covers the underfloor heating and rises up to the ring of the PIKO levellers, set with a laser.', duration: 8 }],
+  [E.universal]: [{ file: '/videos/universal-vertido-recrecido.mp4', thumb: uniVertido, title: 'Nivelador Universal: liquid screed', description: 'Liquid screed flows over the slab between KREOX Nivelador Universal levellers.', duration: 8 }],
 };
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');

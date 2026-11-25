@@ -10,8 +10,8 @@ export const langFromPath = (path: string): Lang => (path === '/en' || path.star
 
 const ES_NIV = '/nivelacion-mortero-autonivelante/';
 const ES_AZU = '/colocacion-azulejos/';
-const EN_NIV = '/en/self-leveling-mortar-levelers/';
-const EN_AZU = '/en/tile-leveling-system/';
+const EN_NIV = '/en/screed-levellers/';
+const EN_AZU = '/en/tile-levelling-system/';
 
 /** Rutas de cada idioma, para construir enlaces sin escribir URLs a mano en los componentes. */
 export const PATHS = {
@@ -42,14 +42,14 @@ export const PATHS = {
     home: '/en/',
     nivelacion: EN_NIV,
     piko: `${EN_NIV}piko/`,
-    universal: `${EN_NIV}universal-leveler/`,
+    universal: `${EN_NIV}universal-screed-leveller/`,
     recambios: `${EN_NIV}spare-parts/`,
-    lamina: `${EN_NIV}underslab-polyethylene-sheet/`,
+    lamina: `${EN_NIV}underslab-polythene-sheet/`,
     calculadora: `${EN_NIV}calculator/`,
-    vsTripode: `${EN_NIV}piko-vs-steel-tripod/`,
+    vsTripode: `${EN_NIV}piko-vs-metal-tripod/`,
     azulejos: EN_AZU,
     kalzo: `${EN_AZU}kalzo-spacer-clip/`,
-    kunaNiveladora: `${EN_AZU}kuna-leveling-wedge/`,
+    kunaNiveladora: `${EN_AZU}kuna-levelling-wedge/`,
     kunaAntimanchas: `${EN_AZU}stain-resistant-kuna-wedge/`,
     alikates: `${EN_AZU}alikates-tile-pliers/`,
     noticias: '/en/news/',
@@ -67,9 +67,9 @@ export type PathKey = keyof (typeof PATHS)['es'];
 
 /** Noticias traducidas: slug ES → slug EN (las que no están aquí solo existen en español). */
 export const NEWS_PAIRS: [string, string][] = [
-  ['como-nivelar-mortero-autonivelante-suelo-radiante', 'how-to-level-self-leveling-mortar-over-underfloor-heating'],
-  ['recrecido-mortero-autonivelante-como-marcar-la-cota', 'self-leveling-mortar-screed-how-to-mark-the-finished-level'],
-  ['sistemas-de-nivelacion-para-mortero-autonivelante', 'leveling-systems-for-self-leveling-mortar'],
+  ['como-nivelar-mortero-autonivelante-suelo-radiante', 'how-to-level-liquid-screed-over-underfloor-heating'],
+  ['recrecido-mortero-autonivelante-como-marcar-la-cota', 'liquid-screed-how-to-set-the-datum-level'],
+  ['sistemas-de-nivelacion-para-mortero-autonivelante', 'screed-levelling-systems'],
 ];
 
 // Pares de páginas (excepto /gracias/, que no se indexa, pero sí se enlaza en el selector).

@@ -16,12 +16,12 @@ const EN = lang === 'en';
 const url = P.faq;
 const grupos = EN
   ? [
-      { id: 'leveling', title: 'Leveling with self-leveling mortar', link: { href: P.nivelacion, label: 'Leveling systems' }, faqs: FAQ_NIVELACION_EN },
+      { id: 'levelling', title: 'Levelling with liquid screed', link: { href: P.nivelacion, label: 'Levelling systems' }, faqs: FAQ_NIVELACION_EN },
       { id: 'piko', title: 'PIKO · underfloor heating', link: { href: P.piko, label: 'PIKO product page' }, faqs: FAQ_PIKO_EN },
       { id: 'universal', title: 'Nivelador Universal · screeds', link: { href: P.universal, label: 'Nivelador Universal product page' }, faqs: FAQ_UNIVERSAL_EN },
-      { id: 'quantities', title: 'Quantities and calculation', link: { href: P.calculadora, label: 'Leveler calculator' }, faqs: FAQ_CALCULADORA_EN },
-      { id: 'tripod', title: 'PIKO versus the steel tripod', link: { href: P.vsTripode, label: 'Full comparison' }, faqs: FAQ_TRIPODE_EN },
-      { id: 'tiles', title: 'Tile installation', link: { href: P.azulejos, label: 'Tile leveling system' }, faqs: TILE_FAQ_EN },
+      { id: 'quantities', title: 'Quantities and calculation', link: { href: P.calculadora, label: 'Leveller calculator' }, faqs: FAQ_CALCULADORA_EN },
+      { id: 'tripod', title: 'PIKO versus the metal tripod', link: { href: P.vsTripode, label: 'Full comparison' }, faqs: FAQ_TRIPODE_EN },
+      { id: 'tiles', title: 'Tile installation', link: { href: P.azulejos, label: 'Tile levelling system' }, faqs: TILE_FAQ_EN },
     ]
   : [
       { id: 'nivelacion', title: 'Nivelación con mortero autonivelante', link: { href: P.nivelacion, label: 'Sistemas de nivelación' }, faqs: FAQ_NIVELACION },
@@ -36,10 +36,10 @@ const seen = new Set<string>();
 const all = grupos.flatMap((g) => g.faqs).filter((f) => (seen.has(f.q) ? false : (seen.add(f.q), true)));
 const T = EN
   ? {
-      title: 'FAQ about self-leveling mortar levelers | KREOX',
-      description: 'Clear answers about PIKO, Nivelador Universal, how many levelers per m², steel tripods, spare parts and the KREOX tile leveling system.',
+      title: 'FAQ about screed levellers | KREOX',
+      description: 'Clear answers about PIKO, Nivelador Universal, how many levellers per m², metal tripods, spare parts and the KREOX tile levelling system.',
       crumb: 'FAQ', eyebrow: 'Help', heroTitle: 'Frequently asked', heroAccent: 'questions',
-      lead: `${all.length} clear answers about our levelers for self-leveling mortar and the tile leveling system.`,
+      lead: `${all.length} clear answers about our screed levellers and the tile levelling system.`,
       search: 'Search for a question', searchPh: 'E.g. underfloor heating, laser, m²…', topics: 'Topics',
       empty1: 'We could not find that question.', empty2: 'Write to us', empty3: 'and we will answer it.',
       result: 'result', results: 'results',
@@ -146,7 +146,7 @@ const T = EN
   .ghead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 24px; margin-bottom: 8px; }
   .ghead h2 { font-size: clamp(1.4rem, 2.4vw, 1.9rem); margin: 0; }
   details { border-bottom: 1px solid var(--line); }
-  summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 20px; align-items: center; padding: 20px 0; }
+  summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 20px; align-items: centre; padding: 20px 0; }
   summary::-webkit-details-marker { display: none; }
   summary h3 { margin: 0; font-size: 1.05rem; font-weight: 500; }
   summary:hover h3 { color: var(--sand-strong); }

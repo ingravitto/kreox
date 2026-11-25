@@ -44,24 +44,24 @@ const EN = lang === 'en';
 // Textos fijos de la plantilla en cada idioma
 const L = EN
   ? {
-      crumb: 'Self-leveling mortar', crumbShort: 'Leveling', chips: ['Patented product', 'Made in Spain', 'Reusable'],
+      crumb: 'Liquid screed', crumbShort: 'Levelling', chips: ['Patented product', 'Made in Spain', 'Reusable'],
       ask: 'Ask us on WhatsApp', howMany: 'How many do I need?', opens: ' (opens WhatsApp)',
-      onPage: 'On this page', secs: [['datos', 'Technical data'], ['como-se-usa', 'How to use'], ['comparativa', 'vs steel tripod'], ['calculadora', 'Calculator'], ['faq', 'FAQ']],
+      onPage: 'On this page', secs: [['datos', 'Technical data'], ['como-se-usa', 'How to use'], ['comparativa', 'vs metal tripod'], ['calculadora', 'Calculator'], ['faq', 'FAQ']],
       dataEyebrow: 'Technical sheet · to the millimeter', dataTitle: `${p.name} technical data`, plano: 'Dimensions in millimeters according to the manufacturer’s drawing.',
       howEyebrow: 'How it works', howTitle: `How ${p.name} levels,`, howAccent: 'step by step.', howText: 'Tap each step or scroll down and you will see the process in a cross-section of the job.',
       installEyebrow: 'Real installation', installTitle: 'This is how it is placed on site',
-      installChecks: ['Finished level marked with a laser with receiver.', 'Also works with a standard laser.', 'Ring adjusted to the line marked by the laser.'],
+      installChecks: ['Datum level marked with a laser with receiver.', 'Also works with a standard laser.', 'Ring adjusted to the line marked by the laser.'],
       videoAria: `${p.name} installation video`, noVideo: 'Your browser cannot play this video.', download: 'Download it here', pause: 'Pause video', sound: 'Turn sound on',
       onSite: 'On site',
       marquee: ['Rust-free', 'Reusable', 'Standard laser or laser with receiver', 'Visual level ring', 'Spare parts by piece', 'Patented product'],
-      vsEyebrow: 'Versus the steel tripod', vsTitle: 'Everything a tripod does,', vsAccent: 'without its problems.',
-      vsText: `The steel tripod weighs about 1 kg, rusts with the alkaline pH of the mortar and all three legs must be firmly seated. ${p.name} is placed in seconds and cleaned with water.`,
-      impEyebrow: 'Continuous improvement', impTitle: 'Fiber-reinforced ring.', impAccent: 'Spare parts by piece.',
-      impText: 'More resistance to continuous use, a new high-visibility color and, when a part wears out, you replace only that part.', seeParts: 'See spare parts',
-      calcEyebrow: 'Calculator', calcTitle: 'How many do you need for your job?', calcText: 'Enter the square meters you are going to pour: we give you levelers, boxes and the weight you save compared with the tripod.',
+      vsEyebrow: 'Versus the metal tripod', vsTitle: 'Everything a tripod does,', vsAccent: 'without its problems.',
+      vsText: `The metal tripod weighs about 1 kg, rusts with the alkaline pH of the screed and all three legs must be firmly seated. ${p.name} is placed in seconds and cleaned with water.`,
+      impEyebrow: 'Continuous improvement', impTitle: 'Fibre-reinforced ring.', impAccent: 'Spare parts by piece.',
+      impText: 'More resistance to continuous use, a new high-visibility colour and, when a part wears out, you replace only that part.', seeParts: 'See spare parts',
+      calcEyebrow: 'Calculator', calcTitle: 'How many do you need for your job?', calcText: 'Enter the square metres you are going to pour: we give you levellers, boxes and the weight you save compared with the tripod.',
       guidesEyebrow: 'Guides and news', guidesTitle: `Get the most out of ${p.name}`,
-      howToName: `How to level self-leveling mortar with ${p.name}`, howToDesc: `Leveling process for self-leveling mortar with KREOX ${p.name} in ${p.steps.length} steps.`,
-      laserTool: 'Laser level (standard or with receiver)', mortar: 'Self-leveling mortar', filmName: `${p.name}: pouring self-leveling mortar`, installName: `${p.name} installation on site`,
+      howToName: `How to level liquid screed with ${p.name}`, howToDesc: `Levelling process for liquid screed with KREOX ${p.name} in ${p.steps.length} steps.`,
+      laserTool: 'Laser level (standard or with receiver)', screed: 'Liquid screed', filmName: `${p.name}: pouring liquid screed`, installName: `${p.name} installation on site`,
     }
   : {
       crumb: 'Nivelación autonivelante', crumbShort: 'Nivelación', chips: ['Producto patentado', 'Fabricado en España', 'Reutilizable'],
@@ -81,7 +81,7 @@ const L = EN
       calcEyebrow: 'Calculadora', calcTitle: '¿Cuántos necesitas para tu obra?', calcText: 'Introduce los metros cuadrados que vas a verter: te damos niveladores, cajas y el peso que te ahorras frente al trípode.',
       guidesEyebrow: 'Guías y noticias', guidesTitle: `Aprende a sacarle partido al ${p.name}`,
       howToName: `Cómo nivelar mortero autonivelante con ${p.name}`, howToDesc: `Proceso de nivelación de mortero autonivelante con ${p.name} de KREOX en ${p.steps.length} pasos.`,
-      laserTool: 'Láser nivelador (habitual o con receptor)', mortar: 'Mortero autonivelante', filmName: `${p.name}: vertido de mortero autonivelante`, installName: `Instalación del ${p.name} en obra`,
+      laserTool: 'Láser nivelador (habitual o con receptor)', screed: 'Mortero autonivelante', filmName: `${p.name}: vertido de mortero autonivelante`, installName: `Instalación del ${p.name} en obra`,
     };
 // Guías y noticias que mencionan este producto (enlazado interno hacia el contenido editorial)
 const guias = (EN ? await getNews() : await getNoticias()).filter((n) => n.data.products.includes(p.kind)).slice(0, 3);
@@ -93,7 +93,7 @@ const howTo = {
   description: L.howToDesc,
   inLanguage: lang,
   tool: [{ '@type': 'HowToTool', name: p.name }, { '@type': 'HowToTool', name: L.laserTool }],
-  supply: [{ '@type': 'HowToSupply', name: L.mortar }],
+  supply: [{ '@type': 'HowToSupply', name: L.screed }],
   step: p.steps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.title, text: s.text, url: `${SITE.url}${url}#como-se-usa` })),
 };
 const schema = [
@@ -337,12 +337,12 @@ const schema = [
   .specs :global(a) { color: var(--sand-strong); }
 
   .install { display: grid; gap: 0; margin-top: clamp(40px, 6vw, 80px); background: var(--ink); border-radius: var(--radius-xl); overflow: hidden; }
-  @media (min-width: 860px) { .install { grid-template-columns: 1.2fr 0.8fr; align-items: center; } }
+  @media (min-width: 860px) { .install { grid-template-columns: 1.2fr 0.8fr; align-items: centre; } }
   .install-copy { padding: clamp(28px, 4vw, 56px); }
   .install-copy h3 { color: var(--white); font-size: clamp(1.5rem, 2.6vw, 2.1rem); margin-bottom: .8em; }
   .install-copy .checks { color: var(--on-dark); }
   .install-copy .muted { margin: 24px 0 0; }
-  .install-video { padding: clamp(20px, 3vw, 36px); display: grid; place-items: center; background: radial-gradient(ellipse at center, #2a2a28, var(--ink) 70%); }
+  .install-video { padding: clamp(20px, 3vw, 36px); display: grid; place-items: centre; background: radial-gradient(ellipse at centre, #2a2a28, var(--ink) 70%); }
   .iv { position: relative; width: 100%; max-width: 300px; }
   .install-video video { width: 100%; max-width: 300px; aspect-ratio: 404 / 720; border-radius: 22px; background: #000; box-shadow: 0 30px 60px -20px rgba(0,0,0,.7); }
 
@@ -350,15 +350,15 @@ const schema = [
   @media (min-width: 760px) { .gallery { grid-template-columns: repeat(4, 1fr); } }
   .gallery figure { margin: 0; }
   .gallery :global(img) { width: 100%; aspect-ratio: 316 / 190; object-fit: cover; border-radius: var(--radius); }
-  .gallery figcaption { display: flex; gap: 10px; align-items: center; font-size: 0.85rem; margin-top: 10px; font-weight: 500; }
-  .gallery figcaption span { display: inline-grid; place-content: center; width: 22px; height: 22px; border-radius: 50%; font-size: 0.7rem; flex: none; }
+  .gallery figcaption { display: flex; gap: 10px; align-items: centre; font-size: 0.85rem; margin-top: 10px; font-weight: 500; }
+  .gallery figcaption span { display: inline-grid; place-content: centre; width: 22px; height: 22px; border-radius: 50%; font-size: 0.7rem; flex: none; }
   .gallery .bad span { background: #f3dcd8; color: var(--bad); }
   .gallery .good span { background: var(--ink); color: var(--lime); }
   .cmp { margin-top: clamp(40px, 5vw, 72px); }
 
   .head-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 40px; margin-bottom: clamp(36px, 5vw, 56px); }
   .head-row .section-head { margin-bottom: 0; }
-  .part { text-align: center; }
+  .part { text-align: centre; }
   .part :global(img) { width: 160px; height: 150px; object-fit: contain; margin: 0 auto 18px; transition: transform .6s var(--ease); }
   .part:hover :global(img) { transform: scale(1.06) rotate(-3deg); }
   .part h3 { font-size: 1.05rem; margin-bottom: .2em; }
@@ -368,18 +368,18 @@ const schema = [
   .secnav ul { list-style: none; margin: 0; padding: 10px 0; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity; }
   .secnav ul::-webkit-scrollbar { display: none; }
   .secnav li { flex: none; scroll-snap-align: start; }
-  .secnav a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 500; font-size: .92rem; white-space: nowrap; background: var(--white); }
+  .secnav a { display: inline-flex; align-items: centre; min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 500; font-size: .92rem; white-space: nowrap; background: var(--white); }
   .secnav a:hover { border-color: var(--ink); }
   .secnav a[aria-current='location'] { background: var(--ink); border-color: var(--ink); color: var(--white); }
   :global(#datos), :global(#como-se-usa), :global(#comparativa), :global(#calculadora), :global(#preguntas-frecuentes), :global(#faq) { scroll-margin-top: calc(var(--header-h) + 64px); }
   @media (max-width: 759px) {
-    .part { display: grid; grid-template-columns: 72px 1fr; column-gap: 16px; align-items: center; text-align: left; padding: 14px 16px; }
+    .part { display: grid; grid-template-columns: 72px 1fr; column-gap: 16px; align-items: centre; text-align: left; padding: 14px 16px; }
     .part :global(img) { grid-row: 1 / 3; width: 72px; height: 72px; margin: 0; }
     .part h3 { font-size: 1rem; align-self: end; }
     .part p { align-self: start; }
   }
 
-  .other { display: flex; gap: 18px; align-items: center; margin-top: 32px; padding: 16px; border-radius: var(--radius); background: var(--white); text-decoration: none; transition: transform .3s var(--ease); }
+  .other { display: flex; gap: 18px; align-items: centre; margin-top: 32px; padding: 16px; border-radius: var(--radius); background: var(--white); text-decoration: none; transition: transform .3s var(--ease); }
   .other:hover { transform: translateX(6px); }
   .other :global(img) { width: 88px; height: 88px; object-fit: cover; border-radius: 12px; background: var(--ink); flex: none; }
   .other strong { display: block; color: var(--ink); }

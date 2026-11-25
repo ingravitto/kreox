@@ -77,14 +77,14 @@ RewriteRule ^(sitemap_index|post-sitemap|page-sitemap|category-sitemap|wp-sitema
 # Versión en inglés: URLs de la web WordPress anterior → nuevas páginas /en/ (301 permanentes).
 # /en/, /en/company/, /en/contact/ y /en/news/ existen con la misma URL y no necesitan regla.
 RewriteRule ^en/home/?$ /en/ [R=301,L]
-RewriteRule ^en/solutions-for-flooring-systems-using-self-leveling-mortar/?$ /en/self-leveling-mortar-levelers/ [R=301,L]
-RewriteRule ^en/solutions-for-flooring-systems-using-self-leveling-mortar/leveler-insulation-1-tip/?$ /en/self-leveling-mortar-levelers/piko/ [R=301,L]
-RewriteRule ^en/solutions-for-flooring-systems-using-self-leveling-mortar/universal-raised-leveler/?$ /en/self-leveling-mortar-levelers/universal-leveler/ [R=301,L]
-RewriteRule ^en/solutions-for-tile-installation/?$ /en/tile-leveling-system/ [R=301,L]
-RewriteRule ^en/solutions-for-tile-installation/alikates-tile-pliers/?$ /en/tile-leveling-system/alikates-tile-pliers/ [R=301,L]
-RewriteRule ^en/solutions-for-tile-installation/kalzo-spacer-clip/?$ /en/tile-leveling-system/kalzo-spacer-clip/ [R=301,L]
-RewriteRule ^en/solutions-for-tile-installation/stain-resistant-kuna-leveling-wedge/?$ /en/tile-leveling-system/stain-resistant-kuna-wedge/ [R=301,L]
-RewriteRule ^en/solutions-for-tile-installation/kuna-leveling-wedge/?$ /en/tile-leveling-system/kuna-leveling-wedge/ [R=301,L]
+RewriteRule ^en/solutions-for-flooring-systems-using-self-leveling-mortar/?$ /en/screed-levellers/ [R=301,L]
+RewriteRule ^en/solutions-for-flooring-systems-using-self-leveling-mortar/leveler-insulation-1-tip/?$ /en/screed-levellers/piko/ [R=301,L]
+RewriteRule ^en/solutions-for-flooring-systems-using-self-leveling-mortar/universal-raised-leveler/?$ /en/screed-levellers/universal-screed-leveller/ [R=301,L]
+RewriteRule ^en/solutions-for-tile-installation/?$ /en/tile-levelling-system/ [R=301,L]
+RewriteRule ^en/solutions-for-tile-installation/alikates-tile-pliers/?$ /en/tile-levelling-system/alikates-tile-pliers/ [R=301,L]
+RewriteRule ^en/solutions-for-tile-installation/kalzo-spacer-clip/?$ /en/tile-levelling-system/kalzo-spacer-clip/ [R=301,L]
+RewriteRule ^en/solutions-for-tile-installation/stain-resistant-kuna-leveling-wedge/?$ /en/tile-levelling-system/stain-resistant-kuna-wedge/ [R=301,L]
+RewriteRule ^en/solutions-for-tile-installation/kuna-leveling-wedge/?$ /en/tile-levelling-system/kuna-levelling-wedge/ [R=301,L]
 RewriteRule ^en/piece-calculator/?$ https://calculadora.kreox.es/ [R=301,L]
 
 # Restos de WordPress

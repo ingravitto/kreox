@@ -15,38 +15,38 @@ import imgAnilla from '../../../assets/img/anilla-metalica-niveladora-universal.
 const R = PATHS.en;
 const url = R.recambios;
 const items = [
-  { id: 'leveling-washer', name: 'Leveling washer', img: imgArandela, para: 'PIKO and Nivelador Universal', caja: 150, alt: 'Lime-green leveling washer spare part for PIKO and Nivelador Universal', text: 'The part that marks the height of the mortar. 2026 version with fiber additive: more resistant to continuous use and in a color that is easier to see on site.' },
-  { id: 'universal-leveling-base', name: 'Universal leveling base', img: imgBase, para: 'Nivelador Universal', caja: 40, alt: 'Lime-green universal leveling base spare part', text: 'Flat, reinforced base that keeps the Nivelador Universal stable on any surface. Harder and more resistant during setting.' },
-  { id: 'universal-metal-leveling-ring', name: 'Universal metal leveling ring', img: imgAnilla, para: 'Nivelador Universal', caja: 40, alt: 'Universal metal leveling ring spare part', text: 'Metal part of the Nivelador Universal base, available as a spare part to extend the life of the system.' },
+  { id: 'levelling-washer', name: 'Levelling washer', img: imgArandela, para: 'PIKO and Nivelador Universal', caja: 150, alt: 'Lime-green levelling washer spare part for PIKO and Nivelador Universal', text: 'The part that marks the height of the screed. 2026 version with fibre additive: more resistant to continuous use and in a colour that is easier to see on site.' },
+  { id: 'universal-levelling-base', name: 'Universal levelling base', img: imgBase, para: 'Nivelador Universal', caja: 40, alt: 'Lime-green universal levelling base spare part', text: 'Flat, reinforced base that keeps the Nivelador Universal stable on any surface. Harder and more resistant during setting.' },
+  { id: 'universal-metal-levelling-ring', name: 'Universal metal levelling ring', img: imgAnilla, para: 'Nivelador Universal', caja: 40, alt: 'Universal metal levelling ring spare part', text: 'Metal part of the Nivelador Universal base, available as a spare part to extend the life of the system.' },
 ];
 // FAQ built only from the data on this page (parts, compatibility and boxes) and WhatsApp contact.
 const [washer, base, ring] = items;
 const faqs = [
-  { q: 'What spare parts are there for KREOX levelers?', a: `Three parts: the ${washer.name.toLowerCase()} (for ${washer.para}), the ${base.name.toLowerCase()} and the ${ring.name.toLowerCase()} (both for the ${base.para}).` },
-  { q: 'Which spare part does the PIKO use?', a: `The ${washer.name.toLowerCase()}, the part that marks the height of the mortar. The current version has a fiber additive and a color that is easier to see on site.` },
-  { q: 'Why buy spare parts instead of new levelers?', a: 'Because the levelers are reusable: they are removed after pouring, cleaned and used again. If a part wears out, only that part is replaced.' },
+  { q: 'What spare parts are there for KREOX levellers?', a: `Three parts: the ${washer.name.toLowerCase()} (for ${washer.para}), the ${base.name.toLowerCase()} and the ${ring.name.toLowerCase()} (both for the ${base.para}).` },
+  { q: 'Which spare part does the PIKO use?', a: `The ${washer.name.toLowerCase()}, the part that marks the height of the screed. The current version has a fibre additive and a colour that is easier to see on site.` },
+  { q: 'Why buy spare parts instead of new levellers?', a: 'Because the levellers are reusable: they are removed after pouring, cleaned and used again. If a part wears out, only that part is replaced.' },
   { q: 'How are the spare parts sold?', a: `In boxes: ${washer.name.toLowerCase()}, ${washer.caja} units; ${base.name.toLowerCase()}, ${base.caja} units; ${ring.name.toLowerCase()}, ${ring.caja} units.` },
-  { q: 'How do I get spare part prices?', a: 'Message us on WhatsApp with the parts you need and we will send you leveler and spare part prices.' },
+  { q: 'How do I get spare part prices?', a: 'Message us on WhatsApp with the parts you need and we will send you leveller and spare part prices.' },
 ];
 const schema = items.map((it) =>
-  productSchema({ id: `${url}#${it.id}`, name: it.name, description: `${it.text} Spare part for ${it.para}. Box of ${it.caja} units.`, images: [it.img.src], category: 'Self-leveling mortar levelers', props: [['Compatible with', it.para], ['Packaging', `Box of ${it.caja} units`]] }),
+  productSchema({ id: `${url}#${it.id}`, name: it.name, description: `${it.text} Spare part for ${it.para}. Box of ${it.caja} units.`, images: [it.img.src], category: 'Screed levellers', props: [['Compatible with', it.para], ['Packaging', `Box of ${it.caja} units`]] }),
 ).concat([faqSchema(faqs)]);
 ---
 <Base
   overlay
-  title="Spare parts for self-leveling mortar levelers | KREOX"
-  description="Spare parts for PIKO and Nivelador Universal: leveling washer, base and metal ring. Replace only the worn part and extend the life of the system."
-  breadcrumbs={[{ name: 'Self-leveling mortar levelers', url: R.nivelacion }, { name: 'Spare parts', url }]}
+  title="Spare parts for screed levellers | KREOX"
+  description="Spare parts for PIKO and Nivelador Universal: levelling washer, base and metal ring. Replace only the worn part and extend the life of the system."
+  breadcrumbs={[{ name: 'Screed levellers', url: R.nivelacion }, { name: 'Spare parts', url }]}
   schema={schema}
 >
   <PageHero
     compact
     eyebrow="Spare parts and accessories"
     title="Spare parts for"
-    accent="PIKO and Universal levelers"
+    accent="PIKO and Universal levellers"
     lead="When a part wears out, <strong>you replace only that part</strong>: you extend the life of the system and lower the cost per job compared with buying new tripods."
     bg={imgHeroBg}
-    crumbs={[{ name: 'Leveling', url: R.nivelacion }, { name: 'Spare parts', url }]}
+    crumbs={[{ name: 'Levelling', url: R.nivelacion }, { name: 'Spare parts', url }]}
   />
   <section class="section section--tight">
     <div class="container">
@@ -82,7 +82,7 @@ const schema = items.map((it) =>
 
   <section class="section">
     <div class="container grid grid-2">
-      <a class="card" href={R.piko}><h3>PIKO →</h3><p class="muted mt-0">Leveler for underfloor heating. Uses the leveling washer.</p></a>
+      <a class="card" href={R.piko}><h3>PIKO →</h3><p class="muted mt-0">Leveller for underfloor heating. Uses the levelling washer.</p></a>
       <a class="card" href={R.universal}><h3>Nivelador Universal →</h3><p class="muted mt-0">For screeds. Uses the base, metal ring and washer.</p></a>
     </div>
   </section>
@@ -91,10 +91,10 @@ const schema = items.map((it) =>
   <CtaContacto title="Order spare parts" text="Message us on WhatsApp with the parts you need and we will send them with your next order." interes="recambios" />
 </Base>
 <style>
-  .item { display: grid; gap: 24px; align-items: center; }
+  .item { display: grid; gap: 24px; align-items: centre; }
   @media (min-width: 720px) { .item { grid-template-columns: 260px 1fr; } }
   .img { background: var(--sand-soft); border-radius: 12px; padding: 16px; }
   .img :global(img) { width: 100%; height: 220px; object-fit: contain; }
   .item h2 { font-size: 1.4rem; }
-  a.card { text-decoration: none; color: inherit; }
+  a.card { text-decoration: none; colour: inherit; }
 </style>

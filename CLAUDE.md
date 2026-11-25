@@ -15,7 +15,8 @@ La línea principal es **nivelación con mortero autonivelante**: PIKO (suelo ra
 Archivo Markdown nuevo en `src/content/noticias/<slug>.md` con este frontmatter: `title`, `seoTitle` (opcional, ≤65), `description` (≤170), `date`, `category` (nivelacion | azulejos | empresa | comunidad), `products`, `image`, `imageAlt`, `faq`. El primer párrafo debe responder directamente a la pregunta del título. Hay que enlazar al menos una ficha de producto.
 
 ## Versión en inglés (/en/)
-- Inglés de EE. UU. con los términos de la web antigua: "self-leveling mortar", "leveler", "tile leveling system". Los nombres "PIKO", "Nivelador Universal", Kalzo, Kuña y Alikates no se traducen ("universal raised leveler" solo como descripción). Tarifa 2027 = "2027 price list".
+- **Inglés británico** (mercado del Reino Unido) con los términos del sector: "screed levellers", "liquid screed", "underfloor heating (UFH)", "insulation board", "datum height", "metal tripod", "levelling", "colour", "fibre", "metres". PIKO = "insulation screed leveller"; Nivelador Universal = "universal screed leveller". Los nombres "PIKO", "Nivelador Universal", Kalzo, Kuña y Alikates no se traducen.
+- Rutas: /en/screed-levellers/ (piko, universal-screed-leveller, spare-parts, calculator, piko-vs-metal-tripod, underslab-polythene-sheet) y /en/tile-levelling-system/.
 - El idioma sale de la URL (`/en/…`). Textos de interfaz compartidos: `src/i18n/ui.ts` (`useT(Astro.url)` devuelve `lang`, `t()` y las rutas `P`). Rutas ES↔EN: `src/i18n/routes.ts` (alimenta hreflang, selector de idioma y sitemap). Página nueva con versión inglesa = añadir su pareja ahí.
 - Datos en inglés: `src/data/en/` (FAQ, azulejos) y `NAV_EN`; WhatsApp en inglés con `waTarifa(interes, 'en')` y `waInfo('en')`.
 - Portada, contacto y FAQ son vistas compartidas (`src/views/`) con los textos de los dos idiomas; el resto de páginas inglesas están en `src/pages/en/`. Si cambia un texto o dato en español, actualizar también el inglés.

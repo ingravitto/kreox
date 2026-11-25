@@ -47,13 +47,13 @@ ${qa('Preguntas frecuentes · colocación de azulejos', TILE_FAQ)}
 
 # English
 
-> KREOX is a Spanish manufacturer of leveling systems for self-leveling mortar (PIKO and Nivelador Universal) and tile installation solutions. English pages: ${U}${PATHS.en.home}
+> KREOX is a Spanish manufacturer of screed levelling systems (PIKO and Nivelador Universal) and tile installation solutions. English pages: ${U}${PATHS.en.home}
 
 - PIKO (${U}${PATHS.en.piko}): ≈ ${P.pesoG} g, box of ${P.caja}; dimensions (mm): shaft ${P.medidas.altoMm} + tip ${P.medidas.puntaMm}; base Ø${P.medidas.baseMm}; washer Ø${P.medidas.arandelaMm}. Pushed into underfloor heating insulation.
 - Nivelador Universal (${U}${PATHS.en.universal}): ≈ ${N.pesoG} g, box of ${N.caja}; dimensions (mm): shaft ${N.medidas.altoMm}; base ${N.medidas.baseAltoMm} high and Ø${N.medidas.baseMm}; washer Ø${N.medidas.arandelaMm}. Rests on its flat base, for screeds.
-- Recommended density: about 1 leveler every ${M2_POR_NIVELADOR} m².
+- Recommended density: about 1 leveller every ${M2_POR_NIVELADOR} m².
 
-${qa('FAQ · leveling', FAQ_NIVELACION_EN)}
+${qa('FAQ · levelling', FAQ_NIVELACION_EN)}
 
 ${qa('FAQ · PIKO', FAQ_PIKO_EN)}
 
@@ -61,7 +61,7 @@ ${qa('FAQ · Nivelador Universal', FAQ_UNIVERSAL_EN)}
 
 ${qa('FAQ · quantities', FAQ_CALCULADORA_EN)}
 
-${qa('FAQ · PIKO versus the steel tripod', FAQ_TRIPODE_EN)}
+${qa('FAQ · PIKO versus the metal tripod', FAQ_TRIPODE_EN)}
 
 ${qa('FAQ · tile installation', TILE_FAQ_EN)}
 `;

@@ -79,7 +79,7 @@ function validar_noticia(array $d, bool $nueva, array $slugsExistentes, string $
     if ($d['image'] !== '' && trim($d['imageAlt']) === '') $err[] = 'Describe la imagen (texto alternativo): es obligatorio para la accesibilidad.';
     foreach ($d['faq'] as $i => $f) if (trim($f['q']) === '' || trim($f['a']) === '') $err[] = 'La pregunta frecuente ' . ($i + 1) . ' necesita pregunta y respuesta.';
     if (trim($d['body']) === '') $err[] = 'El texto de la noticia está vacío.';
-    if (!preg_match('#\]\(/(en/)?(nivelacion-mortero-autonivelante|colocacion-azulejos|self-leveling-mortar-levelers|tile-leveling-system)/#', $d['body'])) {
+    if (!preg_match('#\]\(/(en/)?(nivelacion-mortero-autonivelante|colocacion-azulejos|screed-levellers|tile-levelling-system)/#', $d['body'])) {
         $err[] = 'Enlaza al menos una ficha de producto en el texto, por ejemplo [PIKO](/nivelacion-mortero-autonivelante/piko/).';
     }
     if (preg_match('/\b(Pikos?|PiKo|pico)\b/u', $d['title'] . ' ' . $d['body'])) $warn[] = 'El producto se escribe siempre "PIKO" (en mayúsculas).';

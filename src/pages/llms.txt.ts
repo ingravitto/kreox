@@ -46,13 +46,13 @@ ${noticias.map((n) => `- [${n.data.title}](${U}${noticiaUrl(n)}) (${n.data.date.
 
 ## English
 
-> Spanish manufacturer (${SITE.address.city}, ${SITE.address.region}) of leveling systems for self-leveling mortar and tile installation. Third-generation family business (${SITE.legalName}). Designed and made in Spain; patented levelers. English pages: ${U}${E.home}
+> Spanish manufacturer (${SITE.address.city}, ${SITE.address.region}) of screed levelling systems and tile installation. Third-generation family business (${SITE.legalName}). Designed and made in Spain; patented levellers. English pages: ${U}${E.home}
 
-- [PIKO](${U}${E.piko}): leveler pushed into the insulation board of underfloor heating; marks the self-leveling mortar height with a laser-adjustable ring (standard laser or with receiver). Replaces the steel tripod: about ${P.pesoG} g versus ~1 kg, rust-free, reusable. Box of ${P.caja}.
-- [Nivelador Universal](${U}${E.universal}): universal raised leveler with a flat, reinforced base for self-leveling mortar screeds on any surface. About ${N.pesoG} g, laser adjustable, reusable, with spare parts. Box of ${N.caja}.
-- Recommended density: roughly 1 leveler every ${M2_POR_NIVELADOR} m² (100 m² ≈ ${Math.ceil(100 / M2_POR_NIVELADOR)} levelers).
-- [Spare parts](${U}${E.recambios}) · [Leveler calculator](${U}${E.calculadora}) · [PIKO vs steel tripod](${U}${E.vsTripode}) · [Leveling systems](${U}${E.nivelacion}) · [FAQ](${U}${E.faq})
-- Tile leveling system: ${TILE_PRODUCTS_EN.map((p) => `[${p.name}](${U}${E.azulejos}${p.slug}/)`).join(' · ')}
+- [PIKO](${U}${E.piko}): leveller pushed into the insulation board of underfloor heating; marks the liquid screed height with a laser-adjustable ring (standard laser or with receiver). Replaces the metal tripod: about ${P.pesoG} g versus ~1 kg, rust-free, reusable. Box of ${P.caja}.
+- [Nivelador Universal](${U}${E.universal}): universal screed leveller with a flat, reinforced base for liquid screeds on any surface. About ${N.pesoG} g, laser adjustable, reusable, with spare parts. Box of ${N.caja}.
+- Recommended density: roughly 1 leveller every ${M2_POR_NIVELADOR} m² (100 m² ≈ ${Math.ceil(100 / M2_POR_NIVELADOR)} levellers).
+- [Spare parts](${U}${E.recambios}) · [Leveller calculator](${U}${E.calculadora}) · [PIKO vs metal tripod](${U}${E.vsTripode}) · [Levelling systems](${U}${E.nivelacion}) · [FAQ](${U}${E.faq})
+- Tile levelling system: ${TILE_PRODUCTS_EN.map((p) => `[${p.name}](${U}${E.azulejos}${p.slug}/)`).join(' · ')}
 ${news.map((n) => `- [${n.data.title}](${U}${newsUrl(n)}) (${n.data.date.toISOString().slice(0, 10)})`).join('\n')}
 - [Company](${U}${E.empresa}) · [Contact](${U}${E.contacto}). Sales contact is via WhatsApp (${SITE.whatsappDisplay}). Export: ${SITE.emailExport}
 `;

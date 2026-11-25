@@ -14,30 +14,30 @@ const url = R.lamina;
 const schema = [
   productSchema({
     id: url,
-    name: 'Underslab polyethylene sheet',
-    description: 'Polyethylene sheet to waterproof concrete slabs, foundations and sidewalks. It is laid over the drainage gravel and under the mesh.',
+    name: 'Underslab polythene sheet',
+    description: 'Polythene sheet to waterproof concrete slabs, foundations and pavements. It is laid over the drainage gravel and under the mesh.',
     images: [img.src],
     category: 'Flooring accessories',
-    props: [['Use', 'Waterproofing under slabs, foundations and sidewalks'], ['Material', 'Polyethylene']],
+    props: [['Use', 'Waterproofing under slabs, foundations and pavements'], ['Material', 'Polythene']],
   }),
 ];
 ---
 <Base
   overlay
-  title="Underslab polyethylene sheet | KREOX"
-  description="KREOX polyethylene sheet for slabs, foundations and sidewalks: stops rising damp, resists mold and protects the concrete from grease and oils."
-  breadcrumbs={[{ name: 'Self-leveling mortar levelers', url: R.nivelacion }, { name: 'Underslab sheet', url }]}
+  title="Underslab polythene sheet | KREOX"
+  description="KREOX polythene sheet for slabs, foundations and pavements: stops rising damp, resists mould and protects the concrete from grease and oils."
+  breadcrumbs={[{ name: 'Screed levellers', url: R.nivelacion }, { name: 'Underslab sheet', url }]}
   schema={schema}
 >
   <PageHero
     eyebrow="Flooring accessory"
     title="Underslab"
-    accent="polyethylene sheet"
-    lead="Waterproofs concrete slabs, foundations and sidewalks. It is laid <strong>over the drainage gravel and under the mesh</strong>, leaving a strong base protected from damp."
+    accent="polythene sheet"
+    lead="Waterproofs concrete slabs, foundations and pavements. It is laid <strong>over the drainage gravel and under the mesh</strong>, leaving a strong base protected from damp."
     bg={imgHeroBg}
     product={img}
-    productAlt="Rolls of KREOX underslab polyethylene sheet in black and clear"
-    crumbs={[{ name: 'Leveling', url: R.nivelacion }, { name: 'Underslab sheet', url }]}
+    productAlt="Rolls of KREOX underslab polythene sheet in black and clear"
+    crumbs={[{ name: 'Levelling', url: R.nivelacion }, { name: 'Underslab sheet', url }]}
   >
     <div class="btn-row"><a class="btn btn--sand" href={waConsulta('nivelacion', 'en')} target="_blank" rel="noopener">Ask us on WhatsApp<span class="visually-hidden"> (opens WhatsApp)</span></a></div>
   </PageHero>
@@ -46,7 +46,7 @@ const schema = [
       <div class="section-head"><span class="eyebrow">Benefits</span><h2>A base protected from damp</h2></div>
       <div class="grid grid-4">
         <div class="card"><h3>No damp</h3><p class="muted mt-0">Stops rising damp and rainwater seepage.</p></div>
-        <div class="card"><h3>Resists mold</h3><p class="muted mt-0">Long-lasting protection under the slab.</p></div>
+        <div class="card"><h3>Resists mould</h3><p class="muted mt-0">Long-lasting protection under the slab.</p></div>
         <div class="card"><h3>Protects the concrete</h3><p class="muted mt-0">From grease and oils.</p></div>
         <div class="card"><h3>Longer life</h3><p class="muted mt-0">Extends the life of other building elements.</p></div>
       </div>
@@ -56,13 +56,13 @@ const schema = [
     <div class="container">
       <div class="section-head"><h2>Complete your flooring system</h2></div>
       <div class="grid grid-2">
-        <a class="card" href={R.piko}><h3>PIKO →</h3><p class="muted mt-0">Self-leveling mortar leveler for underfloor heating.</p></a>
-        <a class="card" href={R.universal}><h3>Nivelador Universal →</h3><p class="muted mt-0">Leveler for screeds on any surface.</p></a>
+        <a class="card" href={R.piko}><h3>PIKO →</h3><p class="muted mt-0">Liquid screed leveller for underfloor heating.</p></a>
+        <a class="card" href={R.universal}><h3>Nivelador Universal →</h3><p class="muted mt-0">Leveller for screeds on any surface.</p></a>
       </div>
     </div>
   </section>
   <CtaContacto />
 </Base>
 <style>
-  a.card { text-decoration: none; color: inherit; }
+  a.card { text-decoration: none; colour: inherit; }
 </style>

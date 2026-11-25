@@ -8,7 +8,7 @@ export const CATEGORIAS = {
 } as const;
 
 export const CATEGORIES_EN = {
-  nivelacion: 'Self-leveling mortar',
+  nivelacion: 'Liquid screed',
   azulejos: 'Tile installation',
   empresa: 'Company',
   comunidad: 'Community',

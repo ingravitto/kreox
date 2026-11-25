@@ -24,46 +24,46 @@ const P = PATHS.en;
 const faqs = FAQ_NIVELACION_EN;
 
 const steps = [
-  { title: 'Place the levelers', text: `One roughly every ${M2_POR_NIVELADOR} m²: pushed in (PIKO) or resting on the substrate (Universal).` },
+  { title: 'Place the levellers', text: `One roughly every ${M2_POR_NIVELADOR} m²: pushed in (PIKO) or resting on the substrate (Universal).` },
   { title: 'Mark the level', text: 'With a standard laser or a laser with receiver.' },
   { title: 'Adjust the rings', text: 'Each ring to the laser line.' },
-  { title: 'Pour and remove', text: 'Mortar up to the ring; then remove and clean the levelers.' },
+  { title: 'Pour and remove', text: 'Screed up to the ring; then remove and clean the levellers.' },
 ];
 ---
 <Base
   overlay
-  title="Leveling systems for self-leveling mortar | KREOX"
-  description="PIKO and Nivelador Universal levelers for self-leveling mortar replace the steel tripod in underfloor heating and screeds. Light, rust-free, Spanish."
-  breadcrumbs={[{ name: 'Self-leveling mortar levelers', url: P.nivelacion }]}
+  title="Screed levellers for liquid screed | KREOX"
+  description="PIKO and Nivelador Universal screed levellers replace the metal tripod in underfloor heating and screeds. Light, rust-free, Spanish."
+  breadcrumbs={[{ name: 'Screed levellers', url: P.nivelacion }]}
   schema={[faqSchema(faqs), {
     '@type': 'ItemList',
-    name: 'KREOX leveling systems for self-leveling mortar',
+    name: 'KREOX screed levelling systems',
     itemListElement: [
-      { name: 'PIKO · Leveler for underfloor heating', url: P.piko },
+      { name: 'PIKO · Leveller for underfloor heating', url: P.piko },
       { name: 'Nivelador Universal for screeds', url: P.universal },
-      { name: 'Spare parts for levelers', url: P.recambios },
-      { name: 'Underslab polyethylene sheet', url: P.lamina },
+      { name: 'Spare parts for levellers', url: P.recambios },
+      { name: 'Underslab polythene sheet', url: P.lamina },
     ].map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, url: `https://kreox.es${it.url}` })),
   }]}
 >
   <PageHero
-    eyebrow="Flooring with self-leveling mortar"
-    title="Leveling systems for"
-    accent="self-leveling mortar"
-    lead="Two levelers made in Spain that replace the steel tripod: <strong>PIKO</strong> for <strong>underfloor heating</strong> and <strong>Nivelador Universal</strong> for <strong>screeds</strong>."
+    eyebrow="Flooring with liquid screed"
+    title="Screed levellers for"
+    accent="liquid screed"
+    lead="Two levellers made in Spain that replace the metal tripod: <strong>PIKO</strong> for <strong>underfloor heating</strong> and <strong>Nivelador Universal</strong> for <strong>screeds</strong>."
     bg={imgHeroBg}
-    bgAlt="Underfloor heating with blue PIKO levelers before pouring"
-    crumbs={[{ name: 'Self-leveling mortar levelers', url: P.nivelacion }]}
+    bgAlt="Underfloor heating with blue PIKO levellers before pouring"
+    crumbs={[{ name: 'Screed levellers', url: P.nivelacion }]}
   >
     <div class="btn-row">
-      <a class="btn btn--sand" href="#choose">Choose your leveler</a>
+      <a class="btn btn--sand" href="#choose">Choose your leveller</a>
       <a class="btn btn--ghost" href={P.calculadora}>Calculate quantities</a>
     </div>
   </PageHero>
 
   <section class="section section--paper" id="choose">
     <div class="container">
-      <div class="section-head"><h2>Choose your leveler</h2></div>
+      <div class="section-head"><h2>Choose your leveller</h2></div>
       <div class="grid grid-2">
         <a class="card prod" href={P.piko}>
           <div class="pimg"><Image src={imgPiko} alt="KREOX PIKO for underfloor heating" widths={[300, 522]} sizes="240px" /></div>
@@ -98,8 +98,8 @@ const steps = [
   <section class="section">
     <div class="container">
       <div class="section-head">
-        <h2>Why give up the steel tripod</h2>
-        <p>Steel tripods are heavy, rust with the alkaline pH of the mortar and are harder to place. KREOX levelers also have a visual ring that makes checking the level easier.</p>
+        <h2>Why give up the metal tripod</h2>
+        <p>Metal tripods are heavy, rust with the alkaline pH of the screed and are harder to place. KREOX levellers also have a visual ring that makes checking the level easier.</p>
       </div>
       <CompareTripode />
       <p><a href={P.vsTripode}>Full comparison →</a></p>
@@ -108,7 +108,7 @@ const steps = [
 
   <section class="section section--paper">
     <div class="container">
-      <div class="section-head"><h2>How to level self-leveling mortar with KREOX</h2></div>
+      <div class="section-head"><h2>How to level liquid screed with KREOX</h2></div>
       <Steps steps={steps} />
     </div>
   </section>
@@ -117,13 +117,13 @@ const steps = [
     <div class="container">
       <div class="section-head">
         <h2>Spare parts and accessories</h2>
-        <p>Replace only the worn part, not the whole leveler.</p>
+        <p>Replace only the worn part, not the whole leveller.</p>
       </div>
       <div class="grid grid-4">
-        <a class="card mini" href={P.recambios}><Image src={imgArandela} alt="Leveling washer" widths={[240]} sizes="160px" /><h3>Leveling washer</h3><p class="muted">Box of 150</p></a>
-        <a class="card mini" href={P.recambios}><Image src={imgBase} alt="Universal leveling base" widths={[240]} sizes="160px" /><h3>Universal leveling base</h3><p class="muted">Box of 40</p></a>
-        <a class="card mini" href={P.recambios}><Image src={imgAnilla} alt="Universal metal leveling ring" widths={[240]} sizes="160px" /><h3>Metal ring</h3><p class="muted">Box of 40</p></a>
-        <a class="card mini" href={P.lamina}><Image src={imgLamina} alt="Underslab polyethylene sheet" widths={[240]} sizes="160px" /><h3>Underslab sheet</h3><p class="muted">Polyethylene</p></a>
+        <a class="card mini" href={P.recambios}><Image src={imgArandela} alt="Levelling washer" widths={[240]} sizes="160px" /><h3>Levelling washer</h3><p class="muted">Box of 150</p></a>
+        <a class="card mini" href={P.recambios}><Image src={imgBase} alt="Universal levelling base" widths={[240]} sizes="160px" /><h3>Universal levelling base</h3><p class="muted">Box of 40</p></a>
+        <a class="card mini" href={P.recambios}><Image src={imgAnilla} alt="Universal metal levelling ring" widths={[240]} sizes="160px" /><h3>Metal ring</h3><p class="muted">Box of 40</p></a>
+        <a class="card mini" href={P.lamina}><Image src={imgLamina} alt="Underslab polythene sheet" widths={[240]} sizes="160px" /><h3>Underslab sheet</h3><p class="muted">Polythene</p></a>
       </div>
     </div>
   </section>
@@ -136,7 +136,7 @@ const steps = [
         <ul class="checks">
           <li>Underfloor heating installations</li>
           <li>Floor screeds</li>
-          <li>Leveling before applying floor finishes</li>
+          <li>Levelling before applying floor finishes</li>
           <li>Technical and industrial floors</li>
           <li>Refurbishment and new builds</li>
         </ul>
@@ -144,8 +144,8 @@ const steps = [
       <div>
         <span class="eyebrow">Continuous improvement</span>
         <h2>Tested on real jobs</h2>
-        <p>Ring with fiber additive, a new high-visibility color and a reinforced Nivelador Universal base. Every improvement was tested on site before launch.</p>
-        <a href="/en/news/leveling-systems-for-self-leveling-mortar/">Read the news →</a>
+        <p>Ring with fibre additive, a new high-visibility colour and a reinforced Nivelador Universal base. Every improvement was tested on site before launch.</p>
+        <a href="/en/news/screed-levelling-systems/">Read the news →</a>
       </div>
     </div>
   </section>
@@ -155,14 +155,14 @@ const steps = [
 </Base>
 
 <style>
-  .prod { display: grid; grid-template-columns: 1fr; gap: 20px; text-decoration: none; color: inherit; transition: transform .15s ease; }
+  .prod { display: grid; grid-template-columns: 1fr; gap: 20px; text-decoration: none; colour: inherit; transition: transform .15s ease; }
   .prod:hover { transform: translateY(-3px); }
-  @media (min-width: 560px) { .prod { grid-template-columns: 180px 1fr; align-items: center; } }
+  @media (min-width: 560px) { .prod { grid-template-columns: 180px 1fr; align-items: centre; } }
   .pimg { background: #0b0b0b; border-radius: 12px; overflow: hidden; }
   .pimg :global(img) { width: 100%; }
   .prod h3 { margin-bottom: 0.7em; }
-  .more { display: inline-block; margin-top: 16px; font-weight: 600; color: var(--blue); }
-  .mini { text-decoration: none; color: inherit; text-align: center; }
+  .more { display: inline-block; margin-top: 16px; font-weight: 600; colour: var(--blue); }
+  .mini { text-decoration: none; colour: inherit; text-align: centre; }
   .mini :global(img) { width: 130px; height: 120px; object-fit: contain; margin: 0 auto 10px; }
   .mini h3 { font-size: 1rem; margin-bottom: 0.2em; }
   .mini p { margin: 0; }

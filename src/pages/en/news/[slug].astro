@@ -21,18 +21,18 @@ const { n, all } = Astro.props as { n: CollectionEntry<'news'>; all: CollectionE
 const { Content } = await render(n);
 const R = PATHS.en;
 const url = newsUrl(n);
-// Related: same category, shared products, then leveling guides (main business line).
+// Related: same category, shared products, then levelling guides (main business line).
 const score = (o: CollectionEntry<'news'>) =>
   (o.data.category === n.data.category ? 4 : 0) +
   o.data.products.filter((p) => n.data.products.includes(p)).length * 2 +
   (o.data.category === 'nivelacion' ? 1 : 0);
 const related = all.filter((o) => o.id !== n.id).map((o, i) => ({ o, s: score(o), i })).sort((x, y) => y.s - x.s || x.i - y.i).slice(0, 3).map((x) => x.o);
 const PRODUCT_LINKS: Record<string, { label: string; href: string }> = {
-  piko: { label: 'PIKO · leveler for underfloor heating', href: R.piko },
+  piko: { label: 'PIKO · leveller for underfloor heating', href: R.piko },
   universal: { label: 'Nivelador Universal for screeds', href: R.universal },
-  recambios: { label: 'Spare parts for levelers', href: R.recambios },
+  recambios: { label: 'Spare parts for levellers', href: R.recambios },
   kalzo: { label: 'Kalzo spacer clip', href: R.kalzo },
-  kunas: { label: 'Kuña leveling wedge', href: R.kunaNiveladora },
+  kunas: { label: 'Kuña levelling wedge', href: R.kunaNiveladora },
   alikates: { label: 'Alikates tile pliers', href: R.alikates },
 };
 const article = {
@@ -83,7 +83,7 @@ const schema = [article, ...(n.data.faq.length ? [faqSchema(n.data.faq)] : [])];
 </Base>
 <style>
   .head { margin-bottom: 28px; }
-  .meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 0.85rem; color: var(--text-soft); margin-bottom: 14px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: centre; font-size: 0.85rem; colour: var(--text-soft); margin-bottom: 14px; }
   .cover { max-width: 760px; width: 100%; border-radius: var(--radius); margin-bottom: 32px; background: #0b0b0b; }
   .prods { margin-top: 36px; }
   .prods h2 { margin-top: 0; font-size: 1.1rem; }

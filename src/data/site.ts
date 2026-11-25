@@ -47,9 +47,9 @@ const WA_MSG: Record<'es' | 'en', Record<Interes, string>> = {
     piko: 'Hello, I would like information about the PIKO for underfloor heating.',
     universal: 'Hello, I would like information about the Nivelador Universal for screeds.',
     recambios: 'Hello, I would like information about spare parts for PIKO and Nivelador Universal.',
-    nivelacion: 'Hello, I would like information about KREOX levelers for self-leveling mortar.',
-    azulejos: 'Hello, I would like information about the KREOX tile leveling system.',
-    general: 'Hello, I would like information about KREOX levelers.',
+    nivelacion: 'Hello, I would like information about KREOX screed levellers.',
+    azulejos: 'Hello, I would like information about the KREOX tile levelling system.',
+    general: 'Hello, I would like information about KREOX levellers.',
   },
 };
 /** Contacto principal de la web: WhatsApp con un mensaje ya escrito según el producto y el idioma. */
@@ -91,20 +91,20 @@ export const NAV = [
   { label: 'Ayuda', href: '/preguntas-frecuentes/' },
 ] as const;
 
-const EN_NIV = '/en/self-leveling-mortar-levelers/';
-const EN_AZU = '/en/tile-leveling-system/';
+const EN_NIV = '/en/screed-levellers/';
+const EN_AZU = '/en/tile-levelling-system/';
 export const NAV_EN = [
   {
-    label: 'Self-leveling mortar',
+    label: 'Liquid screed',
     href: EN_NIV,
     highlight: true,
     children: [
-      { label: 'PIKO · Underfloor heating', href: `${EN_NIV}piko/`, note: '20 g · replaces the steel tripod' },
-      { label: 'Nivelador Universal · Screeds', href: `${EN_NIV}universal-leveler/`, note: 'Flat base for any surface' },
+      { label: 'PIKO · Underfloor heating', href: `${EN_NIV}piko/`, note: '20 g · replaces the metal tripod' },
+      { label: 'Nivelador Universal · Screeds', href: `${EN_NIV}universal-screed-leveller/`, note: 'Flat base for any surface' },
       { label: 'Spare parts and accessories', href: `${EN_NIV}spare-parts/`, note: 'Replace only the worn part' },
-      { label: 'Underslab polyethylene sheet', href: `${EN_NIV}underslab-polyethylene-sheet/`, note: 'Slab waterproofing' },
-      { label: 'Leveler calculator', href: `${EN_NIV}calculator/`, note: 'How many do I need?' },
-      { label: 'PIKO vs steel tripod', href: `${EN_NIV}piko-vs-steel-tripod/`, note: 'Comparison' },
+      { label: 'Underslab polyethylene sheet', href: `${EN_NIV}underslab-polythene-sheet/`, note: 'Slab waterproofing' },
+      { label: 'Leveller calculator', href: `${EN_NIV}calculator/`, note: 'How many do I need?' },
+      { label: 'PIKO vs metal tripod', href: `${EN_NIV}piko-vs-metal-tripod/`, note: 'Comparison' },
     ],
   },
   {
@@ -112,7 +112,7 @@ export const NAV_EN = [
     href: EN_AZU,
     children: [
       { label: 'Kalzo spacer clip', href: `${EN_AZU}kalzo-spacer-clip/` },
-      { label: 'Kuña leveling wedge', href: `${EN_AZU}kuna-leveling-wedge/` },
+      { label: 'Kuña levelling wedge', href: `${EN_AZU}kuna-levelling-wedge/` },
       { label: 'Stain-resistant Kuña', href: `${EN_AZU}stain-resistant-kuna-wedge/` },
       { label: 'Alikates tile pliers', href: `${EN_AZU}alikates-tile-pliers/` },
     ],
