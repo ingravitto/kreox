@@ -45,6 +45,14 @@ for (const f of pages) {
   if (!noindex && route !== '/404/' && !sitemap.includes(`https://kreox.es${route}<`)) errors.push(`${route}: falta en sitemap.xml`);
 }
 
+// CSS con ortografía británica (p. ej. tras traducir a inglés del Reino Unido): el navegador ignora la regla.
+for (const f of walk(DIST).filter((f) => /\.(html|css)$/.test(f))) {
+  const txt = readFileSync(f, 'utf8');
+  const css = f.endsWith('.css') ? txt : (txt.match(/<style[^>]*>[\s\S]*?<\/style>|style="[^"]*"/g) || []).join('\n');
+  const bad = css.match(/(?:^|[;{\s"])(?:[a-z-]*-)?colour\s*:|:\s*[^;{}]*\bcentre\b/);
+  if (bad) errors.push(`${'/' + relative(DIST, f)}: CSS no válido (${bad[0].trim().slice(0, 40)}): usa color/center`);
+}
+
 console.log(`Páginas revisadas: ${pages.length}`);
 warn.forEach((w) => console.log('⚠️  ' + w));
 errors.forEach((e) => console.log('❌ ' + e));
