@@ -25,7 +25,6 @@ import imgBase from '../assets/img/base-niveladora-universal-recambio.png';
 import imgAnilla from '../assets/img/anilla-metalica-niveladora-universal.png';
 import imgLineas from '../assets/img/lineas-azulejos.jpg';
 import imgFabrica from '../assets/img/niveladores-piko-universal-kreox.jpg';
-import imgInyeccion from '../assets/img/hf-fabricacion-inyeccion-molde.jpg';
 import imgAplicador from '../assets/img/hf-aplicador-vertido-autonivelante-piko.jpg';
 import imgRehab from '../assets/img/hf-recrecido-rehabilitacion-nivelador-universal.jpg';
 
@@ -79,7 +78,6 @@ const T = EN
       coLead: 'Kreox was born from experience passed down over the years by three generations of our family. We are a Spanish manufacturer based in Ibi (Alicante).',
       coGen: 'Generation', coSpain: 'Made in Spain', coRecycled: 'Recycled material', coMeet: 'About us',
       fabAlt: 'KREOX Insulation and Universal Screed Levellers, made in Ibi (Alicante, Spain)',
-      fabVideo: 'Injection moulding: a robotic arm lifts a freshly moulded blue leveller out of the steel mould',
       newsEyebrow: 'News', newsTitle: 'The latest from KREOX', newsAll: 'All news',
       proAlts: ['Insulation Screed Levellers pushed into underfloor heating insulation, with the laser line at ring height', 'Screed applicator in rubber boots pouring liquid screed from a pump hose over underfloor heating, between small Insulation Screed Levellers, with a laser level on a tripod', 'Universal Screed Levellers on the old tiled floor of a renovation, next to a bucket, with a laser line at ring height', 'KREOX Insulation and Universal Screed Levellers, made in Ibi (Alicante, Spain)'],
       proEyebrow: 'For professionals', proTitle: 'Built for people who level floors every day.',
@@ -132,7 +130,6 @@ const T = EN
       coLead: 'Kreox nace de la experiencia transmitida durante años por las tres generaciones de nuestra familia. Somos fabricantes nacionales, en Ibi (Alicante).',
       coGen: 'Generación', coSpain: 'Hecho en España', coRecycled: 'Material reciclado', coMeet: 'Conócenos',
       fabAlt: 'Niveladores PIKO y Universal de KREOX, fabricados en Ibi (Alicante)',
-      fabVideo: 'Fabricación por inyección: un brazo robótico saca del molde de acero un nivelador azul recién inyectado',
       newsEyebrow: 'Noticias', newsTitle: 'Lo último de KREOX', newsAll: 'Todas las noticias',
       proAlts: ['Niveladores PIKO clavados en el aislamiento del suelo radiante con la línea del láser a la altura de las anillas', 'Aplicador con botas de agua vertiendo mortero autonivelante con la manguera sobre suelo radiante, entre niveladores PIKO, con el láser nivelador en su trípode', 'Niveladores Universales sobre el suelo de baldosas antiguo de una reforma, junto a un cubo, con la línea del láser a la altura de las anillas', 'Niveladores PIKO y Universal de KREOX, fabricados en Ibi (Alicante)'],
       proEyebrow: 'Para profesionales', proTitle: 'Pensado para quien nivela todos los días.',
@@ -366,7 +363,7 @@ const T = EN
         </dl>
         <div class="btn-row"><a class="btn btn--sand" href={P.empresa}>{T.coMeet}</a></div>
       </div>
-      <div class="fab-video" data-reveal><AutoVideo src="/videos/fabricacion-inyeccion-kreox.mp4" poster={imgInyeccion} label={T.fabVideo} /></div>
+      <div data-reveal><Image src={imgFabrica} alt={T.fabAlt} widths={[600, 1100]} sizes="(min-width: 960px) 560px, 92vw" class="fab" /></div>
     </div>
   </section>
 
@@ -512,5 +509,5 @@ const T = EN
   .tile:hover .tile-img :global(img) { transform: scale(1.06); }
   .tile h3 { margin-bottom: 6px; }
 
-  .fab-video { position: relative; aspect-ratio: 4 / 3; border-radius: var(--radius-xl); overflow: hidden; background: var(--ink); }
+  .fab { border-radius: var(--radius-xl); width: 100%; }
 </style>
