@@ -1,6 +1,7 @@
 ---
 // English version of /nivelacion-mortero-autonivelante/lamina-bajo-solera/
 import PageHero from '../../../components/PageHero.astro';
+import { Image } from 'astro:assets';
 import imgHeroBg from '../../../assets/img/fondo-piedra-productos-kreox.jpg';
 import Base from '../../../layouts/Base.astro';
 import CtaContacto from '../../../components/CtaContacto.astro';
@@ -8,6 +9,8 @@ import { waConsulta } from '../../../data/site';
 import { PATHS } from '../../../i18n/routes';
 import { productSchema } from '../../../data/schema';
 import img from '../../../assets/img/lamina-polietileno-bajo-solera.png';
+import imgColocacion from '../../../assets/img/hf-lamina-bajo-solera-colocacion.jpg';
+import imgMallazo from '../../../assets/img/hf-lamina-bajo-solera-mallazo.jpg';
 
 const R = PATHS.en;
 const url = R.lamina;
@@ -53,6 +56,20 @@ const schema = [
     </div>
   </section>
   <section class="section section--paper">
+    <div class="container split split--top">
+      <div data-reveal>
+        <span class="eyebrow">Installation</span>
+        <h2>On the gravel, under the rebar mesh</h2>
+        <p class="lead">The sheet is laid over the drainage gravel and the rebar mesh goes on top, before the slab is poured. This keeps the concrete separated from the ground and protected from damp.</p>
+      </div>
+      <div class="lam-gal" data-reveal>
+        <figure><Image src={imgColocacion} alt="Roll of black polythene sheet being unrolled over the drainage gravel, with rebar mesh on spacers on top" widths={[600, 1000]} sizes="(min-width: 960px) 540px, 92vw" /><figcaption>1 · Laid over the gravel.</figcaption></figure>
+        <figure><Image src={imgMallazo} alt="Prepared slab: black polythene sheet covering the gravel base and steel rebar mesh on top, ready for concrete" widths={[600, 1000]} sizes="(min-width: 960px) 540px, 92vw" /><figcaption>2 · The rebar mesh goes on top, ready for concrete.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="container">
       <div class="section-head"><h2>Complete your flooring system</h2></div>
       <div class="grid grid-2">
@@ -65,4 +82,8 @@ const schema = [
 </Base>
 <style>
   a.card { text-decoration: none; color: inherit; }
+  .lam-gal { display: grid; gap: 14px; }
+  .lam-gal figure { margin: 0; }
+  .lam-gal :global(img) { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius); }
+  .lam-gal figcaption { margin-top: 8px; font-size: .92rem; color: var(--text-soft); }
 </style>

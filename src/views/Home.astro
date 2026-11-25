@@ -23,6 +23,8 @@ import imgBase from '../assets/img/base-niveladora-universal-recambio.png';
 import imgAnilla from '../assets/img/anilla-metalica-niveladora-universal.png';
 import imgLineas from '../assets/img/lineas-azulejos.jpg';
 import imgFabrica from '../assets/img/niveladores-piko-universal-kreox.jpg';
+import imgAplicador from '../assets/img/hf-aplicador-vertido-autonivelante-piko.jpg';
+import imgRehab from '../assets/img/hf-recrecido-rehabilitacion-nivelador-universal.jpg';
 
 // Portada compartida por / (español) y /en/ (inglés): mismo diseño, textos de T según el idioma de la URL.
 const { lang, P } = useT(Astro.url);
@@ -75,6 +77,7 @@ const T = EN
       coGen: 'Generation', coSpain: 'Made in Spain', coRecycled: 'Recycled material', coMeet: 'About us',
       fabAlt: 'KREOX Insulation and Universal Screed Levellers, made in Ibi (Alicante, Spain)',
       newsEyebrow: 'News', newsTitle: 'The latest from KREOX', newsAll: 'All news',
+      proAlts: ['Insulation Screed Levellers pushed into underfloor heating insulation, with the laser line at ring height', 'Screed applicator pouring liquid screed from a pump hose between Insulation Screed Levellers, with a laser level on a tripod', 'Universal Screed Levellers on the old floor of a renovation, with a laser line at ring height', 'KREOX Insulation and Universal Screed Levellers, made in Ibi (Alicante, Spain)'],
       proEyebrow: 'For professionals', proTitle: 'Built for people who level floors every day.',
       pros: [
         { t: 'Underfloor heating installers', d: 'The Insulation Screed Leveller pushes into the insulation board without tools. Box of 100.', l: 'See the leveller', k: 'piko' },
@@ -126,6 +129,7 @@ const T = EN
       coGen: 'Generación', coSpain: 'Hecho en España', coRecycled: 'Material reciclado', coMeet: 'Conócenos',
       fabAlt: 'Niveladores PIKO y Universal de KREOX, fabricados en Ibi (Alicante)',
       newsEyebrow: 'Noticias', newsTitle: 'Lo último de KREOX', newsAll: 'Todas las noticias',
+      proAlts: ['Niveladores PIKO clavados en el aislamiento del suelo radiante con la línea del láser a la altura de las anillas', 'Aplicador vertiendo mortero autonivelante con la manguera entre niveladores PIKO, con el láser nivelador en su trípode', 'Niveladores Universales sobre el suelo antiguo de una reforma, con la línea del láser a la altura de las anillas', 'Niveladores PIKO y Universal de KREOX, fabricados en Ibi (Alicante)'],
       proEyebrow: 'Para profesionales', proTitle: 'Pensado para quien nivela todos los días.',
       pros: [
         { t: 'Instaladores de suelo radiante', d: 'El PIKO se clava en la placa de aislamiento sin herramientas. Caja de 100 unidades.', l: 'Ver PIKO', k: 'piko' },
@@ -311,8 +315,8 @@ const T = EN
         {T.pros.map((p, i) => (
           <li data-reveal style={`--d:${i * 0.06}s`}>
             <a href={p.k === 'whatsapp' ? waConsulta('nivelacion', lang) : P[p.k as 'piko' | 'nivelacion' | 'universal']} {...(p.k === 'whatsapp' ? { target: '_blank', rel: 'noopener' } : {})}>
-              <span class="pro-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-              <span class="pro-b"><h3 class="pro-t">{p.t}</h3><span>{p.d}</span><span class="arrow-link">{p.l}{p.k === 'whatsapp' && <span class="visually-hidden">{lang === 'en' ? ' (opens WhatsApp)' : ' (abre WhatsApp)'}</span>}</span></span>
+              <span class="pro-img"><Image src={[imgSuelo, imgAplicador, imgRehab, imgFabrica][i]} alt={T.proAlts[i]} widths={[200, 480, 720]} sizes="(min-width: 1100px) 290px, (min-width: 760px) 45vw, 96px" /></span>
+              <span class="pro-b"><span class="pro-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span><h3 class="pro-t">{p.t}</h3><span>{p.d}</span><span class="arrow-link">{p.l}{p.k === 'whatsapp' && <span class="visually-hidden">{lang === 'en' ? ' (opens WhatsApp)' : ' (abre WhatsApp)'}</span>}</span></span>
             </a>
           </li>
         ))}
@@ -476,9 +480,18 @@ const T = EN
   .pros { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
   @media (min-width: 760px) { .pros { grid-template-columns: 1fr 1fr; gap: 16px; } }
   @media (min-width: 1100px) { .pros { grid-template-columns: repeat(4, 1fr); } }
-  .pros a { display: flex; gap: 14px; height: 100%; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; color: var(--ink); background: var(--white); transition: border-color .2s, transform .2s var(--ease); }
+  .pros a { display: grid; grid-template-columns: 96px 1fr; gap: 14px; align-items: start; height: 100%; padding: 14px; border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; color: var(--ink); background: var(--white); transition: border-color .2s, transform .2s var(--ease); }
   .pros a:hover { border-color: var(--ink); transform: translateY(-2px); }
-  .pro-n { font-weight: 600; color: var(--sand-strong); font-variant-numeric: tabular-nums; }
+  .pro-n { font-weight: 600; font-size: .85rem; color: var(--sand-strong); font-variant-numeric: tabular-nums; }
+  .pro-img { display: block; overflow: hidden; border-radius: 12px; background: var(--ink); }
+  .pro-img :global(img) { display: block; width: 96px; height: 96px; object-fit: cover; transition: transform .6s var(--ease); }
+  .pros a:hover .pro-img :global(img) { transform: scale(1.04); }
+  @media (min-width: 760px) {
+    .pros a { grid-template-columns: 1fr; padding: 0 0 20px; overflow: hidden; }
+    .pro-img { border-radius: 0; }
+    .pro-img :global(img) { width: 100%; height: auto; aspect-ratio: 3 / 2; }
+    .pro-b { padding: 0 20px; }
+  }
   .pro-b { display: flex; flex-direction: column; gap: 6px; }
   .pro-t { margin: 0; font-size: 1.05rem; line-height: 1.3; }
   .pro-b > span:not(.arrow-link) { color: var(--text-soft); font-size: .95rem; }
