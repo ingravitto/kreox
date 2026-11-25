@@ -28,8 +28,8 @@ const score = (o: CollectionEntry<'news'>) =>
   (o.data.category === 'nivelacion' ? 1 : 0);
 const related = all.filter((o) => o.id !== n.id).map((o, i) => ({ o, s: score(o), i })).sort((x, y) => y.s - x.s || x.i - y.i).slice(0, 3).map((x) => x.o);
 const PRODUCT_LINKS: Record<string, { label: string; href: string }> = {
-  piko: { label: 'PIKO · leveller for underfloor heating', href: R.piko },
-  universal: { label: 'Nivelador Universal for screeds', href: R.universal },
+  piko: { label: 'Insulation Screed Leveller · underfloor heating', href: R.piko },
+  universal: { label: 'Universal Screed Leveller · screeds', href: R.universal },
   recambios: { label: 'Spare parts for levellers', href: R.recambios },
   kalzo: { label: 'Kalzo spacer clip', href: R.kalzo },
   kunas: { label: 'Kuña levelling wedge', href: R.kunaNiveladora },

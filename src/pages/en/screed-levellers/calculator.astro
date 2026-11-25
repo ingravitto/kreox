@@ -22,7 +22,7 @@ const faqs = FAQ_CALCULADORA_EN;
 <Base
   overlay
   title="Leveller calculator for liquid screed | KREOX"
-  description="Work out how many PIKO or Nivelador Universal levellers you need for your liquid screed job: units, boxes and weight versus the metal tripod."
+  description="Work out how many Insulation or Universal Screed Levellers you need for your liquid screed job: units, boxes and weight versus metal tripods."
   breadcrumbs={[{ name: 'Screed levellers', url: R.nivelacion }, { name: 'Calculator', url }]}
   schema={[faqSchema(faqs)]}
 >
@@ -43,11 +43,11 @@ const faqs = FAQ_CALCULADORA_EN;
     <div class="container">
       <div class="section-head">
         <h2>Quick quantity table</h2>
-        <p>With one leveller every {M2_POR_NIVELADOR} m². PIKO in boxes of {PRODUCTOS.piko.caja} units and Nivelador Universal in boxes of {PRODUCTOS.universal.caja} units.</p>
+        <p>With one leveller every {M2_POR_NIVELADOR} m². Insulation Screed Levellers come in boxes of {PRODUCTOS.piko.caja} and Universal Screed Levellers in boxes of {PRODUCTOS.universal.caja}.</p>
       </div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th scope="col">Area</th><th scope="col">Levellers</th><th scope="col">Boxes of PIKO</th><th scope="col">Boxes of Universal</th></tr></thead>
+          <thead><tr><th scope="col">Area</th><th scope="col">Levellers</th><th scope="col">Boxes (insulation)</th><th scope="col">Boxes (universal)</th></tr></thead>
           <tbody>
             {rows.map((r) => <tr><th scope="row">{r.m2.toLocaleString('en-US')} m²</th><td>{r.uds.toLocaleString('en-US')}</td><td>{r.piko}</td><td>{r.uni}</td></tr>)}
           </tbody>

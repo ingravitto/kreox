@@ -22,8 +22,8 @@ const M = P.medidas;
 const schema = [
   productSchema({
     id: url,
-    name: P.nombreCompleto,
-    alternateName: ['Nivelador Universal KREOX', 'Universal screed leveller'],
+    name: 'KREOX Universal Screed Leveller',
+    alternateName: ['Nivelador Universal', 'Nivelador Universal KREOX', P.nombreCompleto, 'Universal raised leveller'],
     description: 'Leveller with a flat, reinforced base to mark the datum height of liquid screed in screeds on any surface. Laser adjustable, reusable, rust-free and with spare parts by piece. About 250 g per unit.',
     images: [imgProducto.src, imgPlano.src],
     weightG: P.pesoG,
@@ -45,22 +45,22 @@ const schema = [
 ---
 <ProductPage
   kind="universal"
-  name="Nivelador Universal"
+  name="Universal Screed Leveller"
   seo={{
-    title: 'Nivelador Universal: universal screed leveller | KREOX',
-    description: 'KREOX Nivelador Universal: universal screed leveller with a flat, reinforced base for liquid screeds on any surface. Reusable, with spare parts.',
+    title: 'Universal Screed Leveller for liquid screed | KREOX',
+    description: 'The KREOX Universal Screed Leveller has a flat, reinforced base for liquid screed on any surface. Reusable, with spare parts. Made in Spain.',
     schema,
     image: imgProducto.src,
   }}
   hero={{
-    eyebrow: 'Liquid screed leveller',
-    title: 'Nivelador Universal for',
-    accent: 'screeds',
+    eyebrow: 'Flat-base screed leveller',
+    title: 'Universal Screed Leveller for',
+    accent: 'slabs and subfloors',
     lead: `A flat, reinforced base to mark the height of the screed on a <strong>slab, subfloor or existing floor</strong>. <strong>${P.pesoG} g</strong>, rust-free and with spare parts by piece.`,
     bg: imgBg,
-    bgAlt: 'Liquid screed flowing between Nivelador Universal levellers on a slab',
+    bgAlt: 'Liquid screed flowing between Universal Screed Levellers on a slab',
     product: imgProducto,
-    productAlt: 'KREOX Nivelador Universal with a lime-green base and blue shaft',
+    productAlt: 'KREOX Universal Screed Leveller with a lime-green base and blue shaft',
   }}
   kpis={[
     { v: String(P.pesoG), u: 'g', l: 'Weight per unit' },
@@ -68,7 +68,7 @@ const schema = [
     { v: String(P.caja), u: 'units', l: 'Per box' },
     { v: '3', u: 'parts', l: 'Replaceable' },
   ]}
-  plano={{ img: imgPlano, alt: `Nivelador Universal dimension drawing: ${M.altoMm} mm shaft, base ${M.baseAltoMm} mm high and ${M.baseMm} mm in diameter, ${M.arandelaMm} mm washer` }}
+  plano={{ img: imgPlano, alt: `Universal Screed Leveller dimension drawing: ${M.altoMm} mm shaft, base ${M.baseAltoMm} mm high and ${M.baseMm} mm in diameter, ${M.arandelaMm} mm washer` }}
   specs={[
     ['Use', 'Screeds and floor levelling with liquid screed'],
     ['Support', 'Flat, stable, reinforced base'],
@@ -93,9 +93,9 @@ const schema = [
     { img: imgAnilla, alt: 'Universal metal levelling ring spare part', name: 'Metal ring', caja: 'Box of 40' },
     { img: imgArandela, alt: 'Levelling washer with fibre additive', name: 'Levelling washer', caja: 'Box of 150' },
   ]}
-  other={{ name: 'Underfloor heating with insulation board?', text: 'Use the PIKO: it is pushed in and weighs just 20 g →', href: R.piko, img: imgPiko, alt: 'PIKO' }}
-  film={{ src: '/videos/universal-vertido-recrecido.mp4', poster: imgBg, label: 'Pouring liquid screed over a slab with Nivelador Universal levellers', title: 'A perfect screed', accent: 'on any substrate.' }}
+  other={{ name: 'Underfloor heating with insulation board?', text: 'Use the Insulation Screed Leveller: it is pushed in and weighs just 20 g →', href: R.piko, img: imgPiko, alt: 'Insulation Screed Leveller' }}
+  film={{ src: '/videos/universal-vertido-recrecido.mp4', poster: imgBg, label: 'Pouring liquid screed over a slab with Universal Screed Levellers', title: 'A perfect screed', accent: 'on any substrate.' }}
   faqs={FAQ_UNIVERSAL_EN}
-  faqTitle="Frequently asked questions about the Nivelador Universal"
-  cta={{ title: 'Got a screed under way?', text: 'Message us on WhatsApp and we will help you with Nivelador Universal levellers and spare parts for your screed.' }}
+  faqTitle="Universal Screed Leveller: frequently asked questions"
+  cta={{ title: 'Got a screed under way?', text: 'Message us on WhatsApp and we will help you with Universal Screed Levellers and spare parts for your screed.' }}
 />

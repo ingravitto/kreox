@@ -24,7 +24,7 @@ const P = PATHS.en;
 const faqs = FAQ_NIVELACION_EN;
 
 const steps = [
-  { title: 'Place the levellers', text: `One roughly every ${M2_POR_NIVELADOR} m²: pushed in (PIKO) or resting on the substrate (Universal).` },
+  { title: 'Place the levellers', text: `One roughly every ${M2_POR_NIVELADOR} m²: pushed into the insulation (insulation leveller) or resting on the substrate (universal leveller).` },
   { title: 'Mark the level', text: 'With a standard laser or a laser with receiver.' },
   { title: 'Adjust the rings', text: 'Each ring to the laser line.' },
   { title: 'Pour and remove', text: 'Screed up to the ring; then remove and clean the levellers.' },
@@ -33,14 +33,14 @@ const steps = [
 <Base
   overlay
   title="Screed levellers for liquid screed | KREOX"
-  description="PIKO and Nivelador Universal screed levellers replace the metal tripod in underfloor heating and screeds. Light, rust-free, Spanish."
+  description="KREOX Insulation and Universal Screed Levellers replace the metal tripod on underfloor heating and screeds. Light, rust-free, made in Spain."
   breadcrumbs={[{ name: 'Screed levellers', url: P.nivelacion }]}
   schema={[faqSchema(faqs), {
     '@type': 'ItemList',
     name: 'KREOX screed levelling systems',
     itemListElement: [
-      { name: 'PIKO · Leveller for underfloor heating', url: P.piko },
-      { name: 'Nivelador Universal for screeds', url: P.universal },
+      { name: 'Insulation Screed Leveller for underfloor heating', url: P.piko },
+      { name: 'Universal Screed Leveller for screeds', url: P.universal },
       { name: 'Spare parts for levellers', url: P.recambios },
       { name: 'Underslab polythene sheet', url: P.lamina },
     ].map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, url: `https://kreox.es${it.url}` })),
@@ -50,9 +50,9 @@ const steps = [
     eyebrow="Flooring with liquid screed"
     title="Screed levellers for"
     accent="liquid screed"
-    lead="Two levellers made in Spain that replace the metal tripod: <strong>PIKO</strong> for <strong>underfloor heating</strong> and <strong>Nivelador Universal</strong> for <strong>screeds</strong>."
+    lead="Two levellers made in Spain that replace the metal tripod: the <strong>Insulation Screed Leveller</strong> for <strong>underfloor heating</strong> and the <strong>Universal Screed Leveller</strong> for <strong>screeds on any surface</strong>."
     bg={imgHeroBg}
-    bgAlt="Underfloor heating with blue PIKO levellers before pouring"
+    bgAlt="Underfloor heating with blue Insulation Screed Levellers before pouring"
     crumbs={[{ name: 'Screed levellers', url: P.nivelacion }]}
   >
     <div class="btn-row">
@@ -66,29 +66,29 @@ const steps = [
       <div class="section-head"><h2>Choose your leveller</h2></div>
       <div class="grid grid-2">
         <a class="card prod" href={P.piko}>
-          <div class="pimg"><Image src={imgPiko} alt="KREOX PIKO for underfloor heating" widths={[300, 522]} sizes="240px" /></div>
+          <div class="pimg"><Image src={imgPiko} alt="KREOX Insulation Screed Leveller for underfloor heating" widths={[300, 522]} sizes="240px" /></div>
           <div>
-            <h3>PIKO · Underfloor heating</h3>
+            <h3>Insulation Screed Leveller · Underfloor heating</h3>
             <ul class="checks">
               <li>Pushed into the insulation board</li>
               <li>≈ {PRODUCTOS.piko.pesoG} g per unit</li>
               <li>Box of {PRODUCTOS.piko.caja} units</li>
               <li>Spare part: washer</li>
             </ul>
-            <span class="more">See PIKO →</span>
+            <span class="more">See the insulation leveller →</span>
           </div>
         </a>
         <a class="card prod" href={P.universal}>
-          <div class="pimg"><Image src={imgUni} alt="KREOX Nivelador Universal for screeds" widths={[300, 522]} sizes="240px" /></div>
+          <div class="pimg"><Image src={imgUni} alt="KREOX Universal Screed Leveller for screeds" widths={[300, 522]} sizes="240px" /></div>
           <div>
-            <h3>Nivelador Universal · Screeds</h3>
+            <h3>Universal Screed Leveller · Screeds</h3>
             <ul class="checks">
               <li>Flat base: rests on any surface</li>
               <li>≈ {PRODUCTOS.universal.pesoG} g per unit</li>
               <li>Box of {PRODUCTOS.universal.caja} units</li>
               <li>Spare parts: base, ring and washer</li>
             </ul>
-            <span class="more">See Nivelador Universal →</span>
+            <span class="more">See the universal leveller →</span>
           </div>
         </a>
       </div>
@@ -144,7 +144,7 @@ const steps = [
       <div>
         <span class="eyebrow">Continuous improvement</span>
         <h2>Tested on real jobs</h2>
-        <p>Ring with fibre additive, a new high-visibility colour and a reinforced Nivelador Universal base. Every improvement was tested on site before launch.</p>
+        <p>Ring with fibre additive, a new high-visibility colour and a reinforced base for the Universal Screed Leveller. Every improvement was tested on site before launch.</p>
         <a href="/en/news/screed-levelling-systems/">Read the news →</a>
       </div>
     </div>

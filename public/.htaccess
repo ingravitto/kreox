@@ -78,7 +78,7 @@ RewriteRule ^(sitemap_index|post-sitemap|page-sitemap|category-sitemap|wp-sitema
 # /en/, /en/company/, /en/contact/ y /en/news/ existen con la misma URL y no necesitan regla.
 RewriteRule ^en/home/?$ /en/ [R=301,L]
 RewriteRule ^en/solutions-for-flooring-systems-using-self-leveling-mortar/?$ /en/screed-levellers/ [R=301,L]
-RewriteRule ^en/solutions-for-flooring-systems-using-self-leveling-mortar/leveler-insulation-1-tip/?$ /en/screed-levellers/piko/ [R=301,L]
+RewriteRule ^en/solutions-for-flooring-systems-using-self-leveling-mortar/leveler-insulation-1-tip/?$ /en/screed-levellers/insulation-screed-leveller/ [R=301,L]
 RewriteRule ^en/solutions-for-flooring-systems-using-self-leveling-mortar/universal-raised-leveler/?$ /en/screed-levellers/universal-screed-leveller/ [R=301,L]
 RewriteRule ^en/solutions-for-tile-installation/?$ /en/tile-levelling-system/ [R=301,L]
 RewriteRule ^en/solutions-for-tile-installation/alikates-tile-pliers/?$ /en/tile-levelling-system/alikates-tile-pliers/ [R=301,L]
