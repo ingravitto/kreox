@@ -55,7 +55,7 @@ export const FAQ_UNIVERSAL = [
     a: 'El PIKO tiene punta y se clava en la placa de aislamiento del suelo radiante. El Nivelador Universal tiene base plana y se apoya sobre superficies duras, por lo que está pensado para recrecidos.',
   },
   {
-    q: '¿Qué mejoras trae la versión 2026?',
+    q: '¿Qué mejoras tiene el Nivelador Universal actual?',
     a: 'Base reforzada, más dura y resistente durante el fraguado, y anilla con aditivo de fibra en un nuevo color más visible en obra. Todas las mejoras se probaron en obra real antes de lanzarlas.',
   },
 ];

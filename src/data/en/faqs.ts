@@ -56,7 +56,7 @@ export const FAQ_UNIVERSAL_EN = [
     a: 'The PIKO has a tip and is pushed into the insulation board of underfloor heating. The Nivelador Universal has a flat base and rests on hard surfaces, so it is designed for screeds.',
   },
   {
-    q: 'What is new in the 2026 version?',
+    q: 'What has improved in the current Nivelador Universal?',
     a: 'A reinforced base, harder and more resistant during setting, and a fiber-reinforced ring in a new color that is more visible on site. All improvements were tested on real jobs before launch.',
   },
 ];

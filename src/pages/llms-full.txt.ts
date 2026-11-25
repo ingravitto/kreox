@@ -20,14 +20,14 @@ export const GET: APIRoute = () => {
 - Uso: ${P.uso}. ${P.fijacion}.
 - Peso: ≈ ${P.pesoG} g. Caja de ${P.caja} unidades.
 - Medidas (mm): fuste ${P.medidas.altoMm} + punta ${P.medidas.puntaMm}; base Ø${P.medidas.baseMm}; fuste ${P.medidas.fusteMm}; arandela Ø${P.medidas.arandelaMm}.
-- Regulación: anilla deslizante ajustada con láser habitual o con receptor. Versión 2026 con anilla con aditivo de fibra.
+- Regulación: anilla deslizante ajustada con láser habitual o con receptor. Anilla con aditivo de fibra.
 - No se oxida, reutilizable. Recambio: arandela niveladora (caja de 150). Producto patentado, fabricado en España.
 
 ## Nivelador Universal · Nivelador Recrecido Universal (${U}${N.url})
 - Uso: ${N.uso}. ${N.fijacion}.
 - Peso: ≈ ${N.pesoG} g. Caja de ${N.caja} unidades.
 - Medidas (mm): fuste ${N.medidas.altoMm}; base ${N.medidas.baseAltoMm} de alto y Ø${N.medidas.baseMm}; arandela Ø${N.medidas.arandelaMm}.
-- Base reforzada en 2026. Recambios: base niveladora universal (caja 40), anilla metálica niveladora universal (caja 40), arandela niveladora (caja 150). Producto patentado, fabricado en España.
+- Base reforzada. Recambios: base niveladora universal (caja 40), anilla metálica niveladora universal (caja 40), arandela niveladora (caja 150). Producto patentado, fabricado en España.
 
 ## Regla de cálculo
 - Densidad recomendada: aprox. 1 nivelador cada ${M2_POR_NIVELADOR} m² (100 m² ≈ ${Math.ceil(100 / M2_POR_NIVELADOR)} niveladores).

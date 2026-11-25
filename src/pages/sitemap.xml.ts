@@ -10,7 +10,6 @@ import { PATHS, alternates } from '../i18n/routes';
 import piko from '../assets/img/piko-nivelador-suelo-radiante-kreox.png';
 import pikoPlano from '../assets/img/piko-medidas-plano.png';
 import pikoSuelo from '../assets/img/hf-piko-suelo-radiante-laser.jpg';
-import anilla from '../assets/img/hf-anilla-fibra-macro.jpg';
 import uni from '../assets/img/nivelador-universal-recrecido-kreox.png';
 import uniPlano from '../assets/img/nivelador-universal-medidas-plano.png';
 import uniVertido from '../assets/img/hf-universal-recrecido-vertido.jpg';
@@ -60,7 +59,6 @@ const IMAGES: Record<string, Img[]> = {
     { src: piko, title: 'PIKO de KREOX, nivelador para mortero autonivelante en suelo radiante' },
     { src: pikoPlano, title: 'Medidas del PIKO' },
     { src: pikoSuelo, title: 'PIKO clavado en placa de suelo radiante con láser' },
-    { src: anilla, title: 'Anilla del PIKO con aditivo de fibra' },
   ],
   [`${NIVELACION}nivelador-universal/`]: [
     { src: uni, title: 'Nivelador Universal de KREOX para recrecidos' },
@@ -79,7 +77,6 @@ const IMAGES: Record<string, Img[]> = {
     { src: piko, title: 'KREOX PIKO, self-leveling mortar leveler for underfloor heating' },
     { src: pikoPlano, title: 'PIKO dimensions' },
     { src: pikoSuelo, title: 'PIKO pushed into an underfloor heating board with a laser' },
-    { src: anilla, title: 'PIKO ring with fiber additive' },
   ],
   [E.universal]: [
     { src: uni, title: 'KREOX Nivelador Universal for screeds' },

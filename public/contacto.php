@@ -40,7 +40,7 @@ $interes   = campo('interes', 40);
 $mensaje   = mb_substr(trim((string)($_POST['mensaje'] ?? '')), 0, 3000);
 $privacidad = ($_POST['privacidad'] ?? '') === '1';
 
-$intereses = ['nivelacion' => 'Nivelación autonivelante', 'azulejos' => 'Colocación de azulejos', 'exportacion' => 'Distribución / exportación', 'otra' => 'Otra consulta'];
+$intereses = ['nivelacion' => 'Nivelación autonivelante', 'azulejos' => 'Colocación de azulejos', 'exportacion' => 'Exportación', 'otra' => 'Otra consulta'];
 
 if ($nombre === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || !$privacidad) {
     volver($pContacto . '?error=1');

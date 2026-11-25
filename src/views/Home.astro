@@ -7,7 +7,7 @@ import WeightBars from '../components/WeightBars.astro';
 import NoticiaCard from '../components/NoticiaCard.astro';
 import CtaContacto from '../components/CtaContacto.astro';
 import AutoVideo from '../components/AutoVideo.astro';
-import { PRODUCTOS, M2_POR_NIVELADOR } from '../data/site';
+import { PRODUCTOS, M2_POR_NIVELADOR, waConsulta } from '../data/site';
 import { TILE_PRODUCTS } from '../data/azulejos';
 import { TILE_PRODUCTS_EN } from '../data/en/tiles';
 import { getNoticias, getNews } from '../data/noticias';
@@ -18,13 +18,11 @@ import imgPiko from '../assets/img/piko-nivelador-suelo-radiante-kreox.png';
 import imgUni from '../assets/img/nivelador-universal-recrecido-kreox.png';
 import imgSuelo from '../assets/img/hf-piko-suelo-radiante-laser.jpg';
 import imgUniVertido from '../assets/img/hf-universal-recrecido-vertido.jpg';
-import imgDetalle from '../assets/img/hf-anilla-fibra-macro.jpg';
 import imgArandela from '../assets/img/arandela-niveladora-recambio.png';
 import imgBase from '../assets/img/base-niveladora-universal-recambio.png';
 import imgAnilla from '../assets/img/anilla-metalica-niveladora-universal.png';
 import imgLineas from '../assets/img/lineas-azulejos.jpg';
 import imgFabrica from '../assets/img/niveladores-piko-universal-kreox.jpg';
-import SelloPatentado from '../components/SelloPatentado.astro';
 
 // Portada compartida por / (español) y /en/ (inglés): mismo diseño, textos de T según el idioma de la URL.
 const { lang, P } = useT(Astro.url);
@@ -32,7 +30,6 @@ const EN = lang === 'en';
 const tiles = EN ? TILE_PRODUCTS_EN.map((p) => ({ ...p, href: `${P.azulejos}${p.slug}/` })) : TILE_PRODUCTS.map((p) => ({ ...p, href: `${P.azulejos}${p.slug}/` }));
 const posts = EN ? await getNews() : await getNoticias();
 const destacadas = [...posts.filter((n) => n.data.category === 'nivelacion'), ...posts.filter((n) => n.data.category !== 'nivelacion')].slice(0, 3);
-const featuredNews = EN ? '/en/news/leveling-systems-for-self-leveling-mortar/' : '/noticias/sistemas-de-nivelacion-para-mortero-autonivelante/';
 
 const T = EN
   ? {
@@ -71,9 +68,6 @@ const T = EN
       filmEyebrow: 'On site', filmTitle: 'The mortar rises.', filmAccent: 'The ring rules.', filmSide: 'The self-leveling mortar flows up to the ring of each leveler and stays flat. No tripods, no rust.',
       clipPiko: 'Pouring self-leveling mortar over underfloor heating with PIKO levelers', clipPikoCap: 'Underfloor heating',
       clipUni: 'Pouring self-leveling mortar on a screed with Nivelador Universal levelers', clipUniCap: 'Screeds', see: 'See',
-      novAlt: 'Close-up of the lime-green fiber-reinforced ring on the blue PIKO shaft', novEyebrow: 'New for 2026', novTitle: 'Fiber-reinforced ring, new color and reinforced base.',
-      novChecks: ['Ring with fiber additive: longer life and firmer adjustment.', 'New high-visibility color on site.', 'Harder Nivelador Universal base, safer to remove.', 'Everything tested on real jobs before launch.'],
-      novRead: 'Read the news',
       tilesEyebrow: 'Solutions for', tilesTitle: 'Tile installation', tilesAll: 'See all solutions',
       coEyebrow: 'Third generation', coTitle: 'A constant search for perfection.',
       coLead: 'Kreox was born from experience passed down over the years by three generations of our family. We are a Spanish manufacturer based in Ibi (Alicante).',
@@ -84,8 +78,8 @@ const T = EN
       pros: [
         { t: 'Underfloor heating installers', d: 'PIKO pushes into the insulation board without tools. Box of 100.', l: 'See PIKO', k: 'piko' },
         { t: 'Self-leveling mortar applicators', d: 'Mark the level with a standard laser or a laser with receiver; the ring stays visible while pouring.', l: 'See levelers', k: 'nivelacion' },
-        { t: 'Screeds and refurbishment', d: 'Nivelador Universal with a flat base for slabs, subfloors or existing floors.', l: 'See Nivelador Universal', k: 'universal' },
-        { t: 'Builders’ merchants and distributors', d: 'Made in our own factory in Ibi (Alicante), with spare parts sold separately.', l: 'Talk to our sales team', k: 'contacto' },
+        { t: 'Screeds and refurbishment', d: 'Nivelador Universal with a flat base for slabs, subfloors or existing floors.', l: 'See Universal', k: 'universal' },
+        { t: 'Direct orders from the factory', d: 'We make and distribute everything ourselves from Ibi (Alicante), with spare parts sold separately.', l: 'Order on WhatsApp', k: 'whatsapp' },
       ],
     }
   : {
@@ -124,9 +118,6 @@ const T = EN
       filmEyebrow: 'En obra', filmTitle: 'El mortero sube.', filmAccent: 'La anilla manda.', filmSide: 'El autonivelante fluye hasta la anilla de cada nivelador y queda plano. Sin trípodes, sin óxido.',
       clipPiko: 'Vertido de mortero autonivelante sobre suelo radiante con niveladores PIKO', clipPikoCap: 'Suelo radiante',
       clipUni: 'Vertido de mortero autonivelante en un recrecido con Niveladores Universales', clipUniCap: 'Recrecidos', see: 'Ver',
-      novAlt: 'Detalle de la anilla verde lima con aditivo de fibra sobre el fuste azul del PIKO', novEyebrow: 'Novedades 2026', novTitle: 'Anilla con fibra, nuevo color y base reforzada.',
-      novChecks: ['Anilla con aditivo de fibra: más vida útil y regulación más firme.', 'Nuevo color de alta visibilidad en obra.', 'Base del Nivelador Universal más dura y segura al retirarla.', 'Todo probado en obra real antes de lanzarlo.'],
-      novRead: 'Leer la novedad',
       tilesEyebrow: 'Soluciones para', tilesTitle: 'La colocación de azulejos', tilesAll: 'Ver todas las soluciones',
       coEyebrow: 'Tercera generación', coTitle: 'Búsqueda constante de la perfección.',
       coLead: 'Kreox nace de la experiencia transmitida durante años por las tres generaciones de nuestra familia. Somos fabricantes nacionales, en Ibi (Alicante).',
@@ -137,8 +128,8 @@ const T = EN
       pros: [
         { t: 'Instaladores de suelo radiante', d: 'El PIKO se clava en la placa de aislamiento sin herramientas. Caja de 100 unidades.', l: 'Ver PIKO', k: 'piko' },
         { t: 'Aplicadores de mortero autonivelante', d: 'Cota con láser habitual o con receptor y anilla visible durante el vertido.', l: 'Ver niveladores', k: 'nivelacion' },
-        { t: 'Recrecidos y rehabilitación', d: 'Nivelador Universal con base plana para forjado, solera o pavimento existente.', l: 'Ver Nivelador Universal', k: 'universal' },
-        { t: 'Almacenes y distribuidores', d: 'Fabricación propia en Ibi (Alicante) y recambios por pieza.', l: 'Hablar con comercial', k: 'contacto' },
+        { t: 'Recrecidos y rehabilitación', d: 'Nivelador Universal con base plana para forjado, solera o pavimento existente.', l: 'Ver Universal', k: 'universal' },
+        { t: 'Pedidos directos de fábrica', d: 'Fabricamos y distribuimos nosotros mismos desde Ibi (Alicante), con recambios por pieza.', l: 'Pedir por WhatsApp', k: 'whatsapp' },
       ],
     };
 
@@ -307,24 +298,6 @@ const T = EN
     </div>
   </section>
 
-  <!-- NOVEDADES -->
-  <section class="section">
-    <div class="container split">
-      <div class="nov-media" data-reveal>
-        <Image src={imgDetalle} alt={T.novAlt} widths={[600, 1100]} sizes="(min-width: 960px) 560px, 92vw" class="nov-img" />
-        <div class="nov-sello"><SelloPatentado size={132} /></div>
-      </div>
-      <div data-reveal>
-        <span class="eyebrow">{T.novEyebrow}</span>
-        <h2>{T.novTitle}</h2>
-        <ul class="checks">
-          {T.novChecks.map((c) => <li>{c}</li>)}
-        </ul>
-        <div class="btn-row"><a class="btn btn--dark" href={featuredNews}>{T.novRead}</a></div>
-      </div>
-    </div>
-  </section>
-
   <!-- PARA PROFESIONALES -->
   <section class="section pros-sec" aria-labelledby="pros-h">
     <div class="container">
@@ -335,9 +308,9 @@ const T = EN
       <ul class="pros">
         {T.pros.map((p, i) => (
           <li data-reveal style={`--d:${i * 0.06}s`}>
-            <a href={P[p.k as 'piko' | 'nivelacion' | 'universal' | 'contacto']}>
+            <a href={p.k === 'whatsapp' ? waConsulta('nivelacion', lang) : P[p.k as 'piko' | 'nivelacion' | 'universal']} {...(p.k === 'whatsapp' ? { target: '_blank', rel: 'noopener' } : {})}>
               <span class="pro-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-              <span class="pro-b"><h3 class="pro-t">{p.t}</h3><span>{p.d}</span><span class="arrow-link">{p.l}</span></span>
+              <span class="pro-b"><h3 class="pro-t">{p.t}</h3><span>{p.d}</span><span class="arrow-link">{p.l}{p.k === 'whatsapp' && <span class="visually-hidden">{lang === 'en' ? ' (opens WhatsApp)' : ' (abre WhatsApp)'}</span>}</span></span>
             </a>
           </li>
         ))}
@@ -496,9 +469,6 @@ const T = EN
   .how-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,18,17,.9), rgba(18,18,17,.7) 50%, rgba(18,18,17,.95)); }
 
   /* Novedades */
-  .nov-media { position: relative; }
-  .nov-img { border-radius: var(--radius-xl); width: 100%; }
-  .nov-sello { position: absolute; right: clamp(-8px, -1vw, 16px); bottom: -28px; }
 
   /* Para profesionales */
   .pros { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
