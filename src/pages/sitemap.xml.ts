@@ -1,3 +1,5 @@
+import pikoFin from '../assets/img/hf-piko-mortero-a-la-anilla.jpg';
+import uniFin from '../assets/img/hf-universal-mortero-a-la-anilla.jpg';
 import type { APIRoute } from 'astro';
 import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
@@ -95,14 +97,14 @@ const REEL: Vid = { file: '/videos/reel-kreox-piko-universal.mp4', thumb: pikoSu
 
 const VIDEOS: Record<string, Vid[]> = {
   '/': [{ file: '/videos/hero-niveladores-kreox.mp4', thumb: hero, title: 'Niveladores KREOX sobre mortero autonivelante', description: 'PIKO y Nivelador Universal de KREOX sobre mortero autonivelante recién vertido.', duration: 12 }, REEL],
-  [`${NIVELACION}piko/`]: [{ file: '/videos/piko-vertido-suelo-radiante.mp4', thumb: pikoSuelo, title: 'PIKO: vertido de mortero autonivelante sobre suelo radiante', description: 'El mortero autonivelante cubre el suelo radiante y sube hasta la anilla de los niveladores PIKO, marcada con láser.', duration: 8 }, REEL],
+  [`${NIVELACION}piko/`]: [{ file: '/videos/piko-vertido-suelo-radiante.mp4', thumb: pikoFin, title: 'PIKO: vertido de mortero autonivelante sobre suelo radiante', description: 'El mortero autonivelante cubre el suelo radiante y sube hasta la anilla de los niveladores PIKO, marcada con láser.', duration: 8 }, REEL],
   [`${NIVELACION}nivelador-universal/`]: [
-    { file: '/videos/universal-vertido-recrecido.mp4', thumb: uniVertido, title: 'Nivelador Universal: recrecido con mortero autonivelante', description: 'El mortero autonivelante avanza sobre la solera entre los Niveladores Universales de KREOX.', duration: 8 },
+    { file: '/videos/universal-vertido-recrecido.mp4', thumb: uniFin, title: 'Nivelador Universal: recrecido con mortero autonivelante', description: 'El mortero autonivelante avanza sobre la solera entre los Niveladores Universales de KREOX.', duration: 8 },
     { file: '/videos/nivelador-universal-instalacion.mp4', thumb: uniPlano, title: 'Instalación del Nivelador Universal en obra', description: 'Marcado de la cota con láser con receptor y ajuste de la anilla del Nivelador Universal.', duration: 119 },
   ],
   [E.home]: [{ file: '/videos/hero-niveladores-kreox.mp4', thumb: hero, title: 'KREOX levellers on liquid screed', description: 'KREOX Insulation and Universal Screed Levellers on freshly poured liquid screed.', duration: 12 }],
-  [E.piko]: [{ file: '/videos/piko-vertido-suelo-radiante.mp4', thumb: pikoSuelo, title: 'Insulation Screed Leveller: pouring liquid screed over underfloor heating', description: 'Liquid screed covers the underfloor heating and rises up to the ring of the Insulation Screed Levellers, set with a laser.', duration: 8 }],
-  [E.universal]: [{ file: '/videos/universal-vertido-recrecido.mp4', thumb: uniVertido, title: 'Universal Screed Leveller: liquid screed on a slab', description: 'Liquid screed flows over the slab between KREOX Universal Screed Levellers.', duration: 8 }],
+  [E.piko]: [{ file: '/videos/piko-vertido-suelo-radiante.mp4', thumb: pikoFin, title: 'Insulation Screed Leveller: pouring liquid screed over underfloor heating', description: 'Liquid screed covers the underfloor heating and rises up to the ring of the Insulation Screed Levellers, set with a laser.', duration: 8 }],
+  [E.universal]: [{ file: '/videos/universal-vertido-recrecido.mp4', thumb: uniFin, title: 'Universal Screed Leveller: liquid screed on a slab', description: 'Liquid screed flows over the slab between KREOX Universal Screed Levellers.', duration: 8 }],
 };
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
