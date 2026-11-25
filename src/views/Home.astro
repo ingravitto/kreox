@@ -5,7 +5,7 @@ import Steps from '../components/Steps.astro';
 import Marquee from '../components/Marquee.astro';
 import WeightBars from '../components/WeightBars.astro';
 import NoticiaCard from '../components/NoticiaCard.astro';
-import CtaTarifa from '../components/CtaTarifa.astro';
+import CtaContacto from '../components/CtaContacto.astro';
 import AutoVideo from '../components/AutoVideo.astro';
 import { PRODUCTOS, M2_POR_NIVELADOR } from '../data/site';
 import { TILE_PRODUCTS } from '../data/azulejos';
@@ -37,7 +37,7 @@ const featuredNews = EN ? '/en/news/leveling-systems-for-self-leveling-mortar/' 
 const T = EN
   ? {
       title: 'KREOX · Self-leveling mortar levelers and tile systems',
-      description: 'Spanish manufacturer of levelers for self-leveling mortar, PIKO and Nivelador Universal, and tile leveling systems. Ask for the 2027 price list on WhatsApp.',
+      description: 'Spanish manufacturer of levelers for self-leveling mortar, PIKO and Nivelador Universal, and tile leveling systems. Message us on WhatsApp.',
       heroAlt: 'KREOX PIKO and Nivelador Universal levelers on freshly poured self-leveling mortar',
       heroVideo: 'PIKO and Nivelador Universal on self-leveling mortar',
       h1: 'Levelers for self-leveling mortar', h1Accent: 'made in Spain',
@@ -46,7 +46,7 @@ const T = EN
       toLevelers: 'Go to the levelers',
       chooser: 'What are you leveling?',
       ch: [['Underfloor heating', 'PIKO →'], ['Screed on a slab or subfloor', 'Nivelador Universal →'], ['Tile installation', 'Kalzo and Kuñas →'], ['How many do I need?', 'Calculator →']],
-      marquee: ['Patented product', 'Made in Spain', 'Recycled material', 'Rust-free', 'Reusable', 'Laser compatible', 'Third generation'],
+      marquee: ['Patented product', 'Made in Spain', 'Recycled material', 'Rust-free', 'Reusable', 'Laser compatible', 'For underfloor heating and screeds'],
       prodEyebrow: 'Leveling with self-leveling mortar', prodTitle: 'Two levelers. One method.',
       prodSide: 'Mark the level with a laser, adjust the ring and pour. Choose according to your substrate.',
       pikoAlt: 'KREOX PIKO, leveler for underfloor heating', pikoChip: 'Underfloor heating',
@@ -80,10 +80,17 @@ const T = EN
       coGen: 'Generation', coSpain: 'Made in Spain', coRecycled: 'Recycled material', coMeet: 'About us',
       fabAlt: 'KREOX PIKO and Nivelador Universal levelers, made in Ibi (Alicante, Spain)',
       newsEyebrow: 'News', newsTitle: 'The latest from KREOX', newsAll: 'All news',
+      proEyebrow: 'For professionals', proTitle: 'Built for people who level floors every day.',
+      pros: [
+        { t: 'Underfloor heating installers', d: 'PIKO pushes into the insulation board without tools. Box of 100.', l: 'See PIKO', k: 'piko' },
+        { t: 'Self-leveling mortar applicators', d: 'Mark the level with a standard laser or a laser with receiver; the ring stays visible while pouring.', l: 'See levelers', k: 'nivelacion' },
+        { t: 'Screeds and refurbishment', d: 'Nivelador Universal with a flat base for slabs, subfloors or existing floors.', l: 'See Nivelador Universal', k: 'universal' },
+        { t: 'Builders’ merchants and distributors', d: 'Made in our own factory in Ibi (Alicante), with spare parts sold separately.', l: 'Talk to our sales team', k: 'contacto' },
+      ],
     }
   : {
       title: 'KREOX · Niveladores para mortero autonivelante y azulejos',
-      description: 'Fabricante español de niveladores para mortero autonivelante, PIKO y Universal, y de sistemas para colocar azulejos. Pide la tarifa 2027 por WhatsApp.',
+      description: 'Fabricante español de niveladores para mortero autonivelante, PIKO y Universal, y de sistemas para colocar azulejos. Te asesoramos por WhatsApp.',
       heroAlt: 'Niveladores PIKO y Universal de KREOX sobre mortero autonivelante recién vertido',
       heroVideo: 'PIKO y Nivelador Universal sobre mortero autonivelante',
       h1: 'Niveladores para mortero autonivelante', h1Accent: 'fabricados en España',
@@ -92,7 +99,7 @@ const T = EN
       toLevelers: 'Ir a los niveladores',
       chooser: '¿Qué vas a nivelar?',
       ch: [['Suelo radiante', 'PIKO →'], ['Recrecido sobre forjado o solera', 'Nivelador Universal →'], ['Colocación de azulejos', 'Kalzo y Kuñas →'], ['¿Cuántos necesito?', 'Calculadora →']],
-      marquee: ['Producto patentado', 'Fabricado en España', 'Material reciclado', 'Sin óxido', 'Reutilizable', 'Compatible con láser', 'Tercera generación'],
+      marquee: ['Producto patentado', 'Fabricado en España', 'Material reciclado', 'Sin óxido', 'Reutilizable', 'Compatible con láser', 'Para suelo radiante y recrecidos'],
       prodEyebrow: 'Nivelación con mortero autonivelante', prodTitle: 'Dos niveladores. Un mismo método.',
       prodSide: 'Marca la cota con láser, ajusta la anilla y vierte. Elige según el soporte de tu obra.',
       pikoAlt: 'PIKO de KREOX, nivelador para suelo radiante', pikoChip: 'Suelo radiante',
@@ -126,6 +133,13 @@ const T = EN
       coGen: 'Generación', coSpain: 'Hecho en España', coRecycled: 'Material reciclado', coMeet: 'Conócenos',
       fabAlt: 'Niveladores PIKO y Universal de KREOX, fabricados en Ibi (Alicante)',
       newsEyebrow: 'Noticias', newsTitle: 'Lo último de KREOX', newsAll: 'Todas las noticias',
+      proEyebrow: 'Para profesionales', proTitle: 'Pensado para quien nivela todos los días.',
+      pros: [
+        { t: 'Instaladores de suelo radiante', d: 'El PIKO se clava en la placa de aislamiento sin herramientas. Caja de 100 unidades.', l: 'Ver PIKO', k: 'piko' },
+        { t: 'Aplicadores de mortero autonivelante', d: 'Cota con láser habitual o con receptor y anilla visible durante el vertido.', l: 'Ver niveladores', k: 'nivelacion' },
+        { t: 'Recrecidos y rehabilitación', d: 'Nivelador Universal con base plana para forjado, solera o pavimento existente.', l: 'Ver Nivelador Universal', k: 'universal' },
+        { t: 'Almacenes y distribuidores', d: 'Fabricación propia en Ibi (Alicante) y recambios por pieza.', l: 'Hablar con comercial', k: 'contacto' },
+      ],
     };
 
 ---
@@ -311,6 +325,26 @@ const T = EN
     </div>
   </section>
 
+  <!-- PARA PROFESIONALES -->
+  <section class="section pros-sec" aria-labelledby="pros-h">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">{T.proEyebrow}</span>
+        <h2 id="pros-h">{T.proTitle}</h2>
+      </div>
+      <ul class="pros">
+        {T.pros.map((p, i) => (
+          <li data-reveal style={`--d:${i * 0.06}s`}>
+            <a href={P[p.k as 'piko' | 'nivelacion' | 'universal' | 'contacto']}>
+              <span class="pro-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <span class="pro-b"><h3 class="pro-t">{p.t}</h3><span>{p.d}</span><span class="arrow-link">{p.l}</span></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
   <!-- AZULEJOS -->
   <section class="tiles section section--paper">
     <Image src={imgLineas} alt="" widths={[960]} sizes="60vw" class="lineart" />
@@ -366,7 +400,7 @@ const T = EN
     </div>
   </section>
 
-  <CtaTarifa />
+  <CtaContacto />
 </Base>
 
 <style>
@@ -466,8 +500,21 @@ const T = EN
   .nov-img { border-radius: var(--radius-xl); width: 100%; }
   .nov-sello { position: absolute; right: clamp(-8px, -1vw, 16px); bottom: -28px; }
 
+  /* Para profesionales */
+  .pros { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  @media (min-width: 760px) { .pros { grid-template-columns: 1fr 1fr; gap: 16px; } }
+  @media (min-width: 1100px) { .pros { grid-template-columns: repeat(4, 1fr); } }
+  .pros a { display: flex; gap: 14px; height: 100%; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; color: var(--ink); background: var(--white); transition: border-color .2s, transform .2s var(--ease); }
+  .pros a:hover { border-color: var(--ink); transform: translateY(-2px); }
+  .pro-n { font-weight: 600; color: var(--sand-strong); font-variant-numeric: tabular-nums; }
+  .pro-b { display: flex; flex-direction: column; gap: 6px; }
+  .pro-t { margin: 0; font-size: 1.05rem; line-height: 1.3; }
+  .pro-b > span:not(.arrow-link) { color: var(--text-soft); font-size: .95rem; }
+  .pro-b .arrow-link { margin-top: auto; padding-top: 8px; }
+
   /* Azulejos */
   .tiles { overflow: hidden; }
+  @media (max-width: 759px) { .tiles .grid-4 { grid-template-columns: 1fr 1fr; gap: 14px; } .tiles .tile h3 { font-size: 1rem; } }
   .lineart { position: absolute; right: -8%; top: 4%; width: min(60vw, 820px); opacity: .5; mix-blend-mode: multiply; pointer-events: none; }
   .tile { display: block; text-decoration: none; }
   .tile-img { border-radius: var(--radius); overflow: hidden; margin-bottom: 16px; }

@@ -41,7 +41,7 @@ ${noticias.map((n) => `- [${n.data.title}](${U}${noticiaUrl(n)}) (${n.data.date.
 ## Empresa y contacto
 
 - [Empresa](${U}/empresa/)
-- [Contacto](${U}/contacto/). La tarifa 2027 se pide por WhatsApp (${SITE.whatsappDisplay}). Teléfono ${SITE.phone} · ${SITE.email} · exportación: ${SITE.emailExport}
+- [Contacto](${U}/contacto/). El contacto comercial es por WhatsApp (${SITE.whatsappDisplay}). Teléfono ${SITE.phone} · ${SITE.email} · exportación: ${SITE.emailExport}
 - Dirección: ${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.city} (${SITE.address.region}), España
 
 ## English
@@ -54,7 +54,7 @@ ${noticias.map((n) => `- [${n.data.title}](${U}${noticiaUrl(n)}) (${n.data.date.
 - [Spare parts](${U}${E.recambios}) · [Leveler calculator](${U}${E.calculadora}) · [PIKO vs steel tripod](${U}${E.vsTripode}) · [Leveling systems](${U}${E.nivelacion}) · [FAQ](${U}${E.faq})
 - Tile leveling system: ${TILE_PRODUCTS_EN.map((p) => `[${p.name}](${U}${E.azulejos}${p.slug}/)`).join(' · ')}
 ${news.map((n) => `- [${n.data.title}](${U}${newsUrl(n)}) (${n.data.date.toISOString().slice(0, 10)})`).join('\n')}
-- [Company](${U}${E.empresa}) · [Contact](${U}${E.contacto}). The 2027 price list is requested on WhatsApp (${SITE.whatsappDisplay}). Export: ${SITE.emailExport}
+- [Company](${U}${E.empresa}) · [Contact](${U}${E.contacto}). Sales contact is via WhatsApp (${SITE.whatsappDisplay}). Export: ${SITE.emailExport}
 `;
   return new Response(txt, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 };

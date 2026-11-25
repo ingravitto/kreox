@@ -45,7 +45,7 @@ Después de crearlos: **Actions → Construir y publicar → Run workflow → pr
    - En GA4 → Administrar → Gestión de acceso a la propiedad: añade el email de la cuenta de servicio como **Lector**.
    - En Search Console → Configuración → Usuarios y permisos: añade el mismo email con permiso **Restringido**.
 
-La web solo carga Google Analytics si la persona acepta las cookies (botones Aceptar y Rechazar con el mismo peso). Eventos que se miden: `click_tarifa`, `click_whatsapp`, `click_telefono` y `generate_lead` (formulario enviado).
+La web solo carga Google Analytics si la persona acepta las cookies (botones Aceptar y Rechazar con el mismo peso). Eventos que se miden: `click_whatsapp` (con el parámetro `producto`), `click_telefono` y `generate_lead` (formulario enviado).
 
 ## Seguridad
 

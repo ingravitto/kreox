@@ -4,8 +4,8 @@ import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import Steps from '../../components/Steps.astro';
 import Faq from '../../components/Faq.astro';
-import CtaTarifa from '../../components/CtaTarifa.astro';
-import { AZULEJOS, SITE, waTarifa } from '../../data/site';
+import CtaContacto from '../../components/CtaContacto.astro';
+import { AZULEJOS, SITE, waConsulta } from '../../data/site';
 import { TILE_PRODUCTS, TILE_FAQ, type TileProduct } from '../../data/azulejos';
 import { faqSchema, ORG_ID } from '../../data/schema';
 
@@ -45,7 +45,7 @@ const schema = [
     crumbs={[{ name: 'Azulejos', url: AZULEJOS }, { name: p.name, url }]}
   >
     <div class="btn-row">
-      <a class="btn btn--sand" href={waTarifa("azulejos")} target="_blank" rel="noopener">Pedir tarifa 2027<span class="visually-hidden"> (abre WhatsApp)</span></a>
+      <a class="btn btn--sand" href={waConsulta('azulejos')} target="_blank" rel="noopener">Consultar por WhatsApp<span class="visually-hidden"> (abre WhatsApp)</span></a>
       <a class="btn btn--ghost" href={SITE.tileCalculator}>Calculadora de piezas</a>
     </div>
   </PageHero>
@@ -84,7 +84,7 @@ const schema = [
   </section>
 
   <Faq faqs={TILE_FAQ} />
-  <CtaTarifa interes="azulejos" text="Escríbenos por WhatsApp y te enviamos la tarifa 2027 de Kalzos, Kuñas y Alikates." />
+  <CtaContacto interes="azulejos" text="Escríbenos por WhatsApp y te asesoramos sobre Kalzos, Kuñas y Alikates para tu obra." />
 </Base>
 <style>
   .pimg { border-radius: 22px; width: 100%; aspect-ratio: 1; object-fit: cover; }

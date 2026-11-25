@@ -16,7 +16,7 @@ const { t } = useT(Astro.url);
 </div>
 <style>
   .partners { display: flex; flex-wrap: wrap; align-items: center; gap: 24px 48px; margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--line-dark); }
-  .label { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--on-dark-soft); }
+  .label { font-size: var(--fs-label); letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--on-dark-soft); }
   ul { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 28px 48px; margin: 0; padding: 0; }
   li :global(img) { height: 34px; width: auto; opacity: 0.6; transition: opacity .2s; }
   li :global(img):hover { opacity: 1; }

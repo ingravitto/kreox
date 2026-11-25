@@ -108,6 +108,10 @@ const graph = [organizationSchema(), websiteSchema(), ...(crumbs ? [breadcrumbSc
           entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
         }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
         els.forEach((el) => io.observe(el));
+        // Si se baja muy rápido, el observador puede saltarse bloques: al parar el scroll se muestran los que ya están por encima o en pantalla.
+        let t: number | undefined;
+        const sweep = () => document.querySelectorAll('[data-reveal]:not(.is-in)').forEach((el) => { if (el.getBoundingClientRect().top < innerHeight) { el.classList.add('is-in'); io.unobserve(el); } });
+        addEventListener('scroll', () => { clearTimeout(t); t = window.setTimeout(sweep, 120); }, { passive: true });
       } else {
         els.forEach((el) => el.classList.add('is-in'));
       }

@@ -1,11 +1,12 @@
 ---
+// Bloque final de contacto: WhatsApp (contacto principal, con mensaje según el producto) y llamada.
 import { Image } from 'astro:assets';
 import bg from '../assets/img/fondo-piedra-productos-kreox.jpg';
-import { SITE, waTarifa } from '../data/site';
+import { SITE, waConsulta, type Interes } from '../data/site';
 import WaIcon from './WaIcon.astro';
 import { useT } from '../i18n/ui';
 const { lang, t } = useT(Astro.url);
-interface Props { title?: string; text?: string; interes?: 'nivelacion' | 'azulejos' }
+interface Props { title?: string; text?: string; interes?: Interes }
 const {
   title = t('ctaTitle'),
   text = t('ctaText'),
@@ -20,8 +21,8 @@ const {
     <h2>{title}</h2>
     <p class="lead">{text}</p>
     <div class="btn-row">
-      <a class="btn btn--sand" href={waTarifa(interes, lang)} target="_blank" rel="noopener"><WaIcon size={16} /> {t('ctaButton')}<span class="visually-hidden">{t('opensWhatsApp')}</span></a>
-      <a class="btn btn--ghost" href={SITE.phoneHref}>{SITE.phone}</a>
+      <a class="btn btn--sand" href={waConsulta(interes, lang)} target="_blank" rel="noopener"><WaIcon size={16} /> {t('ctaButton')}<span class="visually-hidden">{t('opensWhatsApp')}</span></a>
+      <a class="btn btn--ghost" href={SITE.phoneHref}><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1z" fill="currentColor"/></svg> {t('callUs')} <span class="visually-hidden">{SITE.phone}</span></a>
     </div>
   </div>
 </section>
@@ -32,4 +33,6 @@ const {
   .inner { position: relative; max-width: var(--container); }
   h2 { max-width: 640px; }
   .lead { color: var(--on-dark); max-width: 560px; }
+  .btn svg { width: 16px; height: 16px; }
+  @media (max-width: 600px) { .btn-row .btn { width: 100%; justify-content: center; } }
 </style>

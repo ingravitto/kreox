@@ -68,7 +68,7 @@ const data = {
 <style>
   .calc { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-xl); padding: clamp(24px, 3.4vw, 44px); color: var(--text); box-shadow: var(--shadow); }
   .fields { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); align-items: end; }
-  label > span, legend { display: block; font-weight: 600; font-size: 0.72rem; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 10px; color: var(--text-soft); }
+  label > span, legend { display: block; font-weight: 600; font-size: var(--fs-label); letter-spacing: var(--tr-label); text-transform: uppercase; margin-bottom: 10px; color: var(--text-soft); }
   input[type='number'] { width: 100%; font: 500 1.6rem/1 var(--font); letter-spacing: -0.02em; padding: 14px 0; border: 0; border-bottom: 2px solid var(--ink); background: transparent; color: var(--ink); border-radius: 0; }
   input[type='number']:focus { outline: none; border-color: var(--sand); }
   fieldset { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
@@ -81,7 +81,7 @@ const data = {
   .result { display: grid; gap: 1px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); margin-top: 32px; background: var(--line); border-radius: var(--radius); overflow: hidden; }
   .result div { background: var(--paper); padding: 20px 22px; }
   .result strong { display: block; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 600; letter-spacing: -0.03em; color: var(--ink); line-height: 1.05; }
-  .result span { font-size: 0.74rem; letter-spacing: .12em; text-transform: uppercase; color: var(--text-soft); }
+  .result span { font-size: var(--fs-label); letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--text-soft); }
   .result .vs { background: var(--ink); }
   .result .vs strong { color: #e07a66; }
   .result .vs span { color: var(--on-dark-soft); }

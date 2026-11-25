@@ -62,6 +62,7 @@ export const FAQ_UNIVERSAL = [
 
 export const FAQ_NIVELACION = [
   { q: '¿Qué es un sistema de nivelación para mortero autonivelante?', a: 'Es un conjunto de niveladores que se colocan sobre el soporte antes del vertido y marcan, con una anilla regulable por láser, la altura de acabado del mortero autonivelante. Sirve para controlar el espesor y conseguir una superficie uniforme.' },
+  { q: '¿Trípodes, pivotes o niveladores de mortero: es lo mismo?', a: 'En obra se les llama de muchas formas: trípodes de nivelación, pivotes, pinchos, niveladores de mortero o niveladores de recrecido. Todos sirven para marcar la cota de acabado antes de verter el mortero autonivelante. PIKO y Nivelador Universal son niveladores de plástico que hacen ese trabajo sin el peso ni el óxido del trípode de acero.' },
   { q: '¿Qué diferencia hay entre PIKO y el Nivelador Universal?', a: 'El PIKO tiene punta y se clava en la placa de aislamiento del suelo radiante. El Nivelador Universal tiene base plana y se apoya sobre superficies duras, por lo que está pensado para recrecidos.' },
   { q: '¿Cuántos niveladores necesito por m²?', a: `Se recomienda aproximadamente un nivelador cada ${M2_POR_NIVELADOR} m². Para 100 m², unos ${Math.ceil(100 / M2_POR_NIVELADOR)} niveladores.` },
   { q: '¿Por qué no usar trípodes de acero?', a: 'Pesan cerca de 1 kg cada uno, se oxidan con el pH alcalino del mortero, se limpian mal y requieren asentar bien sus tres patas. Los niveladores KREOX pesan entre 20 y 250 g, no se oxidan y se colocan en segundos.' },

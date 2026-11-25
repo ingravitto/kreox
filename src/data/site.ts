@@ -31,20 +31,33 @@ export const SITE = {
   whatsappDisplay: '+34 611 87 50 47',
 } as const;
 
-export const TARIFA = 'Tarifa 2027';
 const WA_BASE = 'https://api.whatsapp.com/send?phone=34611875047&text=';
-/** La tarifa se pide por WhatsApp. `interes` personaliza el mensaje ya escrito; `lang` lo escribe en inglés en /en/. */
-export function waTarifa(interes: 'nivelacion' | 'azulejos' | 'general' = 'general', lang: 'es' | 'en' = 'es') {
-  if (lang === 'en') {
-    const line = interes === 'nivelacion' ? ' for self-leveling mortar levelers' : interes === 'azulejos' ? ' for the tile leveling system' : '';
-    return WA_BASE + encodeURIComponent(`Hello, I would like to receive the KREOX 2027 price list${line}.`);
-  }
-  const linea = interes === 'nivelacion' ? ' de niveladores para mortero autonivelante' : interes === 'azulejos' ? ' de colocación de azulejos' : '';
-  return WA_BASE + encodeURIComponent(`Hola, quiero recibir la nueva tarifa 2027 de KREOX${linea}.`);
+/** Interés de la consulta: personaliza el mensaje ya escrito de WhatsApp según la página. */
+export type Interes = 'piko' | 'universal' | 'recambios' | 'nivelacion' | 'azulejos' | 'general';
+const WA_MSG: Record<'es' | 'en', Record<Interes, string>> = {
+  es: {
+    piko: 'Hola, quiero información sobre el PIKO para suelo radiante.',
+    universal: 'Hola, quiero información sobre el Nivelador Universal para recrecidos.',
+    recambios: 'Hola, quiero información sobre los recambios para PIKO y Nivelador Universal.',
+    nivelacion: 'Hola, quiero información sobre los niveladores KREOX para mortero autonivelante.',
+    azulejos: 'Hola, quiero información sobre el sistema KREOX para colocar azulejos.',
+    general: 'Hola, quiero información sobre los niveladores KREOX.',
+  },
+  en: {
+    piko: 'Hello, I would like information about the PIKO for underfloor heating.',
+    universal: 'Hello, I would like information about the Nivelador Universal for screeds.',
+    recambios: 'Hello, I would like information about spare parts for PIKO and Nivelador Universal.',
+    nivelacion: 'Hello, I would like information about KREOX levelers for self-leveling mortar.',
+    azulejos: 'Hello, I would like information about the KREOX tile leveling system.',
+    general: 'Hello, I would like information about KREOX levelers.',
+  },
+};
+/** Contacto principal de la web: WhatsApp con un mensaje ya escrito según el producto y el idioma. */
+export function waConsulta(interes: Interes = 'general', lang: 'es' | 'en' = 'es') {
+  return WA_BASE + encodeURIComponent(WA_MSG[lang][interes]);
 }
 /** Enlace general de WhatsApp con el mensaje en el idioma de la página. */
-export const waInfo = (lang: 'es' | 'en' = 'es') =>
-  lang === 'en' ? WA_BASE + encodeURIComponent('Hello, I would like information about KREOX levelers.') : SITE.whatsapp;
+export const waInfo = (lang: 'es' | 'en' = 'es') => waConsulta('general', lang);
 
 export const NIVELACION = '/nivelacion-mortero-autonivelante/';
 export const AZULEJOS = '/colocacion-azulejos/';

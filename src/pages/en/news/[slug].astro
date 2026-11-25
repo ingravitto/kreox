@@ -6,7 +6,7 @@ import { Image } from 'astro:assets';
 import { render, type CollectionEntry } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
 import Faq from '../../../components/Faq.astro';
-import CtaTarifa from '../../../components/CtaTarifa.astro';
+import CtaContacto from '../../../components/CtaContacto.astro';
 import NoticiaCard from '../../../components/NoticiaCard.astro';
 import { getNews, CATEGORIES_EN, dateEn, newsUrl } from '../../../data/noticias';
 import { faqSchema, ORG_ID } from '../../../data/schema';
@@ -79,7 +79,7 @@ const schema = [article, ...(n.data.faq.length ? [faqSchema(n.data.faq)] : [])];
       </div>
     </section>
   )}
-  <CtaTarifa interes={n.data.category === 'azulejos' ? 'azulejos' : 'nivelacion'} />
+  <CtaContacto interes={n.data.category === 'azulejos' ? 'azulejos' : 'nivelacion'} />
 </Base>
 <style>
   .head { margin-bottom: 28px; }

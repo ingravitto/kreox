@@ -62,6 +62,7 @@ export const FAQ_UNIVERSAL_EN = [
 ];
 
 export const FAQ_NIVELACION_EN = [
+  { q: 'Leveling tripods, screed pins or levelers: are they the same thing?', a: 'On site they go by many names: leveling tripods, screed pins, screed rails, mortar levelers or screed levelers. They all mark the finished level before pouring the self-leveling mortar. PIKO and Nivelador Universal are plastic levelers that do this job without the weight or rust of a steel tripod.' },
   { q: 'What is a leveling system for self-leveling mortar?', a: 'It is a set of levelers placed on the substrate before pouring that mark, with a laser-adjustable ring, the finished height of the self-leveling mortar. It is used to control the thickness and achieve an even surface.' },
   { q: 'What is the difference between PIKO and the Nivelador Universal?', a: 'The PIKO has a tip and is pushed into the insulation board of underfloor heating. The Nivelador Universal has a flat base and rests on hard surfaces, so it is designed for screeds.' },
   { q: 'How many levelers do I need per m²?', a: `We recommend roughly one leveler every ${M2_POR_NIVELADOR} m². For 100 m², about ${n100} levelers.` },

@@ -26,7 +26,7 @@ Archivo Markdown nuevo en `src/content/noticias/<slug>.md` con este frontmatter:
 - `src/data/seo-overrides.json` lo escribe el panel: `{ "/ruta/": { "title", "description" } }`. Base.astro lo aplica; no cambiar su forma.
 - Noticias creadas en el panel: imagen en `src/assets/img/noticias/`, mismo frontmatter. Las reglas de "Noticias" se validan también en el panel (`public/panel/_lib/noticias.php`); si cambian, actualizar ambos.
 - La configuración del panel (usuarios, tokens) se escribe en el job de despliegue desde GitHub Secrets. Nunca en el repositorio ni en el artefacto.
-- Google Analytics 4 solo se carga tras "Aceptar" en el banner (`Analytics.astro`); Aceptar y Rechazar con el mismo peso visual. Eventos: `click_tarifa`, `click_whatsapp`, `click_telefono`, `generate_lead`. Si se añade otra herramienta con cookies, actualizar las dos políticas de cookies.
+- Google Analytics 4 solo se carga tras "Aceptar" en el banner (`Analytics.astro`); Aceptar y Rechazar con el mismo peso visual. Eventos: `click_whatsapp` (parámetro `producto`), `click_telefono`, `generate_lead`. Si se añade otra herramienta con cookies, actualizar las dos políticas de cookies.
 
 ## Comprobaciones antes de hacer commit
 ```
@@ -46,7 +46,8 @@ Las URLs de la web WordPress anterior se redirigen en `public/.htaccess`. Si cam
 - Vídeos: siempre con `AutoVideo` (preload none, póster diferido). No poner `poster` directo en vídeos fuera de la primera pantalla.
 - Submenús: botón con `aria-expanded`; Escape cierra.
 
-## Tarifa y contacto
-- La tarifa (ahora **Tarifa 2027**) se pide **solo por WhatsApp**: usar `waTarifa(interes)` de `src/data/site.ts` en cualquier botón de tarifa. Nunca enlazar la tarifa al formulario.
-- Barra fija del móvil: solo "WhatsApp" y "Nueva tarifa 2027" (las dos abren WhatsApp). En escritorio, botón flotante de WhatsApp.
-- El formulario de /contacto/ es para otras consultas.
+## Contacto (WhatsApp)
+- **No hay botones de tarifa** en la web (decisión del cliente). El contacto principal es WhatsApp con `waConsulta(interes, lang)` de `src/data/site.ts`: `interes` = piko | universal | recambios | nivelacion | azulejos | general, y el mensaje ya escrito cambia según el producto de la página.
+- Barra fija del móvil: "WhatsApp" (principal) y "Llamar". En escritorio, botón flotante de WhatsApp; la cabecera no lleva botón.
+- Bloque final de cada página: `CtaContacto` (WhatsApp + llamar) con el `interes` de la página.
+- El formulario de /contacto/ es para consultas técnicas o por email.

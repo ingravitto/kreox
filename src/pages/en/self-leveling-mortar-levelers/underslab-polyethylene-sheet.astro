@@ -3,8 +3,8 @@
 import PageHero from '../../../components/PageHero.astro';
 import imgHeroBg from '../../../assets/img/fondo-piedra-productos-kreox.jpg';
 import Base from '../../../layouts/Base.astro';
-import CtaTarifa from '../../../components/CtaTarifa.astro';
-import { waTarifa } from '../../../data/site';
+import CtaContacto from '../../../components/CtaContacto.astro';
+import { waConsulta } from '../../../data/site';
 import { PATHS } from '../../../i18n/routes';
 import { productSchema } from '../../../data/schema';
 import img from '../../../assets/img/lamina-polietileno-bajo-solera.png';
@@ -39,7 +39,7 @@ const schema = [
     productAlt="Rolls of KREOX underslab polyethylene sheet in black and clear"
     crumbs={[{ name: 'Leveling', url: R.nivelacion }, { name: 'Underslab sheet', url }]}
   >
-    <div class="btn-row"><a class="btn btn--sand" href={waTarifa('nivelacion', 'en')} target="_blank" rel="noopener">Ask for the 2027 price list<span class="visually-hidden"> (opens WhatsApp)</span></a></div>
+    <div class="btn-row"><a class="btn btn--sand" href={waConsulta('nivelacion', 'en')} target="_blank" rel="noopener">Ask us on WhatsApp<span class="visually-hidden"> (opens WhatsApp)</span></a></div>
   </PageHero>
   <section class="section">
     <div class="container">
@@ -61,7 +61,7 @@ const schema = [
       </div>
     </div>
   </section>
-  <CtaTarifa />
+  <CtaContacto />
 </Base>
 <style>
   a.card { text-decoration: none; color: inherit; }

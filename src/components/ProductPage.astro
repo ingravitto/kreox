@@ -12,8 +12,9 @@ import CompareTripode from './CompareTripode.astro';
 import WeightBars from './WeightBars.astro';
 import Calculadora from './Calculadora.astro';
 import Faq from './Faq.astro';
-import CtaTarifa from './CtaTarifa.astro';
-import { SITE, waTarifa } from '../data/site';
+import CtaContacto from './CtaContacto.astro';
+import WaIcon from './WaIcon.astro';
+import { SITE, waConsulta } from '../data/site';
 import { useT } from '../i18n/ui';
 import NoticiaCard from './NoticiaCard.astro';
 import { getNoticias, getNews } from '../data/noticias';
@@ -44,7 +45,8 @@ const EN = lang === 'en';
 const L = EN
   ? {
       crumb: 'Self-leveling mortar', crumbShort: 'Leveling', chips: ['Patented product', 'Made in Spain', 'Reusable'],
-      ask: 'Ask for the 2027 price list', howMany: 'How many do I need?', opens: ' (opens WhatsApp)',
+      ask: 'Ask us on WhatsApp', howMany: 'How many do I need?', opens: ' (opens WhatsApp)',
+      onPage: 'On this page', secs: [['datos', 'Technical data'], ['como-se-usa', 'How to use'], ['comparativa', 'vs steel tripod'], ['calculadora', 'Calculator'], ['faq', 'FAQ']],
       dataEyebrow: 'Technical sheet · to the millimeter', dataTitle: `${p.name} technical data`, plano: 'Dimensions in millimeters according to the manufacturer’s drawing.',
       howEyebrow: 'How it works', howTitle: `How ${p.name} levels,`, howAccent: 'step by step.', howText: 'Tap each step or scroll down and you will see the process in a cross-section of the job.',
       installEyebrow: 'Real installation', installTitle: 'This is how it is placed on site',
@@ -63,7 +65,8 @@ const L = EN
     }
   : {
       crumb: 'Nivelación autonivelante', crumbShort: 'Nivelación', chips: ['Producto patentado', 'Fabricado en España', 'Reutilizable'],
-      ask: 'Pedir tarifa 2027', howMany: '¿Cuántos necesito?', opens: ' (abre WhatsApp)',
+      ask: 'Consultar por WhatsApp', howMany: '¿Cuántos necesito?', opens: ' (abre WhatsApp)',
+      onPage: 'En esta página', secs: [['datos', 'Datos técnicos'], ['como-se-usa', 'Cómo se usa'], ['comparativa', 'Frente al trípode'], ['calculadora', 'Calculadora'], ['preguntas-frecuentes', 'Preguntas']],
       dataEyebrow: 'Ficha técnica · al milímetro', dataTitle: `Datos técnicos del ${p.name}`, plano: 'Medidas en milímetros según el plano del fabricante.',
       howEyebrow: 'Cómo funciona', howTitle: `Así nivela ${p.name},`, howAccent: 'paso a paso.', howText: 'Pulsa cada paso o baja con el scroll y verás el proceso en un corte de la obra.',
       installEyebrow: 'Instalación real', installTitle: 'Así se coloca en obra',
@@ -125,7 +128,7 @@ const schema = [
   <PageHero eyebrow={p.hero.eyebrow} title={p.hero.title} accent={p.hero.accent} lead={p.hero.lead} bg={p.hero.bg} bgAlt={p.hero.bgAlt} product={p.hero.product} productAlt={p.hero.productAlt} crumbs={[{ name: L.crumbShort, url: P.nivelacion }, { name: p.name, url }]}>
     <div class="chips hero-chips"><span class="chip chip--sand">{L.chips[0]}</span><span class="chip">{L.chips[1]}</span><span class="chip">{L.chips[2]}</span></div>
     <div class="btn-row">
-      <a class="btn btn--sand" href={waTarifa("nivelacion", lang)} target="_blank" rel="noopener">{L.ask} <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="visually-hidden">{L.opens}</span></a>
+      <a class="btn btn--sand" href={waConsulta(p.kind, lang)} target="_blank" rel="noopener"><WaIcon size={16} /> {L.ask}<span class="visually-hidden">{L.opens}</span></a>
       <a class="btn btn--ghost" href="#calculadora">{L.howMany}</a>
     </div>
   </PageHero>
@@ -137,6 +140,12 @@ const schema = [
       </dl>
     </div>
   </section>
+
+  <nav class="secnav" aria-label={L.onPage} data-secnav>
+    <div class="container"><ul>
+      {L.secs.map(([id, label]) => <li><a href={`#${id}`}>{label}</a></li>)}
+    </ul></div>
+  </nav>
 
   <section class="section section--paper" id="datos">
     <div class="container">
@@ -274,8 +283,33 @@ const schema = [
       </div>
     </section>
   )}
-  <CtaTarifa title={p.cta.title} text={p.cta.text} />
+  <CtaContacto title={p.cta.title} text={p.cta.text} interes={p.kind} />
 </Base>
+<script>
+  // Menú de secciones: marca la sección visible y mantiene su chip a la vista.
+  const nav = document.querySelector<HTMLElement>('[data-secnav]');
+  if (nav && 'IntersectionObserver' in window) {
+    const links = [...nav.querySelectorAll<HTMLAnchorElement>('a')];
+    const map = new Map(links.map((a) => [a.hash.slice(1), a]));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        links.forEach((a) => a.removeAttribute('aria-current'));
+        const a = map.get(e.target.id);
+        if (a) { a.setAttribute('aria-current', 'location'); a.scrollIntoView({ block: 'nearest', inline: 'nearest' }); }
+      });
+    }, { rootMargin: '-35% 0px -60% 0px' });
+    map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+    // Por encima de la primera sección no hay ninguna marcada
+    const first = document.getElementById(links[0]?.hash.slice(1) || '');
+    addEventListener('scroll', () => {
+      if (first && first.getBoundingClientRect().top > innerHeight * 0.4) {
+        links.forEach((a) => a.removeAttribute('aria-current'));
+        nav.querySelector('ul')?.scrollTo({ left: 0 });
+      }
+    }, { passive: true });
+  }
+</script>
 
 <style>
   .hero-chips { margin-top: 26px; }
@@ -291,7 +325,7 @@ const schema = [
   .kpis dl > div:last-child { border-right: 0; }
   .kpis dt { color: var(--white); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1; }
   .kpis dt small { font-size: 0.45em; color: var(--sand); margin-left: 4px; letter-spacing: 0; }
-  .kpis dd { margin: 10px 0 0; color: var(--on-dark-soft); font-size: 0.74rem; letter-spacing: .16em; text-transform: uppercase; }
+  .kpis dd { margin: 10px 0 0; color: var(--on-dark-soft); font-size: var(--fs-label); letter-spacing: var(--tr-label); text-transform: uppercase; }
 
   @media (min-width: 960px) { .plano { position: sticky; top: calc(var(--header-h) + 28px); } }
   .plano { margin: 0; background: #dcdcdc; border-radius: var(--radius-xl); padding: clamp(14px, 2vw, 24px); }
@@ -329,6 +363,21 @@ const schema = [
   .part:hover :global(img) { transform: scale(1.06) rotate(-3deg); }
   .part h3 { font-size: 1.05rem; margin-bottom: .2em; }
   .part p { margin: 0; }
+  /* Menú de secciones: fijo bajo la cabecera, desplazable en horizontal en móvil */
+  .secnav { position: sticky; top: var(--header-h); z-index: 30; background: rgba(255,255,255,.94); backdrop-filter: saturate(140%) blur(10px); -webkit-backdrop-filter: saturate(140%) blur(10px); border-bottom: 1px solid var(--line); }
+  .secnav ul { list-style: none; margin: 0; padding: 10px 0; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity; }
+  .secnav ul::-webkit-scrollbar { display: none; }
+  .secnav li { flex: none; scroll-snap-align: start; }
+  .secnav a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 500; font-size: .92rem; white-space: nowrap; background: var(--white); }
+  .secnav a:hover { border-color: var(--ink); }
+  .secnav a[aria-current='location'] { background: var(--ink); border-color: var(--ink); color: var(--white); }
+  :global(#datos), :global(#como-se-usa), :global(#comparativa), :global(#calculadora), :global(#preguntas-frecuentes), :global(#faq) { scroll-margin-top: calc(var(--header-h) + 64px); }
+  @media (max-width: 759px) {
+    .part { display: grid; grid-template-columns: 72px 1fr; column-gap: 16px; align-items: center; text-align: left; padding: 14px 16px; }
+    .part :global(img) { grid-row: 1 / 3; width: 72px; height: 72px; margin: 0; }
+    .part h3 { font-size: 1rem; align-self: end; }
+    .part p { align-self: start; }
+  }
 
   .other { display: flex; gap: 18px; align-items: center; margin-top: 32px; padding: 16px; border-radius: var(--radius); background: var(--white); text-decoration: none; transition: transform .3s var(--ease); }
   .other:hover { transform: translateX(6px); }

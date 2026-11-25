@@ -3,7 +3,7 @@ import PageHero from '../components/PageHero.astro';
 import imgHeroBg from '../assets/img/packaging-kreox-kalzo-kuna.jpg';
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import CtaTarifa from '../components/CtaTarifa.astro';
+import CtaContacto from '../components/CtaContacto.astro';
 import { NIVELACION, AZULEJOS, SITE } from '../data/site';
 import imgFabrica from '../assets/img/hero-productos-kreox.jpg';
 import SelloPatentado from '../components/SelloPatentado.astro';
@@ -90,7 +90,7 @@ const noticias = (await getNoticias()).filter((n) => n.data.category === 'empres
       </div>
     </section>
   )}
-  <CtaTarifa />
+  <CtaContacto />
 </Base>
 <style>
   .photo { border-radius: var(--radius-xl); width: 100%; }

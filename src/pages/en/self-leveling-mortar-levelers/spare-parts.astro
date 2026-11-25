@@ -4,7 +4,7 @@ import PageHero from '../../../components/PageHero.astro';
 import imgHeroBg from '../../../assets/img/hero-productos-kreox.jpg';
 import { Image } from 'astro:assets';
 import Base from '../../../layouts/Base.astro';
-import CtaTarifa from '../../../components/CtaTarifa.astro';
+import CtaContacto from '../../../components/CtaContacto.astro';
 import Faq from '../../../components/Faq.astro';
 import { PATHS } from '../../../i18n/routes';
 import { productSchema, faqSchema } from '../../../data/schema';
@@ -19,14 +19,14 @@ const items = [
   { id: 'universal-leveling-base', name: 'Universal leveling base', img: imgBase, para: 'Nivelador Universal', caja: 40, alt: 'Lime-green universal leveling base spare part', text: 'Flat, reinforced base that keeps the Nivelador Universal stable on any surface. Harder and more resistant during setting.' },
   { id: 'universal-metal-leveling-ring', name: 'Universal metal leveling ring', img: imgAnilla, para: 'Nivelador Universal', caja: 40, alt: 'Universal metal leveling ring spare part', text: 'Metal part of the Nivelador Universal base, available as a spare part to extend the life of the system.' },
 ];
-// FAQ built only from the data on this page (parts, compatibility and boxes) and the price list rules.
+// FAQ built only from the data on this page (parts, compatibility and boxes) and WhatsApp contact.
 const [washer, base, ring] = items;
 const faqs = [
   { q: 'What spare parts are there for KREOX levelers?', a: `Three parts: the ${washer.name.toLowerCase()} (for ${washer.para}), the ${base.name.toLowerCase()} and the ${ring.name.toLowerCase()} (both for the ${base.para}).` },
   { q: 'Which spare part does the PIKO use?', a: `The ${washer.name.toLowerCase()}, the part that marks the height of the mortar. The 2026 version has a fiber additive and a color that is easier to see on site.` },
   { q: 'Why buy spare parts instead of new levelers?', a: 'Because the levelers are reusable: they are removed after pouring, cleaned and used again. If a part wears out, only that part is replaced.' },
   { q: 'How are the spare parts sold?', a: `In boxes: ${washer.name.toLowerCase()}, ${washer.caja} units; ${base.name.toLowerCase()}, ${base.caja} units; ${ring.name.toLowerCase()}, ${ring.caja} units.` },
-  { q: 'How do I get spare part prices?', a: 'Message us on WhatsApp and we will send you the 2027 price list with leveler and spare part prices.' },
+  { q: 'How do I get spare part prices?', a: 'Message us on WhatsApp with the parts you need and we will send you leveler and spare part prices.' },
 ];
 const schema = items.map((it) =>
   productSchema({ id: `${url}#${it.id}`, name: it.name, description: `${it.text} Spare part for ${it.para}. Box of ${it.caja} units.`, images: [it.img.src], category: 'Self-leveling mortar levelers', props: [['Compatible with', it.para], ['Packaging', `Box of ${it.caja} units`]] }),
@@ -88,7 +88,7 @@ const schema = items.map((it) =>
   </section>
 
   <Faq faqs={faqs} title="Questions about spare parts" />
-  <CtaTarifa title="Order spare parts" text="Ask on WhatsApp for the 2027 spare parts price list and we will send them with your next order." />
+  <CtaContacto title="Order spare parts" text="Message us on WhatsApp with the parts you need and we will send them with your next order." interes="recambios" />
 </Base>
 <style>
   .item { display: grid; gap: 24px; align-items: center; }

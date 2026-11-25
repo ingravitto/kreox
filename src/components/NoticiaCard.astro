@@ -18,7 +18,7 @@ const img = n.data.image ?? fallback;
   .ph { border-radius: var(--radius); overflow: hidden; margin-bottom: 20px; background: var(--ink); }
   .ph :global(img) { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; transition: transform .8s var(--ease), opacity .4s; }
   .nc:hover .ph :global(img) { transform: scale(1.05); }
-  .meta { display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 12px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 14px; font-size: var(--fs-label); letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--text-soft); margin-bottom: 12px; }
   .meta span { color: var(--sand-strong); font-weight: 600; }
   h3 { font-size: 1.15rem; line-height: 1.35; }
   h3 a { color: var(--ink); text-decoration: none; }
@@ -26,4 +26,14 @@ const img = n.data.image ?? fallback;
   .nc:hover h3 a { color: var(--sand-strong); }
   p { color: var(--text-soft); font-size: 0.93rem; margin-bottom: 16px; }
   .arrow-link { margin-top: auto; }
+  /* Móvil: tarjeta compacta (miniatura + título) para que tres noticias no ocupen tres pantallas */
+  @media (max-width: 639px) {
+    .nc { display: grid; grid-template-columns: 104px 1fr; grid-template-areas: 'ph meta' 'ph title'; column-gap: 14px; align-items: start; }
+    .ph { grid-area: ph; margin: 0; }
+    .ph :global(img) { aspect-ratio: 1; }
+    .meta { grid-area: meta; gap: 8px; margin: 2px 0 4px; }
+    .meta time { display: none; }
+    h3 { grid-area: title; font-size: 1rem; margin: 0; }
+    p, .arrow-link { display: none; }
+  }
 </style>

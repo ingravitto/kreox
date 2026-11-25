@@ -1,23 +1,27 @@
 ---
+// Barra fija del móvil: WhatsApp (contacto principal) y llamada.
 import WaIcon from './WaIcon.astro';
-import { waTarifa, waInfo } from '../data/site';
+import { SITE, waInfo } from '../data/site';
 import { useT } from '../i18n/ui';
 const { lang, t } = useT(Astro.url);
 ---
 <nav class="mbar" aria-label={t('quickAccess')}>
   <a href={waInfo(lang)} class="wa" target="_blank" rel="noopener" aria-label={`WhatsApp${t('newWindow')}`}>
-    <WaIcon size={18} />
+    <WaIcon size={20} />
     WhatsApp
   </a>
-  <a href={waTarifa('general', lang)} class="quote" target="_blank" rel="noopener">{t('newPriceList')}<span class="visually-hidden">{t('opensWhatsApp')}</span></a>
+  <a href={SITE.phoneHref} class="call">
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1z" fill="currentColor"/></svg>
+    {t('callUs')}<span class="visually-hidden"> {SITE.phone}</span>
+  </a>
 </nav>
 <style>
-  .mbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: grid; grid-template-columns: 1fr 1.25fr; gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: rgba(18,18,17,.94); backdrop-filter: blur(10px); border-top: 1px solid var(--line-dark); }
-  .mbar a { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 48px; border-radius: 999px; font-weight: 600; font-size: .9rem; text-decoration: none; white-space: nowrap; }
-  .mbar svg { width: 18px; height: 18px; flex: none; }
+  .mbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: grid; grid-template-columns: 1.6fr 1fr; gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: rgba(18,18,17,.94); backdrop-filter: blur(10px); border-top: 1px solid var(--line-dark); }
+  .mbar a { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; border-radius: 999px; font-weight: 600; font-size: 1rem; text-decoration: none; white-space: nowrap; }
+  .mbar svg { width: 20px; height: 20px; flex: none; }
   .wa { background: #075e54; color: #fff; }
-  .quote { background: var(--sand); color: var(--ink); }
+  .call { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.45); }
   @media (min-width: 960px) { .mbar { display: none; } }
-  @media (max-width: 959px) { :global(body) { padding-bottom: calc(70px + env(safe-area-inset-bottom)); } }
-  @media (max-width: 359px) { .mbar a { font-size: .8rem; gap: 4px; } }
+  @media (max-width: 959px) { :global(body) { padding-bottom: calc(74px + env(safe-area-inset-bottom)); } }
+  @media (max-width: 359px) { .mbar a { font-size: .9rem; gap: 6px; } }
 </style>

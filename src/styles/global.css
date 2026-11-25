@@ -9,6 +9,9 @@
    etiquetas en mayúsculas espaciadas, botones píldora y planos técnicos.
    ========================================================================== */
 :root {
+  /* Textos pequeños en mayúsculas (antetítulos, etiquetas, botones): en móvil crecen y se separan menos */
+  --fs-label: 0.78rem;
+  --tr-label: 0.16em;
   --ink: #121211;
   --ink-2: #1b1b1a;
   --graphite: #313130;
@@ -110,7 +113,7 @@ strong { font-weight: 600; color: inherit; }
 
 .eyebrow {
   display: inline-flex; align-items: center; gap: 12px;
-  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--tr-label); text-transform: uppercase;
   color: var(--sand-strong); margin-bottom: 1.2em;
 }
 .eyebrow::before { content: ''; width: 28px; height: 1px; background: currentColor; }
@@ -131,7 +134,7 @@ strong { font-weight: 600; color: inherit; }
   --b: var(--ink);
   display: inline-flex; align-items: center; justify-content: center; gap: 0.7em;
   padding: 1.05em 1.75em; border-radius: 999px; border: 1px solid transparent;
-  font: 600 0.78rem/1 var(--font); letter-spacing: 0.16em; text-transform: uppercase;
+  font: 600 var(--fs-label)/1 var(--font); letter-spacing: var(--tr-label); text-transform: uppercase;
   text-decoration: none; cursor: pointer; white-space: nowrap;
   transition: background 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.25s var(--ease);
 }
@@ -147,7 +150,7 @@ strong { font-weight: 600; color: inherit; }
 .section--dark .btn--ghost:hover, .section--graphite .btn--ghost:hover, .on-dark .btn--ghost:hover { background: var(--white); color: var(--ink); border-color: var(--white); }
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 2em; }
 
-.arrow-link { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none; color: var(--ink); }
+.arrow-link { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: var(--fs-label); letter-spacing: var(--tr-label); text-transform: uppercase; text-decoration: none; color: var(--ink); }
 .arrow-link::after { content: '→'; transition: transform .25s var(--ease); }
 .arrow-link:hover::after { transform: translateX(5px); }
 .section--dark .arrow-link, .section--graphite .arrow-link, .on-dark .arrow-link { color: var(--sand); }
@@ -169,7 +172,7 @@ a.card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-co
 .section--dark a.card:hover, .section--graphite a.card:hover { border-color: rgba(199,178,154,.5); background: rgba(255,255,255,.06); box-shadow: none; }
 
 /* Píldoras / chips ----------------------------------------------------- */
-.chip { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text); background: var(--white); }
+.chip { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--text); background: var(--white); }
 .chip--sand { background: var(--sand); border-color: var(--sand); color: var(--ink); }
 .section--dark .chip, .section--graphite .chip, .on-dark .chip { background: transparent; border-color: rgba(255,255,255,.22); color: var(--on-dark); }
 .section--dark .chip--sand, .on-dark .chip--sand { background: var(--sand); color: var(--ink); border-color: var(--sand); }
@@ -179,7 +182,7 @@ a.card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-co
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); border-top: 1px solid var(--line); }
 .stats > div { padding: 22px 20px 0 0; }
 .stats dt { font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 600; letter-spacing: -0.03em; color: var(--ink); line-height: 1; }
-.stats dd { margin: 10px 0 0; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-soft); }
+.stats dd { margin: 10px 0 0; font-size: var(--fs-label); letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--text-soft); }
 .on-dark .stats, .section--dark .stats, .section--graphite .stats { border-color: var(--line-dark); }
 .on-dark .stats dt, .section--dark .stats dt, .section--graphite .stats dt { color: var(--white); }
 .on-dark .stats dt em, .section--dark .stats dt em { font-style: normal; color: var(--sand); }
@@ -189,12 +192,12 @@ a.card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-co
 .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--line); background: var(--white); }
 table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
 th, td { text-align: left; padding: 16px 20px; border-bottom: 1px solid var(--line); vertical-align: top; }
-thead th { background: var(--ink); color: var(--white); font-weight: 500; font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase; }
+thead th { background: var(--ink); color: var(--white); font-weight: 500; font-size: var(--fs-label); letter-spacing: var(--tr-label); text-transform: uppercase; }
 tbody th { font-weight: 600; color: var(--ink); width: 34%; }
 tr:last-child th, tr:last-child td { border-bottom: 0; }
 .td-good { color: var(--good); font-weight: 600; }
 .td-bad { color: var(--bad); }
-.specs th { font-weight: 500; color: var(--text-soft); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.specs th { font-weight: 500; color: var(--text-soft); font-size: var(--fs-label); letter-spacing: var(--tr-label); text-transform: uppercase; }
 .specs td { color: var(--ink); font-weight: 500; }
 
 /* Listas ---------------------------------------------------------------- */
@@ -243,3 +246,17 @@ html.m-lock { overflow: hidden; }
 .prose p:has(> img + img) img { margin: 0; width: 100%; }
 /* Listados (noticias): las columnas mantienen su ancho aunque haya una sola tarjeta */
 .grid-3.grid-fill { grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); }
+
+/* Móvil: legibilidad en obra (sol, prisa, guantes). Textos pequeños más grandes y botones más altos. */
+@media (max-width: 759px) {
+  :root { --fs-label: 0.84rem; --tr-label: 0.08em; }
+  .btn { min-height: 52px; padding-inline: 1.4em; }
+  .arrow-link { font-size: 0.86rem; letter-spacing: 0.08em; }
+  .chip { font-size: 0.82rem; letter-spacing: 0.04em; }
+}
+/* Tablas en móvil: caben en pantalla (sin desplazamiento horizontal escondido) */
+@media (max-width: 759px) {
+  table { font-size: 0.9rem; table-layout: fixed; hyphens: auto; -webkit-hyphens: auto; }
+  th, td { padding: 12px 10px; }
+  tbody th { width: auto; }
+}

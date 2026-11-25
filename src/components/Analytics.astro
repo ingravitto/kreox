@@ -2,7 +2,7 @@
 // Google Analytics 4 con consentimiento previo (RGPD / guía de cookies de la AEPD):
 // - GA solo se carga si la persona pulsa "Aceptar". "Rechazar" es igual de fácil y no carga nada.
 // - La elección se recuerda 12 meses (localStorage, técnico y necesario) y se puede cambiar con [data-ck-open].
-// - Eventos para el panel: click_tarifa, click_whatsapp, click_telefono y generate_lead (página de gracias).
+// - Eventos para el panel: click_whatsapp (con el producto de la consulta), click_telefono y generate_lead (página de gracias).
 // Sin PUBLIC_GA_ID (variable de GitHub GA_MEASUREMENT_ID) no se pinta nada: ni banner ni script.
 const id = import.meta.env.PUBLIC_GA_ID as string | undefined;
 const lang = Astro.currentLocale === 'en' || Astro.url.pathname.startsWith('/en/') ? 'en' : 'es';
@@ -77,7 +77,8 @@ const T = {
           var h = a.getAttribute('href');
           if (/api\.whatsapp\.com|wa\.me/.test(h)) {
             var t = decodeURIComponent(h).toLowerCase();
-            gtag('event', /tarifa|price list/.test(t) ? 'click_tarifa' : 'click_whatsapp', { link_url: h.split('&text')[0], page_path: location.pathname });
+            var prod = /piko/.test(t) ? 'piko' : /universal/.test(t) ? 'universal' : /recambios|spare parts/.test(t) ? 'recambios' : /azulejos|tile/.test(t) ? 'azulejos' : 'general';
+            gtag('event', 'click_whatsapp', { producto: prod, page_path: location.pathname });
           } else if (h.indexOf('tel:') === 0) {
             gtag('event', 'click_telefono', { page_path: location.pathname });
           }

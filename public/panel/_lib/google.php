@@ -8,7 +8,7 @@
 declare(strict_types=1);
 
 /** Eventos que envía la web a GA4 (ver src/components/Analytics.astro). */
-const EVENTOS = ['click_whatsapp' => 'Clics en WhatsApp', 'click_tarifa' => 'Peticiones de tarifa 2027', 'click_telefono' => 'Clics en el teléfono', 'generate_lead' => 'Formularios enviados'];
+const EVENTOS = ['click_whatsapp' => 'Clics en WhatsApp', 'click_telefono' => 'Llamadas (clic en el teléfono)', 'generate_lead' => 'Formularios enviados'];
 
 function google_configurado(): bool
 {
@@ -149,7 +149,7 @@ function metricas_resumen(int $dias): array
 {
     $m = metricas($dias);
     if (!$m['ga'] && !$m['gsc']) throw new RuntimeException($m['ga_error'] ?? $m['gsc_error'] ?? 'Sin datos');
-    return ['usuarios' => $m['ga']['usuarios'] ?? 0, 'clics_google' => $m['gsc']['clics'] ?? 0, 'whatsapp' => ($m['ga']['eventos']['click_whatsapp'] ?? 0) + ($m['ga']['eventos']['click_tarifa'] ?? 0)];
+    return ['usuarios' => $m['ga']['usuarios'] ?? 0, 'clics_google' => $m['gsc']['clics'] ?? 0, 'whatsapp' => ($m['ga']['eventos']['click_whatsapp'] ?? 0)];
 }
 
 // ---------- Gráfico de línea (SVG en el servidor; el tooltip lo añade panel.js) ----------

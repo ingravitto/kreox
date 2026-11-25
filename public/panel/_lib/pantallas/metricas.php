@@ -36,8 +36,8 @@ $sc = $m['gsc'];
 <h2>Lo que importa</h2>
 <div class="grid grid-4 kpis">
   <div class="card kpi"><span class="kpi-n"><?= $ga ? $n($ga['usuarios']) : '—' ?></span><span class="kpi-l">Visitantes</span></div>
-  <div class="card kpi"><span class="kpi-n"><?= $ga ? $n($ga['eventos']['click_tarifa']) : '—' ?></span><span class="kpi-l">Peticiones de tarifa 2027</span></div>
-  <div class="card kpi"><span class="kpi-n"><?= $ga ? $n($ga['eventos']['click_whatsapp']) : '—' ?></span><span class="kpi-l">Otros clics en WhatsApp</span></div>
+  <div class="card kpi"><span class="kpi-n"><?= $ga ? $n($ga['eventos']['click_whatsapp']) : '—' ?></span><span class="kpi-l">Clics en WhatsApp</span></div>
+  <div class="card kpi"><span class="kpi-n"><?= $ga ? $n($ga['eventos']['click_telefono']) : '—' ?></span><span class="kpi-l">Llamadas</span></div>
   <div class="card kpi"><span class="kpi-n"><?= $sc ? $n($sc['clics']) : '—' ?></span><span class="kpi-l">Clics desde Google</span></div>
 </div>
 

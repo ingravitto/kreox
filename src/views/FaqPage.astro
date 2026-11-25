@@ -2,7 +2,7 @@
 // Preguntas frecuentes compartidas por /preguntas-frecuentes/ y /en/faq/: mismo buscador y diseño, datos según el idioma.
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import CtaTarifa from '../components/CtaTarifa.astro';
+import CtaContacto from '../components/CtaContacto.astro';
 import imgHeroBg from '../assets/img/hf-niveladores-estudio-mortero.jpg';
 import { FAQ_NIVELACION, FAQ_PIKO, FAQ_UNIVERSAL, FAQ_CALCULADORA, FAQ_TRIPODE } from '../data/faqs';
 import { FAQ_NIVELACION_EN, FAQ_PIKO_EN, FAQ_UNIVERSAL_EN, FAQ_CALCULADORA_EN, FAQ_TRIPODE_EN } from '../data/en/faqs';
@@ -108,7 +108,7 @@ const T = EN
     </div>
   </section>
 
-  <CtaTarifa title={T.ctaTitle} text={T.ctaText} />
+  <CtaContacto title={T.ctaTitle} text={T.ctaText} />
 </Base>
 
 <script>
@@ -135,7 +135,7 @@ const T = EN
 <style>
   .layout { display: grid; gap: 40px; }
   @media (min-width: 960px) { .layout { grid-template-columns: 300px 1fr; gap: 64px; align-items: start; } .side { position: sticky; top: calc(var(--header-h) + 24px); } }
-  .search span { display: block; font-weight: 600; font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 8px; }
+  .search span { display: block; font-weight: 600; font-size: var(--fs-label); letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--text-soft); margin-bottom: 8px; }
   .search input { width: 100%; font: inherit; font-size: 1.05rem; padding: 14px 16px; border: 1px solid #b9b3a9; border-radius: var(--radius-sm); background: var(--white); }
   .search input:focus { outline: 2px solid var(--sand-strong); outline-offset: 2px; }
   .side nav ul { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 2px; }

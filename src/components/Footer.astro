@@ -41,7 +41,7 @@ const year = new Date().getFullYear();
           <li><a href={SITE.tileCalculator}>{t('fTileCalc')}</a></li>
         </ul>
       </nav>
-      <div>
+      <div class="f-contact">
         <h2>{t('contact')}</h2>
         <address>
           {SITE.address.street}<br />{SITE.address.postalCode} {SITE.address.city} ({SITE.address.region})<br />
@@ -74,11 +74,18 @@ const year = new Date().getFullYear();
   .site-footer { background: var(--ink); color: var(--on-dark-soft); font-size: 0.92rem; padding-top: clamp(64px, 8vw, 110px); overflow: hidden; }
   .top { display: grid; gap: 40px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); }
   @media (min-width: 960px) { .top { grid-template-columns: 1.5fr 1fr 1fr 1.2fr; } }
+  /* Móvil: las dos listas de enlaces lado a lado y enlaces con área táctil cómoda */
+  @media (max-width: 959px) {
+    .top { grid-template-columns: 1fr 1fr; gap: 36px 20px; }
+    .brand, .f-contact { grid-column: 1 / -1; }
+    ul:not(.social) { gap: 2px; }
+    ul:not(.social) a { display: block; padding: 8px 0; }
+  }
   .brand :global(.flogo) { width: 120px; height: auto; }
-  .claim { margin: 14px 0 18px; font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--sand); }
+  .claim { margin: 14px 0 18px; font-size: var(--fs-label); letter-spacing: var(--tr-label); text-transform: uppercase; color: var(--sand); }
   .made { display: flex; align-items: center; gap: 12px; color: var(--white); font-size: 0.88rem; margin-top: 22px; }
   .ene { width: 36px; height: 36px; flex: none; color: var(--sand); }
-  h2 { color: var(--white); font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; margin-bottom: 18px; }
+  h2 { color: var(--white); font-size: var(--fs-label); letter-spacing: var(--tr-label); text-transform: uppercase; font-weight: 600; margin-bottom: 18px; }
   ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
   a { color: var(--on-dark); text-decoration: none; transition: color .2s; }
   a:hover { color: var(--sand); }
