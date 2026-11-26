@@ -53,7 +53,7 @@ Para tu obra concreta usa la [calculadora de niveladores](/nivelacion-mortero-au
 
 ## Por qué no usar trípodes de acero
 
-Un trípode de acero pesa cerca de 1 kg, se corroe con el pH alcalino del mortero y obliga a asentar bien sus tres patas. Para 100 m², eso son unos 100 kg de trípodes frente a 2 kg de PIKO. Tienes la comparativa completa en [PIKO frente al trípode](/nivelacion-mortero-autonivelante/piko-vs-tripode/).
+Un trípode de acero pesa cerca de 1 kg, se corroe con el pH alcalino del mortero y obliga a asentar bien sus tres patas. Para 100 m², eso son unos 100 kg de trípodes frente a 2 kg de PIKO. Tienes la comparativa completa en [trípodes de nivelación frente a PIKO](/nivelacion-mortero-autonivelante/tripodes-de-nivelacion/).
 
 ## Después del vertido
 

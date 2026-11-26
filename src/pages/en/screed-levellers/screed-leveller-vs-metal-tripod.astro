@@ -1,5 +1,5 @@
 ---
-// English version of /nivelacion-mortero-autonivelante/piko-vs-tripode/
+// English version of /nivelacion-mortero-autonivelante/tripodes-de-nivelacion/
 import PageHero from '../../../components/PageHero.astro';
 import imgHeroBg from '../../../assets/img/suelo-radiante-piko-bn.jpg';
 import WeightBars from '../../../components/WeightBars.astro';
@@ -26,19 +26,27 @@ const faqs = FAQ_TRIPODE_EN;
 ---
 <Base
   overlay
-  title="Screed leveller vs metal tripod for liquid screed | KREOX"
-  description="Metal tripod or KREOX Insulation Screed Leveller? Weight, rust, cleaning, placement and cost compared when levelling liquid screed."
-  breadcrumbs={[{ name: 'Screed levellers', url: R.nivelacion }, { name: 'Leveller vs tripod', url }]}
+  title="Levelling tripods for liquid screed: the alternative | KREOX"
+  description="Buying levelling tripods for liquid screed? KREOX plastic screed levellers do the same job: 20 g instead of about 1 kg, rust-free and cleaned with water."
+  breadcrumbs={[{ name: 'Screed levellers', url: R.nivelacion }, { name: 'Levelling tripods', url }]}
   schema={[faqSchema(faqs)]}
 >
   <PageHero
-    eyebrow="Comparison"
-    title="Screed leveller versus the"
-    accent="metal tripod"
-    lead={`Levelling 100 m² takes about ${n} level points. With metal tripods that is <strong>about ${(n * PRODUCTOS.tripode.pesoG) / 1000} kg</strong> to carry, clean and keep from rusting. With Insulation Screed Levellers, <strong>about ${(n * PRODUCTOS.piko.pesoG) / 1000} kg</strong> in one box.`}
+    eyebrow="Levelling tripods · comparison"
+    title="An alternative to"
+    accent="levelling tripods"
+    lead={`Before you buy more metal tripods, do the maths: levelling 100 m² takes about ${n} level points. With metal tripods that is <strong>about ${(n * PRODUCTOS.tripode.pesoG) / 1000} kg</strong> to carry, clean and keep from rusting. With Insulation Screed Levellers, <strong>about ${(n * PRODUCTOS.piko.pesoG) / 1000} kg</strong> in one box.`}
     bg={imgHeroBg}
-    crumbs={[{ name: 'Levelling', url: R.nivelacion }, { name: 'Leveller vs tripod', url }]}
+    crumbs={[{ name: 'Levelling', url: R.nivelacion }, { name: 'Levelling tripods', url }]}
   />
+  <section class="section section--tight">
+    <div class="container container--narrow">
+      <h2>What a levelling tripod is</h2>
+      <p class="lead">A levelling tripod is a three-legged metal stand with a threaded rod and a nut or plate that is wound up or down to the finished datum height. Tripods are spread across the floor, set with a laser and the liquid screed is poured up to their mark. They do the job, but they are heavy, all three legs have to be seated and the steel suffers in the screed.</p>
+      <p>KREOX screed levellers do the same job point by point. The <a href={R.piko}>Insulation Screed Leveller</a> is pushed into the underfloor heating insulation board and the <a href={R.universal}>Universal Screed Leveller</a> rests on a slab, subfloor or existing floor.</p>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container split">
       <WeightBars />

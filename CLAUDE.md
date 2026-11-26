@@ -15,7 +15,7 @@ La línea principal es **nivelación con mortero autonivelante**: PIKO (suelo ra
 ## Tono y estilo (identidad KREOX)
 - Fabricante familiar de Ibi que habla de obra: tú, frases concretas y vocabulario del oficio (cota, anilla, vertido, solera, forjado, recrecido, cejas, tirar el láser).
 - Evitar copy genérico o "de IA": "solución innovadora", "eficiente/eficiencia", "perfecto", "descubre", "precisión y eficiencia" y titulares de dos frases cortas tipo eslogan ("X. Y.").
-- No repetir el mismo argumento en una página ni en bloques seguidos: la comparativa completa con el trípode vive en /piko-vs-tripode/; en la portada solo el peso (`WeightBars`); en las fichas, la tabla (`CompareTripode`). Las FAQ de azulejos se filtran por producto (`p` en `TILE_FAQ`).
+- No repetir el mismo argumento en una página ni en bloques seguidos: la comparativa completa con el trípode vive en /tripodes-de-nivelacion/ (página que ataca la búsqueda "trípodes de nivelación" / "arañas"); en la portada solo el peso (`WeightBars`); en las fichas, la tabla (`CompareTripode`). Las FAQ de azulejos se filtran por producto (`p` en `TILE_FAQ`).
 - Cierre de cada página: `CtaContacto` con su `tema` (home, nivelacion, calculadora, tripode, lamina, empresa, azulejos, guia), no el mismo texto en todas.
 
 ## Noticias

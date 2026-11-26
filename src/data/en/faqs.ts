@@ -80,6 +80,10 @@ export const FAQ_CALCULADORA_EN = [
 ];
 
 export const FAQ_TRIPODE_EN = [
+  { q: 'What is a levelling tripod?', a: 'A three-legged metal stand with a threaded rod that is set to the finished datum height so the liquid screed is poured up to its mark. The KREOX Insulation and Universal Screed Levellers do the same job without steel.' },
+  { q: 'What is the alternative to levelling tripods?', a: `KREOX plastic screed levellers: the Insulation Screed Leveller for underfloor heating, pushed into the insulation board, and the Universal Screed Leveller for screeds on a slab, subfloor or existing floor. They set the datum the same way, with a laser, but weigh between ${PRODUCTOS.piko.pesoG} and ${PRODUCTOS.universal.pesoG} g, do not rust and clean with water.` },
+  { q: 'What about stainless steel tripods?', a: `They do not rust, but they are still metal, they are heavy and all three legs have to be seated at every point. The insulation leveller weighs about ${PRODUCTOS.piko.pesoG} g and is pushed into the insulation board without tools.` },
+  { q: 'How many tripods or levellers do I need per m²?', a: `With KREOX levellers, one per m² on a 1 m grid: 100 m² is about ${n100} levellers. The calculator on this site gives you units and boxes area by area.` },
   { q: 'Why do levelling tripods rust?', a: 'Because they are made of steel and screed has an alkaline pH. Repeated contact with the screed corrodes them, shortens their life and makes them harder to clean.' },
   { q: 'How much weight do I save with screed levellers versus tripods?', a: `With one leveller per m², 100 m² needs about ${n100} levellers: about ${(n100 * PRODUCTOS.tripode.pesoG) / 1000} kg of metal tripods versus about ${(n100 * PRODUCTOS.piko.pesoG) / 1000} kg of Insulation Screed Levellers.` },
   { q: 'Is a plastic screed leveller as accurate as a tripod?', a: 'Yes. The height is marked with a laser in the same way (standard or with receiver) and the leveller’s ring is adjusted to that line. The ring also acts as a visual reference during pouring.' },

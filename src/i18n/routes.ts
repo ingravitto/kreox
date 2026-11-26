@@ -23,7 +23,7 @@ export const PATHS = {
     recambios: `${ES_NIV}recambios/`,
     lamina: `${ES_NIV}lamina-bajo-solera/`,
     calculadora: `${ES_NIV}calculadora/`,
-    vsTripode: `${ES_NIV}piko-vs-tripode/`,
+    vsTripode: `${ES_NIV}tripodes-de-nivelacion/`,
     azulejos: ES_AZU,
     kalzo: `${ES_AZU}kalzo-separador/`,
     kunaNiveladora: `${ES_AZU}kuna-niveladora/`,

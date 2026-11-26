@@ -17,25 +17,33 @@ import imgCaja from '../../assets/img/caja-100-piko.jpg';
 import imgLimpieza from '../../assets/img/piko-limpieza-reutilizable.jpg';
 import imgLaser from '../../assets/img/piko-laser-receptor-suelo-radiante.jpg';
 
-const url = `${NIVELACION}piko-vs-tripode/`;
+const url = `${NIVELACION}tripodes-de-nivelacion/`;
 const n = Math.ceil(100 / M2_POR_NIVELADOR);
 const faqs = FAQ_TRIPODE;
 ---
 <Base
   overlay
-  title="PIKO vs trípode de acero para mortero autonivelante | KREOX"
-  description="Comparativa entre el trípode de acero y el nivelador PIKO de KREOX: peso, óxido, limpieza, colocación y coste para nivelar mortero autonivelante."
-  breadcrumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }, { name: 'PIKO vs trípode', url }]}
+  title="Trípodes de nivelación: alternativa sin óxido | KREOX"
+  description="¿Vas a comprar trípodes de nivelación (arañas) para mortero autonivelante? PIKO y Nivelador Universal los sustituyen: 20 g, sin óxido y reutilizables."
+  breadcrumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }, { name: 'Trípodes de nivelación', url }]}
   schema={[faqSchema(faqs)]}
 >
   <PageHero
-    eyebrow="Comparativa"
-    title="PIKO frente al"
-    accent="trípode de acero"
-    lead={`Para nivelar 100 m² se necesitan unos ${n} puntos de nivel. Con trípodes de acero son <strong>unos ${(n * PRODUCTOS.tripode.pesoG) / 1000} kg</strong> que cargar, limpiar y vigilar que no se oxiden. Con PIKO, <strong>unos ${(n * PRODUCTOS.piko.pesoG) / 1000} kg</strong> en una caja.`}
+    eyebrow="Trípodes de nivelación · comparativa"
+    title="La alternativa a los"
+    accent="trípodes de nivelación"
+    lead={`Antes de comprar más arañas de acero, haz la cuenta: 100 m² son unos ${n} puntos de nivel. Con trípodes, <strong>unos ${(n * PRODUCTOS.tripode.pesoG) / 1000} kg</strong> que cargar, limpiar y vigilar que no se oxiden. Con PIKO, <strong>unos ${(n * PRODUCTOS.piko.pesoG) / 1000} kg</strong> que caben en una caja.`}
     bg={imgHeroBg}
-    crumbs={[{ name: 'Nivelación', url: NIVELACION }, { name: 'PIKO vs trípode', url }]}
+    crumbs={[{ name: 'Nivelación', url: NIVELACION }, { name: 'Trípodes de nivelación', url }]}
   />
+  <section class="section section--tight">
+    <div class="container container--narrow">
+      <h2>Qué es un trípode de nivelación</h2>
+      <p class="lead">Un trípode de nivelación, al que en obra también se le llama araña, es un soporte metálico de tres patas con una varilla roscada y una tuerca o placa que se sube o se baja hasta la cota de acabado. Se reparten por toda la superficie, se ajustan con el láser y el mortero autonivelante (la «solera líquida») se vierte hasta su marca. Hace bien su trabajo, pero pesa, hay que asentar las tres patas y el acero sufre con el mortero.</p>
+      <p>Los niveladores de KREOX hacen lo mismo: marcan la cota punto a punto. El <a href={`${NIVELACION}piko/`}>PIKO</a> se clava en la placa del suelo radiante y el <a href={`${NIVELACION}nivelador-universal/`}>Nivelador Universal</a> se apoya sobre forjado, solera o pavimento existente.</p>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container split">
       <WeightBars />
@@ -47,7 +55,7 @@ const faqs = FAQ_TRIPODE;
   <section class="section section--paper">
     <div class="container grid grid-2">
       <div>
-        <h2>El problema del trípode de acero</h2>
+        <h2>Lo que da guerra de las arañas de acero</h2>
         <ul class="list">
           <li><strong>Pesado y voluminoso:</strong> cerca de 1 kg por trípode.</li>
           <li><strong>Óxido y difícil limpieza:</strong> el pH alcalino del mortero corroe el acero.</li>
@@ -61,7 +69,7 @@ const faqs = FAQ_TRIPODE;
         </div>
       </div>
       <div>
-        <h2>La alternativa: PIKO</h2>
+        <h2>Lo que cambia con el PIKO</h2>
         <ul class="list">
           <li><strong>Ligero y pequeño:</strong> unos {PRODUCTOS.piko.pesoG} g; {PRODUCTOS.piko.caja} unidades en una caja.</li>
           <li><strong>Reutilizable y fácil de limpiar:</strong> no se oxida.</li>
@@ -79,7 +87,7 @@ const faqs = FAQ_TRIPODE;
 
   <section class="section">
     <div class="container">
-      <p class="lead">¿Trabajas sobre superficie dura, sin aislamiento? El <a href={`${NIVELACION}nivelador-universal/`}>Nivelador Universal</a> ofrece las mismas ventajas con base plana para recrecidos.</p>
+      <p class="lead">¿Sin aislamiento debajo? En recrecidos sobre forjado, solera o pavimento antiguo, el trípode se sustituye por el <a href={`${NIVELACION}nivelador-universal/`}>Nivelador Universal</a>: base plana, sin patas que asentar y con recambios por pieza. Para saber cuántos te hacen falta, usa la <a href={`${NIVELACION}calculadora/`}>calculadora de niveladores</a>.</p>
     </div>
   </section>
 

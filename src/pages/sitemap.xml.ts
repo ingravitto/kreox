@@ -31,7 +31,7 @@ const STATIC = [
   `${NIVELACION}recambios/`,
   `${NIVELACION}lamina-bajo-solera/`,
   `${NIVELACION}calculadora/`,
-  `${NIVELACION}piko-vs-tripode/`,
+  `${NIVELACION}tripodes-de-nivelacion/`,
   '/preguntas-frecuentes/',
   AZULEJOS,
   ...TILE_PRODUCTS.map((p) => `${AZULEJOS}${p.slug}/`),

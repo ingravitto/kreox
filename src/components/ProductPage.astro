@@ -55,7 +55,7 @@ const L = EN
       videoAria: `${p.name} installation video`, noVideo: 'Your browser cannot play this video.', download: 'Download it here', pause: 'Pause video', sound: 'Turn sound on',
       onSite: 'On site',
       marquee: ['Rust-free', 'Reusable', 'Standard laser or laser with receiver', 'Visual level ring', 'Spare parts by piece', 'Patented product'],
-      vsEyebrow: 'Versus the metal tripod', vsTitle: isPiko ? 'Why UFH installers' : 'On a slab,', vsAccent: isPiko ? 'are dropping the tripod.' : 'the tripod can stay in the van.',
+      vsMore: 'Levelling tripods: the full comparison', vsEyebrow: 'Versus the metal tripod', vsTitle: isPiko ? 'Why UFH installers' : 'On a slab,', vsAccent: isPiko ? 'are dropping the tripod.' : 'the tripod can stay in the van.',
       vsText: `The metal tripod weighs about 1 kg, rusts with the alkaline pH of the screed and all three legs must be firmly seated. The ${p.name} is placed in seconds and cleaned with water.`,
       impEyebrow: 'Spare parts', impTitle: 'If a part wears out,', impAccent: 'replace just that part.',
       impText: 'The ring is fibre-reinforced to stand up to daily use and comes in a high-visibility colour. Washers, bases and rings are sold separately.', seeParts: 'See spare parts',
@@ -75,7 +75,7 @@ const L = EN
       videoAria: `Vídeo de instalación del ${p.name}`, noVideo: 'Tu navegador no puede reproducir el vídeo.', download: 'Descárgalo aquí', pause: 'Pausar vídeo', sound: 'Activar sonido',
       onSite: 'En obra',
       marquee: ['Sin óxido', 'Reutilizable', 'Láser habitual o con receptor', 'Anilla visual de nivel', 'Recambios por piezas', 'Producto patentado'],
-      vsEyebrow: 'Frente al trípode de acero', vsTitle: isPiko ? 'Por qué el instalador de suelo radiante' : 'En un recrecido,', vsAccent: isPiko ? 'ha dejado el trípode.' : 'el trípode se queda en la furgoneta.',
+      vsMore: 'Trípodes de nivelación: comparativa completa', vsEyebrow: 'Frente al trípode de acero', vsTitle: isPiko ? 'Por qué el instalador de suelo radiante' : 'En un recrecido,', vsAccent: isPiko ? 'ha dejado el trípode.' : 'el trípode se queda en la furgoneta.',
       vsText: `El trípode metálico pesa cerca de 1 kg, se oxida con el pH alcalino del mortero y obliga a asentar sus tres patas. ${p.name} se coloca en segundos y se limpia con agua.`,
       impEyebrow: 'Recambios', impTitle: 'Si una pieza se gasta,', impAccent: 'cambias solo esa.',
       impText: 'La anilla lleva fibra para aguantar el uso diario y un color de alta visibilidad. Arandelas, bases y anillas se venden sueltas.', seeParts: 'Ver recambios',
@@ -233,6 +233,7 @@ const schema = [
         </div>
       )}
       <div class="cmp" data-reveal><CompareTripode only={p.kind} /></div>
+      <p class="cmp-more"><a class="arrow-link" href={P.vsTripode}>{L.vsMore}</a></p>
     </div>
   </section>
 
@@ -353,6 +354,7 @@ const schema = [
   .gallery .bad span { background: #f3dcd8; color: var(--bad); }
   .gallery .good span { background: var(--ink); color: var(--lime); }
   .cmp { margin-top: clamp(8px, 2vw, 24px); }
+  .cmp-more { margin: 20px 0 0; }
 
   .head-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 40px; margin-bottom: clamp(36px, 5vw, 56px); }
   .head-row .section-head { margin-bottom: 0; }

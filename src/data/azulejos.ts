@@ -69,7 +69,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     slug: 'alikates',
     name: 'Alikates',
     title: 'Alikates para sistemas de nivelación de baldosas | KREOX',
-    description: 'Alikates KREOX para sistemas de nivelación: presión regulable sobre la kuña para nivelar baldosas en suelos y paredes. Pensados para el instalador profesional.',
+    description: 'Alikates KREOX para sistemas de nivelación: presión regulable sobre la kuña para nivelar baldosas en suelos y paredes. Para el instalador profesional.',
     img: alikates,
     alt: 'Alikates KREOX para apretar kuñas de nivelación de baldosas',
     intro: 'Desarrollados para facilitar la instalación de baldosas cerámicas tanto en superficies horizontales como verticales.',

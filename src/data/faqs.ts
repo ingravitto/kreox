@@ -79,6 +79,10 @@ export const FAQ_CALCULADORA = [
 ];
 
 export const FAQ_TRIPODE = [
+  { q: '¿Qué es un trípode de nivelación?', a: 'Un soporte metálico de tres patas con una varilla roscada que se ajusta a la cota de acabado para verter el mortero autonivelante hasta su marca. En obra también se le llama araña. El PIKO y el Nivelador Universal de KREOX hacen la misma función sin acero.' },
+  { q: '¿Qué alternativa hay a los trípodes de nivelación?', a: `Los niveladores de plástico de KREOX: el PIKO para suelo radiante, que se clava en la placa de aislamiento, y el Nivelador Universal para recrecidos sobre forjado, solera o pavimento existente. Marcan la cota igual, con láser, pero pesan entre ${PRODUCTOS.piko.pesoG} y ${PRODUCTOS.universal.pesoG} g, no se oxidan y se limpian con agua.` },
+  { q: '¿Y los trípodes de acero inoxidable?', a: `No se oxidan, pero siguen siendo de metal, pesan y hay que asentar sus tres patas en cada punto. El PIKO pesa unos ${PRODUCTOS.piko.pesoG} g y se clava en el aislamiento sin herramientas.` },
+  { q: '¿Cuántos trípodes o niveladores hacen falta por m²?', a: `Con los niveladores KREOX, uno por m² en cuadrícula de 1 m: 100 m² son unos ${Math.ceil(100 / M2_POR_NIVELADOR)} niveladores. La calculadora de la web te da las unidades y las cajas zona por zona.` },
   { q: '¿Por qué se oxidan los trípodes de nivelación?', a: 'Porque son de acero y el mortero tiene un pH alcalino. El contacto repetido con el mortero los corroe, los hace menos duraderos y dificulta su limpieza.' },
   { q: '¿Cuánto peso ahorro con PIKO frente a trípodes?', a: `Con un nivelador por m², 100 m² necesitan unos ${Math.ceil(100 / M2_POR_NIVELADOR)} niveladores: unos ${(Math.ceil(100 / M2_POR_NIVELADOR) * PRODUCTOS.tripode.pesoG) / 1000} kg en trípodes de acero frente a unos ${(Math.ceil(100 / M2_POR_NIVELADOR) * PRODUCTOS.piko.pesoG) / 1000} kg en PIKO.` },
   { q: '¿El PIKO es igual de preciso que un trípode?', a: 'Sí. La altura se marca igualmente con láser (habitual o con receptor) y la anilla del PIKO se ajusta a esa línea. Además, la anilla sirve de referencia visual durante el vertido.' },

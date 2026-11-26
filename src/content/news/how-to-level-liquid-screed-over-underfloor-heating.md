@@ -1,7 +1,7 @@
 ---
 title: 'How to level liquid screed over underfloor heating, step by step'
 seoTitle: 'Levelling liquid screed over underfloor heating | KREOX'
-description: 'Guide to levelling liquid screed over underfloor heating with Insulation Screed Levellers: how many to place, how to set the datum with a laser and how to pour.'
+description: 'Levelling liquid screed over underfloor heating with Insulation Screed Levellers: how many to place, how to set the datum with a laser and how to pour.'
 date: 2026-11-13
 category: nivelacion
 products: [piko, recambios]

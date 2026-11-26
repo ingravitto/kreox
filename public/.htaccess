@@ -46,6 +46,7 @@ RewriteRule ^soluciones-para-sistemas-de-pavimentacion-mediante-mortero-autonive
 RewriteRule ^soluciones-para-sistemas-de-pavimentacion-mediante-mortero-autonivelante/nivelador-recrecido-universal/?$ /nivelacion-mortero-autonivelante/nivelador-universal/ [R=301,L]
 RewriteRule ^soluciones-para-sistemas-de-pavimentacion-mediante-mortero-autonivelante/recambios-y-accesorios/?$ /nivelacion-mortero-autonivelante/recambios/ [R=301,L]
 RewriteRule ^soluciones-para-sistemas-de-pavimentacion-mediante-mortero-autonivelante/lamina-bajo-solera/?$ /nivelacion-mortero-autonivelante/lamina-bajo-solera/ [R=301,L]
+RewriteRule ^nivelacion-mortero-autonivelante/piko-vs-tripode/?$ /nivelacion-mortero-autonivelante/tripodes-de-nivelacion/ [R=301,L]
 
 # Colocación de azulejos
 RewriteRule ^soluciones-para-la-colocacion-de-azulejos/?$ /colocacion-azulejos/ [R=301,L]

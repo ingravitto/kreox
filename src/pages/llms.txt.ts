@@ -25,7 +25,7 @@ export const GET: APIRoute = async () => {
 - [Recambios](${U}${NIVELACION}recambios/): arandela niveladora (caja 150), base niveladora universal (caja 40), anilla metálica niveladora universal (caja 40).
 - [Lámina de polietileno bajo solera](${U}${NIVELACION}lamina-bajo-solera/)
 - [Calculadora de niveladores](${U}${NIVELACION}calculadora/)
-- [Comparativa PIKO vs trípode de acero](${U}${NIVELACION}piko-vs-tripode/)
+- [Trípodes de nivelación (arañas) y su alternativa: PIKO y Nivelador Universal](${U}${NIVELACION}tripodes-de-nivelacion/)
 - [Página general de sistemas de nivelación](${U}${NIVELACION})
 - [Preguntas frecuentes](${U}/preguntas-frecuentes/)
 - [Información completa para IA](${U}/llms-full.txt)
