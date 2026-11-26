@@ -62,65 +62,83 @@ export const waInfo = (lang: 'es' | 'en' = 'es') => waConsulta('general', lang);
 export const NIVELACION = '/nivelacion-mortero-autonivelante/';
 export const AZULEJOS = '/colocacion-azulejos/';
 
-export const NAV = [
-  {
-    label: 'Nivelación autonivelante',
-    href: NIVELACION,
-    highlight: true,
-    children: [
-      { label: 'PIKO · Suelo radiante', href: `${NIVELACION}piko/`, note: '20 g · sustituye al trípode de acero' },
-      { label: 'Nivelador Universal · Recrecidos', href: `${NIVELACION}nivelador-universal/`, note: 'Base plana para cualquier superficie' },
-      { label: 'Recambios y accesorios', href: `${NIVELACION}recambios/`, note: 'Cambia solo la pieza gastada' },
-      { label: 'Lámina bajo solera', href: `${NIVELACION}lamina-bajo-solera/`, note: 'Impermeabilización de soleras' },
-      { label: 'Calculadora de niveladores', href: `${NIVELACION}calculadora/`, note: '¿Cuántos necesito?' },
-      { label: 'PIKO frente al trípode', href: `${NIVELACION}piko-vs-tripode/`, note: 'Comparativa' },
+// Menú principal. "Productos" abre un panel con una columna por línea (nivelación primero) y la calculadora.
+// Para añadir un producto basta con sumarlo a su grupo: el panel crece en columnas, no en altura.
+export const NAV = {
+  products: {
+    label: 'Productos',
+    seeAll: 'Ver toda la gama',
+    groups: [
+      {
+        label: 'Nivelación autonivelante',
+        href: NIVELACION,
+        highlight: true,
+        children: [
+          { label: 'PIKO', href: `${NIVELACION}piko/`, note: 'Suelo radiante · 20 g, sustituye al trípode' },
+          { label: 'Nivelador Universal', href: `${NIVELACION}nivelador-universal/`, note: 'Recrecidos · base plana para cualquier superficie' },
+          { label: 'Recambios y accesorios', href: `${NIVELACION}recambios/`, note: 'Cambia solo la pieza gastada' },
+          { label: 'Lámina bajo solera', href: `${NIVELACION}lamina-bajo-solera/`, note: 'Impermeabilización de soleras' },
+        ],
+      },
+      {
+        label: 'Colocación de azulejos',
+        href: AZULEJOS,
+        children: [
+          { label: 'Kalzo Separador', href: `${AZULEJOS}kalzo-separador/` },
+          { label: 'Kuña Niveladora', href: `${AZULEJOS}kuna-niveladora/` },
+          { label: 'Kuña Antimanchas', href: `${AZULEJOS}kuna-antimanchas/` },
+          { label: 'Alikates', href: `${AZULEJOS}alikates/` },
+        ],
+      },
     ],
+    tool: { label: 'Calculadora de niveladores', note: '¿Cuántos necesito para mi obra?', cta: 'Calcular', href: `${NIVELACION}calculadora/` },
   },
-  {
-    label: 'Colocación de azulejos',
-    href: AZULEJOS,
-    children: [
-      { label: 'Kalzo Separador', href: `${AZULEJOS}kalzo-separador/` },
-      { label: 'Kuña Niveladora', href: `${AZULEJOS}kuna-niveladora/` },
-      { label: 'Kuña Antimanchas', href: `${AZULEJOS}kuna-antimanchas/` },
-      { label: 'Alikates', href: `${AZULEJOS}alikates/` },
-    ],
-  },
-  { label: 'Noticias', href: '/noticias/' },
-  { label: 'Empresa', href: '/empresa/' },
-  { label: 'Ayuda', href: '/preguntas-frecuentes/' },
-] as const;
+  links: [
+    { label: 'Noticias', href: '/noticias/' },
+    { label: 'Empresa', href: '/empresa/' },
+    { label: 'Ayuda', href: '/preguntas-frecuentes/' },
+    { label: 'Contacto', href: '/contacto/' },
+  ],
+};
 
 const EN_NIV = '/en/screed-levellers/';
 const EN_AZU = '/en/tile-levelling-system/';
-export const NAV_EN = [
-  {
-    label: 'Liquid screed',
-    href: EN_NIV,
-    highlight: true,
-    children: [
-      { label: 'Insulation Screed Leveller', href: `${EN_NIV}insulation-screed-leveller/`, note: 'Underfloor heating · 20 g, replaces the metal tripod' },
-      { label: 'Universal Screed Leveller', href: `${EN_NIV}universal-screed-leveller/`, note: 'Screeds · flat base for any surface' },
-      { label: 'Spare parts and accessories', href: `${EN_NIV}spare-parts/`, note: 'Replace only the worn part' },
-      { label: 'Underslab polyethylene sheet', href: `${EN_NIV}underslab-polythene-sheet/`, note: 'Slab waterproofing' },
-      { label: 'Leveller calculator', href: `${EN_NIV}calculator/`, note: 'How many do I need?' },
-      { label: 'Screed leveller vs metal tripod', href: `${EN_NIV}screed-leveller-vs-metal-tripod/`, note: 'Comparison' },
+export const NAV_EN: typeof NAV = {
+  products: {
+    label: 'Products',
+    seeAll: 'See the full range',
+    groups: [
+      {
+        label: 'Screed levellers',
+        href: EN_NIV,
+        highlight: true,
+        children: [
+          { label: 'Insulation Screed Leveller', href: `${EN_NIV}insulation-screed-leveller/`, note: 'Underfloor heating · 20 g, replaces the metal tripod' },
+          { label: 'Universal Screed Leveller', href: `${EN_NIV}universal-screed-leveller/`, note: 'Screeds · flat base for any surface' },
+          { label: 'Spare parts and accessories', href: `${EN_NIV}spare-parts/`, note: 'Replace only the worn part' },
+          { label: 'Underslab polythene sheet', href: `${EN_NIV}underslab-polythene-sheet/`, note: 'Slab waterproofing' },
+        ],
+      },
+      {
+        label: 'Tile levelling system',
+        href: EN_AZU,
+        children: [
+          { label: 'Kalzo spacer clip', href: `${EN_AZU}kalzo-spacer-clip/` },
+          { label: 'Kuña levelling wedge', href: `${EN_AZU}kuna-levelling-wedge/` },
+          { label: 'Stain-resistant Kuña', href: `${EN_AZU}stain-resistant-kuna-wedge/` },
+          { label: 'Alikates tile pliers', href: `${EN_AZU}alikates-tile-pliers/` },
+        ],
+      },
     ],
+    tool: { label: 'Leveller calculator', note: 'How many do I need for my job?', cta: 'Calculate', href: `${EN_NIV}calculator/` },
   },
-  {
-    label: 'Tile installation',
-    href: EN_AZU,
-    children: [
-      { label: 'Kalzo spacer clip', href: `${EN_AZU}kalzo-spacer-clip/` },
-      { label: 'Kuña levelling wedge', href: `${EN_AZU}kuna-levelling-wedge/` },
-      { label: 'Stain-resistant Kuña', href: `${EN_AZU}stain-resistant-kuna-wedge/` },
-      { label: 'Alikates tile pliers', href: `${EN_AZU}alikates-tile-pliers/` },
-    ],
-  },
-  { label: 'News', href: '/en/news/' },
-  { label: 'Company', href: '/en/company/' },
-  { label: 'FAQ', href: '/en/faq/' },
-] as const;
+  links: [
+    { label: 'News', href: '/en/news/' },
+    { label: 'Company', href: '/en/company/' },
+    { label: 'FAQ', href: '/en/faq/' },
+    { label: 'Contact', href: '/en/contact/' },
+  ],
+};
 
 // Densidad recomendada publicada por KREOX: aprox. 1 nivelador cada 2 m².
 export const M2_POR_NIVELADOR = 2;
