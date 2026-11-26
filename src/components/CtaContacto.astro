@@ -6,12 +6,34 @@ import { SITE, waConsulta, type Interes } from '../data/site';
 import WaIcon from './WaIcon.astro';
 import { useT } from '../i18n/ui';
 const { lang, t } = useT(Astro.url);
-interface Props { title?: string; text?: string; interes?: Interes }
-const {
-  title = t('ctaTitle'),
-  text = t('ctaText'),
-  interes = 'nivelacion',
-} = Astro.props;
+// `tema` cambia el titular y el texto según la página, para que el cierre no sea el mismo en toda la web.
+type Tema = 'home' | 'nivelacion' | 'calculadora' | 'tripode' | 'lamina' | 'empresa' | 'azulejos' | 'guia';
+const COPY: Record<'es' | 'en', Record<Tema, [string, string]>> = {
+  es: {
+    home: ['¿Tienes una obra en marcha?', 'Escríbenos por WhatsApp con los metros y el tipo de soporte. Te decimos qué nivelador usar y cuántas cajas pedir.'],
+    nivelacion: ['¿Cuántos metros vas a verter?', 'Pásanos los m², el espesor y si es suelo radiante o recrecido. Te contestamos con el nivelador y las cajas que necesitas.'],
+    calculadora: ['¿Tu obra no es tan cuadrada?', 'Si tienes varias plantas, zonas irregulares o vertidos por fases, cuéntanoslo por WhatsApp y hacemos la cuenta contigo.'],
+    tripode: ['Pruébalo en tu próximo suelo radiante', 'Pide tu caja de PIKO por WhatsApp y compáralo con el trípode en tu propia obra.'],
+    lamina: ['¿Estás preparando la solera?', 'Pide la lámina junto con los niveladores. Escríbenos con los m² y te preparamos el pedido.'],
+    empresa: ['Habla directamente con fábrica', 'Sin intermediarios: por WhatsApp o por teléfono hablas con quien fabrica los niveladores en Ibi.'],
+    azulejos: ['¿Estás alicatando?', 'Cuéntanos el formato y el grosor de la baldosa y te decimos qué Kalzo y qué Kuña te van mejor.'],
+    guia: ['¿Tienes una obra parecida?', 'Escríbenos por WhatsApp con los metros y el espesor y te ayudamos con las cantidades.'],
+  },
+  en: {
+    home: ['Got a job under way?', 'Message us on WhatsApp with the area and the substrate. We will tell you which leveller to use and how many boxes to order.'],
+    nivelacion: ['How many square metres are you pouring?', 'Send us the area, the screed depth and whether it is underfloor heating or a screed on a slab. We will reply with the leveller and boxes you need.'],
+    calculadora: ['Not a simple rectangle?', 'If you have several floors, irregular areas or phased pours, tell us on WhatsApp and we will work it out with you.'],
+    tripode: ['Try it on your next underfloor heating job', 'Order a box of Insulation Screed Levellers on WhatsApp and compare them with tripods on your own site.'],
+    lamina: ['Preparing the slab?', 'Order the polythene sheet together with your levellers. Send us the area and we will prepare the order.'],
+    empresa: ['Talk straight to the factory', 'No middlemen: on WhatsApp or by phone you speak to the people who make the levellers in Ibi.'],
+    azulejos: ['Tiling at the moment?', 'Tell us the tile format and thickness and we will tell you which Kalzo and Kuña suit you best.'],
+    guia: ['Got a similar job?', 'Message us on WhatsApp with the area and the depth and we will help you with the quantities.'],
+  },
+};
+interface Props { title?: string; text?: string; interes?: Interes; tema?: Tema }
+const { interes = 'nivelacion', tema = interes === 'azulejos' ? 'azulejos' : 'nivelacion' } = Astro.props;
+const title = Astro.props.title ?? COPY[lang][tema][0];
+const text = Astro.props.text ?? COPY[lang][tema][1];
 ---
 <section class="cta section section--dark">
   <Image src={bg} alt="" widths={[960, 1920]} sizes="100vw" class="bg" />

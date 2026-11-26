@@ -33,7 +33,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     description: 'Kalzo Separador KREOX: rotura limpia por el punto previsto y compatible con todas las kuñas del mercado. Juntas de 0,5 a 3 mm. Material reciclado.',
     img: kalzo,
     alt: 'Kalzos separadores KREOX de varios colores según grosor de junta',
-    intro: 'Diseñado y fabricado para facilitar y garantizar la colocación de baldosas cerámicas, de pequeño o gran formato, de forma ágil y eficiente.',
+    intro: 'Diseñado y fabricado para facilitar y garantizar la colocación de baldosas cerámicas, de pequeño o gran formato, sin cejas entre piezas.',
     body: 'El Kalzo separador de KREOX rompe de forma rápida y sencilla y siempre por el lugar diseñado para ello, dejando la base bajo la baldosa. Su altura y anchura están pensadas para funcionar con todas las kuñas del mercado.',
     presentacion: ['Bolsa de 100 unidades', 'Bolsa de 300 unidades'],
     extra: [{ label: 'Juntas', value: 'Kalzo 0,5 · 1,0 · 1,5 · 2,0 · 3,0' }, { label: 'Compatibilidad', value: 'Todas las kuñas del mercado' }],
@@ -83,10 +83,11 @@ export const TILE_PRODUCTS: TileProduct[] = [
   },
 ];
 
-export const TILE_FAQ = [
-  { q: '¿El Kalzo de KREOX funciona con kuñas de otras marcas?', a: 'Sí. Su altura y anchura están diseñadas para ser compatibles con todas las kuñas del mercado.' },
-  { q: '¿Qué espesores de baldosa admite la Kuña Niveladora?', a: 'Losas de entre 3 y 15 mm sin necesidad de suplementos.' },
-  { q: '¿Para qué sirve la Kuña Antimanchas?', a: 'Evita el marcado de las baldosas sin usar protectores. Su aleta impide que los alicates toquen la superficie y reparte la presión.' },
-  { q: '¿Las Kuñas son reutilizables?', a: 'Sí. La Kuña es reutilizable y el sobrante del Kalzo separador es reciclable.' },
-  { q: '¿De qué material están hechos?', a: 'KREOX fabrica en España con material reciclado.' },
+// p = productos (posición en el listado) a los que aplica cada pregunta; cada ficha muestra solo las suyas.
+export const TILE_FAQ: { q: string; a: string; p: number[] }[] = [
+  { q: '¿El Kalzo de KREOX funciona con kuñas de otras marcas?', a: 'Sí. Su altura y anchura están diseñadas para ser compatibles con todas las kuñas del mercado.', p: [0] },
+  { q: '¿Qué espesores de baldosa admite la Kuña Niveladora?', a: 'Losas de entre 3 y 15 mm sin necesidad de suplementos.', p: [1] },
+  { q: '¿Para qué sirve la Kuña Antimanchas?', a: 'Evita el marcado de las baldosas sin usar protectores. Su aleta impide que los alicates toquen la superficie y reparte la presión.', p: [2, 3] },
+  { q: '¿Las Kuñas son reutilizables?', a: 'Sí. La Kuña es reutilizable y el sobrante del Kalzo separador es reciclable.', p: [0, 1, 2] },
+  { q: '¿De qué material están hechos?', a: 'KREOX fabrica en España con material reciclado.', p: [0, 1, 2, 3] },
 ];

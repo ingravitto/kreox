@@ -21,7 +21,7 @@ export const TILE_PRODUCTS_EN: (TileProduct & { esSlug: string })[] = [
     description: 'KREOX Kalzo spacer clip: clean break at the designed point and compatible with every wedge on the market. Joints from 0.5 to 3 mm. Recycled material.',
     img: img('kalzo-separador'),
     alt: 'KREOX Kalzo spacer clips in several colours according to joint width',
-    intro: 'Designed and made to make laying ceramic tiles, small or large format, quick, efficient and reliable.',
+    intro: 'Designed and made to make laying ceramic tiles, small or large format, without lippage between tiles.',
     body: 'The KREOX Kalzo spacer clip breaks quickly and easily, always at the point designed for it, leaving the base under the tile. Its height and width are designed to work with every wedge on the market.',
     presentacion: ['Bag of 100 units', 'Bag of 300 units'],
     extra: [{ label: 'Joints', value: 'Kalzo 0.5 · 1.0 · 1.5 · 2.0 · 3.0' }, { label: 'Compatibility', value: 'Every wedge on the market' }],
@@ -74,10 +74,11 @@ export const TILE_PRODUCTS_EN: (TileProduct & { esSlug: string })[] = [
   },
 ];
 
-export const TILE_FAQ_EN = [
-  { q: 'Does the KREOX Kalzo work with other brands’ wedges?', a: 'Yes. Its height and width are designed to be compatible with every wedge on the market.' },
-  { q: 'What tile thicknesses does the Kuña levelling wedge take?', a: 'Tiles between 3 and 15 mm without the need for spacers.' },
-  { q: 'What is the stain-resistant Kuña for?', a: 'It prevents marks on tiles without using protectors. Its fin stops the pliers from touching the surface and spreads the pressure.' },
-  { q: 'Are the Kuñas reusable?', a: 'Yes. The Kuña is reusable and the leftover Kalzo spacer clip is recyclable.' },
-  { q: 'What are they made of?', a: 'KREOX manufactures in Spain using recycled material.' },
+// p = productos (posición en el listado) a los que aplica cada pregunta; cada ficha muestra solo las suyas.
+export const TILE_FAQ_EN: { q: string; a: string; p: number[] }[] = [
+  { q: 'Does the KREOX Kalzo work with other brands’ wedges?', a: 'Yes. Its height and width are designed to be compatible with every wedge on the market.', p: [0] },
+  { q: 'What tile thicknesses does the Kuña levelling wedge take?', a: 'Tiles between 3 and 15 mm without the need for spacers.', p: [1] },
+  { q: 'What is the stain-resistant Kuña for?', a: 'It prevents marks on tiles without using protectors. Its fin stops the pliers from touching the surface and spreads the pressure.', p: [2, 3] },
+  { q: 'Are the Kuñas reusable?', a: 'Yes. The Kuña is reusable and the leftover Kalzo spacer clip is recyclable.', p: [0, 1, 2] },
+  { q: 'What are they made of?', a: 'KREOX manufactures in Spain using recycled material.', p: [0, 1, 2, 3] },
 ];

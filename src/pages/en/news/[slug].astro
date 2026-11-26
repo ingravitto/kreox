@@ -79,7 +79,7 @@ const schema = [article, ...(n.data.faq.length ? [faqSchema(n.data.faq)] : [])];
       </div>
     </section>
   )}
-  <CtaContacto interes={n.data.category === 'azulejos' ? 'azulejos' : 'nivelacion'} />
+  <CtaContacto interes={n.data.category === 'azulejos' ? 'azulejos' : n.data.category === 'nivelacion' ? 'nivelacion' : 'general'} tema={n.data.category === 'azulejos' ? 'azulejos' : n.data.category === 'nivelacion' ? 'guia' : 'home'} />
 </Base>
 <style>
   .head { margin-bottom: 28px; }

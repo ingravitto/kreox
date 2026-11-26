@@ -57,12 +57,9 @@ const es = {
   waFloatLabel: '¿Hablamos?',
   // CTA de contacto (WhatsApp)
   ctaEyebrow: 'Hablemos de tu obra',
-  ctaTitle: '¿Tienes una obra en marcha?',
-  ctaText: 'Escríbenos por WhatsApp: te asesoramos sobre qué nivelador usar y cuántos necesitas para tu obra.',
   ctaButton: 'Escríbenos por WhatsApp',
   // FAQ
   faqTitle: 'Preguntas frecuentes',
-  faqNotFound: '¿No encuentras tu respuesta? Escríbenos y te contestamos.',
   faqContact: 'Contactar',
   // Noticias
   read: 'Leer',
@@ -198,11 +195,8 @@ const en: Record<UiKey, string> = {
   waFloatLink: 'Message us on WhatsApp (opens in a new window)',
   waFloatLabel: 'Shall we talk?',
   ctaEyebrow: "Let's talk about your job",
-  ctaTitle: 'Got a job under way?',
-  ctaText: 'Message us on WhatsApp: we will help you choose the right leveller and work out how many you need.',
   ctaButton: 'Message us on WhatsApp',
   faqTitle: 'Frequently asked questions',
-  faqNotFound: 'Can’t find your answer? Write to us and we will reply.',
   faqContact: 'Contact us',
   read: 'Read',
   legalEyebrow: 'Legal information',

@@ -13,6 +13,7 @@ export function getStaticPaths() {
   return TILE_PRODUCTS.map((p) => ({ params: { slug: p.slug }, props: { p } }));
 }
 const { p } = Astro.props as { p: TileProduct };
+const faqs = TILE_FAQ.filter((f) => f.p.includes(TILE_PRODUCTS.findIndex((o) => o.slug === p.slug)));
 const url = `${AZULEJOS}${p.slug}/`;
 const others = TILE_PRODUCTS.filter((o) => o.slug !== p.slug);
 const schema = [
@@ -32,7 +33,7 @@ const schema = [
       ...(p.extra ?? []).map((e) => ({ '@type': 'PropertyValue', name: e.label, value: e.value })),
     ],
   },
-  faqSchema(TILE_FAQ),
+  faqSchema(faqs),
 ];
 ---
 <Base overlay title={p.title} description={p.description} ogType="product" image={p.img.src} breadcrumbs={[{ name: 'Colocación de azulejos', url: AZULEJOS }, { name: p.name, url }]} schema={schema}>
@@ -83,8 +84,8 @@ const schema = [
     </div>
   </section>
 
-  <Faq faqs={TILE_FAQ} />
-  <CtaContacto interes="azulejos" text="Escríbenos por WhatsApp y te asesoramos sobre Kalzos, Kuñas y Alikates para tu obra." />
+  <Faq faqs={faqs} />
+  <CtaContacto interes="azulejos" />
 </Base>
 <style>
   .pimg { border-radius: 22px; width: 100%; aspect-ratio: 1; object-fit: cover; }

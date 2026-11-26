@@ -90,7 +90,7 @@ const noticias = (await getNoticias()).filter((n) => n.data.category === 'empres
       </div>
     </section>
   )}
-  <CtaContacto />
+  <CtaContacto tema="empresa" interes="general" />
 </Base>
 <style>
   .photo { border-radius: var(--radius-xl); width: 100%; }
