@@ -58,7 +58,7 @@ export const TILE_PRODUCTS: TileProduct[] = [
     title: 'Kuña Antimanchas para baldosas claras | KREOX',
     description: 'Kuña Antimanchas KREOX: evita el marcado de las baldosas sin protectores. Con aleta para que los alicates no toquen la superficie. Losas de 3 a 15 mm.',
     img: kunaAnti,
-    alt: 'Kuña antimanchas KREOX con aleta para proteger baldosas claras',
+    alt: 'Kuña Antimanchas KREOX de plástico translúcido, con aleta para proteger baldosas claras',
     intro: 'Pensada y desarrollada para evitar el marcado de las baldosas sin necesidad de usar protectores.',
     body: 'Abarca espesores de losa de 3 a 15 mm sin suplementos y queda centrada entre ambas baldosas. Gracias a la aleta, los Alikates no tienen contacto directo con la superficie y la presión es igual en toda ella.',
     presentacion: ['Bolsa de 300 unidades'],
