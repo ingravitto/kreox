@@ -70,6 +70,7 @@ export const NEWS_PAIRS: [string, string][] = [
   ['como-nivelar-mortero-autonivelante-suelo-radiante', 'how-to-level-liquid-screed-over-underfloor-heating'],
   ['recrecido-mortero-autonivelante-como-marcar-la-cota', 'liquid-screed-how-to-set-the-datum-level'],
   ['sistemas-de-nivelacion-para-mortero-autonivelante', 'screed-levelling-systems'],
+  ['nivelar-mortero-anhidrita-sin-tripodes', 'levelling-anhydrite-screed-without-tripods'],
 ];
 
 // Pares de páginas (excepto /gracias/, que no se indexa, pero sí se enlaza en el selector).

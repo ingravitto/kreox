@@ -3,6 +3,7 @@ import { PRODUCTOS, M2_POR_NIVELADOR, MORTERO_KG_M2_MM, SITE } from './site';
 const n100 = Math.ceil(100 / M2_POR_NIVELADOR);
 
 export const FAQ_PIKO = [
+  { q: '¿El PIKO sirve para mortero de anhidrita?', a: 'Sí. El PIKO marca la cota igual con mortero autonivelante de cemento que de anhidrita: se clava en la placa del suelo radiante, se ajusta la anilla con el láser y se bombea el mortero hasta la anilla.' },
   {
     q: '¿Qué es el PIKO de KREOX?',
     a: 'Es un nivelador para mortero autonivelante que se clava en la placa de aislamiento del suelo radiante y marca, con su anilla regulable, la altura de acabado del mortero. Sustituye al trípode de acero tradicional.',
@@ -34,6 +35,7 @@ export const FAQ_PIKO = [
 ];
 
 export const FAQ_UNIVERSAL = [
+  { q: '¿El Nivelador Universal sirve para recrecidos de anhidrita?', a: 'Sí. Vale para mortero autonivelante de cemento y de anhidrita. Se apoya sobre el soporte, se ajusta la anilla a la línea del láser y se vierte hasta la anilla.' },
   {
     q: '¿Para qué sirve el Nivelador Universal de KREOX?',
     a: 'Para marcar la altura de acabado del mortero autonivelante en recrecidos y nivelaciones sobre cualquier superficie, sustituyendo al trípode de acero. Se apoya sobre su base plana, sin necesidad de clavarlo.',

@@ -4,6 +4,7 @@ import { PRODUCTOS, M2_POR_NIVELADOR, MORTERO_KG_M2_MM, SITE } from '../site';
 const n100 = Math.ceil(100 / M2_POR_NIVELADOR);
 
 export const FAQ_PIKO_EN = [
+  { q: 'Can the Insulation Screed Leveller be used with anhydrite screed?', a: 'Yes. It sets the datum in the same way with cement-based and anhydrite (calcium sulphate) liquid screed: push it into the insulation board, set the ring with the laser and pump the screed up to the ring.' },
   {
     q: 'What is the KREOX Insulation Screed Leveller?',
     a: 'It is a screed leveller that is pushed into the insulation board of an underfloor heating system and marks, with its adjustable ring, the datum height of the screed. It replaces the traditional metal tripod.',
@@ -35,6 +36,7 @@ export const FAQ_PIKO_EN = [
 ];
 
 export const FAQ_UNIVERSAL_EN = [
+  { q: 'Can the Universal Screed Leveller be used with anhydrite screed?', a: 'Yes. It works with cement-based and anhydrite liquid screed. Rest it on the substrate, set the ring to the laser line and pour up to the ring.' },
   {
     q: 'What is the KREOX Universal Screed Leveller used for?',
     a: 'To set the datum height of liquid screed when screeding or levelling on any surface, replacing the metal tripod. It rests on its flat base, with no need to push it in.',

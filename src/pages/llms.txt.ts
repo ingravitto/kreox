@@ -21,6 +21,7 @@ export const GET: APIRoute = async () => {
 
 - [PIKO · Nivelador Aislamiento 1](${U}${P.url}): nivelador que se clava en la placa de aislamiento del suelo radiante y marca la altura del mortero autonivelante con una anilla regulable por láser (habitual o con receptor). Sustituye al trípode de acero: unos ${P.pesoG} g frente a ~1 kg, no se oxida, reutilizable. Medidas: fuste ${P.medidas.altoMm} mm + punta ${P.medidas.puntaMm} mm, base Ø${P.medidas.baseMm} mm, arandela Ø${P.medidas.arandelaMm} mm. Caja de ${P.caja}.
 - [Nivelador Universal](${U}${N.url}): nivelador con base plana y reforzada para recrecidos con mortero autonivelante sobre cualquier superficie. Unos ${N.pesoG} g, regulable por láser, reutilizable, con recambios. Medidas: fuste ${N.medidas.altoMm} mm, base ${N.medidas.baseAltoMm} mm de alto y Ø${N.medidas.baseMm} mm. Caja de ${N.caja}.
+- Morteros: autonivelante de cemento y de anhidrita (PIKO y Nivelador Universal).
 - Densidad recomendada: aproximadamente 1 nivelador por m² (100 m² ≈ ${Math.ceil(100 / M2_POR_NIVELADOR)} niveladores).
 - [Recambios](${U}${NIVELACION}recambios/): arandela niveladora (caja 150), base niveladora universal (caja 40), anilla metálica niveladora universal (caja 40).
 - [Lámina de polietileno bajo solera](${U}${NIVELACION}lamina-bajo-solera/)
@@ -50,6 +51,7 @@ ${noticias.map((n) => `- [${n.data.title}](${U}${noticiaUrl(n)}) (${n.data.date.
 
 - [Insulation Screed Leveller](${U}${E.piko}) (sold as PIKO in Spain): leveller pushed into the insulation board of underfloor heating; marks the liquid screed height with a laser-adjustable ring (standard laser or with receiver). Replaces the metal tripod: about ${P.pesoG} g versus ~1 kg, rust-free, reusable. Box of ${P.caja}.
 - [Universal Screed Leveller](${U}${E.universal}) (Nivelador Universal in Spain): leveller with a flat, reinforced base for liquid screeds on any surface. About ${N.pesoG} g, laser adjustable, reusable, with spare parts. Box of ${N.caja}.
+- Screeds: cement-based and anhydrite liquid screed.
 - Recommended density: roughly 1 leveller per m² (100 m² ≈ ${Math.ceil(100 / M2_POR_NIVELADOR)} levellers).
 - [Spare parts](${U}${E.recambios}) · [Leveller calculator](${U}${E.calculadora}) · [Screed leveller vs metal tripod](${U}${E.vsTripode}) · [Levelling systems](${U}${E.nivelacion}) · [FAQ](${U}${E.faq})
 - Tile levelling system: ${TILE_PRODUCTS_EN.map((p) => `[${p.name}](${U}${E.azulejos}${p.slug}/)`).join(' · ')}

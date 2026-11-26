@@ -155,6 +155,8 @@ export const PRODUCTOS = {
     url: `${NIVELACION}piko/`,
     uso: 'Suelo radiante sobre placa de aislamiento',
     fijacion: 'Se clava en el aislamiento',
+    // Confirmado por KREOX: sirve para autonivelante de cemento y de anhidrita.
+    morteros: 'Autonivelante de cemento o de anhidrita',
     pesoG: 20,
     caja: 100,
     medidas: { altoMm: 152, puntaMm: 24, baseMm: 50, fusteMm: 20, arandelaMm: 48 },
@@ -165,6 +167,7 @@ export const PRODUCTOS = {
     url: `${NIVELACION}nivelador-universal/`,
     uso: 'Recrecidos sobre cualquier superficie',
     fijacion: 'Se apoya sobre su base plana',
+    morteros: 'Autonivelante de cemento o de anhidrita',
     pesoG: 250,
     caja: 40,
     medidas: { altoMm: 142, baseAltoMm: 15, baseMm: 87, fusteMm: 20, arandelaMm: 48 },
