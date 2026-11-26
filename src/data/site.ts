@@ -12,7 +12,7 @@ export const SITE = {
   phone: '+34 611 87 50 47',
   phoneHref: 'tel:+34611875047',
   email: 'comercial@kreox.es',
-  emailExport: 'natalia@kreox.es',
+  emailExport: 'export@kreox.es',
   address: {
     street: 'C/ Virgen de la Esperanza, 5',
     postalCode: '03440',
