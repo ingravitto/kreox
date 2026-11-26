@@ -1,0 +1,75 @@
+---
+// Comparativa visual trípode de acero / PIKO en dos tarjetas iguales (listas alineadas, fotos con pie).
+import { Image } from 'astro:assets';
+import { PRODUCTOS } from '../data/site';
+import { useT } from '../i18n/ui';
+import imgTriPesado from '../assets/img/tripodes-acero-pesados.jpg';
+import imgTriOxido from '../assets/img/tripodes-acero-oxidados.jpg';
+import imgTriMortero from '../assets/img/tripode-acero-en-mortero.jpg';
+import imgCaja from '../assets/img/caja-100-piko.jpg';
+import imgLimpieza from '../assets/img/piko-limpieza-reutilizable.jpg';
+import imgLaser from '../assets/img/piko-laser-receptor-suelo-radiante.jpg';
+
+const { lang, t } = useT(Astro.url);
+const g = PRODUCTOS.piko.pesoG;
+const T = lang === 'en'
+  ? {
+      bad: { tag: 'Before', title: 'Metal levelling tripods', items: [['Heavy and bulky', 'about 1 kg per tripod.'], ['Rust and hard to clean', 'the alkaline pH of cement screed corrodes the steel.'], ['Slow to place', 'all three legs have to be seated at every point.'], ['Dearer per unit', 'and you replace the whole tripod.']], pics: [[imgTriPesado, 'Heavy', 'Metal levelling tripods carried by a worker'], [imgTriOxido, 'They rust', 'Rusty metal levelling tripods'], [imgTriMortero, 'Legs to seat', 'Metal tripod standing in liquid screed']] },
+      good: { tag: 'Now', title: t('prodPiko'), items: [['Light and compact', `about ${g} g; ${PRODUCTOS.piko.caja} per box.`], ['Rust-free, cleaned with water', 'and reused on the next job.'], ['Fast to place', 'pushed into the insulation board, with a visual ring to check the level.'], ['Cheaper per unit', 'with spare parts by piece.']], pics: [[imgCaja, '100 per box', 'Box of 100 Insulation Screed Levellers'], [imgLimpieza, 'Cleaned with water', 'Insulation Screed Levellers being rinsed with water'], [imgLaser, 'Set with a laser', 'Insulation Screed Leveller set with a laser with receiver on underfloor heating']] },
+    }
+  : {
+      bad: { tag: 'Antes', title: 'Trípodes de acero (arañas)', items: [['Pesados y voluminosos', 'cerca de 1 kg por trípode.'], ['Óxido y limpieza difícil', 'el pH alcalino del mortero de cemento corroe el acero.'], ['Colocación lenta', 'hay que asentar las tres patas en cada punto.'], ['Más caros por unidad', 'y se cambia el trípode entero.']], pics: [[imgTriPesado, 'Pesados', 'Trípodes de acero cargados por un operario'], [imgTriOxido, 'Se oxidan', 'Trípodes de nivelación de acero oxidados'], [imgTriMortero, 'Patas que asentar', 'Trípode de acero en el mortero autonivelante']] },
+      good: { tag: 'Ahora', title: 'PIKO de KREOX', items: [['Ligero y compacto', `unos ${g} g; ${PRODUCTOS.piko.caja} unidades por caja.`], ['Sin óxido, se limpia con agua', 'y se reutiliza en la siguiente obra.'], ['Colocación rápida', 'se clava en el aislamiento y su anilla visual marca el nivel.'], ['Más económico por unidad', 'y con recambios por pieza.']], pics: [[imgCaja, '100 por caja', 'Caja de 100 PIKO'], [imgLimpieza, 'Se limpia con agua', 'PIKO limpiándose con agua'], [imgLaser, 'Ajuste con láser', 'PIKO ajustado con láser con receptor sobre suelo radiante']] },
+    };
+const cards = [['bad', T.bad], ['good', T.good]] as const;
+---
+<div class="vs2">
+  {cards.map(([k, c]) => (
+    <article class:list={['vc', `vc--${k}`]} data-reveal>
+      <header>
+        <span class="vc-tag">{c.tag}</span>
+        <h2>{c.title}</h2>
+      </header>
+      <ul>
+        {c.items.map(([s, x]) => (
+          <li>
+            <span class="ic" aria-hidden="true">{k === 'good'
+              ? <svg viewBox="0 0 16 16" width="12" height="12"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              : <svg viewBox="0 0 16 16" width="12" height="12"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>}</span>
+            <span><strong>{s}:</strong> {x}</span>
+          </li>
+        ))}
+      </ul>
+      <div class="pics">
+        {c.pics.map(([img, cap, alt]) => (
+          <figure>
+            <Image src={img} alt={alt} widths={[240, 456]} sizes="(min-width: 960px) 180px, 30vw" />
+            <figcaption>{cap}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </article>
+  ))}
+</div>
+<style>
+  .vs2 { display: grid; gap: 16px; }
+  @media (min-width: 900px) { .vs2 { grid-template-columns: 1fr 1fr; gap: 24px; } }
+  .vc { display: flex; flex-direction: column; padding: clamp(22px, 3vw, 34px); border-radius: var(--radius-xl); background: var(--white); border: 1px solid var(--line); }
+  .vc--good { background: var(--ink); border-color: var(--ink); color: var(--on-dark); }
+  .vc header { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+  .vc-tag { align-self: flex-start; padding: 5px 12px; border-radius: 999px; font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; background: #f6e3df; color: var(--bad); }
+  .vc--good .vc-tag { background: rgba(200, 225, 29, .16); color: var(--lime); }
+  .vc h2 { margin: 0; font-size: clamp(1.4rem, 2.2vw, 1.85rem); }
+  .vc--good h2 { color: var(--white); }
+  .vc ul { list-style: none; margin: 0 0 22px; padding: 0; display: grid; gap: 12px; }
+  .vc li { display: grid; grid-template-columns: 24px 1fr; gap: 10px; align-items: start; line-height: 1.5; }
+  .vc li strong { color: var(--ink); }
+  .vc--good li strong { color: var(--white); }
+  .ic { display: inline-grid; place-content: center; width: 22px; height: 22px; margin-top: 1px; border-radius: 50%; background: #f6e3df; color: var(--bad); }
+  .vc--good .ic { background: var(--lime); color: var(--ink); }
+  .pics { margin-top: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .pics figure { margin: 0; }
+  .pics :global(img) { width: 100%; aspect-ratio: 6 / 5; object-fit: cover; border-radius: 12px; }
+  .pics figcaption { margin-top: 6px; font-size: .78rem; font-weight: 500; color: var(--text-soft); }
+  .vc--good .pics figcaption { color: var(--on-dark-soft); }
+</style>

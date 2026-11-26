@@ -55,6 +55,7 @@ Las URLs de la web WordPress anterior se redirigen en `public/.htaccess`. Si cam
 - Vídeos con sonido (reel, instalación): `data-inview` + botón "Activar sonido"; sin `controls`.
 - El titular (H1) del hero no lleva animación de opacidad: es el elemento LCP.
 - Al sustituir un vídeo o una imagen de `public/`, cambia el nombre del archivo (p. ej. `-v2`): el navegador los guarda 30 días y seguiría mostrando el antiguo.
+- Vídeo real de fábrica (de kreox.es/empresa): `/videos/fabrica-kreox-ibi.mp4`, en el banner de Empresa (`PageHero` con `bgVideo`) y en "Quiénes somos" de la portada.
 - Vídeos: siempre con `AutoVideo` (preload none, póster diferido). No poner `poster` directo en vídeos fuera de la primera pantalla.
 - Cabecera: píldora flotante fija (cristal oscuro, separada de los bordes; `--header-h` = margen + altura). Menú: `NAV` / `NAV_EN` en `src/data/site.ts`. Arriba solo "Productos" (panel por líneas + calculadora), Noticias, Empresa, Ayuda y Contacto. Un producto nuevo se añade a su grupo; las comparativas y guías no van en el menú. Panel: botón con `aria-expanded`; Escape cierra.
 

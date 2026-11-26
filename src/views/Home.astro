@@ -22,7 +22,8 @@ import imgArandela from '../assets/img/arandela-niveladora-recambio.png';
 import imgBase from '../assets/img/base-niveladora-universal-recambio.png';
 import imgAnilla from '../assets/img/anilla-metalica-niveladora-universal.png';
 import imgLineas from '../assets/img/lineas-azulejos.jpg';
-import imgFabrica from '../assets/img/fabrica-kreox-ibi.jpg';
+import imgFabrica from '../assets/img/fabrica-kreox-video-poster.jpg';
+import Partners from '../components/Partners.astro';
 import imgHow from '../assets/img/hf-piko-laser-anilla-noche.jpg';
 
 // Portada compartida por / (español) y /en/ (inglés): mismo diseño, textos de T según el idioma de la URL.
@@ -74,7 +75,7 @@ const T = EN
       coEyebrow: 'Who we are', coTitle: 'A family of manufacturers in Ibi, Alicante',
       coLead: 'KREOX is the brand of Talleres La Paz, a family business in Ibi (Alicante) now in its third generation. We design and make the levellers here and sell them direct to the people who install them.',
       coGen: 'Generation', coSpain: 'Made in Spain', coRecycled: 'Recycled material', coMeet: 'About us',
-      fabAlt: 'KREOX factory in Ibi (Alicante, Spain): injection mould, packed product and packing by hand',
+      fabAlt: 'KREOX factory in Ibi (Alicante, Spain): injection moulding machines with robot, freshly made Kalzos and packing', fabCap: 'Our factory in Ibi (Alicante, Spain)',
       newsEyebrow: 'News', newsTitle: 'The latest from KREOX', newsAll: 'All news',
     }
   : {
@@ -118,7 +119,7 @@ const T = EN
       coEyebrow: 'Quiénes somos', coTitle: 'Una familia de fabricantes en Ibi (Alicante)',
       coLead: 'KREOX es la marca de Talleres La Paz, empresa familiar de Ibi (Alicante) que ya va por la tercera generación. Diseñamos y fabricamos los niveladores aquí y los vendemos directamente a quien los coloca.',
       coGen: 'Generación', coSpain: 'Hecho en España', coRecycled: 'Material reciclado', coMeet: 'Conócenos',
-      fabAlt: 'Fábrica de KREOX en Ibi (Alicante): molde de inyección, producto embolsado y envasado a mano',
+      fabAlt: 'Planta de KREOX en Ibi (Alicante): máquinas de inyección con robot, Kalzos recién fabricados y envasado', fabCap: 'Nuestra planta de Ibi (Alicante)',
       newsEyebrow: 'Noticias', newsTitle: 'Lo último de KREOX', newsAll: 'Todas las noticias',
     };
 
@@ -326,8 +327,12 @@ const T = EN
         </dl>
         <div class="btn-row"><a class="btn btn--sand" href={P.empresa}>{T.coMeet}</a></div>
       </div>
-      <div data-reveal><Image src={imgFabrica} alt={T.fabAlt} widths={[600, 1013]} sizes="(min-width: 960px) 560px, 92vw" class="fab" /></div>
+      <figure class="fab" data-reveal>
+        <div class="fab-v"><AutoVideo src="/videos/fabrica-kreox-ibi.mp4" poster={imgFabrica} label={T.fabAlt} /></div>
+        <figcaption><span class="dot" aria-hidden="true"></span>{T.fabCap}</figcaption>
+      </figure>
     </div>
+    <div class="container"><Partners /></div>
   </section>
 
   <!-- NOTICIAS -->
@@ -449,5 +454,8 @@ const T = EN
   .tile:hover .tile-img :global(img) { transform: scale(1.06); }
   .tile h3 { margin-bottom: 6px; }
 
-  .fab { border-radius: var(--radius-xl); width: 100%; }
+  .fab { margin: 0; }
+  .fab-v { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--radius-xl); border: 1px solid var(--line-dark); box-shadow: 0 40px 80px -30px rgba(0,0,0,.7); }
+  .fab figcaption { display: flex; align-items: center; gap: 10px; margin-top: 14px; font-size: .85rem; color: var(--on-dark-soft); }
+  .fab .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 4px rgba(200,225,29,.15); }
 </style>

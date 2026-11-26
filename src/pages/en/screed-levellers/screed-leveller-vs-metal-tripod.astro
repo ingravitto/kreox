@@ -3,8 +3,8 @@
 import PageHero from '../../../components/PageHero.astro';
 import imgHeroBg from '../../../assets/img/suelo-radiante-piko-bn.jpg';
 import WeightBars from '../../../components/WeightBars.astro';
-import { Image } from 'astro:assets';
 import Base from '../../../layouts/Base.astro';
+import VsCards from '../../../components/VsCards.astro';
 import CompareTripode from '../../../components/CompareTripode.astro';
 import Faq from '../../../components/Faq.astro';
 import CtaContacto from '../../../components/CtaContacto.astro';
@@ -12,12 +12,6 @@ import { PRODUCTOS, M2_POR_NIVELADOR } from '../../../data/site';
 import { PATHS } from '../../../i18n/routes';
 import { faqSchema } from '../../../data/schema';
 import { FAQ_TRIPODE_EN } from '../../../data/en/faqs';
-import imgTriPesado from '../../../assets/img/tripodes-acero-pesados.jpg';
-import imgTriOxido from '../../../assets/img/tripodes-acero-oxidados.jpg';
-import imgTriMortero from '../../../assets/img/tripode-acero-en-mortero.jpg';
-import imgCaja from '../../../assets/img/caja-100-piko.jpg';
-import imgLimpieza from '../../../assets/img/piko-limpieza-reutilizable.jpg';
-import imgLaser from '../../../assets/img/piko-laser-receptor-suelo-radiante.jpg';
 
 const R = PATHS.en;
 const url = R.vsTripode;
@@ -56,36 +50,7 @@ const faqs = FAQ_TRIPODE_EN;
   </section>
 
   <section class="section section--paper">
-    <div class="container grid grid-2">
-      <div>
-        <h2>The problem with the metal tripod</h2>
-        <ul class="list">
-          <li><strong>Heavy and bulky:</strong> about 1 kg per tripod.</li>
-          <li><strong>Rust and hard cleaning:</strong> the alkaline pH of the screed corrodes the steel.</li>
-          <li><strong>Slow placement:</strong> each leg must be in exactly the right position.</li>
-          <li><strong>More expensive per unit.</strong></li>
-        </ul>
-        <div class="grid grid-3 pics">
-          <Image src={imgTriPesado} alt="Heavy metal tripods carried by a worker" widths={[316]} />
-          <Image src={imgTriOxido} alt="Rusted metal tripods" widths={[316]} />
-          <Image src={imgTriMortero} alt="Metal tripod submerged in liquid screed" widths={[316]} />
-        </div>
-      </div>
-      <div>
-        <h2>The alternative: the Insulation Screed Leveller</h2>
-        <ul class="list">
-          <li><strong>Light and small:</strong> about {PRODUCTOS.piko.pesoG} g; {PRODUCTOS.piko.caja} units in one box.</li>
-          <li><strong>Reusable and easy to clean:</strong> it does not rust.</li>
-          <li><strong>Quick placement:</strong> pushed into the insulation, and its visual ring makes checking the level easier.</li>
-          <li><strong>More affordable per unit.</strong></li>
-        </ul>
-        <div class="grid grid-3 pics">
-          <Image src={imgCaja} alt="Box of 100 Insulation Screed Levellers" widths={[316]} />
-          <Image src={imgLimpieza} alt="Insulation Screed Leveller being cleaned with water" widths={[316]} />
-          <Image src={imgLaser} alt="Insulation Screed Leveller adjusted with a laser with receiver over underfloor heating" widths={[316]} />
-        </div>
-      </div>
-    </div>
+    <div class="container"><VsCards /></div>
   </section>
 
   <section class="section">
@@ -98,8 +63,4 @@ const faqs = FAQ_TRIPODE_EN;
   <CtaContacto tema="tripode" interes="piko" />
 </Base>
 <style>
-  .list { padding-left: 1.2em; }
-  .list li { margin-bottom: 0.5em; }
-  .pics { gap: 10px; margin-top: 16px; grid-template-columns: repeat(3, 1fr); }
-  .pics :global(img) { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 10px; }
 </style>

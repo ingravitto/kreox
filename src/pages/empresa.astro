@@ -1,6 +1,6 @@
 ---
 import PageHero from '../components/PageHero.astro';
-import imgHeroBg from '../assets/img/packaging-kreox-kalzo-kuna.jpg';
+import imgHeroBg from '../assets/img/fabrica-kreox-video-poster.jpg';
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import CtaContacto from '../components/CtaContacto.astro';
@@ -23,9 +23,10 @@ const noticias = (await getNoticias()).filter((n) => n.data.category === 'empres
     eyebrow="Tercera generación"
     title="Tres generaciones fabricando en"
     accent="Ibi (Alicante)"
-    lead="Búsqueda constante de la perfección en la mejora de nuestros productos. Somos <strong>fabricantes nacionales</strong>."
+    lead="Inyectamos, envasamos y enviamos desde nuestra planta de Ibi. Búsqueda constante de la perfección en la mejora de nuestros productos: somos <strong>fabricantes nacionales</strong>."
     bg={imgHeroBg}
-    bgAlt="Bolsas de Kalzo y Kuña Antimanchas KREOX"
+    bgAlt="Planta de KREOX en Ibi (Alicante): máquinas de inyección con robot, Kalzos recién fabricados y envasado"
+    bgVideo="/videos/fabrica-kreox-ibi.mp4"
     crumbs={[{ name: 'Empresa', url: '/empresa/' }]}
   />
   <section class="section">
