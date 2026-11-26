@@ -178,6 +178,7 @@ const other = langs.find((l) => l.code !== lang)!;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.06);
     transition: background .35s var(--ease), box-shadow .35s var(--ease), top .35s var(--ease), border-color .35s var(--ease);
   }
+  .site-header:not(.overlay) { background: rgba(20, 20, 19, 0.94); }
   .site-header.overlay:not(.is-scrolled) { background: rgba(20, 20, 19, 0.38); border-color: rgba(255, 255, 255, 0.16); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); }
   .site-header.is-scrolled { background: rgba(20, 20, 19, 0.88); box-shadow: 0 14px 40px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.06); }
   .bar.container { max-width: none; padding-inline: 18px 7px; }

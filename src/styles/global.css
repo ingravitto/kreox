@@ -72,8 +72,8 @@ body {
 
 img, video { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-underline-offset: 4px; text-decoration-thickness: 1px; }
-.prose a, .link { color: var(--sand-strong); font-weight: 500; }
-.prose a:hover, .link:hover { color: var(--ink); }
+.prose a:not(.btn), .link { color: var(--sand-strong); font-weight: 500; }
+.prose a:not(.btn):hover, .link:hover { color: var(--ink); }
 
 h1, h2, h3, h4 { color: var(--ink); line-height: 1.08; margin: 0 0 0.55em; font-weight: 600; letter-spacing: -0.025em; }
 h1 { font-size: clamp(2.1rem, 4vw, 3.6rem); text-wrap: balance; }
