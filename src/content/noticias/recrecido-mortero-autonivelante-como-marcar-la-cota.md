@@ -11,12 +11,12 @@ faq:
   - q: '¿Qué nivelador se usa en un recrecido sobre superficie dura?'
     a: 'El Nivelador Universal, que tiene base plana y se apoya sobre el soporte sin necesidad de clavarlo. El PIKO está pensado para clavarse en la placa de aislamiento del suelo radiante.'
   - q: '¿Cada cuánto se coloca un Nivelador Universal?'
-    a: 'Aproximadamente uno cada 2 m². Para 100 m² son unos 50 niveladores; cada caja trae 40 unidades.'
+    a: 'Aproximadamente uno por m², en cuadrícula de 1 m. Para 100 m² son unos 100 niveladores, es decir, 3 cajas de 40 unidades.'
   - q: '¿Qué piezas del Nivelador Universal tienen recambio?'
     a: 'La base niveladora universal, la anilla metálica niveladora universal y la arandela niveladora.'
 ---
 
-**Para marcar la cota de un recrecido con mortero autonivelante se apoyan niveladores sobre el soporte, aproximadamente uno cada 2 m², se marca la altura de acabado con un láser, se ajusta la anilla de cada nivelador a esa línea y se vierte el mortero hasta la anilla.** Sobre forjado, solera o pavimento existente, donde no se puede clavar nada, se usa el [Nivelador Universal de KREOX](/nivelacion-mortero-autonivelante/nivelador-universal/), que se apoya sobre su base plana.
+**Para marcar la cota de un recrecido con mortero autonivelante se apoyan niveladores sobre el soporte, aproximadamente uno por m², se marca la altura de acabado con un láser, se ajusta la anilla de cada nivelador a esa línea y se vierte el mortero hasta la anilla.** Sobre forjado, solera o pavimento existente, donde no se puede clavar nada, se usa el [Nivelador Universal de KREOX](/nivelacion-mortero-autonivelante/nivelador-universal/), que se apoya sobre su base plana.
 
 ## Qué necesitas
 
@@ -26,7 +26,7 @@ faq:
 
 ## Paso 1 · Apoya los niveladores
 
-Coloca los Niveladores Universales sobre la superficie que vas a recrecer, aproximadamente **uno cada 2 m²**. Su base plana y reforzada los mantiene estables.
+Coloca los Niveladores Universales sobre la superficie que vas a recrecer, aproximadamente **uno por m²** (en cuadrícula de 1 m). Su base plana y reforzada los mantiene estables.
 
 ## Paso 2 · Marca la cota con láser
 

@@ -8,6 +8,7 @@ La línea principal es **nivelación con mortero autonivelante**: PIKO (suelo ra
 ## Reglas de contenido
 - **No inventar datos técnicos.** Los datos de producto están en `src/data/site.ts` (`PRODUCTOS`) y salen de la web original y de los planos del fabricante. Si falta un dato (rango de regulación, material, EAN, distribuidores…), se pregunta; no se rellena.
 - Nombres de producto siempre iguales: "PIKO" y "Nivelador Universal" (nombre completo: "Nivelador Recrecido Universal"). Nunca "pico", "PiKo" ni "Pikos".
+- **Densidad: 1 nivelador por m²** en cuadrícula de 1 m, igual que la calculadora oficial (calculadora.kreox.es), confirmado por el cliente. Constantes en `src/data/site.ts`: `M2_POR_NIVELADOR`, `SEPARACION_M` y `MORTERO_KG_M2_MM` (1,8 kg/m²·mm, orientativo). La calculadora completa es `CalculadoraObra.astro` (zonas, altura, producto, pedido por WhatsApp); la corta de las fichas, `Calculadora.astro`.
 - Teléfonos, emails y dirección solo en `src/data/site.ts`.
 - Las FAQ visibles y el schema FAQPage salen del mismo array (`src/data/faqs.ts` o el frontmatter `faq` de cada noticia).
 

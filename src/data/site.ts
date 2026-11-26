@@ -140,8 +140,12 @@ export const NAV_EN: typeof NAV = {
   ],
 };
 
-// Densidad recomendada publicada por KREOX: aprox. 1 nivelador cada 2 m².
-export const M2_POR_NIVELADOR = 2;
+// Densidad de KREOX (la de su calculadora oficial, calculadora.kreox.es): un nivelador por m²,
+// repartidos en cuadrícula de 1 m. La calculadora cuenta por zona: ceil(ancho / 1 m) × ceil(largo / 1 m).
+export const M2_POR_NIVELADOR = 1;
+export const SEPARACION_M = 1;
+// Consumo orientativo de mortero autonivelante que usa la calculadora oficial: 1,8 kg por m² y mm de espesor.
+export const MORTERO_KG_M2_MM = 1.8;
 
 // Datos de producto (los que KREOX publica). Lo no publicado queda fuera, no se inventa.
 export const PRODUCTOS = {

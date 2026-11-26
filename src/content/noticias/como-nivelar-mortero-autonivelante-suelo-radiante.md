@@ -9,14 +9,14 @@ image: ../../assets/img/hf-piko-mortero-enrasado-anillas.jpg
 imageAlt: 'Mortero autonivelante recién vertido sobre suelo radiante, enrasado a la anilla de los niveladores PIKO, con el láser en su trípode'
 faq:
   - q: '¿Cuántos niveladores hacen falta para nivelar un suelo radiante?'
-    a: 'Como referencia, uno cada 2 m² aproximadamente. Para 100 m² son unos 50 PIKO, es decir, media caja de 100 unidades.'
+    a: 'Como referencia, uno por m² aproximadamente, repartidos en cuadrícula de 1 m. Para 100 m² son unos 100 PIKO, es decir, una caja de 100 unidades.'
   - q: '¿Se puede marcar la cota con un láser normal?'
     a: 'Sí. El PIKO se ajusta tanto con láser habitual como con láser con receptor: basta con llevar la anilla a la línea que marca el láser.'
   - q: '¿Qué se hace con los niveladores después del vertido?'
     a: 'Se retiran, se limpian con agua y se guardan para la siguiente obra. Si la arandela se desgasta, se cambia solo esa pieza.'
 ---
 
-**Para nivelar mortero autonivelante sobre suelo radiante se colocan niveladores clavados en la placa de aislamiento, aproximadamente uno cada 2 m², se marca la cota de acabado con un láser, se ajusta la anilla de cada nivelador a esa línea y se vierte el mortero hasta cubrir la anilla.** Con el [PIKO de KREOX](/nivelacion-mortero-autonivelante/piko/) todo el proceso se hace sin trípodes de acero, con un nivelador de unos 20 gramos que no se oxida y se reutiliza.
+**Para nivelar mortero autonivelante sobre suelo radiante se colocan niveladores clavados en la placa de aislamiento, aproximadamente uno por m², se marca la cota de acabado con un láser, se ajusta la anilla de cada nivelador a esa línea y se vierte el mortero hasta cubrir la anilla.** Con el [PIKO de KREOX](/nivelacion-mortero-autonivelante/piko/) todo el proceso se hace sin trípodes de acero, con un nivelador de unos 20 gramos que no se oxida y se reutiliza.
 
 ## Qué necesitas
 
@@ -26,7 +26,7 @@ faq:
 
 ## Paso 1 · Clava los PIKO en la placa de aislamiento
 
-El PIKO tiene una punta que entra en la placa de aislamiento del suelo radiante sin herramientas. Repártelos por toda la superficie, aproximadamente **uno cada 2 m²**, para tener puntos de referencia en toda la estancia.
+El PIKO tiene una punta que entra en la placa de aislamiento del suelo radiante sin herramientas. Repártelos por toda la superficie, aproximadamente **uno por m²** (en cuadrícula de 1 m), para tener puntos de referencia en toda la estancia.
 
 ## Paso 2 · Marca la cota de acabado con láser
 
@@ -42,18 +42,18 @@ Vierte el mortero hasta alcanzar la altura de las anillas. Después retira los P
 
 ## ¿Cuántos PIKO necesito?
 
-| Superficie | PIKO (1 cada 2 m²) | Cajas de 100 |
+| Superficie | PIKO (1 por m²) | Cajas de 100 |
 |---|---|---|
-| 50 m² | 25 | 1 |
-| 100 m² | 50 | 1 |
-| 200 m² | 100 | 1 |
-| 500 m² | 250 | 3 |
+| 50 m² | 50 | 1 |
+| 100 m² | 100 | 1 |
+| 200 m² | 200 | 2 |
+| 500 m² | 500 | 5 |
 
 Para tu obra concreta usa la [calculadora de niveladores](/nivelacion-mortero-autonivelante/calculadora/).
 
 ## Por qué no usar trípodes de acero
 
-Un trípode de acero pesa cerca de 1 kg, se corroe con el pH alcalino del mortero y obliga a asentar bien sus tres patas. Para 100 m², eso son unos 50 kg de trípodes frente a 1 kg de PIKO. Tienes la comparativa completa en [PIKO frente al trípode](/nivelacion-mortero-autonivelante/piko-vs-tripode/).
+Un trípode de acero pesa cerca de 1 kg, se corroe con el pH alcalino del mortero y obliga a asentar bien sus tres patas. Para 100 m², eso son unos 100 kg de trípodes frente a 2 kg de PIKO. Tienes la comparativa completa en [PIKO frente al trípode](/nivelacion-mortero-autonivelante/piko-vs-tripode/).
 
 ## Después del vertido
 

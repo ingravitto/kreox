@@ -77,7 +77,7 @@ const T = {
           var h = a.getAttribute('href');
           if (/api\.whatsapp\.com|wa\.me/.test(h)) {
             var t = decodeURIComponent(h).toLowerCase();
-            var prod = /piko/.test(t) ? 'piko' : /universal/.test(t) ? 'universal' : /recambios|spare parts/.test(t) ? 'recambios' : /azulejos|tile/.test(t) ? 'azulejos' : 'general';
+            var prod = /piko|insulation/.test(t) ? 'piko' : /universal/.test(t) ? 'universal' : /recambios|spare parts/.test(t) ? 'recambios' : /azulejos|tile/.test(t) ? 'azulejos' : 'general';
             gtag('event', 'click_whatsapp', { producto: prod, page_path: location.pathname });
           } else if (h.indexOf('tel:') === 0) {
             gtag('event', 'click_telefono', { page_path: location.pathname });

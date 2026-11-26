@@ -1,9 +1,10 @@
 ---
+// Versión corta para las fichas de producto: m² → niveladores. La completa (zonas, altura, mortero) es CalculadoraObra.
 import { PRODUCTOS, M2_POR_NIVELADOR } from '../data/site';
 interface Props { compact?: boolean; defaultProduct?: 'piko' | 'universal' }
 const { compact = false, defaultProduct = 'piko' } = Astro.props;
 import { useT } from '../i18n/ui';
-const { t, locale } = useT(Astro.url);
+const { t, locale, P } = useT(Astro.url);
 const data = {
   piko: { caja: PRODUCTOS.piko.caja, peso: PRODUCTOS.piko.pesoG, nombre: t('prodPiko') },
   universal: { caja: PRODUCTOS.universal.caja, peso: PRODUCTOS.universal.pesoG, nombre: t('prodUni') },
@@ -24,12 +25,6 @@ const data = {
       <label class="radio"><input type="radio" name="prod" value="piko" checked={defaultProduct === 'piko'} /> {t('calcPiko')}</label>
       <label class="radio"><input type="radio" name="prod" value="universal" checked={defaultProduct === 'universal'} /> {t('calcUni')}</label>
     </fieldset>
-    {!compact && (
-      <label>
-        <span>{t('calcDensity')}</span>
-        <input type="number" name="dens" min="0.5" max="6" step="0.5" value={M2_POR_NIVELADOR} />
-      </label>
-    )}
   </div>
   <output class="result" aria-live="polite">
     <div><strong data-o="uds">50</strong><span>{t('calcLevelers')}</span></div>
@@ -37,7 +32,7 @@ const data = {
     <div><strong data-o="peso">1 kg</strong><span>{t('calcWeight')}</span></div>
     <div class="vs"><strong data-o="tri">50 kg</strong><span>{t('calcTripods')}</span></div>
   </output>
-  <p class="muted note">{t('calcNote1')} <span data-o="densTxt">{M2_POR_NIVELADOR}</span> {t('calcNote2')}</p>
+  <p class="muted note">{t('calcNote')} <a href={P.calculadora}>{t('calcFull')}</a></p>
 </form>
 
 <script>
@@ -47,8 +42,7 @@ const data = {
     const out = (k: string) => form.querySelector<HTMLElement>(`[data-o="${k}"]`)!;
     const run = () => {
       const m2 = Math.max(0, Number((form.elements.namedItem('m2') as HTMLInputElement).value) || 0);
-      const densEl = form.elements.namedItem('dens') as HTMLInputElement | null;
-      const dens = Math.max(0.5, Number(densEl?.value) || cfg.m2);
+      const dens = cfg.m2;
       const prod = (form.querySelector('input[name="prod"]:checked') as HTMLInputElement)?.value || 'piko';
       const p = cfg[prod];
       const uds = Math.ceil(m2 / dens);
@@ -58,7 +52,6 @@ const data = {
       out('cajaTxt').textContent = `${cajas === 1 ? cfg.txt.box : cfg.txt.boxes} ${cfg.txt.of} ${p.caja} ${cfg.txt.units}`;
       out('peso').textContent = `${fmt((uds * p.peso) / 1000)} kg`;
       out('tri').textContent = `${fmt((uds * cfg.tripode) / 1000)} kg`;
-      out('densTxt').textContent = fmt(dens);
     };
     form.addEventListener('input', run);
     run();

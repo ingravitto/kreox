@@ -30,7 +30,7 @@ export const GET: APIRoute = () => {
 - Base reforzada. Recambios: base niveladora universal (caja 40), anilla metálica niveladora universal (caja 40), arandela niveladora (caja 150). Producto patentado, fabricado en España.
 
 ## Regla de cálculo
-- Densidad recomendada: aprox. 1 nivelador cada ${M2_POR_NIVELADOR} m² (100 m² ≈ ${Math.ceil(100 / M2_POR_NIVELADOR)} niveladores).
+- Densidad recomendada: aprox. 1 nivelador por m² (100 m² ≈ ${Math.ceil(100 / M2_POR_NIVELADOR)} niveladores).
 - Calculadora: ${U}${NIVELACION}calculadora/
 
 ${qa('Preguntas frecuentes · nivelación', FAQ_NIVELACION)}
@@ -51,7 +51,7 @@ ${qa('Preguntas frecuentes · colocación de azulejos', TILE_FAQ)}
 
 - Insulation Screed Leveller / PIKO (${U}${PATHS.en.piko}): ≈ ${P.pesoG} g, box of ${P.caja}; dimensions (mm): shaft ${P.medidas.altoMm} + tip ${P.medidas.puntaMm}; base Ø${P.medidas.baseMm}; washer Ø${P.medidas.arandelaMm}. Pushed into underfloor heating insulation.
 - Universal Screed Leveller / Nivelador Universal (${U}${PATHS.en.universal}): ≈ ${N.pesoG} g, box of ${N.caja}; dimensions (mm): shaft ${N.medidas.altoMm}; base ${N.medidas.baseAltoMm} high and Ø${N.medidas.baseMm}; washer Ø${N.medidas.arandelaMm}. Rests on its flat base, for screeds.
-- Recommended density: about 1 leveller every ${M2_POR_NIVELADOR} m².
+- Recommended density: about 1 leveller per m².
 
 ${qa('FAQ · levelling', FAQ_NIVELACION_EN)}
 

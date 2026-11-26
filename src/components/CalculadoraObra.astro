@@ -1,0 +1,330 @@
+---
+// Calculadora completa (misma lógica que calculadora.kreox.es):
+// 1) zonas con ancho × largo; cada zona se reparte en cuadrícula de SEPARACION_M → ceil(ancho/s) × ceil(largo/s) niveladores;
+// 2) altura de nivelación (mm) → mortero orientativo = m² × mm × MORTERO_KG_M2_MM;
+// 3) producto → cajas = ceil(niveladores / caja). El resultado se envía por WhatsApp con el pedido ya escrito.
+import { PRODUCTOS, SEPARACION_M, MORTERO_KG_M2_MM, M2_POR_NIVELADOR } from '../data/site';
+import { useT } from '../i18n/ui';
+import WaIcon from './WaIcon.astro';
+
+interface Props { defaultProduct?: 'piko' | 'universal' }
+const { defaultProduct = 'piko' } = Astro.props;
+const { lang, t, locale } = useT(Astro.url);
+const ALTURAS = [10, 20, 30, 40, 50, 60, 80, 100, 120, 150];
+
+const T = {
+  es: {
+    aria: 'Calculadora de niveladores para mortero autonivelante',
+    s1: 'Medidas de la obra', s1d: 'Añade cada habitación o zona con su ancho y su largo. La suma es tu superficie.',
+    zone: 'Zona', width: 'Ancho', length: 'Largo', subtotal: 'Subtotal', add: 'Añadir zona', del: 'Eliminar',
+    s2: 'Altura de nivelación', s2d: 'Espesor del mortero autonivelante que vas a verter.', other: 'Otra altura',
+    s3: 'Elige tu nivelador', s3d: 'Según dónde se vierte el mortero.',
+    pikoUse: 'Suelo radiante · se clava en el aislamiento', uniUse: 'Recrecidos · se apoya en cualquier soporte', box: 'Caja de',
+    plan: 'Plano · vista cenital', planEmpty: 'Sin medidas',
+    planAria: ['Plano con {z} zona, {m2} m² y {n} niveladores repartidos en cuadrícula', 'Plano con {z} zonas, {m2} m² y {n} niveladores repartidos en cuadrícula'],
+    result: 'Resultado', levellers: 'niveladores', boxes: 'Cajas', mortar: 'Mortero', area: 'Superficie', density: 'Densidad', densityV: '1 ud/m²',
+    weight: 'Peso en obra', tripods: 'con trípodes de acero',
+    note: `Cantidades orientativas: un nivelador por m² en cuadrícula de ${String(SEPARACION_M).replace('.', ',')} m. El mortero se estima con ${String(MORTERO_KG_M2_MM).replace('.', ',')} kg por m² y mm de espesor; la cantidad real depende del fabricante, del tipo de mortero y de la obra. Consulta siempre su ficha técnica.`,
+    order: 'Pedir por WhatsApp', newWin: ' (abre WhatsApp)',
+    wa: { hi: 'Hola, quiero hacer un pedido desde la calculadora KREOX:', product: 'Producto', area: 'Superficie', zones: 'Zonas', height: 'Altura de nivelación', lev: 'Niveladores', boxOf: ['{n} caja de {c}', '{n} cajas de {c}'], mortar: 'Mortero estimado', approx: 'orientativo', bye: '¿Me pasáis presupuesto y plazo de entrega? Gracias.' },
+  },
+  en: {
+    aria: 'Screed leveller calculator',
+    s1: 'Job measurements', s1d: 'Add each room or area with its width and length. The total is your floor area.',
+    zone: 'Area', width: 'Width', length: 'Length', subtotal: 'Subtotal', add: 'Add area', del: 'Remove',
+    s2: 'Screed depth', s2d: 'Thickness of the liquid screed you are going to pour.', other: 'Other depth',
+    s3: 'Choose your leveller', s3d: 'Depending on where the screed is poured.',
+    pikoUse: 'Underfloor heating · pushed into the insulation board', uniUse: 'Screeds · rests on any substrate', box: 'Box of',
+    plan: 'Plan · top view', planEmpty: 'No measurements',
+    planAria: ['Plan with {z} area, {m2} m² and {n} levellers set out on a grid', 'Plan with {z} areas, {m2} m² and {n} levellers set out on a grid'],
+    result: 'Result', levellers: 'levellers', boxes: 'Boxes', mortar: 'Screed', area: 'Floor area', density: 'Density', densityV: '1 per m²',
+    weight: 'Weight on site', tripods: 'with metal tripods',
+    note: `Approximate quantities: one leveller per m² on a ${SEPARACION_M} m grid. Screed is estimated at ${MORTERO_KG_M2_MM} kg per m² per mm of depth; the real amount depends on the manufacturer, the type of screed and the job. Always check its data sheet.`,
+    order: 'Order on WhatsApp', newWin: ' (opens WhatsApp)',
+    wa: { hi: 'Hello, I would like to place an order from the KREOX calculator:', product: 'Product', area: 'Floor area', zones: 'Areas', height: 'Screed depth', lev: 'Levellers', boxOf: ['{n} box of {c}', '{n} boxes of {c}'], mortar: 'Estimated screed', approx: 'approximate', bye: 'Could you send me a quote and delivery time? Thanks.' },
+  },
+}[lang];
+
+// Lo que necesita el script del navegador (sin funciones).
+const cfg = {
+  locale, sep: SEPARACION_M, kgmm: MORTERO_KG_M2_MM, perM2: M2_POR_NIVELADOR,
+  tripodeG: PRODUCTOS.tripode.pesoG,
+  products: {
+    piko: { name: t('prodPiko'), caja: PRODUCTOS.piko.caja, g: PRODUCTOS.piko.pesoG },
+    universal: { name: t('prodUni'), caja: PRODUCTOS.universal.caja, g: PRODUCTOS.universal.pesoG },
+  },
+  txt: {
+    zone: T.zone, width: T.width, length: T.length, subtotal: T.subtotal, del: T.del, planEmpty: T.planEmpty,
+    planAria: T.planAria,
+    wa: T.wa,
+  },
+  wa: 'https://api.whatsapp.com/send?phone=34611875047&text=',
+};
+---
+<form class="co" data-co={JSON.stringify(cfg)} onsubmit="return false" aria-label={T.aria}>
+  <div class="co-steps">
+    <fieldset class="co-step">
+      <legend><span class="co-n">01</span>{T.s1}</legend>
+      <p class="co-d">{T.s1d}</p>
+      <div class="co-rooms" data-rooms></div>
+      <button type="button" class="co-add" data-add>
+        <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        {T.add}
+      </button>
+    </fieldset>
+
+    <fieldset class="co-step">
+      <legend><span class="co-n">02</span>{T.s2}</legend>
+      <p class="co-d">{T.s2d}</p>
+      <div class="co-chips">
+        {ALTURAS.map((h) => (
+          <label class="co-chip"><input type="radio" name="h" value={h} checked={h === 30} /><span>{h} mm</span></label>
+        ))}
+      </div>
+      <label class="co-other">
+        <span>{T.other}</span>
+        <input type="number" name="hmm" min="1" max="500" step="1" value="30" inputmode="numeric" />
+        <span aria-hidden="true">mm</span>
+      </label>
+    </fieldset>
+
+    <fieldset class="co-step">
+      <legend><span class="co-n">03</span>{T.s3}</legend>
+      <p class="co-d">{T.s3d}</p>
+      <div class="co-prods">
+        <label class="co-prod">
+          <input type="radio" name="prod" value="piko" checked={defaultProduct === 'piko'} />
+          <strong>{t('prodPiko')}</strong>
+          <span>{T.pikoUse}</span>
+          <em>{T.box} {PRODUCTOS.piko.caja}</em>
+        </label>
+        <label class="co-prod">
+          <input type="radio" name="prod" value="universal" checked={defaultProduct === 'universal'} />
+          <strong>{t('prodUni')}</strong>
+          <span>{T.uniUse}</span>
+          <em>{T.box} {PRODUCTOS.universal.caja}</em>
+        </label>
+      </div>
+    </fieldset>
+  </div>
+
+  <aside class="co-side">
+    <div class="co-plan">
+      <div class="co-plan-h"><span>{T.plan}</span><b data-o="area">0 m²</b></div>
+      <svg data-plan viewBox="0 0 600 380" role="img" aria-label="" preserveAspectRatio="xMidYMid meet"></svg>
+    </div>
+    <output class="co-res" aria-live="polite">
+      <span class="co-res-h">{T.result} · <span data-o="pname">{t('prodPiko')}</span></span>
+      <span class="co-big"><b data-o="n">0</b> {T.levellers}</span>
+      <dl>
+        <div><dt>{T.boxes}</dt><dd data-o="boxes">0</dd></div>
+        <div><dt>{T.mortar}</dt><dd data-o="mortar">≈ 0 kg</dd></div>
+        <div><dt>{T.area}</dt><dd data-o="m2">0 m²</dd></div>
+        <div><dt>{T.density}</dt><dd>{T.densityV}</dd></div>
+        <div><dt>{T.weight}</dt><dd data-o="kg">0 kg</dd></div>
+        <div class="co-vs"><dt>{T.tripods}</dt><dd data-o="tri">0 kg</dd></div>
+      </dl>
+    </output>
+    <a class="btn co-wa" data-wa href={cfg.wa} target="_blank" rel="noopener"><WaIcon size={18} /> {T.order}<span class="visually-hidden">{T.newWin}</span></a>
+    <p class="co-note">{T.note}</p>
+  </aside>
+</form>
+
+<script>
+  type Room = { id: number; w: number; l: number };
+  document.querySelectorAll<HTMLFormElement>('form[data-co]').forEach((form) => {
+    const c = JSON.parse(form.dataset.co || '{}');
+    const fmt = (n: number, d = 2) => n.toLocaleString(c.locale, { minimumFractionDigits: d, maximumFractionDigits: d });
+    const fmt0 = (n: number) => Math.round(n).toLocaleString(c.locale);
+    const o = (k: string) => form.querySelector<HTMLElement>(`[data-o="${k}"]`)!;
+    const roomsEl = form.querySelector<HTMLElement>('[data-rooms]')!;
+    const svg = form.querySelector<SVGSVGElement>('[data-plan]')!;
+    const wa = form.querySelector<HTMLAnchorElement>('[data-wa]')!;
+    const hInput = form.elements.namedItem('hmm') as HTMLInputElement;
+    let rooms: Room[] = [{ id: 1, w: 4, l: 5 }];
+    let next = 2;
+
+    const grid = (r: Room) => (r.w > 0 && r.l > 0 ? { cols: Math.max(1, Math.ceil(r.w / c.sep - 1e-9)), rows: Math.max(1, Math.ceil(r.l / c.sep - 1e-9)) } : { cols: 0, rows: 0 });
+    const pieces = () => rooms.reduce((s, r) => { const g = grid(r); return s + g.cols * g.rows; }, 0);
+    const area = () => rooms.reduce((s, r) => s + Math.max(0, r.w) * Math.max(0, r.l), 0);
+    const height = () => Math.max(0, Number(hInput.value) || 0);
+    const prod = () => (form.querySelector<HTMLInputElement>('input[name="prod"]:checked')?.value || 'piko') as 'piko' | 'universal';
+    const pad = (n: number) => String(n).padStart(2, '0');
+
+    function renderRooms() {
+      roomsEl.innerHTML = '';
+      rooms.forEach((r, i) => {
+        const d = document.createElement('div');
+        d.className = 'co-room';
+        d.setAttribute('role', 'group');
+        d.setAttribute('aria-label', `${c.txt.zone} ${pad(i + 1)}`);
+        const idw = `co-w-${r.id}`, idl = `co-l-${r.id}`;
+        d.innerHTML = `
+          <div class="co-room-h"><span>${c.txt.zone} ${pad(i + 1)}</span>${rooms.length > 1 ? `<button type="button" class="co-del" data-del="${r.id}"><span aria-hidden="true">×</span><span class="visually-hidden">${c.txt.del} ${c.txt.zone.toLowerCase()} ${pad(i + 1)}</span></button>` : ''}</div>
+          <div class="co-dims">
+            <div class="co-dim"><label for="${idw}">${c.txt.width}</label><input id="${idw}" type="number" min="0" step="0.1" inputmode="decimal" value="${r.w}" data-id="${r.id}" data-k="w"><span aria-hidden="true">m</span></div>
+            <span class="co-x" aria-hidden="true">×</span>
+            <div class="co-dim"><label for="${idl}">${c.txt.length}</label><input id="${idl}" type="number" min="0" step="0.1" inputmode="decimal" value="${r.l}" data-id="${r.id}" data-k="l"><span aria-hidden="true">m</span></div>
+          </div>
+          <div class="co-sub"><span>${c.txt.subtotal}</span><b data-sub="${r.id}">${fmt(r.w * r.l)} m²</b></div>`;
+        roomsEl.appendChild(d);
+      });
+    }
+
+    const NS = 'http://www.w3.org/2000/svg';
+    const el = (n: string, a: Record<string, string | number>) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, String(a[k])); return e; };
+    function drawPlan(total: number, n: number) {
+      svg.replaceChildren();
+      const W = 600, H = 380, P = 16;
+      const rs = rooms.filter((r) => r.w > 0 && r.l > 0);
+      const valid = rs.length;
+      svg.setAttribute('aria-label', (valid === 1 ? c.txt.planAria[0] : c.txt.planAria[1]).replace('{z}', String(valid)).replace('{m2}', fmt(total)).replace('{n}', fmt0(n)));
+      if (!valid) {
+        const t = el('text', { x: W / 2, y: H / 2, 'text-anchor': 'middle', class: 'co-empty' }); t.textContent = c.txt.planEmpty; svg.appendChild(t); return;
+      }
+      // Coloca las zonas en filas (como la calculadora oficial) y escala el conjunto al recuadro.
+      const rowMax = Math.max(Math.sqrt(rs.reduce((s, r) => s + r.w * r.l, 0)) * 1.6, ...rs.map((r) => r.w));
+      const rows: Room[][] = [[]]; let cw = 0;
+      rs.forEach((r) => { if (cw + r.w > rowMax && rows[rows.length - 1].length) { rows.push([]); cw = 0; } rows[rows.length - 1].push(r); cw += r.w; });
+      const tw = Math.max(...rows.map((row) => row.reduce((s, r) => s + r.w, 0)));
+      const tl = rows.reduce((s, row) => s + Math.max(...row.map((r) => r.l)), 0);
+      const sc = Math.min((W - P * 2) / tw, (H - P * 2) / tl, 80);
+      const ox = (W - tw * sc) / 2; let y = (H - tl * sc) / 2;
+      const dotR = Math.max(1.6, Math.min(4.5, sc * c.sep * 0.16));
+      rows.forEach((row) => {
+        let x = ox; const rl = Math.max(...row.map((r) => r.l));
+        row.forEach((r) => {
+          const w = r.w * sc, h = r.l * sc, g = grid(r);
+          svg.appendChild(el('rect', { x: x + 0.75, y: y + 0.75, width: Math.max(0, w - 1.5), height: Math.max(0, h - 1.5), class: 'co-zone' }));
+          for (let j = 0; j < g.rows; j++) for (let i = 0; i < g.cols; i++) {
+            svg.appendChild(el('circle', { cx: x + (w * (i + 0.5)) / g.cols, cy: y + (h * (j + 0.5)) / g.rows, r: dotR, class: 'co-dot' }));
+          }
+          if (w > 70 && h > 34) {
+            const t = el('text', { x: x + w / 2, y: y + h / 2 + 4, 'text-anchor': 'middle', class: 'co-lab' }); t.textContent = `${fmt(r.w * r.l, 1)} m²`; svg.appendChild(t);
+          }
+          x += w;
+        });
+        y += rl * sc;
+      });
+    }
+
+    function update() {
+      const p = c.products[prod()];
+      const m2 = area(), n = pieces(), h = height();
+      const boxes = n > 0 ? Math.ceil(n / p.caja) : 0;
+      const kg = m2 * h * c.kgmm;
+      o('area').textContent = `${fmt(m2)} m²`;
+      o('m2').textContent = `${fmt(m2, 1)} m²`;
+      o('n').textContent = fmt0(n);
+      o('pname').textContent = p.name;
+      o('boxes').textContent = `${fmt0(boxes)} × ${p.caja}`;
+      o('mortar').textContent = `≈ ${fmt0(kg)} kg`;
+      o('kg').textContent = `${fmt((n * p.g) / 1000, 1)} kg`;
+      o('tri').textContent = `${fmt0((n * c.tripodeG) / 1000)} kg`;
+      form.querySelectorAll<HTMLInputElement>('input[name="h"]').forEach((r) => { r.checked = Number(r.value) === h; });
+      rooms.forEach((r) => { const s = form.querySelector(`[data-sub="${r.id}"]`); if (s) s.textContent = `${fmt(r.w * r.l)} m²`; });
+      const w = c.txt.wa;
+      const zonas = rooms.filter((r) => r.w > 0 && r.l > 0).map((r) => `${fmt(r.w, 1)} × ${fmt(r.l, 1)} m`).join(' + ');
+      const lines = [
+        w.hi, '',
+        `• ${w.product}: ${p.name}`,
+        `• ${w.area}: ${fmt(m2)} m²${rooms.length > 1 ? ` (${w.zones}: ${zonas})` : ` (${zonas})`}`,
+        `• ${w.height}: ${fmt0(h)} mm`,
+        `• ${w.lev}: ${fmt0(n)} (${(boxes === 1 ? w.boxOf[0] : w.boxOf[1]).replace('{n}', fmt0(boxes)).replace('{c}', String(p.caja))})`,
+        `• ${w.mortar}: ≈ ${fmt0(kg)} kg (${w.approx})`,
+        '', w.bye,
+      ];
+      wa.href = c.wa + encodeURIComponent(lines.join('\n'));
+      drawPlan(m2, n);
+    }
+
+    roomsEl.addEventListener('input', (e) => {
+      const i = e.target as HTMLInputElement; const r = rooms.find((x) => x.id === Number(i.dataset.id));
+      if (r && i.dataset.k) { r[i.dataset.k as 'w' | 'l'] = Math.max(0, Number(i.value.replace(',', '.')) || 0); update(); }
+    });
+    roomsEl.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-del]'); if (!b) return;
+      const idx = rooms.findIndex((r) => r.id === Number(b.dataset.del));
+      rooms = rooms.filter((r) => r.id !== Number(b.dataset.del)); renderRooms(); update();
+      roomsEl.querySelectorAll<HTMLInputElement>('input')[Math.max(0, idx - 1) * 2]?.focus();
+    });
+    form.querySelector('[data-add]')!.addEventListener('click', () => {
+      rooms.push({ id: next++, w: 3, l: 3 }); renderRooms(); update();
+      const ins = roomsEl.querySelectorAll<HTMLInputElement>('input'); ins[ins.length - 2]?.focus();
+    });
+    form.querySelectorAll<HTMLInputElement>('input[name="h"]').forEach((r) => r.addEventListener('change', () => { hInput.value = r.value; update(); }));
+    hInput.addEventListener('input', update);
+    form.querySelectorAll('input[name="prod"]').forEach((r) => r.addEventListener('change', update));
+    renderRooms(); update();
+  });
+</script>
+
+<style>
+  .co { display: grid; gap: clamp(20px, 3vw, 40px); align-items: start; color: var(--text); }
+  @media (min-width: 960px) { .co { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); } .co-side { position: sticky; top: calc(var(--header-h) + 20px); } }
+  .co-steps { display: grid; gap: 16px; }
+  .co-step { margin: 0; padding: clamp(20px, 2.6vw, 30px); border: 1px solid var(--line); border-radius: var(--radius-xl); background: var(--white); min-width: 0; }
+  .co-step legend { float: left; width: 100%; display: flex; align-items: center; gap: 12px; padding: 0; font-weight: 600; font-size: 1.15rem; color: var(--ink); }
+  .co-step legend + * { clear: both; }
+  .co-n { display: inline-grid; place-content: center; width: 34px; height: 34px; border-radius: 50%; background: var(--ink); color: var(--white); font-size: .78rem; font-weight: 600; letter-spacing: .04em; }
+  .co-d { margin: 8px 0 18px; color: var(--text-soft); font-size: .92rem; }
+
+  .co-rooms { display: grid; gap: 10px; }
+  .co-rooms :global(.co-room) { padding: 14px 16px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper, #f6f4f1); }
+  .co-rooms :global(.co-room-h) { display: flex; align-items: center; justify-content: space-between; min-height: 28px; font-size: .74rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--sand-strong); }
+  .co-rooms :global(.co-del) { width: 36px; height: 36px; margin: -4px -6px -4px 0; border: 0; border-radius: 50%; background: transparent; color: var(--text-soft); font-size: 1.4rem; line-height: 1; cursor: pointer; }
+  .co-rooms :global(.co-del:hover) { background: rgba(0,0,0,.06); color: var(--ink); }
+  .co-rooms :global(.co-dims) { display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 10px; margin-top: 6px; }
+  .co-rooms :global(.co-dim) { position: relative; }
+  .co-rooms :global(.co-dim label) { display: block; font-size: .78rem; color: var(--text-soft); margin-bottom: 4px; }
+  .co-rooms :global(.co-dim input) { width: 100%; padding: 10px 28px 10px 12px; font: 500 1.2rem/1 var(--font); color: var(--ink); background: var(--white); border: 1px solid var(--line); border-radius: 12px; }
+  .co-rooms :global(.co-dim input:focus) { outline: 2px solid var(--sand-strong); outline-offset: 1px; }
+  .co-rooms :global(.co-dim > span) { position: absolute; right: 12px; bottom: 12px; font-size: .8rem; color: var(--text-soft); }
+  .co-rooms :global(.co-x) { padding-bottom: 12px; color: var(--text-soft); }
+  .co-rooms :global(.co-sub) { display: flex; justify-content: space-between; margin-top: 10px; font-size: .85rem; color: var(--text-soft); }
+  .co-rooms :global(.co-sub b) { color: var(--ink); font-weight: 600; }
+  .co-add { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; min-height: 44px; padding: 0 18px; border: 1px dashed var(--ink); border-radius: 999px; background: transparent; color: var(--ink); font: 500 .9rem/1 var(--font); cursor: pointer; }
+  .co-add:hover { background: var(--ink); color: var(--white); border-style: solid; }
+
+  .co-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .co-chip { position: relative; cursor: pointer; }
+  .co-chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .co-chip span { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; font-size: .88rem; transition: background .2s, color .2s, border-color .2s; }
+  .co-chip input:checked + span { background: var(--ink); color: var(--white); border-color: var(--ink); }
+  .co-chip input:focus-visible + span { outline: 2px solid var(--sand-strong); outline-offset: 2px; }
+  .co-other { display: flex; align-items: center; gap: 10px; margin-top: 14px; font-size: .88rem; color: var(--text-soft); }
+  .co-other input { width: 96px; padding: 8px 10px; font: 500 1rem/1 var(--font); color: var(--ink); border: 1px solid var(--line); border-radius: 10px; }
+  .co-other input:focus { outline: 2px solid var(--sand-strong); outline-offset: 1px; }
+
+  .co-prods { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+  .co-prod { position: relative; display: flex; flex-direction: column; gap: 4px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 16px; cursor: pointer; transition: border-color .2s, box-shadow .2s; }
+  .co-prod input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .co-prod strong { font-weight: 600; color: var(--ink); }
+  .co-prod span { font-size: .84rem; color: var(--text-soft); }
+  .co-prod em { margin-top: 6px; font-style: normal; font-size: .74rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--sand-strong); }
+  .co-prod:has(input:checked) { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+  .co-prod:has(input:focus-visible) { outline: 2px solid var(--sand-strong); outline-offset: 2px; }
+
+  .co-side { display: grid; gap: 12px; }
+  .co-plan { padding: 16px; border: 1px solid var(--line); border-radius: var(--radius-xl); background: var(--white); }
+  .co-plan-h { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; font-size: .74rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--text-soft); }
+  .co-plan-h b { font-size: .95rem; letter-spacing: 0; color: var(--ink); }
+  .co-plan svg { display: block; width: 100%; height: auto; background: #f4f2ee; border-radius: 12px; }
+  .co-plan :global(.co-zone) { fill: #fff; stroke: var(--ink); stroke-width: 1.5; }
+  .co-plan :global(.co-dot) { fill: #1f4fd1; stroke: #b9d532; stroke-width: 1.2; }
+  .co-plan :global(.co-lab) { font: 600 12px var(--font); fill: var(--ink); paint-order: stroke; stroke: #fff; stroke-width: 4px; }
+  .co-plan :global(.co-empty) { font: 500 13px var(--font); fill: var(--text-soft); }
+
+  .co-res { display: block; padding: 22px; border-radius: var(--radius-xl); background: var(--ink); color: var(--white); }
+  .co-res-h { display: block; font-size: .74rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--sand); }
+  .co-big { display: block; margin: 6px 0 14px; font-size: 1.1rem; color: var(--on-dark-soft); }
+  .co-big b { font-size: clamp(2.6rem, 6vw, 3.4rem); font-weight: 600; letter-spacing: -0.03em; color: var(--white); margin-right: 6px; }
+  .co-res dl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; margin: 0; padding-top: 14px; border-top: 1px solid var(--line-dark); }
+  .co-res dt { font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; color: var(--on-dark-soft); }
+  .co-res dd { margin: 2px 0 0; font-size: 1.05rem; font-weight: 600; }
+  .co-res .co-vs dd { color: var(--sand); }
+  .co-wa { justify-content: center; width: 100%; min-height: 54px; background: #075e54; color: #fff; border-color: #075e54; }
+  .co-wa:hover { background: #054a42; color: #fff; }
+  .co-wa :global(svg) { width: 18px; height: 18px; }
+  .co-note { margin: 0; font-size: .8rem; color: var(--text-soft); }
+</style>

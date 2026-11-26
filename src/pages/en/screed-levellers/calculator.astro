@@ -3,7 +3,7 @@
 import PageHero from '../../../components/PageHero.astro';
 import imgHeroBg from '../../../assets/img/suelo-radiante-piko-bn.jpg';
 import Base from '../../../layouts/Base.astro';
-import Calculadora from '../../../components/Calculadora.astro';
+import CalculadoraObra from '../../../components/CalculadoraObra.astro';
 import Faq from '../../../components/Faq.astro';
 import CtaContacto from '../../../components/CtaContacto.astro';
 import { PRODUCTOS, M2_POR_NIVELADOR } from '../../../data/site';
@@ -22,7 +22,7 @@ const faqs = FAQ_CALCULADORA_EN;
 <Base
   overlay
   title="Leveller calculator for liquid screed | KREOX"
-  description="Work out how many Insulation or Universal Screed Levellers you need for your liquid screed job: units, boxes and weight versus metal tripods."
+  description="Work out how many Insulation or Universal Screed Levellers you need: measure each area, choose the screed depth and get units, boxes and screed. Order on WhatsApp."
   breadcrumbs={[{ name: 'Screed levellers', url: R.nivelacion }, { name: 'Calculator', url }]}
   schema={[faqSchema(faqs)]}
 >
@@ -31,21 +31,21 @@ const faqs = FAQ_CALCULADORA_EN;
     eyebrow="Liquid screed · tool"
     title="Leveller"
     accent="calculator"
-    lead="Square metres → levellers, boxes and the weight you save compared with the tripod."
+    lead="Measure your areas, choose the depth and the leveller: we give you levellers, boxes and an estimate of screed, ready to order on WhatsApp."
     bg={imgHeroBg}
     crumbs={[{ name: 'Levelling', url: R.nivelacion }, { name: 'Calculator', url }]}
   />
   <section class="section section--tight calc-wrap">
-    <div class="container container--narrow"><Calculadora /></div>
+    <div class="container"><CalculadoraObra /></div>
   </section>
 
   <section class="section section--paper">
     <div class="container">
       <div class="section-head">
         <h2>Quick quantity table</h2>
-        <p>With one leveller every {M2_POR_NIVELADOR} m². Insulation Screed Levellers come in boxes of {PRODUCTOS.piko.caja} and Universal Screed Levellers in boxes of {PRODUCTOS.universal.caja}.</p>
+        <p>With one leveller per m² (1 m grid). Insulation Screed Levellers come in boxes of {PRODUCTOS.piko.caja} and Universal Screed Levellers in boxes of {PRODUCTOS.universal.caja}.</p>
       </div>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Quick quantity table">
         <table>
           <thead><tr><th scope="col">Area</th><th scope="col">Levellers</th><th scope="col">Boxes (insulation)</th><th scope="col">Boxes (universal)</th></tr></thead>
           <tbody>

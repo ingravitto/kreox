@@ -2,7 +2,7 @@
 import PageHero from '../../components/PageHero.astro';
 import imgHeroBg from '../../assets/img/suelo-radiante-piko-bn.jpg';
 import Base from '../../layouts/Base.astro';
-import Calculadora from '../../components/Calculadora.astro';
+import CalculadoraObra from '../../components/CalculadoraObra.astro';
 import Faq from '../../components/Faq.astro';
 import CtaContacto from '../../components/CtaContacto.astro';
 import { NIVELACION, PRODUCTOS, M2_POR_NIVELADOR } from '../../data/site';
@@ -19,7 +19,7 @@ const faqs = FAQ_CALCULADORA;
 <Base
   overlay
   title="Calculadora de niveladores para mortero autonivelante | KREOX"
-  description="Calcula cuántos niveladores PIKO o Universal necesitas para tu obra de mortero autonivelante: unidades, cajas y peso frente al trípode de acero."
+  description="Calcula cuántos niveladores PIKO o Universal necesitas: mide cada zona, elige la altura y obtén unidades, cajas y mortero estimado. Pide por WhatsApp."
   breadcrumbs={[{ name: 'Nivelación autonivelante', url: NIVELACION }, { name: 'Calculadora', url }]}
   schema={[faqSchema(faqs)]}
 >
@@ -28,21 +28,21 @@ const faqs = FAQ_CALCULADORA;
     eyebrow="Mortero autonivelante · herramienta"
     title="Calculadora de"
     accent="niveladores"
-    lead="Metros cuadrados → niveladores, cajas y peso que te ahorras frente al trípode."
+    lead="Mide tus zonas, elige la altura y el nivelador: te damos niveladores, cajas y mortero estimado, y lo pides por WhatsApp con un toque."
     bg={imgHeroBg}
     crumbs={[{ name: 'Nivelación', url: NIVELACION }, { name: 'Calculadora', url }]}
   />
   <section class="section section--tight calc-wrap">
-    <div class="container container--narrow"><Calculadora /></div>
+    <div class="container"><CalculadoraObra /></div>
   </section>
 
   <section class="section section--paper">
     <div class="container">
       <div class="section-head">
         <h2>Tabla rápida de cantidades</h2>
-        <p>Con un nivelador cada {M2_POR_NIVELADOR} m². PIKO en cajas de {PRODUCTOS.piko.caja} uds y Nivelador Universal en cajas de {PRODUCTOS.universal.caja} uds.</p>
+        <p>Con un nivelador por m² (cuadrícula de 1 m). PIKO en cajas de {PRODUCTOS.piko.caja} uds y Nivelador Universal en cajas de {PRODUCTOS.universal.caja} uds.</p>
       </div>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Tabla rápida de cantidades">
         <table>
           <thead><tr><th scope="col">Superficie</th><th scope="col">Niveladores</th><th scope="col">Cajas de PIKO</th><th scope="col">Cajas de Universal</th></tr></thead>
           <tbody>
@@ -54,6 +54,24 @@ const faqs = FAQ_CALCULADORA;
     </div>
   </section>
 
+  <section class="section section--tight">
+    <div class="container">
+      <div class="section-head"><h2>Vídeos de ayuda</h2></div>
+      <ul class="vids">
+        <li><a href="https://youtube.com/shorts/3CxGeVATm6o" target="_blank" rel="noopener"><span class="eyebrow">Vídeo 01</span><strong>¿Qué son los niveladores KREOX?</strong><span class="go">Ver en YouTube →<span class="visually-hidden"> (abre una ventana nueva)</span></span></a></li>
+        <li><a href="https://youtube.com/shorts/TKCxqeGa9zQ" target="_blank" rel="noopener"><span class="eyebrow">Vídeo 02</span><strong>¿Cómo hago mi pedido?</strong><span class="go">Ver en YouTube →<span class="visually-hidden"> (abre una ventana nueva)</span></span></a></li>
+      </ul>
+    </div>
+  </section>
+
   <Faq faqs={faqs} />
   <CtaContacto />
 </Base>
+
+<style>
+  .vids { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+  .vids a { display: flex; flex-direction: column; gap: 6px; height: 100%; padding: 22px 24px; border: 1px solid var(--line); border-radius: var(--radius-xl); background: var(--white); color: var(--ink); text-decoration: none; transition: border-color .2s; }
+  .vids a:hover { border-color: var(--ink); }
+  .vids strong { font-size: 1.1rem; font-weight: 600; }
+  .vids .go { margin-top: 6px; font-size: .85rem; color: var(--sand-strong); font-weight: 600; }
+</style>

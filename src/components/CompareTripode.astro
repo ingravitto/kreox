@@ -10,7 +10,7 @@ const kg = (g: number) => ((g * n100) / 1000).toLocaleString(locale, { maximumFr
 const showPiko = only !== 'universal';
 const showUni = only !== 'piko';
 ---
-<div class="table-wrap">
+<div class="table-wrap" tabindex="0" role="region" aria-label={t('cmpCaption')}>
   <table>
     <caption class="visually-hidden">{t('cmpCaption')}</caption>
     <thead>

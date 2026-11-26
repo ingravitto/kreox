@@ -9,14 +9,14 @@ image: ../../assets/img/hf-piko-mortero-enrasado-anillas.jpg
 imageAlt: 'Freshly poured liquid screed over underfloor heating, flush with the rings of the Insulation Screed Levellers, with the laser on its tripod'
 faq:
   - q: 'How many levellers are needed to level an underfloor heating floor?'
-    a: 'As a guide, roughly one every 2 m². For 100 m² that is about 50 levellers, which is half a box of 100 units.'
+    a: 'As a guide, roughly one per m², set out on a 1 m grid. For 100 m² that is about 100 levellers, which is one box of 100 units.'
   - q: 'Can the level be marked with a standard laser?'
     a: 'Yes. The Insulation Screed Leveller can be adjusted with both a standard laser and a laser with receiver: you just bring the ring up to the line marked by the laser.'
   - q: 'What happens to the levellers after pouring?'
     a: 'They are removed, cleaned with water and stored for the next job. If the washer wears out, only that part is replaced.'
 ---
 
-**To level liquid screed over underfloor heating, you push levellers into the insulation board, roughly one every 2 m², mark the datum level with a laser, adjust the ring of each leveller to that line and pour the screed until it covers the ring.** With the [KREOX Insulation Screed Leveller](/en/screed-levellers/insulation-screed-leveller/) the whole process is done without metal tripods, using a leveller of about 20 grams that does not rust and can be reused.
+**To level liquid screed over underfloor heating, you push levellers into the insulation board, roughly one per m², mark the datum level with a laser, adjust the ring of each leveller to that line and pour the screed until it covers the ring.** With the [KREOX Insulation Screed Leveller](/en/screed-levellers/insulation-screed-leveller/) the whole process is done without metal tripods, using a leveller of about 20 grams that does not rust and can be reused.
 
 ## What you need
 
@@ -26,7 +26,7 @@ faq:
 
 ## Step 1 · Push the levellers into the insulation board
 
-The Insulation Screed Leveller has a pointed tip that goes into the underfloor heating insulation board without tools. Spread them over the whole surface, roughly **one every 2 m²**, so you have reference points across the room.
+The Insulation Screed Leveller has a pointed tip that goes into the underfloor heating insulation board without tools. Spread them over the whole surface, roughly **one per m²** (on a 1 m grid), so you have reference points across the room.
 
 ## Step 2 · Mark the datum level with a laser
 
@@ -42,18 +42,18 @@ Pour the screed until it reaches the height of the rings. Then remove the levell
 
 ## How many levellers do I need?
 
-| Area | Levellers (1 every 2 m²) | Boxes of 100 |
+| Area | Levellers (1 per m²) | Boxes of 100 |
 |---|---|---|
-| 50 m² | 25 | 1 |
-| 100 m² | 50 | 1 |
-| 200 m² | 100 | 1 |
-| 500 m² | 250 | 3 |
+| 50 m² | 50 | 1 |
+| 100 m² | 100 | 1 |
+| 200 m² | 200 | 2 |
+| 500 m² | 500 | 5 |
 
 For your specific job, use the [leveller calculator](/en/screed-levellers/calculator/).
 
 ## Why not use metal tripods
 
-A metal tripod weighs about 1 kg, corrodes with the alkaline pH of the screed and all three legs must be firmly seated. For 100 m², that is about 50 kg of tripods versus 1 kg of Insulation Screed Levellers. See the full comparison in [screed leveller versus metal tripod](/en/screed-levellers/screed-leveller-vs-metal-tripod/).
+A metal tripod weighs about 1 kg, corrodes with the alkaline pH of the screed and all three legs must be firmly seated. For 100 m², that is about 100 kg of tripods versus 2 kg of Insulation Screed Levellers. See the full comparison in [screed leveller versus metal tripod](/en/screed-levellers/screed-leveller-vs-metal-tripod/).
 
 ## After pouring
 
