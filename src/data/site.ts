@@ -26,7 +26,6 @@ export const SITE = {
     instagram: 'https://www.instagram.com/kreox.es/',
     tiktok: 'https://www.tiktok.com/@kreox.es',
   },
-  tileCalculator: 'https://calculadora.kreox.es/',
   whatsapp: `https://api.whatsapp.com/send?phone=34611875047&text=${encodeURIComponent('Hola, quiero información sobre los niveladores KREOX.')}`,
   whatsappDisplay: '+34 611 87 50 47',
 } as const;

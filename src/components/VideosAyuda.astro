@@ -1,0 +1,56 @@
+---
+// Vídeos cortos de KREOX en YouTube (los de calculadora.kreox.es). Portada alojada en la web y enlace a YouTube:
+// no se carga nada de YouTube (ni cookies) hasta que la persona pulsa.
+import { Image } from 'astro:assets';
+import { useT } from '../i18n/ui';
+import imgV1 from '../assets/img/video-que-son-los-niveladores-kreox.jpg';
+import imgV2 from '../assets/img/video-como-hago-mi-pedido-kreox.jpg';
+interface Props { tone?: 'light' | 'paper' }
+const { tone = 'light' } = Astro.props;
+const { lang } = useT(Astro.url);
+const EN = lang === 'en';
+const T = EN
+  ? { eyebrow: 'Videos · quick help', title: 'Explained in a minute', note: 'Videos in Spanish.', video: 'Video', open: ' (opens YouTube in a new window)' }
+  : { eyebrow: 'Vídeos · ayuda rápida', title: 'Te lo explicamos en un minuto', note: '', video: 'Vídeo', open: ' (abre YouTube en una ventana nueva)' };
+const vids = [
+  { id: '3CxGeVATm6o', img: imgV1, t: EN ? 'What are KREOX levellers?' : '¿Qué son los niveladores KREOX?', alt: EN ? 'KREOX team member showing a leveller and its ring' : 'Miembro del equipo de KREOX enseñando un nivelador y su anilla' },
+  { id: 'TKCxqeGa9zQ', img: imgV2, t: EN ? 'How do I place an order?' : '¿Cómo hago mi pedido?', alt: EN ? 'KREOX team member explaining what arrives with an order' : 'Miembro del equipo de KREOX explicando qué llega con el pedido' },
+];
+---
+<section class:list={['section', { 'section--paper': tone === 'paper' }]}>
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">{T.eyebrow}</span>
+      <h2>{T.title}</h2>
+      {T.note && <p>{T.note}</p>}
+    </div>
+    <ul class="vids">
+      {vids.map((v, i) => (
+        <li>
+          <a href={`https://www.youtube.com/shorts/${v.id}`} target="_blank" rel="noopener">
+            <Image src={v.img} alt={v.alt} widths={[360, 720]} sizes="(min-width: 760px) 340px, 45vw" />
+            <span class="play" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16"><path d="M5 3l8 5-8 5z" fill="currentColor"/></svg></span>
+            <span class="txt">
+              <span class="n">{T.video} · {String(i + 1).padStart(2, '0')}</span>
+              <strong>{v.t}</strong>
+            </span>
+            <span class="visually-hidden">{T.open}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+<style>
+  .vids { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 340px)); gap: clamp(10px, 2vw, 20px); }
+  .vids a { position: relative; display: block; overflow: hidden; aspect-ratio: 9 / 14; border-radius: var(--radius-xl); background: var(--ink); color: var(--white); text-decoration: none; }
+  .vids :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+  .vids a::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,18,17,0) 45%, rgba(18,18,17,.88)); }
+  .vids a:hover :global(img) { transform: scale(1.04); }
+  .play { position: absolute; z-index: 1; top: 16px; left: 16px; display: grid; place-content: center; width: 56px; height: 56px; border-radius: 50%; background: var(--white); color: var(--ink); box-shadow: 0 10px 30px rgba(0,0,0,.3); transition: transform .2s; }
+  .vids a:hover .play { transform: scale(1.08); }
+  .txt { position: absolute; z-index: 1; left: 18px; right: 18px; bottom: 18px; display: flex; flex-direction: column; gap: 6px; }
+  .n { font-size: .72rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--sand); }
+  .txt strong { font-size: clamp(1rem, 1.8vw, 1.25rem); line-height: 1.25; }
+  @media (max-width: 480px) { .play { width: 44px; height: 44px; top: 12px; left: 12px; } .txt { left: 12px; right: 12px; bottom: 12px; } }
+</style>
