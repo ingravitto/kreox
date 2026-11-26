@@ -2,39 +2,14 @@
 // English version of /politica-cookies/ (keep both in sync)
 import Legal from '../../layouts/Legal.astro';
 import { SITE } from '../../data/site';
-const ga = Boolean(import.meta.env.PUBLIC_GA_ID);
 ---
-<Legal title="Cookie policy" description={ga ? 'Which cookies kreox.es uses: analytics only (Google Analytics), and only if you accept them. How to change your choice at any time.' : 'Information about the use of cookies on kreox.es: the site does not set its own or third-party cookies.'} url="/en/cookie-policy/" updated="November 2026">
-  {ga ? (
-    <>
-      <h2>Which cookies we use</h2>
-      <p>kreox.es uses <strong>only Google Analytics 4 analytics cookies</strong>, to understand how many people visit the site, which pages they read and where they come from. <strong>They are only set if you click "Accept"</strong> in the cookie notice. If you click "Reject", Google Analytics is not loaded. We do not use advertising cookies.</p>
-      <table>
-        <thead><tr><th scope="col">Cookie</th><th scope="col">Provider</th><th scope="col">Purpose</th><th scope="col">Duration</th></tr></thead>
-        <tbody>
-          <tr><td>_ga</td><td>Google (Google Analytics)</td><td>Distinguishes visitors anonymously to count visits.</td><td>2 years</td></tr>
-          <tr><td>_ga_&lt;ID&gt;</td><td>Google (Google Analytics)</td><td>Keeps the analytics session state.</td><td>2 years</td></tr>
-        </tbody>
-      </table>
-      <p>We also store your choice (accept or reject) in your browser's local storage for 12 months so we don't ask again. This is technical and necessary.</p>
-      <h2>How to change your choice</h2>
-      <p>Click <button type="button" class="link-btn" data-ck-open>Cookie settings</button> (also in the footer of every page) or delete the site's cookies and data in your browser.</p>
-      <h2>International transfers</h2>
-      <p>Google may process analytics data outside the European Economic Area under the safeguards of the EU-US Data Privacy Framework. More information in <a href="https://policies.google.com/privacy?hl=en" rel="noopener">Google's privacy policy</a>.</p>
-    </>
-  ) : (
-    <>
-      <h2>This site does not use cookies</h2>
-      <p>kreox.es <strong>does not set its own or third-party cookies</strong>, whether analytics or advertising. Fonts and videos are served from our own server, with no connections to external services.</p>
-    </>
-  )}
+<Legal title="Cookie policy" description='Information about the use of cookies on kreox.es: the site does not set its own or third-party cookies.' url="/en/cookie-policy/" updated="November 2026">
+  <h2>This site does not use cookies</h2>
+  <p>kreox.es <strong>does not set its own or third-party cookies</strong>, whether analytics or advertising. Fonts and videos are served from our own server, with no connections to external services.</p>
   <h2>Links to other sites</h2>
   <p>Some links lead to third-party sites (WhatsApp, YouTube or social networks). Those sites may use their own cookies, governed by their own policies.</p>
   <h2>Changes</h2>
-  <p>If we change the tools that use cookies, we will update this policy and ask for your consent again when required.</p>
+  <p>If we ever add a tool that uses cookies, we will update this policy and ask for your consent before turning it on.</p>
 </Legal>
 <style>
-  table { width: 100%; border-collapse: collapse; margin: 1em 0 1.4em; font-size: .92rem; }
-  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
-  .link-btn { background: none; border: 0; padding: 0; font: inherit; color: var(--sand-strong); text-decoration: underline; cursor: pointer; }
 </style>

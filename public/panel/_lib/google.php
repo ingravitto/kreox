@@ -149,7 +149,7 @@ function metricas_resumen(int $dias): array
 {
     $m = metricas($dias);
     if (!$m['ga'] && !$m['gsc']) throw new RuntimeException($m['ga_error'] ?? $m['gsc_error'] ?? 'Sin datos');
-    return ['usuarios' => $m['ga']['usuarios'] ?? 0, 'clics_google' => $m['gsc']['clics'] ?? 0, 'whatsapp' => ($m['ga']['eventos']['click_whatsapp'] ?? 0)];
+    return ['clics_google' => $m['gsc']['clics'] ?? 0, 'impresiones' => $m['gsc']['impresiones'] ?? 0, 'posicion' => $m['gsc']['posicion'] ?? 0];
 }
 
 // ---------- Gráfico de línea (SVG en el servidor; el tooltip lo añade panel.js) ----------

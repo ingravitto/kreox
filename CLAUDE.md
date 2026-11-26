@@ -37,7 +37,7 @@ Archivo Markdown nuevo en `src/content/noticias/<slug>.md` con este frontmatter:
 - `src/data/seo-overrides.json` lo escribe el panel: `{ "/ruta/": { "title", "description" } }`. Base.astro lo aplica; no cambiar su forma.
 - Noticias creadas en el panel: imagen en `src/assets/img/noticias/`, mismo frontmatter. Las reglas de "Noticias" se validan también en el panel (`public/panel/_lib/noticias.php`); si cambian, actualizar ambos.
 - La configuración del panel (usuarios, tokens) se escribe en el job de despliegue desde GitHub Secrets. Nunca en el repositorio ni en el artefacto.
-- Google Analytics 4 solo se carga tras "Aceptar" en el banner (`Analytics.astro`); Aceptar y Rechazar con el mismo peso visual. Eventos: `click_whatsapp` (parámetro `producto`), `click_telefono`, `generate_lead`. Si se añade otra herramienta con cookies, actualizar las dos políticas de cookies.
+- **Sin cookies ni banner** (decisión del cliente): la web no usa Google Analytics ni ninguna herramienta con cookies. Las métricas del panel salen de Search Console. Si algún día se añade algo con cookies, hace falta un banner de consentimiento (Aceptar y Rechazar con el mismo peso) y actualizar las dos políticas de cookies.
 
 ## Comprobaciones antes de hacer commit
 ```

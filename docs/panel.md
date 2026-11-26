@@ -1,6 +1,6 @@
 # Panel de kreox.es (`/panel/`)
 
-Panel para gestionar la web sin tocar código: **SEO por página**, **noticias** (español e inglés) y **métricas** (Google Analytics 4 + Search Console). Cada cambio se guarda en GitHub y la web se vuelve a publicar sola en 2-3 minutos.
+Panel para gestionar la web sin tocar código: **SEO por página**, **noticias** (español e inglés) y **métricas** de Google (Search Console). La web no usa cookies, así que no lleva banner. Cada cambio se guarda en GitHub y la web se vuelve a publicar sola en 2-3 minutos.
 
 - En pruebas: https://nuevo.kreox.es/panel/
 - En producción: https://kreox.es/panel/
@@ -22,30 +22,25 @@ Repositorio → **Settings → Secrets and variables → Actions**.
 |---|---|
 | `PANEL_USERS` | Una línea por persona: `usuario:contraseña` (contraseña de 10 caracteres o más). Ej.: `juan:…` y en otra línea `natalia:…`. Se guardan cifradas en el servidor. |
 | `PANEL_GITHUB_TOKEN` | Token *fine-grained* de GitHub: Settings de tu cuenta → Developer settings → Personal access tokens → Fine-grained → *Generate new token*. Repositorio: solo `ingravitto/kreox`. Permisos: **Contents: Read and write** y **Actions: Read and write**. Caducidad: 1 año (apúntate renovarlo). |
-| `GOOGLE_SA_JSON` | (Métricas) Contenido completo del archivo JSON de la cuenta de servicio de Google. |
+| `GOOGLE_SA_JSON` | (Métricas, opcional) Contenido completo del archivo JSON de la cuenta de servicio de Google. |
 
 ### Variables (pestaña *Variables*)
 
 | Nombre | Ejemplo | Para qué |
 |---|---|---|
-| `GA_MEASUREMENT_ID` | `G-ABC123XYZ` | Activa Google Analytics 4 y el banner de cookies en la web. |
-| `GA4_PROPERTY_ID` | `412345678` | ID numérico de la propiedad (GA4 → Administrar → Detalles de la propiedad). Para las métricas del panel. |
-| `GSC_SITE` | `sc-domain:kreox.es` | Propiedad de Search Console (de dominio). |
+| `GSC_SITE` | `sc-domain:kreox.es` | (Opcional) Propiedad de Search Console. Si no se pone, se usa `sc-domain:kreox.es`. |
 
 Después de crearlos: **Actions → Construir y publicar → Run workflow → pruebas**.
 
-## Google Analytics y Search Console
+## Search Console (métricas del panel)
 
-1. **GA4**: crea la propiedad "kreox.es" con un flujo web para `https://kreox.es` → copia el ID de medición (`G-…`) en `GA_MEASUREMENT_ID`.
-2. **Search Console**: verifica la propiedad de dominio `kreox.es` (registro DNS TXT en el hosting).
-3. **Cuenta de servicio** (para que el panel lea los datos):
-   - Google Cloud Console → crea un proyecto "kreox-panel".
-   - Activa **Google Analytics Data API** y **Google Search Console API**.
-   - IAM → Cuentas de servicio → Crear → sin roles → Claves → *Añadir clave* → JSON. Ese archivo va en `GOOGLE_SA_JSON`.
-   - En GA4 → Administrar → Gestión de acceso a la propiedad: añade el email de la cuenta de servicio como **Lector**.
-   - En Search Console → Configuración → Usuarios y permisos: añade el mismo email con permiso **Restringido**.
+1. **Search Console**: verifica la propiedad de dominio `kreox.es` (registro DNS TXT en el hosting) y envía el sitemap `https://kreox.es/sitemap.xml`.
+2. **Cuenta de servicio** (para que el panel lea los datos):
+   - Google Cloud Console → crea un proyecto "kreox-panel" y activa **Google Search Console API**.
+   - IAM → Cuentas de servicio → Crear → sin roles → Claves → *Añadir clave* → JSON. Ese archivo va en el secreto `GOOGLE_SA_JSON`.
+   - En Search Console → Configuración → Usuarios y permisos: añade el email de la cuenta de servicio con permiso **Restringido**.
 
-La web solo carga Google Analytics si la persona acepta las cookies (botones Aceptar y Rechazar con el mismo peso). Eventos que se miden: `click_whatsapp` (con el parámetro `producto`), `click_telefono` y `generate_lead` (formulario enviado).
+La web no usa Google Analytics ni cookies: no hay banner de cookies.
 
 ## Seguridad
 

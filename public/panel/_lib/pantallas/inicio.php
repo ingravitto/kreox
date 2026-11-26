@@ -34,12 +34,12 @@ layout_start('Inicio', 'inicio');
   </a>
   <a class="card stat" href="<?= e(url('metricas')) ?>">
     <?php if (!$resumen): ?>
-      <span class="stat-l">Métricas</span><span class="stat-s">Conecta Google Analytics y Search Console para verlas aquí.</span>
+      <span class="stat-l">Métricas</span><span class="stat-s">Conecta Search Console para ver aquí cómo te encuentran en Google.</span>
     <?php elseif (isset($resumen['error'])): ?>
       <span class="stat-l">Métricas</span><span class="stat-s is-bad"><?= e($resumen['error']) ?></span>
     <?php else: ?>
-      <span class="stat-n"><?= e(number_format((int) $resumen['usuarios'], 0, ',', '.')) ?></span><span class="stat-l">visitantes en 28 días</span>
-      <span class="stat-s"><?= e(number_format((int) $resumen['clics_google'], 0, ',', '.')) ?> clics desde Google · <?= e(number_format((int) $resumen['whatsapp'], 0, ',', '.')) ?> clics en WhatsApp</span>
+      <span class="stat-n"><?= e(number_format((int) $resumen['clics_google'], 0, ',', '.')) ?></span><span class="stat-l">clics desde Google en 28 días</span>
+      <span class="stat-s"><?= e(number_format((int) $resumen['impresiones'], 0, ',', '.')) ?> veces en resultados · posición media <?= e(number_format((float) $resumen['posicion'], 1, ',', '.')) ?></span>
     <?php endif; ?>
   </a>
 </div>

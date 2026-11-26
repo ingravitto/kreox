@@ -65,7 +65,6 @@ const year = new Date().getFullYear();
     <a href={P.avisoLegal}>{t('legalNotice')}</a>
     <a href={P.privacidad}>{t('privacy')}</a>
     <a href={P.cookies}>{t('cookies')}</a>
-    {import.meta.env.PUBLIC_GA_ID && <button type="button" class="ck-open" data-ck-open>{t('cookieSettings')}</button>}
   </div>
 </footer>
 
@@ -96,5 +95,4 @@ const year = new Date().getFullYear();
   .giant .wordmark { display: inline-block; font-size: clamp(6rem, 26vw, 24rem); transform: translateY(12%); }
   .legal { display: flex; flex-wrap: wrap; gap: 20px; border-top: 1px solid var(--line-dark); padding-top: 22px; padding-bottom: 30px; font-size: 0.8rem; position: relative; background: var(--ink); }
   .legal span { margin-right: auto; }
-  .ck-open { background: none; border: 0; padding: 0; font: inherit; color: inherit; text-decoration: underline; cursor: pointer; }
 </style>

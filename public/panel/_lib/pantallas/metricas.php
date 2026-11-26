@@ -1,5 +1,6 @@
 <?php
-// Métricas: Google Analytics 4 (visitas y acciones en la web) y Search Console (cómo te encuentran en Google).
+// Métricas: Search Console (cómo te encuentran en Google). La web no usa Google Analytics ni cookies;
+// si algún día se configura GA4 (GA4_PROPERTY_ID), su bloque aparece solo.
 require_once __DIR__ . '/../google.php';
 
 $dias = in_array((int) ($_GET['dias'] ?? 28), [7, 28, 90], true) ? (int) $_GET['dias'] : 28;
@@ -8,7 +9,7 @@ $n = function ($v, int $dec = 0) { return number_format((float) $v, $dec, ',', '
 layout_start('Métricas', 'metricas');
 ?>
 <div class="head">
-  <div><h1>Métricas</h1><p class="muted">Visitas y acciones en la web (Google Analytics) y búsquedas en Google (Search Console).</p></div>
+  <div><h1>Métricas</h1><p class="muted">Cómo te encuentran en Google (Search Console).</p></div>
   <nav class="tabs" aria-label="Periodo">
     <?php foreach ([7 => '7 días', 28 => '28 días', 90 => '90 días'] as $k => $t): ?>
       <a href="<?= e(url('metricas', ['dias' => $k])) ?>"<?= $k === $dias ? ' aria-current="page"' : '' ?>><?= e($t) ?></a>
@@ -17,12 +18,10 @@ layout_start('Métricas', 'metricas');
 </div>
 <?php
 if (!google_configurado()) {
-    echo '<section class="card"><h2>Conecta Google Analytics y Search Console</h2><ol class="steps">';
-    echo '<li>Crea una cuenta de servicio en Google Cloud (proyecto KREOX) y descarga su clave JSON.</li>';
-    echo '<li>Activa en ese proyecto las APIs "Google Analytics Data API" y "Google Search Console API".</li>';
-    echo '<li>En Google Analytics → Administrar → Acceso a la propiedad, añade el email de la cuenta de servicio como <strong>Lector</strong>.</li>';
-    echo '<li>En Search Console → Configuración → Usuarios y permisos, añade el mismo email con permiso <strong>Restringido</strong>.</li>';
-    echo '<li>En GitHub, añade el secreto <code>GOOGLE_SA_JSON</code> (el contenido del JSON) y las variables <code>GA4_PROPERTY_ID</code> y <code>GSC_SITE</code>. Después, publica la web.</li>';
+    echo '<section class="card"><h2>Conecta Search Console</h2><ol class="steps">';
+    echo '<li>Crea una cuenta de servicio en Google Cloud (proyecto KREOX), activa la API "Google Search Console API" y descarga su clave JSON.</li>';
+    echo '<li>En Search Console → Configuración → Usuarios y permisos, añade el email de la cuenta de servicio con permiso <strong>Restringido</strong>.</li>';
+    echo '<li>En GitHub, añade el secreto <code>GOOGLE_SA_JSON</code> (el contenido del JSON) y, si hace falta, la variable <code>GSC_SITE</code> (por defecto <code>sc-domain:kreox.es</code>). Después, publica la web.</li>';
     echo '</ol></section>';
     layout_end();
     return;
@@ -35,12 +34,13 @@ $sc = $m['gsc'];
 
 <h2>Lo que importa</h2>
 <div class="grid grid-4 kpis">
-  <div class="card kpi"><span class="kpi-n"><?= $ga ? $n($ga['usuarios']) : '—' ?></span><span class="kpi-l">Visitantes</span></div>
-  <div class="card kpi"><span class="kpi-n"><?= $ga ? $n($ga['eventos']['click_whatsapp']) : '—' ?></span><span class="kpi-l">Clics en WhatsApp</span></div>
-  <div class="card kpi"><span class="kpi-n"><?= $ga ? $n($ga['eventos']['click_telefono']) : '—' ?></span><span class="kpi-l">Llamadas</span></div>
   <div class="card kpi"><span class="kpi-n"><?= $sc ? $n($sc['clics']) : '—' ?></span><span class="kpi-l">Clics desde Google</span></div>
+  <div class="card kpi"><span class="kpi-n"><?= $sc ? $n($sc['impresiones']) : '—' ?></span><span class="kpi-l">Veces en resultados</span></div>
+  <div class="card kpi"><span class="kpi-n"><?= $sc ? $n($sc['ctr'] * 100, 1) . ' %' : '—' ?></span><span class="kpi-l">De clics (CTR)</span></div>
+  <div class="card kpi"><span class="kpi-n"><?= $sc ? $n($sc['posicion'], 1) : '—' ?></span><span class="kpi-l">Posición media</span></div>
 </div>
 
+<?php if ($ga || $m['ga_error']): ?>
 <section class="block">
   <h2>Visitas a la web <span class="muted small">Google Analytics</span></h2>
   <?php if ($m['ga_error']): ?><p class="flash flash--error" role="alert"><?= e($m['ga_error']) ?></p>
@@ -59,6 +59,7 @@ $sc = $m['gsc'];
     <?= bar_table(array_map(null, array_keys(EVENTOS), array_values(EVENTOS)), ['Acción', 'Veces'], 'Acciones de contacto', function ($r) { return e($r[1]); }, function ($r) use ($ga) { return (int) $ga['eventos'][$r[0]]; }) ?>
   <?php endif; ?>
 </section>
+<?php endif; ?>
 
 <section class="block">
   <h2>Cómo te encuentran en Google <span class="muted small">Search Console</span></h2>

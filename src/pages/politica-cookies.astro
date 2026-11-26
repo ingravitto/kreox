@@ -1,40 +1,14 @@
 ---
 import Legal from '../layouts/Legal.astro';
 import { SITE } from '../data/site';
-// Con Google Analytics activo (variable GA_MEASUREMENT_ID en GitHub) se describe; si no, el sitio no usa cookies.
-const ga = Boolean(import.meta.env.PUBLIC_GA_ID);
 ---
-<Legal title="Política de cookies" description={ga ? 'Qué cookies usa kreox.es: solo de análisis (Google Analytics) y únicamente si las aceptas. Cómo cambiar tu elección en cualquier momento.' : 'Información sobre el uso de cookies en kreox.es: el sitio no instala cookies propias ni de terceros.'} url="/politica-cookies/" updated="noviembre de 2026">
-  {ga ? (
-    <>
-      <h2>Qué cookies usamos</h2>
-      <p>kreox.es usa <strong>solo cookies de análisis de Google Analytics 4</strong>, para saber cuántas personas visitan la web, qué páginas consultan y desde dónde llegan. <strong>Solo se instalan si pulsas «Aceptar»</strong> en el aviso de cookies. Si pulsas «Rechazar», no se carga Google Analytics. No usamos cookies de publicidad.</p>
-      <table>
-        <thead><tr><th scope="col">Cookie</th><th scope="col">Titular</th><th scope="col">Finalidad</th><th scope="col">Duración</th></tr></thead>
-        <tbody>
-          <tr><td>_ga</td><td>Google (Google Analytics)</td><td>Distinguir visitantes de forma anónima para contar visitas.</td><td>2 años</td></tr>
-          <tr><td>_ga_&lt;ID&gt;</td><td>Google (Google Analytics)</td><td>Mantener el estado de la sesión de análisis.</td><td>2 años</td></tr>
-        </tbody>
-      </table>
-      <p>Además guardamos tu elección (aceptar o rechazar) en el almacenamiento local de tu navegador durante 12 meses, para no volver a preguntarte. Es técnico y necesario.</p>
-      <h2>Cómo cambiar tu elección</h2>
-      <p>Pulsa <button type="button" class="link-btn" data-ck-open>Configurar cookies</button> (también al pie de cada página) o borra las cookies y los datos del sitio desde tu navegador.</p>
-      <h2>Transferencias internacionales</h2>
-      <p>Google puede tratar los datos de análisis fuera del Espacio Económico Europeo con las garantías previstas en el Marco de Privacidad de Datos UE-EE. UU. Más información en la <a href="https://policies.google.com/privacy?hl=es" rel="noopener">política de privacidad de Google</a>.</p>
-    </>
-  ) : (
-    <>
-      <h2>Este sitio no usa cookies</h2>
-      <p>kreox.es <strong>no instala cookies propias ni de terceros</strong>, ni de análisis ni de publicidad. Las fuentes tipográficas y los vídeos se sirven desde nuestro propio servidor, sin conexiones a servicios externos.</p>
-    </>
-  )}
+<Legal title="Política de cookies" description='Información sobre el uso de cookies en kreox.es: el sitio no instala cookies propias ni de terceros.' url="/politica-cookies/" updated="noviembre de 2026">
+  <h2>Este sitio no usa cookies</h2>
+  <p>kreox.es <strong>no instala cookies propias ni de terceros</strong>, ni de análisis ni de publicidad. Las fuentes tipográficas y los vídeos se sirven desde nuestro propio servidor, sin conexiones a servicios externos.</p>
   <h2>Enlaces a otros sitios</h2>
   <p>Algunos enlaces llevan a sitios de terceros (WhatsApp, YouTube o redes sociales). Esos sitios pueden usar sus propias cookies, reguladas por sus políticas.</p>
   <h2>Cambios</h2>
-  <p>Si cambiamos las herramientas que usan cookies, actualizaremos esta política y te pediremos de nuevo el consentimiento cuando sea necesario.</p>
+  <p>Si algún día incorporamos una herramienta que use cookies, actualizaremos esta política y te pediremos el consentimiento antes de activarla.</p>
 </Legal>
 <style>
-  table { width: 100%; border-collapse: collapse; margin: 1em 0 1.4em; font-size: .92rem; }
-  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
-  .link-btn { background: none; border: 0; padding: 0; font: inherit; color: var(--sand-strong); text-decoration: underline; cursor: pointer; }
 </style>
